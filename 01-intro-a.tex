@@ -1,0 +1,97 @@
+\documentclass{beamer}
+\begin{document}
+
+\title{01204211 Discrete Mathematics \\ Lecture 1: Introduction}
+
+\author{Jittat Fakcharoenphol}
+
+\frame{\titlepage}
+
+\begin{frame}\frametitle{The goals of this course}
+  There are two goals:
+  \begin{itemize}
+  \item To learn how to make mathematical arguments.
+    \pause
+  \item To learn various fundamental mathematical concepts that are
+    very useful in computer science.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{What is mathematics?}
+  \pause
+  Ah... that's a philosopical question. \\
+  \pause
+  IMHO, mathematics is a mean to communicate {\em precise} ideas.
+\end{frame}
+
+\begin{frame}\frametitle{It's like learning a new language}
+\end{frame}
+
+%%%%%%%%%%%% why
+
+\begin{frame}[fragile]\frametitle{Why should we learn how to prove? (1)}
+  \pause
+  Look at this program.
+
+\begin{verbatim}
+    if a > b:
+        return a
+    else:
+        return b
+\end{verbatim}
+
+  The author claims that this program takes two variables $a$ and $b$
+  and returns the larger one.
+  \pause
+  
+  {\em Do you believe the author of the code? \pause Why?}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Why should we learn how to prove? (2)}
+  Now look at this program.
+
+  {\small
+\begin{verbatim}
+    if a > b:
+        if a > c:
+            return a
+        else:
+            return c
+    else:
+        if c > b:
+            return c
+        else:
+            return b
+\end{verbatim}
+  }
+  
+  The author claims that this program takes three variables $a$, $b$
+  and $c$ and returns the largest one.  \pause
+  
+  {\em Do you believe the author of the code? \pause Why?}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Why should we learn how to prove? (3)}
+  Finally, look at this program.
+
+  {\small
+\begin{verbatim}
+  // Input: array A with n elements: A[0],...,A[n-1]
+  m = A[0]
+  for i = 1, 2, ..., n-1:
+    if A[i] > m:
+      m = A[i]
+  return m  
+\end{verbatim}
+  }
+  
+  The author claims that this program takes an array $A$ with $n$
+  elements and returns the maximum element.  \pause
+  
+  {\em Do you believe the author of the code? \pause Why?}
+  \pause
+
+  {\bf Can we try to test the code with all possible inputs?}
+\end{frame}
+
+\end{document}
