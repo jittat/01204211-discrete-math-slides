@@ -1,4 +1,5 @@
 \documentclass{beamer}
+\usefonttheme[onlymath]{serif}
 \begin{document}
 
 \include{commons}
@@ -44,7 +45,7 @@
   {\em Do you believe the author of the code? \pause Why?}
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Why should we learn how to prove? (2)}
+\begin{frame}[fragile]\frametitle{Finding the maximum value. (1)}
   Now look at this program.
 
   {\small
@@ -68,14 +69,14 @@
   {\em Do you believe the author of the code? \pause Why?}
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Why should we learn how to prove? (3)}
+\begin{frame}[fragile]\frametitle{Finding the maximum value. (2)}
   Finally, look at this program.
 
   {\small
 \begin{verbatim}
   // Input: array A with n elements: A[0],...,A[n-1]
-  m = A[0]
-  for i = 1, 2, ..., n-1:
+  m = 0
+  for i = 0, 1, ..., n-1:
     if A[i] > m:
       m = A[i]
   return m  
@@ -89,6 +90,143 @@
   \pause
 
   {\bf Can we try to test the code with all possible inputs?}
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{Finding the maximum value. (3)}
+  Let's try again.
+
+  {\small
+\begin{verbatim}
+  // Input: array A with n elements: A[0],...,A[n-1]
+  m = A[0]
+  for i = 1, 2, ..., n-1:
+    if A[i] > m:
+      m = A[i]
+  return m  
+\end{verbatim}
+  }
+  
+  {\em Do you believe the author of the code? \pause Why?}
+  \pause
+
+  {\bf Can we try to test the code with all possible inputs?}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Another example: testing primes (1)}
+  A {\em prime} is a natural number greater than 1 that has no
+  positive divisors other 1 and itself.  E.g., 2,3,7,11 are primes.
+  \pause
+  
+  {\small
+\begin{verbatim}
+  // Input: an integer n
+  if n <= 1:
+      return False
+  i = 2
+  while i <= n-1:
+      if n is divisible by i:
+          return False
+      i = i + 1
+  return True
+\end{verbatim}
+  }
+
+  The code above checks if $n$ is a prime number.   How fast can it run?
+  \pause
+
+  Note that if $n$ is a prime number, the for-loop repeats for $n-2$
+  times.  Thus, the running time is approximately proportional to
+  $n$.
+  \pause
+
+  Can we do better?
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Another example: testing primes (2)}
+  Consider the following code.
+  
+  {\small
+\begin{verbatim}
+  // Input: an integer n
+  if n <= 1:
+      return False
+  let s = square root of n
+  i = 2
+  while i <= s:
+      if n is divisible by i:
+          return False
+      i = i + 1
+  return True
+\end{verbatim}
+  }
+
+  How fast can it run? \pause Note that $s = \sqrt{n}$; therefore, it
+  takes time approximately proportional to $\sqrt{n}$ to run.
+  \pause
+
+  Ok, it should be faster.  {\bf But is it correct?}
+
+\end{frame}
+
+\begin{frame}\frametitle{Informal arguments (1)}
+  \begin{itemize}
+  \item Let's try to argue that the faster algorithm works correctly.
+    \pause
+
+  \item
+    Note that if $n$ is a prime number, the algorithm answers
+    correctly. (Why?)  \pause
+
+  \item Therefore, let's consider the case when $n$ is not prime
+    (i.e., $n$ is a composite).  \pause
+
+  \item If that's the case, $n$ has some positive divisor which is not
+    $1$ or $n$.  Let's call this number $a$.  \pause
+
+  \item Now, if $2\leq a\leq\sqrt{n}$, at some point during the
+    execution of the algorithm, $i=a$ and $i$ should divides $n$; thus
+    the algorithm correctly returns {\tt False}.  \pause
+
+  \item
+    Are we done?
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}\frametitle{Informal arguments (2)}
+  \begin{itemize}
+  \item Recall that we are left with the case that (1) $n$ is not
+    prime and (2) its positive divisor $a$ is larger than
+    $\sqrt{n}$. \pause
+
+  \item
+    Let $b=n/a$.  Since $n$ and $a$ are positive integers and $a$
+    divides $n$, $b$ is also a positive integer.
+    \pause
+
+  \item
+    Note that if we can argue that $2\leq b\leq\sqrt{n}$, we are done.
+    (why?)
+    \pause
+
+  \item
+    How can we do that?
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}\frametitle{Informal arguments (3): quick break}
+  \begin{itemize}
+  \item {\bf Original goal:} To show that the faster algorithm is
+    correct.  \pause
+    
+  \item
+    {\bf Current (sub) goal:} Consider a positive composite $n$ and its
+    positive divisor $a$, where $a>\sqrt{n}$.  Let $b=n/a$.  We want
+    to show that $2\leq b\leq\sqrt{n}$.
+  \end{itemize}
+  
 \end{frame}
 
 \end{document}
