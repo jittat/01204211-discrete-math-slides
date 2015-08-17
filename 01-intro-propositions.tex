@@ -328,8 +328,8 @@
     we want to consider. \pause
 
     \begin{tcolorbox}[title=Revised statement]
-      For all positive composite integer $n$, and for some of its
-      divisor $a$ such that $a > \sqrt{n}$,
+      For all positive composite integer $n$, and for every divisor
+      $a$ of $n$ such that $\sqrt{n} < a < n$,
       \[ 2\leq b\leq\sqrt{n},\]
       where $b=n/a$.
     \end{tcolorbox}
@@ -635,6 +635,131 @@
   \end{tcolorbox}
   \pause
   Do you notice any equivalence?
+  \pause
+
+  Right, $P\Rightarrow Q\equiv \neg Q\Rightarrow\neg P$.
+\end{frame}
+
+\begin{frame}\frametitle{How about our subgoal?}
+  \begin{itemize}
+  \item
+    In many cases, the statement we are interested in contains variable.
+
+  \item
+    For example, ``$x$ is even,'' ``$p$ is prime,'' or ``$s$ is a student.''
+    \pause
+
+  \item
+    As we previously did with propositions, we can use variables to
+    represent these statements.  E.g.,
+    \begin{itemize}
+    \item let $E(x)\equiv$ ``$x$ is even'',
+    \item let $P(y)\equiv$ ``$y$ is prime, and
+    \item let $S(w)\equiv$ ``$w$ is a student.
+    \end{itemize}
+    We call $E(x)$, $P(y)$, and $S(w)$ {\em predicates}. (You can
+    think of predicates as statements that may be true of false
+    depending on the values of its variables.)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quantifiers (1)}
+  \begin{itemize}
+  \item As we note before, these predicates are not propositions.  But
+    if we know the value of the variables, then they becomes
+    propositions.  For example, if we let $x=5$, then $E(5)$ is a
+    proposition which is false.  Also, $P(7)$ is true.
+  \item Since the truth values of predicates depend on the assignments
+    of its variables, we can put {\em quantifiers} to specify the
+    scope of these variables and how to interprete the truth values of
+    the predicates over these values.
+    \pause
+    
+  \item Let $A=\{2,4,6,8\}$.
+  \item Note that $E(2), E(4), E(6),$ and $E(8)$ are true, i.e.,
+    $E(x)$ is true for every $x\in A$.  \pause
+    
+    In this case, we say that the following proposition is true:
+    \[(\forall x\in A) E(x). \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quantifiers (2)}
+  \begin{itemize}
+  \item Again, let $A=\{2,4,6,8\}$.
+  \item Note that $P(2)$ is true.  This means that $P(y)$ is true for
+    some $y\in A$.  \pause
+
+    In this case, we say that the following proposition is true:
+    \[(\exists y\in A) P(y). \]
+
+  \item When the universe $A$ is clear, we can leave it out and just
+    write $\forall x E(x)$ or $\exists y P(y)$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The main goal}
+  \begin{itemize}
+  \item
+    Let's try to be more specific about our main goal:
+    
+    \begin{tcolorbox}
+      Algorithm {\tt CheckPrime2} is correct.
+    \end{tcolorbox}
+
+  \item
+    Can we re-write this statement so that the input/output of the
+    algorithm are explicit?
+
+  \item
+    Note that the set of its input $n$ is an integer.  Thus, we are
+    interested in every $n\in\mathbb Z$, where $\mathbb Z$ denote the
+    set of all integers.
+
+  \item
+    Let's rewrite the goal as:
+
+    \begin{tcolorbox}
+      \begin{center}
+        $\forall n\in\mathbb Z$,
+        $C(n)\Leftrightarrow P(n)$,
+      \end{center}
+    \end{tcolorbox}
+
+    where $C(n)\equiv$ \pause ``{\tt CheckPrime2(n)} returns True'', and \\
+    $P(n)\equiv$ \pause ``$n$ is a prime.''
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 5}
+  \begin{itemize}
+  \item Let's consider the current subgoal.  (Note that in this
+    version, variable $b$ is replaced with $n/a$.)
+    
+    \begin{tcolorbox}[title=Another revised statement]
+      For all positive composite integer $n$, and for every divisor
+      $a$ of $n$ such that $\sqrt{n} < a < n$,
+      \[ 2\leq n/a \leq\sqrt{n}.\]
+    \end{tcolorbox}
+
+  \item Define all required predicates and describe a quantified
+    proposition equivalent to the revised statement above.
+
+    \vspace{1in}
+    
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Next lecture...}
+  \begin{itemize}
+  \item
+    We will discuss a few proof techniques and will formally prove the
+    correctness of {\tt CheckPrime2}.
+
+  \item
+    The next lecture will be availabe as VDO clips.  Please watch it
+    before the next section.  We will work on homework in class.
+  \end{itemize}
 \end{frame}
 
 \end{document}
