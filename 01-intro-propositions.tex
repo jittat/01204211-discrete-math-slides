@@ -693,6 +693,10 @@
     In this case, we say that the following proposition is true:
     \[(\exists y\in A) P(y). \]
 
+    \pause
+  \item ``$\forall x$'' and ``$\exists y$'' are quantifiers.  They give
+    predicates $E(x)$ and $P(y)$ precise scopes of considerations.
+    
   \item When the universe $A$ is clear, we can leave it out and just
     write $\forall x E(x)$ or $\exists y P(y)$.
   \end{itemize}
@@ -729,6 +733,28 @@
     where $C(n)\equiv$ \pause ``{\tt CheckPrime2(n)} returns True'', and \\
     $P(n)\equiv$ \pause ``$n$ is a prime.''
   \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quantified propositions with more than one variables}
+  Let our universe be integers ($\mathbb Z$).  Which of the following statements is true?
+
+  \begin{itemize}
+  \item $\forall x\forall y (x=y)$
+  \item $\forall x\exists y (x=y)$
+  \item $\exists x\forall y (x=y)$
+  \item $\exists x\exists y (x=y)$
+  \end{itemize}
+
+  \pause
+
+  When you have many quantifiers, we can interprete the statement by
+  nesting the quantifiers. E.g,
+  \[\exists x\forall y P(x,y)\equiv \exists x (\forall y (P(x,y))).\]
+  \[\forall y\exists x P(x,y)\equiv \forall y (\exists x (P(x,y))).\]
+  \pause
+
+  Also note that usually, $\exists x\forall y P(x,y)\not\equiv \forall
+  y\exists x P(x,y)$.
 \end{frame}
 
 \begin{frame}\frametitle{Quick check 5}
