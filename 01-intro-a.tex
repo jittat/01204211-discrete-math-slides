@@ -1,9 +1,38 @@
 \documentclass{beamer}
 \usefonttheme[onlymath]{serif}
+\usepackage{fancybox}
+\usepackage{tcolorbox}
 \begin{document}
 
 \include{commons}
 \lecturetitle{Lecture 1: Introduction}
+
+\begin{frame}\frametitle{What is this course about?}
+  This is a math class. \\
+  \pause
+  But, what is mathematics? \\
+  \pause
+  Ah... that's a philosopical question. \\
+  \pause
+  IMHO, mathematics is a mean to communicate {\em precise} ideas.
+\end{frame}
+
+\begin{frame}\frametitle{It's like learning a new language}
+  \begin{itemize}
+  \item Do you remember the time when you start learning English?
+    \pause
+  \item There are a few things you have to learn and get used to.
+    \pause
+  \item They might not make so much sense in the beginning, but over
+    time, you will get comfortable with how the language is used.
+    \pause
+  \item As your knowledge of the language gets better, everything
+    becomes more natural.  Learning a new language sometimes expands
+    your view of the world.
+    \pause
+  \item I hope it is also true with this course.
+  \end{itemize}
+\end{frame}
 
 \begin{frame}\frametitle{The goals of this course}
   There are two goals:
@@ -13,16 +42,6 @@
   \item To learn various fundamental mathematical concepts that are
     very useful in computer science.
   \end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{What is mathematics?}
-  \pause
-  Ah... that's a philosopical question. \\
-  \pause
-  IMHO, mathematics is a mean to communicate {\em precise} ideas.
-\end{frame}
-
-\begin{frame}\frametitle{It's like learning a new language}
 \end{frame}
 
 %%%%%%%%%%%% why
@@ -120,15 +139,15 @@
   
   {\small
 \begin{verbatim}
-  // Input: an integer n
-  if n <= 1:
-      return False
-  i = 2
-  while i <= n-1:
-      if n is divisible by i:
+  Algorithm CheckPrime(n):     // Input: an integer n
+      if n <= 1:
           return False
-      i = i + 1
-  return True
+      i = 2
+      while i <= n-1:
+          if n is divisible by i:
+              return False
+          i = i + 1
+      return True
 \end{verbatim}
   }
 
@@ -148,16 +167,16 @@
   
   {\small
 \begin{verbatim}
-  // Input: an integer n
-  if n <= 1:
-      return False
-  let s = square root of n
-  i = 2
-  while i <= s:
-      if n is divisible by i:
+  Algorithm CheckPrime2(n):  // Input: an integer n
+      if n <= 1:
           return False
-      i = i + 1
-  return True
+      let s = square root of n
+      i = 2
+      while i <= s:
+          if n is divisible by i:
+              return False
+          i = i + 1
+      return True
 \end{verbatim}
   }
 
@@ -171,8 +190,8 @@
 
 \begin{frame}\frametitle{Informal arguments (1)}
   \begin{itemize}
-  \item Let's try to argue that the faster algorithm works correctly.
-    \pause
+  \item Let's try to argue the Algorithm {\tt CheckPrime2} works
+    correctly.  \pause
 
   \item
     Note that if $n$ is a prime number, the algorithm answers
@@ -216,17 +235,359 @@
   
 \end{frame}
 
-\begin{frame}\frametitle{Informal arguments (3): quick break}
+\begin{frame}\frametitle{The goals}
   \begin{itemize}
-  \item {\bf Original goal:} To show that the faster algorithm is
-    correct.  \pause
+  \item Let's take a break and look back at what we are trying to do.
+    \pause
+
+    \begin{tcolorbox}
+      {\bf Original goal:} To show that Algorithm {\tt CheckPrime2} is
+      correct.
+    \end{tcolorbox}
+    \pause
     
+    \begin{tcolorbox}
+      {\bf Current (sub) goal:} Consider a positive composite $n$ and
+      its positive divisor $a$, where $a>\sqrt{n}$.  Let $b=n/a$.  We
+      want to show that $2\leq b\leq\sqrt{n}$.
+    \end{tcolorbox}
+    \pause
+
+  \item Before we continue, I'd like to add a bit of formalism to our
+    thinking process.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The main goal}
+  \begin{itemize}
+  \item {\bf Original goal:} To show that Algorithm {\tt CheckPrime2}
+    is correct.  \pause
+  \item Let's focus on the statement we want to argue for:
+    
+    \begin{tcolorbox}
+      {\bf ``Algorithm {\tt CheckPrime2} is correct.''}
+    \end{tcolorbox}
+
+    \pause
+  \item
+    Note that this statement can either be ``true'' or ``false.''  If
+    we can demonstrate, using logical/mathematical arguments that this
+    statement is true, we can say that we {\bf prove} the statement.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The (sub) goal}
+  \begin{itemize}
   \item
     {\bf Current (sub) goal:} Consider a positive composite $n$ and its
     positive divisor $a$, where $a>\sqrt{n}$.  Let $b=n/a$.  We want
     to show that $2\leq b\leq\sqrt{n}$.
+    \pause
+  \item Let's focus only on the statement we want to argue for:
+    \pause
+
+    \begin{tcolorbox}
+      \begin{center}
+        $2\leq b\leq\sqrt{n}$.
+      \end{center}
+    \end{tcolorbox}
+    
+    \pause
+  \item If we only look at this statement, it is unclear if the
+    statement is true or false because there are variables $b$ and $n$
+    in the statement.  It can be true in some case and it can be false
+    in some case depending on the values of $n$ and $b$.
+
+    \pause
+
+  \item Are we doom? \pause Not really.  The statement above is not
+    precisely the statement we want to prove.
   \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The (sub) goal (second try)}
+  \begin{itemize}
+  \item
+    {\small {\bf Current (sub) goal:} Consider a positive composite $n$ and its
+    positive divisor $a$, where $a>\sqrt{n}$.  Let $b=n/a$.  We want
+    to show that $2\leq b\leq\sqrt{n}$.}
+
+  \item We can be more specific about what values of $n$ and $b$ that
+    we want to consider. \pause
+
+    \begin{tcolorbox}[title=Revised statement]
+      For all positive composite integer $n$, and for some of its
+      divisor $a$ such that $a > \sqrt{n}$,
+      \[ 2\leq b\leq\sqrt{n},\]
+      where $b=n/a$.
+    \end{tcolorbox}
+
+  \item Note that this revised statement is now ``quantified,'' that
+    is, every variable in the statement has specific scope.  Now the
+    statement is either true or false.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Propositions}
+  \begin{itemize}
+  \item A {\em proposition} is a statement which is either {\bf true}
+    or {\bf false}.
+    \pause
+  \item It is our basic unit of mathematical ``facts''.
+    
+  \item Examples:
+    \begin{itemize}
+    \item Algorithm {\tt CheckPrime2} is correct.
+    \item $10^2 = 100$.
+    \item $\sqrt{2}$ is irrational.
+    \end{itemize}
+
+    \pause
+  \item Examples of statements which are not propositions (why?):
+    \begin{itemize}
+    \item $x > 10$.
+    \item $1+2+\cdots+10$.
+    \item This algorithm is fast.
+    \item Run, run fast.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Combining propositions}
+  \begin{itemize}
+  \item We usually use a variable to refer to a proposition.  For
+    example, we may use $P$ to stand for ``it rains'' or $Q$ to stand
+    for ``the road is wet.''
+    \pause
+  \item The truth value of a variable is the truth value of the
+    proposition it stands for.
+    \pause
+  \item Many propositions can be combined to get a complex statement
+    using logical operators.  \pause
+  \item For example, we can join $P$ and $Q$ with ``and'' (denoted by
+    ``$\wedge$'') and get
+    \[P\wedge Q,\]
+    which stands for ``it rains and the road is wet''.
+    \pause
+    
+  \item An expression $P\wedge Q$ is an example of {\em propositional
+    forms}.  The logical value of a propositional form ``usually''
+    depends on the truth value of its variables.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Connectives: ``and'', ``or'', ``not''}
+  Given propositions $P$ and $Q$, we can use connectives to form more
+  complex propositions:
+  \begin{itemize}
+  \item {\bf Conjunction:} $P\wedge Q$ (``$P$ and $Q$''), \\
+    (True when both $P$ and $Q$ are true)
+  \item {\bf Disjunction:} $P\vee Q$ (``$P$ or $Q$''), \\
+    (True when at least one of $P$ and $Q$ is true)
+  \item {\bf Negation:} $\neg P$ (``not $P$'') \\
+    (True only when $P$ is false)
+  \end{itemize}
+  \pause
+
+  If $P$ stands for ``today is Tuesday'' and $Q$ stands for
+  ``dogs are animals'', then
+  \begin{itemize}
+  \item $P\wedge Q$ stands for ``today is Tuesday and dogs are animals'',
+  \item $P\vee Q$ stands for ``today is Tuesday or dogs are animals'', and
+  \item $\neg P$ stands for ``today is not Tuesday''.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Truth tables}
+  To represents values of propositional forms, we usually use truth tables.
+  \begin{tcolorbox}[title=And/Or/Not]
+    \begin{tabular}{|c|c||c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\wedge Q$ & $P\vee Q$ & $\neg P$ \\
+      \hline
+      $T$ & $T$ & $T$ & $T$ & $F$ \\
+      $T$ & $F$ & $F$ & $T$ & \\
+      $F$ & $T$ & $F$ & $T$ & $T$ \\
+      $F$ & $F$ & $F$ & $F$ & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 1}
+  For each of these statements, define propositional variables
+  representing each proposition inside the statement and write the
+  proposition form of the statement.
+  \begin{itemize}
+  \item All prime numbers are larger than 0 and all natural numbers is
+    at least one.
+  \item You are smart or you won't be taking this class.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 2}
+  Use a truth table to find the values of (1) $P\wedge \neg P$ and (2)
+  $P\vee\neg P$.
+  \pause
+
+  \begin{tcolorbox}[title=And/Or/Not]
+    \begin{tabular}{|c|c||c|c|}
+      \hline
+      $P$ & $\neg P$ & $P\wedge\neg P$ & $P\vee\neg P$\\
+      \hline
+      $T$ & $F$ & $F$ & $T$ \\
+      $F$ & $T$ & $F$ & $T$ \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+  \pause
+
+  Note that $P\wedge\neg P$ is always false and $P\vee\neg P$ is always true.
+
+  A propositional form which is always true regardless of the truth
+  values of its variables is called a {\em tautology.}  On the other
+  hand, a propositional form which is always false regardless of the
+  truth values of its variables is called a {\em contradiction.}
+\end{frame}
+
+\begin{frame}\frametitle{Implications}
+  Given $P$ and $Q$, an implication
+  \[P\Rightarrow Q\]
+  stands for ``if $P$, then $Q$''.  This is a very important
+  propositional form.
+
+  It states that ``when $P$ is true, $Q$ must be true''.  Let's try to
+  fill in its truth table:
+
+  \begin{tcolorbox}[title=Implications]
+    \begin{tabular}{|c|c||c|}
+      \hline
+      $P$ & $Q$ & $P\Rightarrow Q$ \\
+      \hline
+      $T$ & $T$ & \pause $T$ \\
+      $T$ & $F$ & \pause $F$ \\
+      $F$ & $T$ & \pause $T$ \\
+      $F$ & $F$ & \pause $T$ \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{What?}
+  \begin{itemize}
+  \item
+    Yes, when $P$ is false, $P\Rightarrow Q$ is {\bf always true} no
+    matter what truth value of $Q$ is. 
+
+  \item We say that in this case, the statement $P\Rightarrow Q$ is
+    {\em vacuously true.}
+    \pause
+
+  \item
+    You might feel a bit uncomfortable about this, because in most
+    natural languages, when we say that if $P$, then $Q$ we sometimes
+    mean something more than that in the logical expression
+    ``$P\Rightarrow Q$.''
+  \end{itemize}
+\end{frame}
+
   
+\begin{frame}\frametitle{One explanation}
+  \begin{itemize}
+  \item
+    But let's look closely at what it means when we say that:
+
+    \begin{tcolorbox}
+      if $P$ is true, $Q$ must be true.
+    \end{tcolorbox}
+
+  \item
+    Note that this statement does not say anything about the case when
+    $P$ is false, i.e., it only considers the case when $P$ is true.
+    \pause
+    
+  \item
+    Therefore, having that $P\Rightarrow Q$ is true is OK with the
+    case that (1) $Q$ is false when $P$ is false, and (2) $Q$ is true
+    when $P$ is false.
+    \pause
+    
+  \item
+    This is an example when mathematical language is ``stricter'' than
+    natural language.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Noticing if-then}
+  We can write ``if $P$, then $Q$'' for $P\Rightarrow Q$, but there
+  are other ways to say this. E.g., we can write (1) $Q$ if $P$, (2) $P$
+  only if $Q$, or (3) when $P$, then $Q$.
+
+  \pause
+
+  \begin{tcolorbox}[title=Quick check 3]
+    For each of these statements, define
+    propositional variables representing each proposition inside the
+    statement and write the proposition form of the statement.
+    \begin{itemize}
+    \item If you do not have enough sleep, you will feel dizzy during class.
+    \item If you eat a lot and you do not have enough exercise, you will
+      get fat.
+    \item You can get A from this course, only if you work fairly hard.
+    \end{itemize}
+  \end{tcolorbox}
+  
+\end{frame}
+
+\begin{frame}\frametitle{Only-if}
+  Let $P$ be ``you get A from this course.''
+
+  Let $Q$ be ``you work fairly hard.''
+  
+  Let $R$ be ``You can get A from this course, only if you work fairly hard.''
+
+  Let's think about the truth values of $R$.
+  
+  \begin{tcolorbox}[title=Only if you work fairly hard.]
+    \begin{tabular}{|c|c||c|}
+      \hline
+      $P$ & $Q$ & $R$ \\
+      \hline
+      $T$ & $T$ & \\
+      $T$ & $F$ & \\
+      $F$ & $T$ & \\
+      $F$ & $F$ & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+  \pause
+
+  Thus, $R$ should be logically equivalent to $P\Rightarrow Q$.  (We
+  write $R\equiv P\Rightarrow Q$ in this case.)
+\end{frame}
+
+\begin{frame}\frametitle{If and only if: ($\Leftrightarrow$)}
+  Given $P$ and $Q$, we denote by
+  \[ P\Leftrightarrow Q \]
+  the statement ``$P$ if and only if $Q$.''
+  \pause
+  It is logically equivalent to
+  \[ (P\Leftarrow Q)\wedge (P\Rightarrow Q), \]
+  i.e., $P\Leftrightarrow Q \equiv (P\Leftarrow Q)\wedge (P\Rightarrow Q)$.
+
+  Let's fill its truth table.
+  \begin{tcolorbox}
+    \begin{tabular}{|c|c||c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\Rightarrow Q$ & $P\Leftarrow Q$ & $P\Leftrightarrow Q$ \\
+      \hline
+      $T$ & $T$ & & & \\
+      $T$ & $F$ & & & \\
+      $F$ & $T$ & & & \\
+      $F$ & $F$ & & & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
 \end{frame}
 
 \end{document}
