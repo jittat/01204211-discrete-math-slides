@@ -50,13 +50,15 @@
   \pause
   Look at this program.
 
+  \begin{tcolorbox}
 \begin{verbatim}
     if a > b:
         return a
     else:
         return b
 \end{verbatim}
-
+  \end{tcolorbox}
+  
   The author claims that this program takes two variables $a$ and $b$
   and returns the larger one.
   \pause
@@ -67,6 +69,7 @@
 \begin{frame}[fragile]\frametitle{Finding the maximum value. (1)}
   Now look at this program.
 
+  \begin{tcolorbox}
   {\small
 \begin{verbatim}
     if a > b:
@@ -81,6 +84,7 @@
             return b
 \end{verbatim}
   }
+  \end{tcolorbox}
   
   The author claims that this program takes three variables $a$, $b$
   and $c$ and returns the largest one.  \pause
@@ -91,6 +95,7 @@
 \begin{frame}[fragile]\frametitle{Finding the maximum value. (2)}
   Finally, look at this program.
 
+  \begin{tcolorbox}
   {\small
 \begin{verbatim}
   // Input: array A with n elements: A[0],...,A[n-1]
@@ -101,6 +106,7 @@
   return m  
 \end{verbatim}
   }
+  \end{tcolorbox}
   
   The author claims that this program takes an array $A$ with $n$
   elements and returns the maximum element.  \pause
@@ -115,6 +121,7 @@
 \begin{frame}[fragile]\frametitle{Finding the maximum value. (3)}
   Let's try again.
 
+  \begin{tcolorbox}
   {\small
 \begin{verbatim}
   // Input: array A with n elements: A[0],...,A[n-1]
@@ -125,6 +132,7 @@
   return m  
 \end{verbatim}
   }
+  \end{tcolorbox}
   
   {\em Do you believe the author of the code? \pause Why?}
   \pause
@@ -136,7 +144,8 @@
   A {\em prime} is a natural number greater than 1 that has no
   positive divisors other 1 and itself.  E.g., 2,3,7,11 are primes.
   \pause
-  
+
+  \begin{tcolorbox}
   {\small
 \begin{verbatim}
   Algorithm CheckPrime(n):     // Input: an integer n
@@ -150,7 +159,8 @@
       return True
 \end{verbatim}
   }
-
+  \end{tcolorbox}
+  
   The code above checks if $n$ is a prime number.   How fast can it run?
   \pause
 
@@ -165,6 +175,7 @@
 \begin{frame}[fragile]\frametitle{Another example: testing primes (2)}
   Consider the following code.
   
+  \begin{tcolorbox}
   {\small
 \begin{verbatim}
   Algorithm CheckPrime2(n):  // Input: an integer n
@@ -179,7 +190,8 @@
       return True
 \end{verbatim}
   }
-
+  \end{tcolorbox}
+  
   How fast can it run? \pause Note that $s = \sqrt{n}$; therefore, it
   takes time approximately proportional to $\sqrt{n}$ to run.
   \pause
@@ -575,7 +587,7 @@
   \[ (P\Leftarrow Q)\wedge (P\Rightarrow Q), \]
   i.e., $P\Leftrightarrow Q \equiv (P\Leftarrow Q)\wedge (P\Rightarrow Q)$.
 
-  Let's fill its truth table.
+  Let's fill in its truth table.
   \begin{tcolorbox}
     \begin{tabular}{|c|c||c|c|c|}
       \hline
@@ -588,6 +600,41 @@
       \hline
     \end{tabular}
   \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{An implication and its friends}
+  When you have two propositions
+  \begin{itemize}
+  \item $P$ = ``I own a cell phone'', and
+  \item $Q$ = ``I bring a cell phone to class''.
+  \end{itemize}
+  We have
+  \begin{itemize}
+  \item an implication $P\Rightarrow Q$ $\equiv$ \\ ``If I own a cell phone,
+    I'll bring it to class'',
+  \item its {\bf converse} $Q\Rightarrow P$ $\equiv$ \\ ``If I bring a cell phone
+    to class, I own it'', and
+  \item its {\bf contrapositive} $\neg Q\Rightarrow\neg P$ $\equiv$ \\ ``If I do not
+    bring a cell phone to class, I do not own one''.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 4}
+  Let's consider the following truth table:
+  \begin{tcolorbox}
+    \begin{tabular}{|c|c||c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\Rightarrow Q$ & $Q\Rightarrow P$ & $\neg Q \Rightarrow \neg P$ \\
+      \hline
+      $T$ & $T$ & & & \\
+      $T$ & $F$ & & & \\
+      $F$ & $T$ & & & \\
+      $F$ & $F$ & & & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+  \pause
+  Do you notice any equivalence?
 \end{frame}
 
 \end{document}
