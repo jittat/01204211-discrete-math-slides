@@ -1,9 +1,3 @@
-\documentclass{beamer}
-\usefonttheme[onlymath]{serif}
-\usepackage{fancybox}
-\usepackage{tcolorbox}
-\begin{document}
-
 \include{commons}
 \lecturetitle{Lecture 2: Quantifiers and proofs}
 
@@ -24,12 +18,14 @@
     proposition.
   \item Two ways to quantify:
     \begin{itemize}
-    \item {\bf Universal quantifier ($\forall$)} states that the
-      quantified proposition is true when the predicate is true for
-      every value of the variable in the specified set.
-    \item {\bf Existential quantifier ($\exists$)} states that the
-      quantified proposition is true when the predicate is true for at
-      least one value of the variable in the specified set.
+    \item {\bf Using universal quantifiers ($\forall$).} This
+      quantifier states that the quantified proposition is true when
+      the predicate is true for every value of the variable in the
+      specified set.
+    \item {\bf Using existential quantifiers ($\exists$).} This
+      quantifier states that the quantified proposition is true when
+      the predicate is true for at least one value of the variable in
+      the specified set.
     \end{itemize}
 
   \item Quantifiers can be nested.  E.g., 
@@ -40,4 +36,102 @@
   \end{itemize}
 \end{frame}
 
-\end{document}
+\begin{frame}\frametitle{Quick check 1}
+\end{frame}
+
+\begin{frame}\frametitle{Negations (1)}
+  Let consider a set of positive integers $\mathbb Z^+$ as our
+  universe.  Let predicate $P(x)\equiv$ ``$x$ is a prime number.''
+
+  Consider this proposition
+
+  \[(\forall x\in {\mathbb Z^+}) P(x).\]
+
+  How can we show that this is false? \pause
+
+  When showing that a universally quantified proposition is false, we
+  need to show ``one'' counter example.  In this case, since $P(4)$ is
+  false, $\forall x P(x)$ is false.  \pause
+
+  This way of disproving a statement is equivalent to showing that
+
+  \[(\exists x)(\neg P(x)).\]
+\end{frame}
+
+\begin{frame}\frametitle{Negations of quantified propositions}
+  Let consider a set of positive integers $\mathbb Z^+$ as our
+  universe.  Let predicate $Q(x)\equiv$ ``if $x > 2$, then  $x^2\leq 2x$.''
+
+  Consider this proposition
+
+  \[(\exists x\in {\mathbb Z^+}) Q(x).\]
+
+  How can we show that this is false? \pause
+
+  When showing that an existential quantified proposition is false, we
+  need to show that $Q(x)$ is false for every possible values of $x$.
+  In this case, since $x^2 = x\cdot x > 2\cdot x$ for every $x>2$, we
+  have that $(\exists x) Q(x)$ is false. \pause
+
+  This way of disproving a statement is equivalent to showing that
+
+  \[(\forall x)(\neg Q(x)).\]
+\end{frame}
+
+\begin{frame}\frametitle{Negations (3)}
+  Thus, the following equivalences:
+
+  \begin{itemize}
+  \item $\neg(\forall x P(x)) \equiv \exists x (\neg P(x))$
+  \item $\neg(\exists x P(x)) \equiv \forall x (\neg P(x))$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 2}
+\end{frame}
+
+\begin{frame}\frametitle{How to prove a mathematical statement}
+  Given propositions $P$ and $Q$, these are a very useful logical
+  equivalences (referred to as the De Morgan's Laws).
+
+  \begin{itemize}
+  \item $\neg (P\vee Q)\equiv \neg P \wedge \neg Q$
+  \item $\neg (P\wedge Q)\equiv \neg P \vee \neg Q$
+  \end{itemize}
+
+  (Note that $\neg$ takes precedence over $\vee$ or $\wedge$.)
+
+  \vspace{0.2in}
+  
+  How can we prove that the first statement is true?
+\end{frame}
+
+\begin{frame}\frametitle{Proof by exhaustion}
+  \begin{tcolorbox}
+    For any proposition $P$ and $Q$, $\neg (P\vee Q)\equiv \neg P
+    \wedge \neg Q$.
+  \end{tcolorbox}
+  \begin{proof}
+    We will prove by exhaustion.  There are 4 cases as in the truth
+    table below.
+
+    \vspace{0.1in}
+    
+    \begin{tabular}{|c|c||c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\vee Q$ & $\neg(P\vee Q)$ & $\neg Q \wedge \neg P$ \\
+      \hline
+      $T$ & $T$ & $T$ & $F$ & $F$ \\
+      $T$ & $F$ & $T$ & $F$ & $F$ \\
+      $F$ & $T$ & $T$ & $F$ & $F$ \\
+      $F$ & $F$ & $F$ & $T$ & $T$ \\
+      \hline
+    \end{tabular}
+
+    \vspace{0.1in}
+
+    Note that for all possible truth values of $P$ and $Q$, $\neg
+    (P\vee Q)$ equals $\neg P \wedge \neg Q$.  Thus, the statement is
+    true.
+  \end{proof}
+\end{frame}

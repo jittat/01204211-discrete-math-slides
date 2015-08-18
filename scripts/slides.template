@@ -1,0 +1,7 @@
+\documentclass{beamer}
+\usefonttheme[onlymath]{serif}
+\usepackage{fancybox}
+\usepackage{tcolorbox}
+\begin{document}
+\input{##}
+\end{document}
