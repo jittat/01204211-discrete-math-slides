@@ -1,0 +1,43 @@
+\documentclass{beamer}
+\usefonttheme[onlymath]{serif}
+\usepackage{fancybox}
+\usepackage{tcolorbox}
+\begin{document}
+
+\include{commons}
+\lecturetitle{Lecture 2: Quantifiers and proofs}
+
+\begin{frame}\frametitle{This lecture covers:}
+  \begin{itemize}
+  \item More on quantifiers
+  \item How to prove a proposition
+  \item Basic proof techniques
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Review: Quantifiers}
+  \begin{itemize}
+  \item A {\em predicate} is a statement with variables, which can be
+    either true or false, after all its variables are specified.
+  \item If we quantify a predicate completely, the quantified
+    expression now has a truth value, and it is called a quantified
+    proposition.
+  \item Two ways to quantify:
+    \begin{itemize}
+    \item {\bf Universal quantifier ($\forall$)} states that the
+      quantified proposition is true when the predicate is true for
+      every value of the variable in the specified set.
+    \item {\bf Existential quantifier ($\exists$)} states that the
+      quantified proposition is true when the predicate is true for at
+      least one value of the variable in the specified set.
+    \end{itemize}
+
+  \item Quantifiers can be nested.  E.g., 
+    \begin{itemize}
+    \item $\forall x\forall y P(x,y)\equiv \forall x(\forall y (P(x,y)))$
+    \item $\forall x\exists y P(x,y)\equiv \exists x(\forall y (P(x,y)))$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\end{document}
