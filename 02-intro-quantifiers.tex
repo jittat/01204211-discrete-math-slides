@@ -3,7 +3,7 @@
 
 \begin{frame}\frametitle{This lecture covers:}
   \begin{itemize}
-  \item Implications
+  \item More connectives: implications and equivalences
   \item Quantifiers
   \end{itemize}
 \end{frame}
@@ -250,7 +250,7 @@
 \begin{frame}\frametitle{How about our subgoal?}
   \begin{itemize}
   \item
-    In many cases, the statement we are interested in contains variable.
+    In many cases, the statement we are interested in contains variables.
 
   \item
     For example, ``$x$ is even,'' ``$p$ is prime,'' or ``$s$ is a student.''
@@ -273,12 +273,12 @@
 \begin{frame}\frametitle{Quantifiers (1)}
   \begin{itemize}
   \item As we note before, these predicates are not propositions.  But
-    if we know the value of the variables, then they becomes
+    if we know the values of their variables, then they becomes
     propositions.  For example, if we let $x=5$, then $E(5)$ is a
     proposition which is false.  Also, $P(7)$ is true.
   \item Since the truth values of predicates depend on the assignments
-    of its variables, we can put {\em quantifiers} to specify the
-    scope of these variables and how to interprete the truth values of
+    of their variables, we can put {\em quantifiers} to specify the
+    scopes of these variables and how to interprete the truth values of
     the predicates over these values.
   \end{itemize}
 \end{frame}
@@ -377,6 +377,16 @@
 \end{frame}
 
 \begin{frame}\frametitle{Quick check 4}
+  We will consider the universe to be ``everything''.  Consider the
+  following statements.  Define appropriate predicates and rewrite
+  them using the defined predicates and quantifiers.  (Note: the
+  predicates may have more than one variables.)
+  \begin{itemize}
+  \item Every human must die.
+  \item Some animal eats other animals.
+  \item If a student works hard, that student will be successful.
+  \item Everyone has someone that care about him or her.
+  \end{itemize}                  
 \end{frame}
 
 \begin{frame}\frametitle{Quick check 5}
@@ -398,7 +408,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Negations (1)}
+\begin{frame}\frametitle{Negations of quantified propositions (1)}
   Let consider a set of positive integers $\mathbb Z^+$ as our
   universe.  Let predicate $P(x)\equiv$ ``$x$ is a prime number.''
 
@@ -417,7 +427,7 @@
   \[(\exists x)(\neg P(x)).\]
 \end{frame}
 
-\begin{frame}\frametitle{Negations of quantified propositions}
+\begin{frame}\frametitle{Negations of quantified propositions (2)}
   Let consider a set of positive integers $\mathbb Z^+$ as our
   universe.  Let predicate $Q(x)\equiv$ ``if $x > 2$, then  $x^2\leq 2x$.''
 
@@ -437,7 +447,7 @@
   \[(\forall x)(\neg Q(x)).\]
 \end{frame}
 
-\begin{frame}\frametitle{Negations (3)}
+\begin{frame}\frametitle{Negations of quantified propositions (3)}
   Thus, the following equivalences:
 
   \begin{itemize}
@@ -447,50 +457,14 @@
 \end{frame}
 
 \begin{frame}\frametitle{Quick check 6}
-\end{frame}
-
-\begin{frame}\frametitle{How to prove a mathematical statement}
-  Given propositions $P$ and $Q$, these are a very useful logical
-  equivalences (referred to as the De Morgan's Laws).
-
+  Consider the following statements with the quantified propositions
+  that you have written previously.  Write down their negations in
+  quantified propositional forms, and then translate them back to
+  English sentences.
   \begin{itemize}
-  \item $\neg (P\vee Q)\equiv \neg P \wedge \neg Q$
-  \item $\neg (P\wedge Q)\equiv \neg P \vee \neg Q$
-  \end{itemize}
-
-  (Note that $\neg$ takes precedence over $\vee$ or $\wedge$.)
-
-  \vspace{0.2in}
-  
-  How can we prove that the first statement is true?
-\end{frame}
-
-\begin{frame}\frametitle{Proof by exhaustion}
-  \begin{tcolorbox}
-    For any proposition $P$ and $Q$, $\neg (P\vee Q)\equiv \neg P
-    \wedge \neg Q$.
-  \end{tcolorbox}
-  \begin{proof}
-    We will prove by exhaustion.  There are 4 cases as in the truth
-    table below.
-
-    \vspace{0.1in}
-    
-    \begin{tabular}{|c|c||c|c|c|}
-      \hline
-      $P$ & $Q$ & $P\vee Q$ & $\neg(P\vee Q)$ & $\neg Q \wedge \neg P$ \\
-      \hline
-      $T$ & $T$ & $T$ & $F$ & $F$ \\
-      $T$ & $F$ & $T$ & $F$ & $F$ \\
-      $F$ & $T$ & $T$ & $F$ & $F$ \\
-      $F$ & $F$ & $F$ & $T$ & $T$ \\
-      \hline
-    \end{tabular}
-
-    \vspace{0.1in}
-
-    Note that for all possible truth values of $P$ and $Q$, $\neg
-    (P\vee Q)$ equals $\neg P \wedge \neg Q$.  Thus, the statement is
-    true.
-  \end{proof}
+  \item Every human must die.
+  \item Some animal eats other animals.
+  \item If a student works hard, that student will be successful.
+  \item Everyone has someone that care about him or her.
+  \end{itemize}                  
 \end{frame}
