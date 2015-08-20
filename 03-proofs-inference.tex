@@ -336,4 +336,37 @@
 \end{frame}
 
 \begin{frame}\frametitle{Other useful logical equivalences}
+  We have discussed De Morgan's Laws, which are logical
+  equivalences. The following logical equivalences are also useful
+  when making valid arguments.  (Notes: do not get confused with
+  operator $\Leftrightarrow$ and notation $P\equiv Q$.)
+
+  \vspace{0.2in}
+  
+  \begin{tabular}{l|l}
+    Equivalences & Names \\
+    \hline
+    $\neg (\neg P)\equiv P$ & Double negation law \\
+    $(P\vee Q)\wedge R\equiv (P\wedge R)\vee(Q\wedge R)$ & Distributive law\\
+    $(P\wedge Q)\vee R\equiv (P\vee R)\wedge(Q\vee R)$ & Distributive law\\
+    $P\Rightarrow Q\equiv \neg P\vee Q$ & \\
+  \end{tabular}
+\end{frame}
+
+\begin{frame}\frametitle{Another example}
+  \begin{tcolorbox}
+    Argue that $P\Rightarrow R$ and $Q\Rightarrow R$ logically leads
+    to the conclusion $(P\vee Q)\Rightarrow R$.
+  \end{tcolorbox}
+  \pause
+  \begin{tabular}{ll}
+    {\bf Steps} & {\bf Reasons}\\
+    \hline\pause
+    1. $P\Rightarrow R$ & Hypothesis\pause \\
+    2. $\neg P\vee R$ & Equivalence of Step 1\pause \\
+    3. $Q\Rightarrow R$ & Hypothesis\pause \\
+    4. $\neg Q\vee R$ & Equivalence of Step 3\pause \\
+    5. $(\neg P\vee R)\wedge (\neg Q\vee R)$ & Conjuction of Steps 2 and 4.\pause \\
+    6. ... (left as homework)
+  \end{tabular}
 \end{frame}
