@@ -2,6 +2,7 @@
 \usefonttheme[onlymath]{serif}
 \usepackage{fancybox}
 \usepackage{tcolorbox}
+\setbeamertemplate{theorems}[numbered]
 \begin{document}
 \input{##}
 \end{document}

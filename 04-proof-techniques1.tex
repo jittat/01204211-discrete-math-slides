@@ -11,7 +11,7 @@
   originate from two simple inference rules.
   \begin{itemize}
   \item Direct proofs
-  \item Indirect proofs
+  \item Proofs by contraposition
   \end{itemize}
 \end{frame}
 
@@ -103,9 +103,8 @@
   true as well.
 
   \begin{tcolorbox}[title=Direct proofs]
-    \begin{theorem}
+    {\bf Theorem:} \\
       $P\Rightarrow Q$.
-    \end{theorem}
     \begin{proof}
       Assume $P$.
       
@@ -193,9 +192,8 @@
   false as well.
 
   \begin{tcolorbox}[title=Proof by contraposition]
-    \begin{theorem}
-      $P\Rightarrow Q$.
-    \end{theorem}
+    {\bf Theorem:} \\
+    $P\Rightarrow Q$.
     \begin{proof}
       Assume $\neg Q$.
       
@@ -233,7 +231,21 @@
   \end{proof}
 \end{frame}
 
-\begin{frame}\frametitle{An incorrect proof is not a proof (1)}
+\begin{frame}\frametitle{Proving iff statements}
+  How can we prove a statement of the form $P\Leftrightarrow Q$?  For example:
+  \begin{theorem}
+    $x$ is an even number iff $x^2$ is an even number.
+  \end{theorem} \pause
+  \begin{proof}
+    We will prove that the statement is true in both directions.
+    
+    ($\Rightarrow$) This direction is true from Theorem~1.
+
+    ($\Leftarrow$) This direction is true from Theorem~5.
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{An incorrect proof is not a proof}
   \begin{theorem}
     For any numbers $x$ and $y$, $x = y$.
   \end{theorem}
@@ -248,4 +260,33 @@
     \[ 0 = 0, \]
     which is clearly true.
   \end{proof}
+
+  \pause
+
+  What is wrong with this (non) proof?
+\end{frame}
+
+\begin{frame}\frametitle{How to be good at proving theorems?}
+  In a way, proving theorems is like solving puzzles.  There is no
+  general rules on how to prove theorems.
+
+  \pause
+  But you can get better by (1) trying to read and understand good
+  proofs and by (2) practicing.
+
+  \pause
+  \vspace{0.2in}
+  
+  There are many levels of understandings:
+  \pause
+  
+  \begin{itemize}
+  \item Understand each step of the proof and how each step follows
+    from previous ones
+    \pause
+  \item Understand why the proof needs each step
+    \pause
+  \item Can apply techniques or proof strategies learned from this
+    proof for proving other statements
+  \end{itemize}
 \end{frame}
