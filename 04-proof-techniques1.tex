@@ -85,9 +85,10 @@
   \end{tcolorbox}
 
   The only way to prove this in Euclidean geometry is to use the
-  parallel postulate. \pause
+  parallel postulate.  (Exercise: try to prove it.)\pause 
 
-  Is this statement always true? \pause
+  Is this statement always true everywhere in the world (or in the
+  universe)? \pause
 
   There are other geometries where Euclid's 5\textsuperscript{th}
   postulate is not true; then the triagle postulate may not be true in
@@ -97,7 +98,154 @@
 \end{frame}
 
 \begin{frame}\frametitle{Direct proofs}
-  \begin{itemize}
-  \item When we want to prove a fact
-  \end{itemize}
+  When we want to prove a theorem of the form $P\Rightarrow Q$, we can
+  assume that $P$ is true, then use this to argue that $Q$ has to be
+  true as well.
+
+  \begin{tcolorbox}[title=Direct proofs]
+    \begin{theorem}
+      $P\Rightarrow Q$.
+    \end{theorem}
+    \begin{proof}
+      Assume $P$.
+      
+      ... (then show that $Q$ follows from $P$)
+    \end{proof}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Example 1}
+  \begin{theorem}
+    If $x$ is an even number, then $x^2$ is an even number.
+  \end{theorem} \pause
+  \begin{proof}
+    Assume that $x$ is an even number. \pause
+
+    By definition, there exists an integer $k$ such that
+    $x=2k$. \pause This implies that $x^2 = (2k)^2 = 4k^2$.  \pause
+    Since $k$ is an integer, $2k^2$ is also an integer.  Hence we can
+    write $x^2 = 2\cdot (2k^2)$ where $2k^2$ is an integer; this means
+    that $x^2$ is even.
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Example 1: disected}
+  \begin{theorem}
+    ($\forall x$) If $x$ is an even number, then $x^2$ is an even
+    number.
+  \end{theorem} \pause
+  \begin{proof}
+    {\small
+      \begin{itemize}
+      \item Assume $P(x)$ where $P(x)$ = ``$x$ is an even
+        number''. \pause
+      \item By definition, $P(x)\Rightarrow R(x)$ where $R(x)$ =``there
+        exists an integer $k$ such that $x=2k$.'' \pause
+      \item $R(x)\Rightarrow S(x)$, where $S(x)$ = ``there exists an
+        integer $k$ such that $x^2 = (2k)^2 = 4k^2$.''  \pause
+      \item By elementary algebra, we know that $U$ is true, where $U$ =
+        ``for all integer $k$, $2k^2$ is an integer.''  \pause
+      \item $S(x)\wedge U\Rightarrow V(x)$, where $V$ = ``there exists
+        an integer $k$ such that $x^2 = 2\cdot (2k^2)$ where $2k^2$ is
+        an integer.'' \pause
+      \item By definition, $V(x)\Rightarrow Q(x)$, where $Q(x)$ = ``$x^2$
+        is even''.
+      \end{itemize}
+    }
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Example 1: be careful}
+  When we prove a statement with universal quantifiers like:
+
+  \begin{tcolorbox}
+    ($\forall x$) If $x$ is an even number, then $x^2$ is an even
+    number
+  \end{tcolorbox}
+
+  we have to be {\em extremely} careful not to assume anything about
+  $x$ except those state explicitly in the assumption.
+\end{frame}
+
+\begin{frame}\frametitle{Practice: Back to our subgoal}
+  Can you use direct proofs to show the following theorem?
+
+  \begin{theorem}
+    For any positive number $n$ and $a$ such that $a > \sqrt{n}$, then
+    $n/a\leq\sqrt{n}$.
+  \end{theorem} \pause
+
+  \begin{proof}
+    Assume that $a > \sqrt{n}$. \pause
+    Since
+    \[ n = n, \]
+    by dividing the left side by $a$ and the right side by $\sqrt{n}$,
+    we get that
+    \[ \frac{n}{a} < \frac{n}{\sqrt{n}}, \]
+    because both $a$ and $\sqrt{n}$ are positive.  Hence, $n/a <
+    \sqrt{n}$ as required.
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Proof by contraposition}
+  When we want to prove a theorem of the form $P\Rightarrow Q$, we can
+  assume that $Q$ is false, then use this to argue that $P$ has to be
+  false as well.
+
+  \begin{tcolorbox}[title=Proof by contraposition]
+    \begin{theorem}
+      $P\Rightarrow Q$.
+    \end{theorem}
+    \begin{proof}
+      Assume $\neg Q$.
+      
+      ... (then show that $\neg P$ follows from $\neg Q$)
+    \end{proof}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Practice}
+  \begin{theorem}
+    If $x^2$ is an even number, then $x$ is an even number, 
+  \end{theorem} \pause
+
+  Before we try to prove by contraposition, let's try to use direct
+  proof to show this theorem. \pause
+
+  \begin{proof}
+    Assume that $x^2$ is an even number...
+
+    \vspace{1.2in} \pause
+
+    ... doesn't seem to go very well.
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Practice}
+  \begin{theorem}
+    If $x^2$ is an even number, then $x$ is an even number, 
+  \end{theorem} \pause
+  \begin{proof}
+    We will prove by contraposition.  
+    Assume that $x$ is not an even number.
+
+    \vspace{1.5in}
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{An incorrect proof is not a proof (1)}
+  \begin{theorem}
+    For any numbers $x$ and $y$, $x = y$.
+  \end{theorem}
+  \pause
+
+  \begin{proof}
+    Assume that
+    \[ x = y. \] \pause
+    Multiplying both terms by 0, we get that
+    \[ 0\cdot x = 0\cdot y, \] \pause
+    and this implies
+    \[ 0 = 0, \]
+    which is clearly true.
+  \end{proof}
 \end{frame}
