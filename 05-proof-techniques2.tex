@@ -1,0 +1,178 @@
+\include{commons}
+\lecturetitle{Lecture 5: Proof techniques 2}
+
+\begin{frame}\frametitle{Proof techniques}
+  In this lecture, we will focus on two other proof techniques.
+  \begin{itemize}
+  \item Proofs by contradiction
+  \item Proofs by cases
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Proofs by contradiction}
+  We want to prove that proposition $P$ is true.  To do so, we first
+  assume that $P$ is false, and show that this logically leads to a
+  contradiction.  This means that it is impossible for $P$ to be
+  false; hence, $P$ has to be true.  This is called a proof by
+  contradiction or {\em reductio ad absurdum}.
+
+  \begin{tcolorbox}[title=Direct proofs]
+    {\bf Theorem:} \\
+    $P$
+    \begin{proof}
+      We use prove by contradiction.
+      
+      Assume $\neg P$.
+      
+      ... (then show that $R$ and $\neg R$ follows from $\neg P$)
+
+      This is a contradiction. Therefore, $P$ must be true.
+    \end{proof}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Example 1 (1)}
+  \begin{theorem}
+    $\sqrt{2}$ is irrational.
+  \end{theorem}
+  \begin{proof}
+    We prove by contradiction.  Assume that the theorem is false,
+    i.e., assume that $\sqrt{2}$ is rational. \pause
+
+    Therefore, there exists a pair of positive integers $a$ and $b$
+    such that $\sqrt{2} = a/b$.  \pause Let's choose the pair $a$ and
+    $b$ such that $b$ is minimum. In this case, $a$ and $b$ share no
+    common factors. \pause
+
+    Let's square both terms.  We get $2 = a^2/b^2$, or
+    \[ a^2 = 2b^2. \]
+
+    (cont. in next slide)
+  \end{proof}
+\end{frame}
+
+
+\begin{frame}\frametitle{Example 1 (2)}
+  \begin{proof}[Proof. (cont.)]
+    By definition, we know that $a^2$ is an even number.  From a
+    theorem from last time, we know that $a$ must also be an even
+    number. \pause
+
+    Again by definition, there exists integer $k$ such that $a = 2k$.
+    We then obtain
+    \[2b^2 = (2k)^2 = 4k^2,\]
+    i.e., $b^2 = 2k^2$.  \pause This implies that $b^2$ is an even number.
+    Again, this means that $b$ must be an even number. \pause
+
+    \vspace{0.1in}
+    \textcolor{blue}{{\bf [quick check] } Do you see that we are
+      arriving at a contradiction here?}
+    \vspace{0.1in}
+    \pause
+
+    (cont. in the next slide)
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Example 1 (3)}
+  \begin{proof}[Proof. (cont.)]
+    Since $a$ and $b$ are both even numbers, they share $2$ as a
+    common factor. \pause
+
+    This contradicts the fact that we choose the pair $a$ and $b$ that
+    share no common factor. \pause
+
+    Therefore, $\sqrt{2}$ must be irrational.
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Proofs by cases}
+  \begin{itemize}
+  \item The last proof technique that we shall discuss is closely
+    related to proofs by exhaustion we tried before.
+  \item Sometimes when we want to prove a statement, there are many
+    possible cases.  Also, we might not know which cases are true.
+  \item We might still be able to prove the statement if we can show
+    that the statement is true in every case.
+  \end{itemize}
+\end{frame}
+  
+\begin{frame}\frametitle{Example 2 (1)}
+  \begin{theorem}
+    Suppose that I have 3 pairs of socks: one pair in gray, one pair
+    in white, and one pair in black.  If I pick any 4 socks, I will
+    have at least one pair of the same color.
+  \end{theorem}
+  \pause
+
+  \textcolor{blue}{If we want to prove by exhaustion, we will have to
+    consider all 15 cases.}
+  \pause
+  
+  \begin{proof}
+    Let's split the process of picking 4 socks into 2 steps.  First,
+    pick 3 socks, then pick the last sock.
+
+    After we pick the first 3 socks.  There are 2 possible cases:
+    either I have a pair of socks with the same color, or I do not
+    have such a pair.  We shall consider each case separately.
+
+    (cont. in the next slide)
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Example 2 (1)}
+  \begin{proof}[Proof. (cont.)]
+    \begin{itemize}
+    \item
+      {\bf Case 1:} {\em I have a pair of socks with the same color.} \\
+      \pause
+      In this case, the theorem is true.
+      \pause
+    \item
+      {\bf Case 2:} {\em I do not have a pair of socks with the same
+      color.} \\
+      \pause
+      In this case, since I have 3 colors and 3 socks, I must have one
+      sock for each color.  Now, after we pick the last sock, whatever
+      color the last one is, we have a color-matching sock in our
+      first 3 socks.  Therefore, the theorem is also true in this
+      case.
+    \end{itemize}
+    \pause
+
+    Since these two cases cover all possibilities, we conclude that
+    the theorem is true.
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Proofs by cases in propositional logic}
+  In propositional logic, the following describe a proof by cases.
+
+  \begin{tcolorbox}
+    \begin{tabular}{l}
+      $P \vee Q \vee R$ \\
+      $P\Rightarrow S$ \\
+      $Q\Rightarrow S$ \\
+      $R\Rightarrow S$ \\
+      \hline
+      $S$
+    \end{tabular}
+  \end{tcolorbox}
+  \pause
+
+  Sometimes, when we have 2 cases, we also see:
+  \pause
+  
+  \begin{tcolorbox}
+    \begin{tabular}{l}
+      $P\vee\neg P$\\
+      $P\Rightarrow S$ \\
+      $\neg P \Rightarrow S$ \\
+      \hline
+      $S$
+    \end{tabular}
+  \end{tcolorbox}
+
+  Note that we can leave $P\vee\neg P$ out, because it is always true.
+\end{frame}

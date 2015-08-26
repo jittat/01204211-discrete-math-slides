@@ -186,6 +186,48 @@
   \end{proof}
 \end{frame}
 
+\begin{frame}\frametitle{Practice: Divisibility by 3 (1)}
+  Let's try to prove a well-known fact.
+
+  \begin{theorem}
+    An integer $n$ is divisible by $3$ if the sum of the digits of $n$
+    is divisible by $3$.
+  \end{theorem}
+  \pause
+
+  \vspace{0.2in}
+  Let's start by proving this lemma.
+
+  \begin{lemma}
+    For any integer $k\geq 0$, $10^k - 1$ is divisible by $3$.
+  \end{lemma}
+\end{frame}
+
+\begin{frame}\frametitle{Practice: Divisibility by 3 (2)}
+  {\small
+    \begin{proof}
+      Assume that the sum of the digits of $n$ is divisible by $3$.
+      We will show that $n$ is divisible by $3$.
+      
+      Let $k$ be the number of digits of $n$.  Let
+      $a_1,a_2,\ldots,a_k$ be the digits of $n$ where $a_1$ is the
+      most significant digit and $a_k$ is the least significant one.
+      Therefore, we can write
+      \[ n = a_1\cdot 10^{k-1} + a_2\cdot 10^{k-2} + \cdots + a_{k-1}\cdot 10^1 + a_k\cdot 10^0.\]
+      Consider the $i$-th term: $a_i\cdot 10^{k-i-1}$.  From Lemma 5,
+      we know that $10^{k-i-1} - 1$ is divisible by 3.  Thus
+      $a_i\cdot(10^{k-i-1}-1)$ is also divisible by $3$.
+
+      Therefore, the remainder of $a_i\cdot 10^{k-i-1}$ divided by $3$
+      is equal to the remainder of $a_i$ divided by $3$.
+
+      Summing all terms, the remainder of the division of $n$ by $3$
+      is $a_1+a_2+\cdots+ a_k$.  Since $3$ divides this number, the
+      remainder of $n/3$ is 0; thus, $3$ divides $n$.
+    \end{proof}
+  }
+\end{frame}
+
 \begin{frame}\frametitle{Proof by contraposition}
   When we want to prove a theorem of the form $P\Rightarrow Q$, we can
   assume that $Q$ is false, then use this to argue that $P$ has to be
