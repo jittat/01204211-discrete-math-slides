@@ -1,0 +1,28 @@
+\include{commons}
+\lecturetitle{Lecture 6: Mathematical Induction 1}
+
+\begin{frame}\frametitle{Mathematical Induction}
+  \begin{itemize}
+  \item In this lecture, we will focus on how to prove properties on natural numbers. \pause
+  \item For example, we may want to prove that for any integer $n\geq 1$,
+    \[ \sum_{i=1}^n i = i(i+1)/2, \]
+    \pause
+    or for any integer $n\geq 1$,
+    \[ \sum_{i=1}^n i^2 = \frac{n}{6}(n+1)(2n+1),\]
+    \pause
+    or ``We can pay any integer amount $x\geq 4$ baht with 2-baht
+    coins and 5-baht coins.''
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Informal arguments}
+  \begin{itemize}
+  \item Let's try to check that $\sum_{i=1}^n i = i(i+1)/2$, for any
+    integer $n\geq 1$, by experimentation.
+  \item Try $n=1$: \pause LHS: $1$, \pause RHS: $1(1+1)/2 = 1$, \pause OK
+  \item Try $n=2$: \pause LHS: $1+2=3$, \pause RHS: $2(2+1)/2 = 3$, \pause OK
+  \item Try $n=3$: \pause LHS: $1+2+3=6$, \pause RHS: $3(3+1)/2 = 6$, \pause OK
+  \item Try ... \pause
+  \item With this approach, we can't actually prove this statement.
+  \end{itemize}
+\end{frame}
