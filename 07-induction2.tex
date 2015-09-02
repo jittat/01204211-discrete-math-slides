@@ -1,0 +1,112 @@
+\include{commons}
+\lecturetitle{Lecture 7: Mathematical Induction 2}
+
+\begin{frame}\frametitle{Review: Mathematical Induction}
+  \begin{tcolorbox}
+    Suppose that you want to prove that property $P(n)$ is true for
+    every natural number $n$.\\
+    
+    Suppose that we can prove the following two facts:
+    
+    {\bf Base case:} $P(1)$ \\
+    {\bf Inductive step:} For any $k\geq 1$, $P(k)\Rightarrow P(k+1)$ \\
+    
+    The {\bf Principle of Mathematical Induction} states that $P(n)$
+    is true for every natural number $n$.
+  \end{tcolorbox}
+
+  The assumption $P(k)$ in the inductive step is usually referred to
+  as {\bf the Induction Hypothesis}.
+\end{frame}
+
+\begin{frame}\frametitle{Example 1}
+  {\bf \textcolor{blue}{Theorem:}}
+  For every natural number $n$, $\sum_{i=1}^n i^2 = \frac{n}{6}(n+1)(2n+1)$
+  \vspace{0.15in}
+  
+  {\bf \textcolor{blue}{Proof:}}
+  We prove by induction.  The property that we want to prove $P(n)$
+  is ``$\sum_{i=1}^n i^2 = \frac{n}{6}(n+1)(2n+1)$.''
+  \vspace{0.15in}
+    
+  {\bf Base case:} We can plug in $n=1$ to check that $P(1)$ is
+  true: $1^2 = \frac{1}{6}(1+1)(2\cdot 1+1)$.
+  \vspace{0.15in}
+
+  {\bf Inductive step:} We assume that $P(k)$ is true for $k\geq 1$
+  and show that $P(k+1)$ is true.
+  \vspace{0.15in}
+
+  We first assume the Induction Hypothesis $P(k)$: $ \sum_{i=1}^k
+  i^2 = \frac{k}{6}(k+1)(2k+1)$
+  \vspace{0.15in}
+
+  (continue on the next page)
+\end{frame}
+
+\begin{frame}\frametitle{Example 1 (cont.)}
+  Let's show $P(k+1)$.  We write
+  $ \sum_{i=1}^{k+1} i^2 = \left(\sum_{i=1}^k i^2\right) + (k+1)^2 .$
+  \vspace{0.15in}
+
+  Using the Induction Hypothesis, we know that this is equal to
+  {\small
+  \begin{eqnarray*}
+    (k/6)(k+1)(2k+1) + (k+1)^2 &=& \frac{(k+1)}{6}(k(2k+1)+6(k+1)) \\
+    && \mbox{\tiny \ \ \ \ \ \ \textcolor{blue}{(In this step, we factor out $(k+1)/6$)}} \\
+    &=& \frac{(k+1)}{6}(2k^2+7k+6) \\
+    &=& \frac{(k+1)}{6}((k+1)+1)(2(k+1)+1).
+  \end{eqnarray*}
+  }
+  
+  This implies $P(k+1)$ as required.
+  
+  From the Principle of Mathematical Induction, this implies that
+  $P(n)$ is true for every natural number $n$. $\blacksquare$
+\end{frame}
+
+\begin{frame}\frametitle{Not an example (1)}
+  \begin{theorem}
+    For any set of cows, all cows have the same color.
+  \end{theorem}
+  \textcolor{blue}{Proof.}
+
+  We prove by induction on the size $n$ of the set of cows.
+  
+  {\bf Base case:} For $n=1$, clearly for any set of a single cow,
+  every cow in the set has the same color.
+  
+  {\bf Inductive step:} Suppose that for every set of size $k$ of
+  cows, all cows in the set have the same color.
+  
+  We will show that every set of size $k+1$ of cows, all cows in
+  this set have the same color.
+\end{frame}
+
+\begin{frame}\frametitle{Not an example (2)}
+  {\bf Inductive step (cont.):} Consider set $A$ of $k+1$ cows.
+
+  \vspace{2.2in}
+  \pause
+
+  Because we have established that the base case and the inductive
+  step is true, we can conclude that for any set of cows, all cows
+  have the same color. $\blacksquare$
+  
+\end{frame}
+
+\begin{frame}\frametitle{Not an example (3)}
+  Clearly the following theorem cannot be true.
+
+  \begin{tcolorbox}
+    \begin{theorem}
+      For any set of cows, all cows have the same color.
+    \end{theorem}
+  \end{tcolorbox}
+
+  What is wrong with its proof based on mathematical induction?
+  
+\end{frame}
+
+\begin{frame}\frametitle{Strong induction}
+\end{frame}
