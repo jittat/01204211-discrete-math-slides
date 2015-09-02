@@ -108,5 +108,35 @@
   
 \end{frame}
 
-\begin{frame}\frametitle{Strong induction}
+\begin{frame}\frametitle{Unused facts}
+  \begin{itemize}
+  \item Let's informally think about how proving $P(1)$ and
+    $P(k)\Rightarrow P(k+1)$ for all $k\geq 1$ implies that $P(n)$ is
+    true for all natural number $n$.
+    \vspace{1.5in}
+    \pause
+  \item
+    One may notice that when we prove a statement $P(n)$ for all
+    natural number $n$ by induction, during the inductive step where
+    we want to show $P(k+1)$ from $P(k)$, we usually have that
+    $P(1),P(2),\ldots,P(k)$ is true at hands as well.
+    \pause
+  \item Then why don't we use them as well?
+  \end{itemize}
 \end{frame}
+
+\begin{frame}\frametitle{Strong Mathematical Induction}
+  \begin{tcolorbox}[title=Strong Induction]
+    Suppose that you want to prove that property $P(n)$ is true for
+    every natural number $n$.\\
+    
+    Suppose that we can prove the following two facts:
+    
+    {\bf Base case:} $P(1)$ \\
+    {\bf Inductive step:} For any $k\geq 1$,
+    \[P(1)\wedge P(2)\wedge\cdots\wedge P(k)\Rightarrow P(k+1).\]
+    
+    Then $P(n)$ is true for every natural number $n$.
+  \end{tcolorbox}
+\end{frame}
+
