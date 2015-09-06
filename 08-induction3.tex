@@ -92,22 +92,37 @@
     {\footnotesize
       (... the beginning is left out ...)
       
-      {\bf Inductive step:} For $k\geq 1$, assume that $ \frac{1}{1^2} + \frac{1}{2^2} + \frac{1}{3^2} + \cdots +\frac{1}{k^2} < 2 - \frac{1}{k}. $
+      {\bf Inductive step:} For $k\geq 1$, assume that $ \frac{1}{1^2} + \frac{1}{2^2}  + \cdots +\frac{1}{k^2} < 2 - \frac{1}{k}. $
       
       Adding $1/(k+1)^2$ on both sides, we get
-      \begin{eqnarray*}
-        \frac{1}{1^2} + \frac{1}{2^2} + \frac{1}{3^2} + \cdots +\frac{1}{k^2}+\frac{1}{(k+1)^2}
-        &<& 2 - \frac{1}{k} +\frac{1}{(k+1)^2} \\
-        &=& 2 - \left(\frac{(k+1)^2 - k}{k(k+1)^2}\right).
-      \end{eqnarray*}
-      Since one can verify that $\frac{(k+1)^2 - k}{k(k+1)^2} >
-      \frac{1}{k+1}$, we conclude that
+      \[ \frac{1}{1^2} + \frac{1}{2^2}  + \cdots +\frac{1}{k^2}+\frac{1}{(k+1)^2}
+      < 2 - \frac{1}{k} +\frac{1}{(k+1)^2}
+      = 2 - \left(\frac{1}{k} - \frac{1}{(k+1)^2}\right).\]
+
+     Since $1/k - 1/(k+1) = 1/(k(k+1))$, we have that
+      \[1/(k+1) = 1/k - 1/(k(k+1)) < 1/k - 1/(k+1)^2.\]
+
+      Therefore, we conclude that
       \[
-      \frac{1}{1^2} + \frac{1}{2^2} + \frac{1}{3^2} + \cdots +\frac{1}{k^2}+\frac{1}{(k+1)^2} < 2 - \frac{1}{k+1},
+      \frac{1}{1^2} + \frac{1}{2^2} + \cdots +\frac{1}{k^2}+\frac{1}{(k+1)^2}
+      < 2 - \left(\frac{1}{k} - \frac{1}{(k+1)^2}\right)
+      < 2 - \frac{1}{k+1},
       \]
       as required.
     }
   \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{A Lesson learned}
+  \begin{itemize}
+  \item
+    Is a stronger statement easier to prove?
+    \pause
+  \item
+    In this case, the statement is indeed stronger, but the induction
+    hypothesis gets stronger as well.  Sometimes, this works out
+    nicely.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{L-shaped tiles}
@@ -116,7 +131,7 @@
   \vspace{0.2in}
   
   \begin{tikzpicture}
-    \draw[step=1cm,lightgray,very thin] (0,0) grid (4,4);
+    \draw[step=1cm,lightgray,ultra thin] (0,0) grid (4,4);
     \draw[thick] (0,0) -- (0,2) -- (1,2) -- (1,1) -- (2,1) -- (2,0) -- cycle;
     \fill[black] (2,2) -- (2,3) -- (3,3) -- (3,2) -- cycle;
     \draw[thick] (0,2) -- (0,4) -- (2,4) -- (2,3) -- (1,3) -- (1,2) -- cycle;
