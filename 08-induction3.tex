@@ -287,3 +287,49 @@
   
   (Try to finish it in homework.)
 \end{frame}
+
+\begin{frame}\frametitle{Proof of the Principle of Mathematical Induction}
+  \begin{theorem}
+    If $P(1)$ and for any integer $k\geq 1$, $P(k)\Rightarrow P(k+1)$,
+    then $P(n)$ for all natural number $n$.
+  \end{theorem}
+  \begin{proof}
+    \pause We prove by contradiction.  \pause Assume that $P(n)$ is
+    not true for some natural number $n$.  \pause Let $m$ be the
+    smallest positive integer such that $P(m)$ is false.  \pause If
+    $m=1$, we get a contradiction because we know that $P(1)$ is true;
+    therefore, we know that $m>1$. \pause
+ 
+    Since $m$ is smallest and $m > 1$, then $P(m-1)$ must be
+    true. \pause However, because for any integer $k\geq 1$,
+    $P(k)\Rightarrow P(k+1)$, we can conclude that $P(m)$ must be
+    true.  Again, we reach a contradiction. \pause
+
+    Therefore, $P(n)$ is true for every positive integer $n$.
+  \end{proof}
+  \pause
+
+  Is this proof correct?
+\end{frame}
+
+\begin{frame}\frametitle{The Well-Ordering Property}
+  \begin{itemize}
+  \item The proof of the Principle of Mathematical Induction depends
+    on the following axiom of natural numbers ${\mathbb N}$:
+    \vspace{0.2in}
+
+    \begin{tcolorbox}
+      {\bf The Well-Ordering Property:} Any nonempty subset
+      $S\subseteq{\mathbb N}$ contains the smallest element.
+    \end{tcolorbox}
+    \pause
+
+    \vspace{0.1in}
+
+  \item Previously, we use the well-ordering property of natural
+    numbers to prove the Principle of Mathematical Induction, but it
+    turns out that we can use the induction to prove the well-ordering
+    property as well. \pause Therefore, we can take one as an axiom,
+    and use it to prove the other.
+  \end{itemize}
+\end{frame}
