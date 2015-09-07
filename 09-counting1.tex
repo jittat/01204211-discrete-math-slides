@@ -1,0 +1,114 @@
+\include{commons}
+\lecturetitle{Lecture 9: Counting 1}
+
+\begin{frame}\frametitle{Let's count}
+  \begin{tcolorbox}
+    {\bf Club representatives:} You are a second year student. Your
+    board game club has 40 members which are in the first year.  There
+    is a big competition very soon, so the club has to find exactly 2
+    representatives (from the first-year students) for the competition.
+  \end{tcolorbox}
+  \pause
+
+  \begin{itemize}
+  \item
+    How to find these 2 representatives?  One of your friends suggests
+    that to be fair to everyone, you have to look at every possible
+    pair and see how the 2 members of the pair play together as a
+    team.  \pause
+  \item
+    It might take a very long time, you think.  How many pairs are
+    there?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Club representatives (1)}
+  \begin{itemize}
+  \item
+    To choose the member of the pair, you pick the first member and then
+    pick the second member.  \pause
+  \item There are 40 ways to choose the
+    first member. \pause For every person you pick as the first member,
+    there are exactly 39 left to pick as the second one. \pause
+    Therefore, there are $40\cdot 39 = 1,560$ ways.  \pause
+  \item
+    Wait.. \pause This is over counting.  Picking $a$ as the first
+    member and $b$ as the second member results in the same pair as
+    picking $b$ first and $a$ second. \pause Thus, every pair is counted
+    twice.  \pause
+  \item The correct number of pairs is 780; too many possibilities to
+    consider, you conclude.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Club representatives (2)}
+  \begin{itemize}
+  \item Since 780 is too many, you decide to randomly choose 15 pairs
+    of representatives and observe how each pair plays.
+    \pause
+  \item Your friend argue that 15 is too small.  Because the number of
+    members is 40 and we will miss someone there.
+    \pause
+  \item So you ask, how many pairs one have to randomly choosing a
+    pair from 40 members so that it is very likely that every member
+    is picked once?
+    \pause
+  \item You try to calculate the number, but your friend starts
+    writing a program to simulate.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Club representatives (2)}
+  \begin{itemize}
+  \item Here's the table of the simulation.  For each value of number
+    of random pairs, 2,000 simulations has been conducted.
+
+    \vspace{0.1in}
+    
+    {\small
+    \begin{tabular}{c|c}
+      \hline
+      Number of pairs to random & \% of choosing everyone once \\
+      \hline
+      20 & 0.00 \\
+      30 & 0.00 \\
+      40 & 0.15 \\
+      50 & 2.45 \\
+      60 & 12.05 \\
+      80 & 51.65 \\
+      100 & 78.00 \\
+      120 & 91.25 \\
+      140 & 97.10 \\ \hline
+    \end{tabular}
+    }
+    \pause
+
+  \item You end up choosing randomly 100 pairs, as it has about 80\%
+    chance.  You feel so tired, but you keep wondering if you can
+    calculate the number without having to write a program.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Club representative again}
+  \begin{tcolorbox}
+    {\bf A team:} Another team competition is coming up.  It requires
+    a team of 5 players.  In the team, each player can play either as
+    Protoss, Terrans, or Zerg.  Luckily, only one team of 5 members
+    volunteers to participate.
+  \end{tcolorbox}
+
+  \begin{itemize}
+  \item
+    To find the best team organization, you ask them to try all
+    possible configurations of race choices against AI players.  How
+    many games do you have to watch?  \pause
+  \item
+    Each member has 3 choices and this member's choice is independent
+    of the other.  Therefore, there are $3\cdot 3\cdot 3\cdot 3\cdot 3
+    = 243$ possible ways. \pause
+  \item
+    You are still tired from watching 100 pairs of players.  So you
+    change your mind and ask them to try only configurations that
+    contain all the three races.  How many are there?
+  \end{itemize}
+\end{frame}
