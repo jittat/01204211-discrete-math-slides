@@ -231,11 +231,12 @@
     \item $\{1,2,3\}$ has \pause 8 subsets.
     \end{itemize}
     \pause
-  \item We can guess the answer $2^n$.  But how can we prove that?
+  \item We can guess that the answer is $2^n$.  But how can we prove
+    that?
   \end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Choosing a subset}
+\begin{frame}\frametitle{Choosing a subset (1)}
   \begin{itemize}
   \item Let's try to think about how to select a subset.  To be
     concrete, let's consider choosing a subset of set $\{1,2,3\}$.
@@ -259,11 +260,105 @@
 \end{frame}
 
 \begin{frame}\frametitle{A decision tree}
+  We describe the process as a decision tree for choosing subset $S$
+  from $A=\{1,2,3\}$.
+
+  {\tiny
+  \begin{tikzpicture}[scale=0.6]
+    \tikzstyle{level 1}=[sibling distance=80mm] 
+    \tikzstyle{level 2}=[sibling distance=50mm] 
+    \tikzstyle{level 3}=[sibling distance=18mm] 
+
+    \node [circle, draw] (a){$1\in S$}
+      child {node [circle, draw] (b) {$2\in S$}
+        child {node [circle, draw] (c) {$3\in S$}
+          child {node [rectangle, draw] (d) {$\{1,2,3\}$}}
+          child {node [rectangle, draw] (e) {$\{1,2\}$}}
+        }
+        child {node [circle, draw] (f) {$3\in S$}
+          child {node [rectangle, draw] (g) {$\{1,3\}$}}
+          child {node [rectangle, draw] (h) {$\{1\}$}}
+        }
+      }
+      child {node [circle, draw] (i) {$2\in S$}
+        child {node [circle, draw] (j) {$3\in S$}
+          child {node [rectangle, draw] (k) {$\{2,3\}$}}
+          child {node [rectangle, draw] (l) {$\{2\}$}}
+        }
+        child {node [circle, draw] (m) {$3\in S$}
+          child {node [rectangle, draw] (n) {$\{3\}$}}
+          child {node [rectangle, draw] (o) {$\{\}$}}
+        }
+      };
+    \path (a) -- (b) node [midway, left] {Y};
+    \path (a) -- (i) node [midway, right] {N};
+
+    \path (b) -- (c) node [midway, left] {Y};
+    \path (b) -- (f) node [midway, right] {N};
+
+    \path (c) -- (d) node [midway, left] {Y};
+    \path (c) -- (e) node [midway, right] {N};
+
+    \path (f) -- (g) node [midway, left] {Y};
+    \path (f) -- (h) node [midway, right] {N};
+
+    \path (i) -- (j) node [midway, left] {Y};
+    \path (i) -- (m) node [midway, right] {N};
+
+    \path (j) -- (k) node [midway, left] {Y};
+    \path (j) -- (l) node [midway, right] {N};
+
+    \path (m) -- (n) node [midway, left] {Y};
+    \path (m) -- (o) node [midway, right] {N};
+  \end{tikzpicture}
+  }
+\end{frame}
+
+\begin{frame}\frametitle{Choosing a subset (2)}
+  \begin{itemize}
+  \item To be concrete, let's consider choosing a subset of set
+    $\{1,2,3\}$.
+  \item We make 3 decisions, for all elements in the set.  The number
+    of ways we can choose a subset is 8.
+  \item While we know that it is the correct answer, let's look back
+    on what we are trying to do. \pause
+  \item We are trying to count the number of subsets. \pause But we
+    are actually counting the number of ways we can choose a subset.
+  \item To make sure that they are the same number, we need to make
+    sure that: \pause
+    \begin{itemize}
+    \item We count everything: for every possible subset, there is at
+      least one way we can choose it.
+    \item We do not over count: any two different ways of choosing
+      subsets produce two different subsets.
+    \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{The number of subsets}
-  {\bf \textcolor{blue}{Theorem:}} The number of subsets of a set with
-  $n$ elements is $2^n$.
+  Let's think about a general case for set $A=\{1,2,\ldots,n\}$ with
+  $n$ elements.  \pause We choose elements of a subset in $n$ steps.
+  Each step $i$, for $1\leq i\leq n$, we consider $i\in A$, and we
+  have $2$ choices.  \pause Hence, there are $2^n$ ways of choosing
+  subsets.
+  {\small
+    \begin{itemize}
+    \item {\bf To see that we can choose every subset:} \pause
+      consider a given subset $S\subseteq A$.  Note that we when we
+      consider $i$, we can choose $i$ if and only if $i\in S$.  \pause
+    \item {\bf To see that two different ways of choosing subsets
+      produce different subsets:} \pause consider two different ways
+      of choosing subsets.  Since they differ in some step, let $i\in
+      A$ be the element that they choose differently.  Thus, one of
+      the subsets contain $i$ while the other does not.
+    \end{itemize}
+  }
+  \pause
 
-  {\bf \textcolor{blue}{Proof:}}
+  Therefore, we have proved the following theorem.
+
+  \begin{tcolorbox}
+    {\bf \textcolor{blue}{Theorem:}} The number of subsets of a set with
+    $n$ elements is $2^n$.
+  \end{tcolorbox}
 \end{frame}
