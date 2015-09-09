@@ -123,11 +123,11 @@
   the statement.
 
   \begin{itemize}
-  \item The first proof considers procedure for constructing subsets.
-  \item The second proof introduces a nice techniques for counting.
+  \item The first proof considers a procedure for constructing subsets.
+  \item The second proof introduces a nice technique for counting.
     I.e., instead of counting subsets directly, we show that we have a
     ``special'' correspondence between subsets and binary numbers, and
-    then count the numbers.
+    then just count the numbers.
   \end{itemize}
 \end{frame}
 
@@ -150,3 +150,59 @@
       one-to-one correspondence} or {\bf bijection}.
   \end{tcolorbox}
 \end{frame}
+
+\begin{frame}\frametitle{Sequences of choices}
+  Previously, when we want to count the number of bit strings of
+  length $n$, we use this argument:
+
+  \begin{tcolorbox}
+    Suppose that to select an object, you have to make $k$ decisions.
+    The first decision has $n_1$ choices, the second decision has
+    $n_2$ choices, and so on.  More precisely, for $1\leq i\leq k$,
+    the $i$-th decision has $n_i$ choices.  Then the number of ways
+    you can select an object is $n_1\cdot n_2\cdots n_{k-1}\cdot n_k$.
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Example 1}
+  \begin{tcolorbox}
+    A car license number consists of two English letters and one
+    number from 1 to 9999.  How many possible license numbers are
+    there?
+  \end{tcolorbox}
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}\frametitle{Example 2}
+  \begin{tcolorbox}
+    10 students stand in a line.  You want to give them ice cream.
+    There are 4 flavours, but you don't want to give the same flavour
+    to any consecutive students.  In how many ways can you give out
+    the ice cream to these students?
+  \end{tcolorbox}
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}\frametitle{Permutations}
+\end{frame}
+
+\begin{frame}\frametitle{Counting permutations: an example}
+  We want to count the number of permutations.  Let's try with a small
+  example: permutations of set $\{a,b,c\}$.
+
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}\frametitle{Counting permutations}
+\end{frame}
+
+\begin{frame}\frametitle{Number of permutations}
+  We have proved this theorem.
+  \begin{tcolorbox}
+    {\bf \textcolor{blue}{Theorem:}} The number of permutations of a
+    set with $n$ elements is $n!$.
+  \end{tcolorbox}
+\end{frame}
+
+
+
