@@ -36,7 +36,8 @@
   \pause
 
   \begin{itemize}
-  \item We will also discuss the inclusion-exclusion priciples.
+  \item We will also discuss the inclusion-exclusion priciples (and,
+    if we have time, the pigeonhole principle).
   \end{itemize}
 \end{frame}
 
@@ -131,8 +132,8 @@
   \item
     Let's think about $n!$.  \pause
     \begin{itemize}
-    \item The first lower bound that comes to mind for $n!$ is $1^n =
-      1$. \pause
+    \item The first lower bound that comes to mind for $n!$ is $1^n = 1$.
+      \pause
     \item Can we get a better lower bound?  (Here, better lower bounds
       should be closer to the actual value.) \pause How about $2^n$?
       Is it a lower bound? \pause How about $3^n$ or $5^n$? Are they
@@ -154,6 +155,7 @@
   \vspace{0.1in}
   Are they any good? \pause
 
+  {\small
   \begin{tabular}{c|c|c|c}
     $n$ & $2^{n-1}$ & $n!$ & $n^{n-1}$ \\ \hline
     $1$ & $1$ & $1$ & $1$ \\
@@ -162,11 +164,44 @@
     $4$ & $8$ & $24$ & $64$ \\
     $10$ & $512$ & $3,628,800$ & $1,000,000,000$
   \end{tabular}
+  }
 \end{frame}
 
+\begin{frame}\frametitle{A better bound?}
+  Let's consider $n!$ again, but for simplicity, let's consider only
+  the case when $n$ is an even number:
+  \[ 1\cdot 2\cdot 3\cdots (n/2-1)\cdot(n/2)\cdot (n/2+1)\cdots n \]
+  \pause
+
+  To get a better lower bound, we may move our cutting point from $2$
+  to, say, $n/2$.  Note that at least $n/2$ factors are at least
+  $n/2$.  Thus,
+  \begin{eqnarray*}
+    n! &=& 1\cdot 2\cdots n \\
+    &\geq& \underbrace{1\cdot 1\cdots 1}_{n/2}\times\underbrace{(n/2)\cdots(n/2)}_{n/2} \\
+    &=& (n/2)^{n/2} = \sqrt{(n/2)^n}.
+  \end{eqnarray*}
+\end{frame}
+
+\begin{frame}\frametitle{Better?}
+  \begin{tabular}{c|c|c|c|c}
+    $n$ & $2^{n-1}$ & $\sqrt{(n/2)^n}$ & $n!$ & $n^{n-1}$ \\ \hline
+    $1$ & $1$ & - & $1$ & $1$ \\
+    $2$ & $2$ & $1$ & $2$ & $2$ \\
+    $3$ & $4$ & - & $6$ & $9$ \\
+    $4$ & $8$ & $4$ & $24$ & $64$ \\
+    $6$ & $32$ & $27$ & $720$ & $7,776$ \\
+    $10$ & $512$ & $3,125$ & $3,628,800$ & $1,000,000,000$ \\
+    $12$ & $2,048$ & $46,656$ & $479,001,600$ & $743,008,370,688$
+  \end{tabular}
+
+  \vspace{0.2in}
+
+  OK. A bit better.
+\end{frame}
 
 \begin{frame}\frametitle{Stering's formula}
-  A better estimate for $n!$ exists.
+  An even better estimate for $n!$ exists.
 
   \begin{theorem}[Stering's formula]
     $n!\sim \left(\frac{n}{e}\right)^n\sqrt{2\pi n}$.
@@ -184,6 +219,18 @@
   \[\log\left((100/e)^{100}\cdot\sqrt{200\pi}\right) = 100\log(100/e) + \log(200\pi) \approx 157.9696.\]
   \pause
   Note that the correct answer is 158 digits.
+\end{frame}
+
+\begin{frame}\frametitle{Another example}
+  \begin{itemize}
+  \item Consider the sum $1+2+\cdots+n$. \pause
+  \item While know that it is $n(n+1)/2$, we can get a very easy upper
+    bound by noting that each term in the sum is at most $n$; thus,
+    \[ 1+2+\cdot+n\leq \underbrace{n+n+\cdots+n}_{\mbox{$n$ terms}} = n\times n = n^2 \] \pause
+  \item This upper bound of $n^2$ is very good as the gaps between the
+    upper bounds and the actual values will not be larger than $2$, as
+    $\frac{n^2}{n(n+1)/2} < 2$.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{The number of subsets}
@@ -361,4 +408,33 @@
   This theorem also shows that our calculation technique is correct.
   This technique is usually called the {\bf Inclusion-Exclusion
     principle}.
+\end{frame}
+
+\begin{frame}\frametitle{The sock problem}
+  \begin{tcolorbox}
+    I have $n$ pairs of socks.  Each pair is different from the other
+    pair.  How many socks do I have to pick out to be sure that I have
+    at least one matching pair.
+  \end{tcolorbox}
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}\frametitle{The Pigeonhole Principle}
+  The answer of the previous question seems obvious.  But it appears
+  to be very useful in numerous cases.  It is called {\bf the
+    pigeonhole principle}.
+
+  \begin{tcolorbox}[title=The pigeonhole principle]
+    If we put $n+1$ objects into $n$ boxes, at least one box gets more
+    than one objects.
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Example}
+  \begin{tcolorbox}
+    Assume that nobody is taller than 250 cm.  In a group of 251
+    people, there are at least two people whose heights differ by at
+    most 1cm.
+  \end{tcolorbox}
+  \vspace{2in}
 \end{frame}
