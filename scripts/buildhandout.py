@@ -9,6 +9,8 @@ def main():
         quit()
 
     fname = sys.argv[1]
+    if fname.endswith('.'):
+        fname = fname + 'tex'
     build(fname, "handout.template", "%s.handout.tex")
 
 if __name__ == '__main__':

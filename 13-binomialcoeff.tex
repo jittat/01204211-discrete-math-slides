@@ -1,7 +1,7 @@
 \include{commons}
 \lecturetitle{Lecture 13: Binomial Coefficients} 
 
-\begin{frame}\frametitle{The binomial coefficients}
+\begin{frame}\frametitle{The binomial coefficients\footnote{This lecture mostly follows Chapter 3 of [LPV].}}
   There is a reason why the term $\binom{n}{k}$ is called the binomial
   coefficients.  In this lecture, we will discuss
   \begin{itemize}
@@ -103,4 +103,118 @@
 
   Let's look further at the coefficients of terms $x^{n-1}y$.  Do you
   see any pattern in their coefficients?  {\em Can you explain why?}
+\end{frame}
+
+\begin{frame}\frametitle{Another way to look at it}
+  Let's take a look at $(x+y)^4$ again.  It is
+
+  \[ (x+y)(x+y)(x+y)(x+y). \]
+
+  \begin{itemize}
+  \item How do we get $x^4$ in the expansion?  \pause For every
+    factory, you have to pick $x$.
+  \item How do we get $xy^3$ in the expansion? \pause Out of the 4
+    factors, you have to pick $y$ in one of the factor (or you have to
+    pick $x$ in 3 of the factors).  \pause Thus there are
+    $\binom{4}{3}=\binom{4}{1}$ ways to do so.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The binomial theorem}
+  \begin{tcolorbox}
+    \textcolor{blue}{Theorem:} If you expand $(x+y)^n$, the
+    coefficient of the term $x^ky^{n-k}$ is $\binom{n}{k}$.
+  \end{tcolorbox}
+  That is,
+  \[ (x+y)^n = \sum_{k=0}^n \binom{n}{k} x^ky^{n-k} = \]
+  \[ \binom{n}{n} x^n + \binom{n}{n-1} x^{n-1}y^1 + \binom{n}{n-2} x^{n-2}y^2 + \cdots + \binom{n}{1}xy^{n-1} + \binom{n}{0} y^n.\]
+\end{frame}
+
+\begin{frame}\frametitle{Additional applications of the binomial theorem}
+  The binomial theorem can be used to prove various identities
+  regarding the binomial coefficients.  For example, if we let $x=1$
+  and $y=1$, we get that
+  \[(1+1)^n=2^n=\binom{n}{0}+\binom{n}{1}+\cdots+\binom{n}{n-1}+\binom{n}{n}.\]
+
+  \pause
+
+  \vspace{0.2in}
+
+  \begin{tcolorbox}
+    {\bf Quick check.}  Can you prove that
+    \[\binom{n}{0} - \binom{n}{1} + \binom{n}{2} - \binom{n}{3} + \cdots = 0.\]
+
+    {\em Note that this statements says that the number of odd subsets
+      equals the number of even subsets.}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{More on counting}
+  We shall see more techniques for counting when we consider the
+  following problems.
+  \begin{itemize}
+  \item How many anagrams does the word ``KASETSARTUNIVERSITY'' have?
+    (They do not have to be real English words.)
+  \item How can you give out $n$ different presents to $k$ students
+    when student $i$ has to get $n_i$ pieces of presents?
+  \item How many ways can you distribute $n$ baht coins to $k$
+    children?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Easy anagrams}
+  \begin{itemize}
+  \item An anagram of a particular word is a word that uses the same
+    set of alphabets.  For example, the anagrams of $ADD$ are $ADD$,
+    $DAD$, and $DDA$. \pause
+  \item How many anagrams does ``$ABC$'' have? \pause
+    \begin{itemize}
+    \item $3!$, because every permutation of A B or C is a different
+      anagram. \pause
+    \end{itemize}
+  \item How many anagrams does ``$ABCC$'' have? \pause
+    \begin{itemize}
+    \item This time we have to be careful because the answer of $4!$
+      is too large as it over counts many anagrams. \pause
+    \item How many times does ``$CABC$'' get counted in $4!$? \pause
+    \item If we treat two $C$'s differently as $C_1$ and $C_2$, we can
+      see that $CABC$ is counted twice as $C_1ABC_2$ and $C_2ABC_1$.
+      This is true for any anagram of $ABCC$.  \pause
+    \item Since each anagram is counted in $4!$ twice, the number of
+      anagrams is $4!/2 = 4\cdot 3 = 12$.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{General anagrams}
+  \begin{tcolorbox}
+    Let's try to use the same approach to count the anagram of
+    $HELLOWORLD$. (It has 3 $L$'s, 2 $O$'s, $H$, $E$, $W$, $R$, and
+    $D$.)
+  \end{tcolorbox}
+
+  \pause
+  \vspace{0.2in}
+  
+  The number of permutation of alphabets in $HELLOWORLD$, treating
+  each character differently is $10!$.  However, each anagram is
+  counted for $3!2!$ times because of the 3 copies of $L$ and the 2
+  copies of $O$.  Therefore, the number of anagrams is
+  \[
+  \frac{10!}{3!2!}.
+  \]
+\end{frame}
+
+\begin{frame}\frametitle{Distributing presents}
+  \begin{tcolorbox}
+    I have $9$ different presents.  I want to give them to $3$
+    students: A, B, and C.  I want to give each student $3$ presents.
+    In how many ways can I do it?
+  \end{tcolorbox}
+
+  \pause
+  \vspace{0.2in} This is essentially an anagram problem.  You can
+  think of one particular way of present distribution as anagram of
+  AAABBBCCC.  Thus, the number is
+  \[\frac{9!}{3!3!3!}.\]
 \end{frame}
