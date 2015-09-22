@@ -1,5 +1,5 @@
 \include{commons}
-\lecturetitle{Lecture 13: Binomial Coefficients} 
+\lecturetitle{Lecture 13: Binomial Coefficients (1)} 
 
 \begin{frame}\frametitle{The binomial coefficients\footnote{This lecture mostly follows Chapter 3 of [LPV].}}
   There is a reason why the term $\binom{n}{k}$ is called the binomial
@@ -113,7 +113,7 @@
   \begin{itemize}
   \item How do we get $x^4$ in the expansion?  \pause For every
     factory, you have to pick $x$.
-  \item How do we get $xy^3$ in the expansion? \pause Out of the 4
+  \item How do we get $x^3y$ in the expansion? \pause Out of the 4
     factors, you have to pick $y$ in one of the factor (or you have to
     pick $x$ in 3 of the factors).  \pause Thus there are
     $\binom{4}{3}=\binom{4}{1}$ ways to do so.
@@ -461,68 +461,4 @@
   \binom{n}{0} + \binom{n+1}{1} + \binom{n+2}{2} + \cdots + \binom{n+k}{k} = \binom{n+k+1}{k}.
   \]
   \vspace{2.5in}
-\end{frame}
-
-\begin{frame}
-  Let's see the actual value of the binomial coefficients
-  $\binom{n}{\cdot}$.
-  \vspace{2in}
-\end{frame}
-
-\begin{frame}\frametitle{What do you see?}
-  \begin{itemize}
-  \item The function $\binom{n}{\cdot}$ is symmetric around $n/2$.
-  \item Why? \pause This is true because we know that $\binom{n}{k}=\binom{n}{n-k}$. \pause
-  \item The maximum is at the middle, i.e., when $n$ is even the
-    maximum is at $\binom{n}{n/2}$ and when $n$ is odd, the maximum is
-    at $\binom{n}{\lfloor n/2 \rfloor}$ and $\binom{n}{\lceil
-      n/2\rceil}$.
-  \item Why? \pause Can we prove that?
-  \end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Largest in the middle}
-  To understand the behavior of $\binom{n}{k}$ as $k$ changes, let's
-  look at two consecutive values:
-  \[ \binom{n}{k} \ \ \heartsuit \ \ \binom{n}{k+1}\]
-  \pause
-
-  Let's write them out:
-  \[ \frac{n(n-1)(n-2)\cdots(n-k+1)}{k!} \ \heartsuit \ \frac{n(n-1)(n-2)\cdots(n-k)}{(k+1)k!}.\]
-  \pause
-  Removing common terms, we can see that we are comparing these two terms:
-  \[ 1 \ \heartsuit \ \frac{n-k}{k+1} \Leftrightarrow k \ \heartsuit \ \frac{n-1}{2},\]
-  that is, \pause
-  \begin{itemize}
-  \item if $k<(n-1)/2$, $\binom{n}{k}<\binom{n}{k+1}$; and
-  \item if $k>(n-1)/2$, $\binom{n}{k} > \binom{n}{k+1}$.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{How large is the middle $\binom{n}{n/2}$}
-  Here, to simplify the calculation, we shall only consider the case
-  when $n$ is even. Let's try to estimate the value of
-  $\binom{n}{n/2}$ by finding its upper and lower bounds.
-  \pause
-
-  A simple upper bound can be obtain using the fact that
-  $\binom{n}{n/2}$ counts subsets of certain size:
-  \[\binom{n}{n/2} < 2^n.\]
-  \pause
-
-  We can also get a lower bound by noting that the maximum must be at
-  least the average, i.e.,
-  \[\binom{n}{n/2} \geq \frac{2^n}{n+1}\]
-\end{frame}
-
-\begin{frame}
-  Combining both bounds, we get that
-  \[\frac{2^n}{n+1}\leq \binom{n}{n/2} < 2^n.\]
-
-  \pause Let's plug in $n=200$, and calculate the number of digits to
-  see how close these bounds.
-  \[27.80 \approx 200\cdot\log 2 - \log 201 \leq \log\binom{n}{n/2} < 200\cdot \log 2\approx 30.10\]
-  \pause
-
-  Can we get a better approximation?
 \end{frame}
