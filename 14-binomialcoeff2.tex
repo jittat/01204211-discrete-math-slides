@@ -2,11 +2,9 @@
 \lecturetitle{Lecture 14: Binomial Coefficients (2)} 
 
 \begin{frame}\frametitle{The binomial coefficients\footnote{This lecture mostly follows Chapter 3 of [LPV].}}
-\end{frame}
-
-\begin{frame}
-  Let's see the actual value of the binomial coefficients
-  $\binom{n}{\cdot}$.
+  In this lecture, we shall study the function $\binom{n}{k}$ itself.
+  First, let's see the actual value of the binomial coefficients
+  $\binom{n}{k}$ for various values of $n$.
   \vspace{2in}
 \end{frame}
 
@@ -35,7 +33,7 @@
   \[ 1 \ \heartsuit \ \frac{n-k}{k+1} \Leftrightarrow k \ \heartsuit \ \frac{n-1}{2},\]
   that is, \pause
   \begin{itemize}
-  \item if $k<(n-1)/2$, $\binom{n}{k}<\binom{n}{k+1}$; and
+  \item if $k<(n-1)/2$, $\binom{n}{k} < \binom{n}{k+1}$; and
   \item if $k>(n-1)/2$, $\binom{n}{k} > \binom{n}{k+1}$.
   \end{itemize}
 \end{frame}
@@ -66,4 +64,46 @@
   \pause
 
   Can we get a better approximation?
+\end{frame}
+
+\begin{frame}\frametitle{Concentration}
+  \begin{itemize}
+  \item We know that the maximum of $\binom{n}{k}$ is obtained when
+    $k=n/2$.  From the graph, you can see that, as you move further
+    from the middle, the value of the function drops rapidly.
+  \item Since we consider even $n$, we let $2m=n$.  One way to
+    quantify how fast the values drop is to think about the ratio
+    \[ \binom{2m}{m-t}\Big/\binom{2m}{m}. \] \pause
+  \item In fact, it is known that
+    \[ \binom{2m}{m-t}\Big/\binom{2m}{m} \approx e^{-t^2/m} \]
+    \pause
+  \item We will use our basic tools to obtain weaker bounds.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{How close is the approximation?}
+  The estimation $e^{-t^2/m}$ is extremely close as shown in the
+  figure below, where the gray bars are the actual value of
+  $\binom{2m}{m-t}/\binom{2m}{m}$ and the red line is $e^{-t^2/m}$.
+
+  \includegraphics[height=2.2in]{images/binom-approx.png}
+\end{frame}
+
+\begin{frame}\frametitle{The actual values}
+  Let's try to calculate the ratio
+  \begin{eqnarray*}
+    \binom{2m}{m-t}\Big/\binom{2m}{m}
+    &=&
+    \frac{(2m)!}{(m-t)!(2m-m+t)!}\times\frac{m!m!}{(2m)!}\\
+    &=&
+    \frac{m(m-1)(m-2)\cdots(m-t+1)}{(m+t)(m+t-1)\cdots(m+1)}.
+  \end{eqnarray*}
+  \pause
+  We can use the same logarithm trick.  We have that the log of the
+  ratio is
+  \[
+  \ln\left(\frac{m}{m+t}\right) +
+  \ln\left(\frac{m-1}{m+t-1}\right)+\cdots+
+  \ln\left(\frac{m-t+1}{m+1}.\right)
+  \]
 \end{frame}
