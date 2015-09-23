@@ -90,20 +90,126 @@
 \end{frame}
 
 \begin{frame}\frametitle{The actual values}
-  Let's try to calculate the ratio
+  Because dealing with numbers less than 1 with logarithms is
+  error-prone, we will work on the reciprocal.  Let's try to calculate
+  the ratio
   \begin{eqnarray*}
-    \binom{2m}{m-t}\Big/\binom{2m}{m}
+    \binom{2m}{m}\Big/\binom{2m}{m-t}
     &=&
-    \frac{(2m)!}{(m-t)!(2m-m+t)!}\times\frac{m!m!}{(2m)!}\\
+    \frac{(2m)!}{m!m!}\times\frac{(2m-m+t)!(m-t)!}{(2m)!}\\
     &=&
-    \frac{m(m-1)(m-2)\cdots(m-t+1)}{(m+t)(m+t-1)\cdots(m+1)}.
+    \frac{(m+t)(m+t-1)\cdots(m+1)}{m(m-1)(m-2)\cdots(m-t+1)}.
   \end{eqnarray*}
   \pause
   We can use the same logarithm trick.  We have that the log of the
   ratio is
   \[
-  \ln\left(\frac{m}{m+t}\right) +
-  \ln\left(\frac{m-1}{m+t-1}\right)+\cdots+
-  \ln\left(\frac{m-t+1}{m+1}.\right)
+  \ln\left(\frac{m+t}{m}\right) +
+  \ln\left(\frac{m+t-1}{m-1}\right)+\cdots+
+  \ln\left(\frac{m+1}{m-t+1}.\right).
   \]
+  \pause
+  Then we can apply the bounds we have for $\ln x$:
+  \[
+  \frac{x-1}{x}\leq \ln x \leq x - 1
+  \]
+\end{frame}
+
+\begin{frame}\frametitle{The upper bound on the reciprocal}
+  Each term in the sum is in this form $\ln((m-i)/(m+t-i))$.  Applying
+  the upper bound, we get
+  \[ \ln\left(\frac{m+t-i}{m-i}\right) \leq \frac{m+t-i}{m-i}-1 = \frac{m+t-i-m+i}{m-i}=\frac{t}{m-i}.\]
+  \pause
+
+  Let's sum them up to get
+  \[
+    \ln\left(\frac{m+t}{m}\right) +
+    \ln\left(\frac{m+t-1}{m-1}\right)+\cdots+
+    \ln\left(\frac{m+1}{m-t+1}.\right) \quad\quad\quad
+  \]
+  \begin{eqnarray*}
+    \quad\quad &\leq&
+    \frac{t}{m} + \frac{t}{m-1} + \cdots + \frac{t}{m-t+1} \\
+    &\leq&
+    \frac{t}{m-t+1} + \frac{t}{m-t+1} + \cdots + \frac{t}{m-t+1} \\
+    & = & \frac{t^2}{m-t+1}. \\
+  \end{eqnarray*}
+\end{frame}
+
+\begin{frame}
+  This implies that
+  \[
+  \ln\left(\frac{(m+t)(m+t-1)\cdots(m+1)}{m(m-1)(m-2)\cdots(m-t+1)}\right)
+  \leq \frac{t^2}{m-t+1},
+  \]
+  i.e.,
+  \begin{eqnarray*}
+    \binom{2m}{m}\Big/\binom{2m}{m-t} &=& 
+    \left(\frac{(m+t)(m+t-1)\cdots(m+1)}{m(m-1)(m-2)\cdots(m-t+1)}\right)\\
+    &\leq& e^{t^2/(m-t+1)}.
+  \end{eqnarray*}
+  \pause
+
+  Taking the reciprocal, we get
+  \[
+  e^{-t^2/(m-t+1)}\leq
+  \binom{2m}{m-t}\Big/\binom{2m}{m}.
+  \]
+\end{frame}
+
+\begin{frame}\frametitle{Upper bounds}
+  Using the same approach, we can show that
+  \[
+  \binom{2m}{m-t}\Big/\binom{2m}{m}\leq e^{-t^2/(m+t)}.
+  \]
+  \pause
+
+  Thus, we derived the estimates:
+  \begin{tcolorbox}
+    \[
+    e^{-t^2/(m-t+1)}\leq
+    \binom{2m}{m-t}\Big/\binom{2m}{m}
+    \leq e^{-t^2/(m+t)},
+    \]
+  \end{tcolorbox}
+  \pause
+  which is fairly close the the estimate of $e^{-t^2/m}$.
+\end{frame}
+
+\begin{frame}\frametitle{How fast?}
+  \begin{itemize}
+  \item
+    Let's return to the question on how fast do the values of the
+    binomial coefficients decrease as you move further from the
+    middle.  Let's use the better estimate
+    $\binom{2m}{m-t}\big/\binom{2m}{m}\approx e^{-t^2/m}$.  \pause
+
+  \item
+    Given a constant $C$, we want to estimate the value of $t$ such
+    that $\binom{2m}{m-t}$ is less than $\binom{2m}{m}\big/C$.  (E.g.,
+    we can set $C=2$ to see when the value drops by 50\%.) Therefore,
+    we want to find $t$ such that
+    \[
+    1/C \geq 
+    \binom{2m}{m-t}\big/\binom{2m}{m}\approx e^{-t^2/m}
+    \]
+    Taking the logs, we get
+    \[
+    \ln 1/C = -\ln C \geq 
+    \ln \binom{2m}{m-t}\big/\binom{2m}{m}\approx -t^2/m.
+    \]
+    This is true when
+    \[
+    t \geq \sqrt{m\ln C}.
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{What does this means?}
+  As an example, let $m=20$ and $C=2$.  We know that when $t$ is
+  approximately $\sqrt{20\cdot \ln 2} = 3.723$ the value of
+  $\binom{2m}{m-t}$ drops by 50\%.
+
+  \includegraphics[height=2.2in]{images/binom-approx.png}
+
 \end{frame}
