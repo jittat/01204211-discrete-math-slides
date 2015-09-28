@@ -206,3 +206,151 @@
   as required.  Note that the first step follows from the induction
   hypothesis. $\blacksquare$
 \end{frame}
+
+\begin{frame}\frametitle{Another harder identity}
+  The following identity is harder to prove:
+  \[ F_n^2 + F_{n-1}^2 = F_{2n-1}. \]
+  Let's try a few values as a sanity check.
+  \[
+  F_1^2+F_2^2 = 1^2+1^2=2=F_3
+  \]
+  \[
+  F_2^2+F_3^2 = 1^2 + 2^2 = 5 = F_5
+  \]
+  \[
+  F_3^2+F_4^2 = 2^2 + 3^2 = 13 = F_7
+  \]
+
+  To see how hard it is to prove the identity, let's try to prove it
+  by induction.  (Let's jump to the inductive step.)
+\end{frame}
+
+\begin{frame}
+  We use strong induction. Assume that the statement is true for
+  $n=k,k-1,k-2,\ldots,0$. We prove the statement for $n=k+1$.
+
+  \vspace{0.1in}
+  Let's work on the left hand side.
+  \begin{eqnarray*}
+    F_{k+1}^2 + F_{k}^2 &=&
+    \left(F_k+F_{k-1}\right)^2 + \left(F_{k-1}+F_{k-2}\right)^2\\
+    &=& F_k^2 + 2F_kF_{k-1} +F_{k-1}^2 + F_{k-1}^2 +  2F_{k-1}F_{k-2} + F_{k-2}^2\\
+    &=& (F_k^2 + F_{k-1}^2) + 2F_kF_{k-1} + (F_{k-1}^2 + F_{k-2}^2) + 2F_{k-1}F_{k-2}\\
+    &=& F_{2k-1} + F_{2k-3} + 2F_kF_{k-1} + 2F_{k-1}F_{k-2},
+  \end{eqnarray*}
+  where the last step follows from the induction hypothesis.
+
+  \vspace{0.1in}
+  Note that we end up with the terms like:
+  $F_kF_{k-1}+F_{k-1}F_{k-2}$.  We can keep expanding the terms, but
+  we will end up with the same cross terms like this.
+
+  \vspace{0.1in} So, let's take a look at a few values of this
+  expression.  Maybe we can guess its values.
+\end{frame}
+
+\begin{frame}
+  Let's plug in a few values:
+  
+  \[ F_3F_2+F_2F_1 = 2\cdot 1 + 1\cdot 1 = 3 = F_4 \] 
+  \[ F_4F_3+F_3F_2 = 3\cdot 2 + 2\cdot 1 = 8 = F_6 \] 
+  \[ F_5F_4+F_4F_3 = 5\cdot 3 + 3\cdot 2 = 21 = F_8 \] 
+  \[ F_6F_5+F_5F_4 = 8\cdot 5 + 5\cdot 3 = 55 = F_{10} \]
+
+  From this, we can make another conjecture:
+  \begin{tcolorbox}
+    {\bf Conjecture 2:}
+    \[
+    F_{n+1}F_n + F_nF_{n-1} = F_{2n}.
+    \]
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}
+  Let's assume that Conjecture 2 is true and see if we can prove the
+  identity that we want.
+
+  Recall that we have
+  \begin{eqnarray*}
+    F_{k+1}^2 + F_{k}^2
+    &=& F_{2k-1} + F_{2k-3} + 2F_kF_{k-1} + 2F_{k-1}F_{k-2} \\
+    &=& F_{2k-1} + F_{2k-3} + 2(F_kF_{k-1} + F_{k-1}F_{k-2}) \\
+    &=& F_{2k-1} + F_{2k-3} + 2F_{2k-2} \ \ \ \ \ \ \mbox{(from Conj 2)}\\
+    &=& (F_{2k-1} + F_{2k-2}) + (F_{2k-2} + F_{2k-3})\\
+    &=& F_{2k} + F_{2k-1}\\
+    &=& F_{2k+1},
+  \end{eqnarray*}
+  as required.  We use Conjecture 2 to show the second step.
+
+  \vspace{0.1in} This means that assuming the Conjecture 2, we can
+  show the identity $F_n^2+F_{n-1}^2 = F_{2n-1}$.
+\end{frame}
+
+\begin{frame}\frametitle{Let's prove Conjecture 2}
+  {\bf Conjecture 2:} $F_{n+1}F_n + F_nF_{n-1}=F_{2n}$.
+  
+  {\bf Proof:} Let's do so by induction.  Since we have plugged in
+  many small values, we can only consider the inductive step now.
+  Assume that the statement is true for $n=k,k-1,k-2,\ldots,0$.  We
+  prove the statement for $n=k+1$.
+
+  We write
+  \begin{eqnarray*}
+    F_{k+2}F_{k+1}+F_{k+1}F_k
+    &=& (F_{k+1} + F_k)F_{k+1} + (F_k+F_{k-1})F_k \\
+    &=& F_{k+1}^2 + F_kF_{k+1} + F_k^2 + F_{k-1}F_k \\
+    &=& (F_kF_{k+1} + F_{k-1}F_k) + F_{k+1}^2 + F_k^2 \\
+    &=& F_{2k} + F_{k+1}^2 + F_k^2.
+  \end{eqnarray*}
+  (Note that the 4th step uses the induction hypothesis.)  Do you see
+  any familiar terms?
+
+  \vspace{0.1in} Yes, the terms $F_{k+1}^2 + F_k^2$ is the left hand
+  side of the identity we have just proven.  Actually, we cannot use
+  it directly here, because we use Conjecture 2 to prove it and now we
+  are trying to prove the conjecture itself.  {\bf Using it results in
+    a circular reasoning.}
+\end{frame}
+
+\begin{frame}
+  We can actually prove the conjecture using that identity, but we
+  first have to break our circular reasoning by proving both
+  statements together.  Formally, let's define predicates $P$ and $Q$:
+
+  \begin{tcolorbox}
+    \[P(n): F_n^2 +F_{n-1}^2 = F_{2n-1}\]
+    \[Q(n): F_{n+1}F_n + F_nF_{n-1} = F_{2n}\]
+  \end{tcolorbox}
+
+  We will prove that for all integer $n\geq 0$, $P(n)\wedge Q(n)$.
+    
+  {\bf Base Case:} We have shown that $P(1)$ and $Q(1)$ are true.
+  
+  {\bf Inductive Step:} Assume that the statements are true for
+  $n=k,k-1,\ldots,1$ for $k\geq 1$.  We will prove $P(k+1)\wedge
+  Q(k+1)$.
+  \begin{itemize}
+  \item $P(k+1)$ can be proved as in the proof of the identity
+    previously.
+  \item To prove $Q(k+1)$, we can use the induction hypotheses and
+    also $P(k+1)$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Simultaneous induction}
+  Let's prove $Q(k+1)$. We can continue from our ``broken'' proof.  We
+  have that
+  \begin{eqnarray*}
+    F_{k+2}F_{k+1}+F_{k+1}F_k
+    &=& F_{2k} + (F_{k+1}^2 + F_k^2) \\
+    &=& F_{2k} + F_{2k+1} = F_{2k+2},
+  \end{eqnarray*}
+  as required. Note that the second step uses $P(k+1)$. $\blacksquare$
+
+  \vspace{0.2in}
+  The technique we use to prove $P$ and $Q$ together is called {\bf
+    simultaneous induction}.
+\end{frame}
+
+\begin{frame}\frametitle{Explicit form of the Fibonacci sequence}
+\end{frame}
