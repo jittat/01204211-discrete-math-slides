@@ -1,0 +1,161 @@
+\include{commons}
+\lecturetitle{Lecture 18: Primality testing (3)} 
+
+\begin{frame}\frametitle{The first algorithm}
+  This lecture presents the primality testing algorithm based on the
+  Fermat test.
+
+  To perform the test if $q$ is a prime, we pick an integer $a$ from
+  the range $\{2,3,\ldots,q-1\}$ and check that the condition
+  specified by the Fermat's Little Theorem is satisfied.
+  \begin{tcolorbox}
+    {\bf PROCEDURE} FermatTest($q$,$a$)\\
+    1. {\bf if} $GCD(q,a)\neq 1$ {\bf then} {\bf return} ``COMPOSITE'' {\bf endif}\\
+    2. Find $y = a^{q-1}\Mod q$\\
+    3. {\bf if} $y\neq 1$ {\bf then}\\
+    4. \ \ {\bf return} ``COMPOSITE''\\
+    5. {\bf else}\\
+    6. \ \ {\bf return} ``PRIME''\\
+    7. {\bf endif}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Guarantees}
+  Let's consider all input/output possibilities.  Let
+  $y=$FermatTest($q$,$a$).
+
+  \vspace{0.1in}
+  \begin{tabular}{|l|c|c|}
+    \hline
+    & $y$=PRIME & $y$=COMPOSITE \\
+    \hline
+    $q$ is prime & \pause Correct & \pause Incorrect \\
+    \hline
+    $q$ is composite & \pause Incorrect & \pause Correct \\
+    \hline
+  \end{tabular}
+
+  \vspace{0.2in} \pause However, from the Fermat's Little Theorem, we
+  know that if $q$ is prime, the test always return ``PRIME''; thus
+  the test is always correct.
+
+  \textcolor{white}{We then need to consider the case when $q$ is composite.  In
+  this case, the Fermat's Little Theorem does not provide any
+  guarantee.  However, we hope that if $q$ is not a prime, we may be
+  able to find $a$ such that FermatTest($q$,$a$) reveals the truth,
+  i.e., it returns COMPOSITE.}
+\end{frame}
+
+\begin{frame}\frametitle{Guarantees}
+  Let's consider all input/output possibilities.  Let
+  $y=$FermatTest($q$,$a$).
+
+  \vspace{0.1in}
+  \begin{tabular}{|l|c|c|}
+    \hline
+    & $y$=PRIME & $y$=COMPOSITE \\
+    \hline
+    $q$ is prime & Correct & \textcolor{white}{Incorrect} \\
+    \hline
+    $q$ is composite & Incorrect & Correct \\
+    \hline
+  \end{tabular}
+
+  \vspace{0.2in} However, from the Fermat's Little Theorem, we
+  know that if $q$ is prime, the test always return ``PRIME''; thus
+  the test is always correct.
+
+  \pause We then need to consider the case when $q$ is
+  composite. \pause In this case, the Fermat's Little Theorem does not
+  provide any guarantee. \pause However, we hope that if $q$ is not a
+  prime, we may be able to find $a$ such that FermatTest($q$,$a$)
+  reveals the truth, i.e., it returns COMPOSITE.
+\end{frame}
+
+\begin{frame}\frametitle{Witness}
+  \begin{itemize}
+  \item 
+    Let's try to be precise.  For a composite $q$, if $a$ is an
+    integer such that FermatTest($q$,$a$) returns COMPOSITE, we say
+    that $a$ is a {\bf witness} for $q$.
+  \item
+    It would be great if, for any composite $q$, we can quickly find
+    its witness.  \pause But unfortunately, there exists a composite
+    $q$ with very few witnesses. I.e., every witness $a$ for $q$
+    shares its factor (i.e., it is such that $gcd(a,q)\neq 1$).
+    \pause They are called {\bf Carmichael numbers}.
+    \begin{tcolorbox}
+      A {\bf Carmichael} number is a composite number $q$ such that
+      \[ b^{q-1}\Mod q = 1, \]
+      for all integers $1<b<n$ which are relatively prime to $q$.
+    \end{tcolorbox}
+    \pause
+  \item The first Carmichael number is 561.  The next ones are 1105,
+    1729, and 2465.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Witnesses for non-Carmichael numbers (1)}
+  Let's focus on the bright side.  Suppose that $q$ is not Carmichael,
+  can we say anything about its witnesses?  Can we say that there are
+  plenty of them?
+\end{frame}
+
+\begin{frame}\frametitle{Witnesses for non-Carmichael numbers (2)}
+  Let $a$ be $q$'s witness such that $gcd(a,q)=1$, i.e., we also have that
+  \[ a^{q-1}\Mod q\neq 1. \]
+
+  Let's consider a non-witness $b$, i.e., $b$ is an integer such that
+  $gcd(b,q)=1$ and \[ b^{q-1}\Mod q=1. \]
+
+  \pause
+  Now, consider $ab$.  \pause We have that
+  \begin{eqnarray*}
+    (ab)^{q-1}\Mod q &=& (a^{q-1}b^{q-1})\Mod q \\
+    &=& (a^{q-1}\Mod q)(b^{q-1}\Mod q)\\
+    &=& a^{q-1}\Mod q\\
+    &\neq& 1
+  \end{eqnarray*}
+
+  \pause Can we use this to say that there are a lot of witnesses?
+\end{frame}
+
+\begin{frame}\frametitle{A lot of witnesses}
+  Since we can show that given a witness $a$ and a non-witness $b$,
+  $ab$ is also witness, we might be able to construct a lot of
+  witnesses from non-witnesses.  \pause
+  
+  Let $A\subseteq\{2,3,\ldots,q-1\}$.  Let $B$ be the set of
+  non-witnesses which are relatively prime to $q$, i.e.,
+  \[ B=\{b\in A : (gcd(b,q)=1) \wedge (b^{q-1}\Mod q = 1)\}. \]
+  Let $C=\{ab\Mod q : b\in A \}$.  We know that every $c\in C$ is a witness.
+
+  \pause If we know that $|C| = |B|$, can you show that the
+  probability of choosing a witness from the set $A$ is large (i.e, at
+  least $1/2$).
+
+  \pause Now, is it obvious that $|C| = |B|$?  What is missing?
+\end{frame}
+
+\begin{frame}\frametitle{The missing argument}
+  To show that $|C|=|B|$, we need to argue that when we multiply every
+  element of $B$, we do not get duplicate elements.  I.e., we need to
+  prove that for $x\in B$ and $y\in B$ such that $x\neq y$,
+  \[ x\Mod q \neq y\Mod q.\]
+
+  {\bf Quick check:} prove this statement.
+\end{frame}
+
+\begin{frame}\frametitle{Conclusions}
+  From the previous discussion, we know that for non-Carmichael
+  numbers, the Fermat test succeeds with probability at least $1/2$.
+
+  Further developments:
+  \begin{itemize}
+  \item In 1976, Miller and Rabin show that one can deal with
+    Carmichael numbers, providing the first randomized algorithm for
+    testing primes.
+  \item In 2002, Agrawal, Kayal, and Saxena devise an $O(m^{12})$-time
+    deterministic algorithm for primality testing.
+  \end{itemize}
+\end{frame}

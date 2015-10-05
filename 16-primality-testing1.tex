@@ -1,0 +1,198 @@
+\include{commons}
+\lecturetitle{Lecture 16: Primality testing (1)} 
+
+\begin{frame}\frametitle{Integers}
+  This is the second major area that we shall study in this course:
+  integers and their properties.  This area is called {\bf number
+    theory.}  We will see many properties of integers and their
+  applications that include data encoding techniques and data
+  encryption.
+
+  Most techniques depend on having large primes.  So, we start this
+  area by focus on the primality testing algorithm.  This is also the
+  first algorithm that we considered in this class as well.
+\end{frame}
+
+\begin{frame}\frametitle{Brute-force division}
+  \begin{tcolorbox}
+    {\bf FUNCTION} CheckPrime2($n$)\\
+    1. $k\leftarrow 2$\\
+    2. WHILE $k\leq\sqrt{n}$ DO\\
+    3. \ \ IF $k$ divides $n$ THEN\\
+    4. \ \ \ \ RETURN {\bf false}\\
+    5. \ \ ENDIF\\
+    6. \ \ $k\leftarrow k+1$\\
+    7. ENDWHILE\\
+    8. RETURN {\bf true}
+  \end{tcolorbox}
+
+  The WHILE loop in CheckPrime2 runs for at most $\sqrt{n}$ times.  This
+  improves over the original algorithm that uses roughly $n$ rounds.
+  While this is a big improvement, it is usually not good enough when
+  we consider a typical usage of the algorithm that we need, where we
+  need to check if a 1000-digit number is a prime.
+\end{frame}
+
+\begin{frame}\frametitle{Running time analysis: the $O$-notation}
+  \begin{itemize}                  
+  \item We shall study the running time of various algorithms in this
+    section.  Since we will not be very precise, keeping tracks of all
+    details, we will use the $O$-notation when we talk about the
+    running time.
+  \item
+    We will informally use the notation.  When we say that function
+    $f(n)$ is $O(g(n))$, we means that the growth of $f(n)$ is at most
+    that of $g(n)$.  This means that the largest terms in $f(n)$ is
+    not larger than that of $g(n)$.
+  \item
+    {\bf Examples:}
+    \begin{itemize}
+    \item $n^2 + 100n = O(n^2)$
+    \item $\sqrt{n} + n = O(n)$
+    \item $2^n + 10000 + 100000n^{10} = O(2^n)$
+    \item $5\cdot n^3 + n^2 = O(n^3)$
+    \item $10n^2 \times 7n + 12n^3\times 75n^2  = O(n^3) + O(n^5) = O(n^5)$
+    \end{itemize}
+  \item Note that it is also true that $n^2 = O(n^3)$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Polynomial running times}
+  Let's discuss CheckPrime2's running time.
+
+  We usually think about the running time as a function on the size of
+  the input.  When we want to sort $n$ numbers, the size of the input
+  is $n$.  However, when dealing with big numbers (i.e., those much
+  larger than directly manipulatable in the CPU), you cannot
+  manipulate them in constant time.  In this case, we usually count
+  the number of bits as the size of the input.
+
+  Since $n$ is the value of the input, to keep this integer in
+  computer memory, you need at least $\log_2 n$ bits\footnote{We shall
+    use logarithm base 2 in this part of the course.}.  This will be
+  the size of the input that we shall consider.
+
+  \vspace{0.1in}
+  Let $m=O\log n$ be the number of bits of $n$.  The algorithm that
+  runs in time $O(\sqrt{n})$, actually runs in time
+  $O(\sqrt{2^m})=O(2^{m/2})$, an exponential running time.  This means
+  that the algorithm does not scale very well, as the size of the
+  input increases.
+  
+  In this case, we want a more efficient algorithm, i.e., it runs in
+  time in the polynomial of $m$.
+\end{frame}
+
+\begin{frame}\frametitle{Running time: integer addition}
+  
+\end{frame}
+
+\begin{frame}\frametitle{Running time: integer multiplication}
+\end{frame}
+
+\begin{frame}
+  This lecture covers
+  \begin{itemize}
+  \item basic definitions related to division and modulo operation
+  \item prime factorization
+  \item a fundamental theorem stating a fact related to prime numbers
+    called the Fermat's Little Theorem
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Definitions: divisibilty}
+  Let's start with basic definitions.
+  \begin{itemize}
+  \item We say that ``$a$ divides $b$'', ``$b$ is divisible by $a$'',
+    or ``$b$ is a multiple of $a$'' if there exists an integer $k$
+    such that $b = ka$.  In this case, we write \[a|b.\]
+  \item If it's not the case, we write $a\not| b$.
+  \item When $a$ does not divides $b$, there is a remainder.  We say
+    that $r$ is a remainder of dividing $b$ by $a$ if $0\leq r<a$ and
+    there exists integer $k$ such that $b = ka + r$.  We also write
+    \[ r = a\mod b.\]
+    \begin{itemize}
+    \item $10\mod 3 = 1$, $10\mod 2 = 0$, $10\mod 15=10$
+    \item $-10\mod 3 = 2$, $-10\mod 15=5$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The modulo operation}
+  \begin{tcolorbox}
+    For integers $a$ and $b$ and positive integer $q$, we have
+    \begin{itemize}
+    \item $(a+b)\;\bmod\;q = ((a\;\bmod\;q) + (b\;\bmod\;q))\;\bmod\; q$
+    \item $(a-b)\;\bmod\;q = ((a\;\bmod\;q) - (b\;\bmod\;q))\;\bmod\; q$
+    \item $(ab)\;\bmod\;q = ((a\;\bmod\;q) \times (b\;\bmod\;q))\;\bmod\; q$
+    \end{itemize}
+  \end{tcolorbox}
+
+  Examples:
+  \begin{itemize}
+    \item $(14 + 7)\;\bmod\; 5 = ((14\;\bmod\;5) + (7\;\bmod\;5))\;\bmod\;5 = (4+2)\;\bmod\;5 = 1$
+    \item $(14\cdot 7\cdot 13\cdot 19)\;\bmod\; 5 = ((14\;\bmod\;5)\cdot(7\;\bmod\;5)\cdot(13\;\bmod\;5)\cdot(19\;\bmod\;5))\;\bmod\;5 = (4\cdot 2\cdot 3\cdot 4)\;\bmod\;5 = 96\;\bmod\;5=1$
+  \end{itemize}
+
+  {\small These facts are really helpful when you try to compute
+    $x\;\bmod\; y$ when $x$ is very large compared to $y$ and $x$ is a
+    result of many operations of small numbers.  In this case, we can
+    keep moduloing intermediate results to keep them under $y$.
+  
+    You will prove these properties in your homework.
+  }
+\end{frame}
+
+\begin{frame}\frametitle{Definitions: primes}
+  \begin{tcolorbox}
+    An integer $p$ is a {\bf prime} if $p>1$ and $p$ has only 4
+    factors: $1,-1,p,$ and $-p$.  If a number larger than $1$ is not a
+    prime, we say that it is a {\bf composite}.
+  \end{tcolorbox}
+
+  Prime numbers are very fascinating.  There are many facts that have
+  proved about them.  E.g., we looked at Euclid's proof that there are
+  infinitely many primes.  Here's another one by Euclid:
+
+  {\small
+    \begin{tcolorbox}
+      \textcolor{blue}{Theorem:} For any positive integer $n$, there
+      are $n$ consecutive composites.
+      
+      \textcolor{blue}{Proof:} Let $m=n+1$.  Consider
+      \[
+      (m!+2),(m!+3),\ldots,(m!+m).
+      \]
+      Note that these $m-1=n$ numbers are composite because for any
+      $1\leq i\leq m$, $i|m!$, $i|i$, and thus,
+      $i|(m!+i)$. $\blacksquare$
+    \end{tcolorbox}
+  }
+\end{frame}
+
+\begin{frame}\frametitle{Prime factorization}
+  It is known since the Greeks that if you have a composite $n$, you
+  can factor it as a product of prime numbers.  For example, you can
+  write
+  \[ 140 = 2\times 2\times 5\times 7. \]
+\end{frame}
+
+\begin{frame}
+  \textcolor{blue}{Theorem:} A prime factorization of a positive
+  number larger than 1 is unique.
+\end{frame}
+
+\begin{frame}
+  \textcolor{blue}{Lemma:} If $p$ is a prime for any integer $1\leq
+  k<p$, we have that
+  \[
+  p\Big|\binom{p}{k}.
+  \]
+\end{frame}
+
+\begin{frame}\frametitle{Fermat's Little Theorem}
+  \begin{tcolorbox}
+    \textcolor{blue}{Theorem:} If $p$ is a prime and for any integer
+    $a$, we have that $p|a^p-a$.
+  \end{tcolorbox}
+\end{frame}
