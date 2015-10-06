@@ -22,12 +22,12 @@
 
 \begin{frame}\frametitle{Guarantees}
   Let's consider all input/output possibilities.  Let
-  $y=$FermatTest($q$,$a$).
+  $z=$FermatTest($q$,$a$).
 
   \vspace{0.1in}
   \begin{tabular}{|l|c|c|}
     \hline
-    & $y$=PRIME & $y$=COMPOSITE \\
+    & $z$=PRIME & $z$=COMPOSITE \\
     \hline
     $q$ is prime & \pause Correct & \pause Incorrect \\
     \hline
@@ -48,12 +48,12 @@
 
 \begin{frame}\frametitle{Guarantees}
   Let's consider all input/output possibilities.  Let
-  $y=$FermatTest($q$,$a$).
+  $z=$FermatTest($q$,$a$).
 
   \vspace{0.1in}
   \begin{tabular}{|l|c|c|}
     \hline
-    & $y$=PRIME & $y$=COMPOSITE \\
+    & $z$=PRIME & $z$=COMPOSITE \\
     \hline
     $q$ is prime & Correct & \textcolor{white}{Incorrect} \\
     \hline
@@ -78,6 +78,22 @@
     Let's try to be precise.  For a composite $q$, if $a$ is an
     integer such that FermatTest($q$,$a$) returns COMPOSITE, we say
     that $a$ is a {\bf witness} for $q$.
+  \item
+    From the code of FermatTest, an integer $a$ can be a witness for
+    $q$ in two cases:
+    \begin{itemize}
+    \item (1) when $GCD(q,a)\neq 1$, or
+    \item (2) when $a^{q-1}\Mod q\neq 1$.
+    \end{itemize}
+  \item Note that if we pick $a$ randomly from the set $\{2,3,\ldots,
+    q-1\}$ and composite $q$ is a product of very large primes, it is
+    very unlikely that we pick $a$ that satisfies (1) because $a$ must
+    be a multiple of some of $q$'s prime factors.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Carmichael numbers}
+  \begin{itemize}
   \item
     It would be great if, for any composite $q$, we can quickly find
     its witness.  \pause But unfortunately, there exists a composite
@@ -109,10 +125,11 @@
   $gcd(b,q)=1$ and \[ b^{q-1}\Mod q=1. \]
 
   \pause
-  Now, consider $ab$.  \pause We have that
+  Now, consider $ab\Mod q$.  \pause We have that
   \begin{eqnarray*}
-    (ab)^{q-1}\Mod q &=& (a^{q-1}b^{q-1})\Mod q \\
-    &=& (a^{q-1}\Mod q)(b^{q-1}\Mod q)\\
+    (ab\Mod q)^{q-1}\Mod q &=& (ab)^{q-1}\Mod q \\
+    &=&(a^{q-1}b^{q-1})\Mod q \\
+    &=& (a^{q-1}\Mod q)(b^{q-1}\Mod q)\Mod q\\
     &=& a^{q-1}\Mod q\\
     &\neq& 1
   \end{eqnarray*}
@@ -125,10 +142,11 @@
   $ab$ is also witness, we might be able to construct a lot of
   witnesses from non-witnesses.  \pause
   
-  Let $A\subseteq\{2,3,\ldots,q-1\}$.  Let $B$ be the set of
-  non-witnesses which are relatively prime to $q$, i.e.,
-  \[ B=\{b\in A : (gcd(b,q)=1) \wedge (b^{q-1}\Mod q = 1)\}. \]
-  Let $C=\{ab\Mod q : b\in A \}$.  We know that every $c\in C$ is a witness.
+  Let $A=\{2,3,\ldots,q-1\}$ be the set of all candidates.  Let $B$ be
+  the set of non-witnesses which are relatively prime to $q$, i.e., \[
+  B=\{b\in A : (gcd(b,q)=1) \wedge (b^{q-1}\Mod q = 1)\}. \] Let
+  $C=\{ab\Mod q : b\in A \}$.  We know that every $c\in C$ is a
+  witness.
 
   \pause If we know that $|C| = |B|$, can you show that the
   probability of choosing a witness from the set $A$ is large (i.e, at
