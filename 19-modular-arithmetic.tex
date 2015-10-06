@@ -1,0 +1,60 @@
+\include{commons}
+\lecturetitle{Lecture 19: Modular arithmetic} 
+
+\begin{frame}\frametitle{Review}
+  In previous lectures, we studied various properties of integers and
+  primes, and discussed primality testing algorithms.  In this
+  lecture, we will dive deeper into {\bf modular arithmetic}, where we
+  work with integers that ``wrap around'' when reaching a particular
+  value, called the ``modulus''.
+\end{frame}
+
+\begin{frame}\frametitle{An example}
+  \begin{tcolorbox}
+    Alice was born on July.  Betty was born in the next 7 months.
+    Before Betty was born for 3 months, Cathy was born.  Dave was born
+    10 months before Cathy.  What is Dave's birth month?
+  \end{tcolorbox}
+
+  \pause We shall encode 12 months as numbers from 0 (for January) to
+  11 (for December).  Let $a$ be Alice's birth month.  If we denote by
+  $b,c,$ and $d$ birth months of Betty, Cathy, and Dave, we can write
+  down the conditions as follows:
+  \pause
+  \begin{eqnarray*}
+    a \Mod 12 &=& 6\Mod 12\\
+    (a + 7) \Mod 12 &=& b \Mod 12 \\
+    (b - 3) \Mod 12 &=& c \Mod 12 \\
+    (c - 10) \Mod 12 &=& d \Mod 12
+  \end{eqnarray*}
+  
+  \pause This is a familiar system of linear equations, but with a
+  little twist: a ``modulus'' at the end.
+\end{frame}
+
+\begin{frame}\frametitle{Congruence}
+  To deal with these equations, Carl Friedrich Gauss introduced a
+  notation for them, called contruence.  Instead of writing
+  \[ (a+7)\Mod 12 = b \Mod 12,\]
+  we write
+  \[ a+7 \equiv b \pmod {12}.\]
+  \pause
+
+  Formally, if
+  \[ x\Mod m = y\Mod m, \]
+  we can write
+  \[ x \equiv y \pmod m.\]
+\end{frame}
+
+\begin{frame}\frametitle{The system with the congruence notation}
+  Let's rewrite our previous set of equations using this notation:
+  \begin{eqnarray*}
+    a &\equiv& 6 \pmod {12}\\
+    a + 7 &\equiv& b \pmod {12} \\
+    b - 3 &\equiv& c \pmod {12} \\
+    c - 10 &\equiv& d \pmod {12}
+  \end{eqnarray*}
+
+  Now everything looks fairly much like normal equations.  But do they
+  behave the same?
+\end{frame}

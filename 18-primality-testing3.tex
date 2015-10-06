@@ -141,9 +141,13 @@
   To show that $|C|=|B|$, we need to argue that when we multiply every
   element of $B$, we do not get duplicate elements.  I.e., we need to
   prove that for $x\in B$ and $y\in B$ such that $x\neq y$,
-  \[ x\Mod q \neq y\Mod q.\]
+  \[ ax\Mod q \neq ay\Mod q,\]
+  when $gcd(a,q)=1$.
 
   {\bf Quick check:} prove this statement.
+
+  (Note: From the definitions of $a$ and $B$, you may assume that
+  $gcd(q,a)=gcd(q,x)=gcd(q,y)=1$.)
 \end{frame}
 
 \begin{frame}\frametitle{Conclusions}
