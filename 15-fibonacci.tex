@@ -353,4 +353,158 @@
 \end{frame}
 
 \begin{frame}\frametitle{An explicit form of the Fibonacci sequence}
+  While the recurrence for $F_n$ completely specifies the sequence, it
+  is hard to find the value of, say, $F_{20}$ quickly.  We really have
+  to enumerate the sequence from $F_0,F_1,\ldots,$ to get to $F_{20}$.
+  Also, with the definition based on the recurrence, other properties
+  of the sequcen is unclear (e.g., how fast the sequence grows).
+
+  Therefore, it might be useful to find the explicit definition of the
+  Fibonacci sequence.
+\end{frame}
+
+\begin{frame}\frametitle{Ratios}
+  To get started, we might want to look for a common form of the
+  function.  We can start by looking at the numbers in the sequence.
+
+  \vspace{0.1in}
+
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+      \begin{tabular}{r|r|r}
+        $n$ & $F_n$ & ratio $F_n/F_{n-1}$ \\
+        \hline
+        1 & 1   & \\	
+        2 & 1   & 1.0000000000\\
+        3 & 2   & 2.0000000000\\
+        4 & 3   & 1.5000000000\\
+        5 & 5   & 1.6666666667\\
+        6 & 8   & 1.6000000000\\
+        7 & 13  & 1.6250000000\\
+        8 & 21  & 1.6153846154\\
+        9 & 34  & 1.6190476190\\
+        10 & 55 & 1.6176470588\\
+        11	&	89	&	1.6181818182	\\
+        12	&	144	&	1.6179775281	\\
+       \hline
+      \end{tabular}
+    \end{column}
+
+      \begin{column}{0.4\textwidth}
+      \begin{tabular}{r|r|r}
+        $n$ & $F_n$ & ratio $F_n/F_{n-1}$ \\
+        \hline
+        13	&	233	&	1.6180555556	\\
+        14	&	377	&	1.6180257511	\\
+        15	&	610	&	1.6180371353	\\
+        16	&	987	&	1.6180327869	\\
+        17	&	1597	&	1.6180344478	\\
+        18	&	2584	&	1.6180338134	\\
+        19	&	4181	&	1.6180340557	\\
+        20	&	6765	&	1.6180339632	\\
+        21	&	10946	&	1.6180339985	\\
+        22	&	17711	&	1.6180339850	\\
+        23	&	28657	&	1.6180339902	\\
+        24	&	46368	&	1.6180339882	\\
+        \hline
+      \end{tabular}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{The 1st guess: $a^n$}
+  We can see that the ratio between two consecutive Fibonacci numbers
+  is close to $1.61803$.  We may guess that the explicit form for
+  $F_n$ is an exponential function $a^n$.  (While we know that this is
+  not true, it may give us hints on the correct function.)
+
+  \vspace{0.1in}
+  Let's try to figure out the exact value for $a$.  The value $a$ must
+  satisfy the recurrence $F(n+1)=F(n)+F(n-1)$, i.e.,
+  \[ a^{n+1}=a^n+a^{n-1}. \]
+
+  \vspace{0.1in} We can try to solve for $a$.  Dividing the
+  equation by $a^{n-1}$, we get
+  \[ a^2 = a + 1, \]
+  i.e., $a^2-a-1 = 0$.
+\end{frame}
+
+\begin{frame}\frametitle{Solutions (1)}
+  We can use a standard formula to get the values of $a$, i.e., $a$
+  can be $\frac{1+\sqrt{1^2+4\cdot 1\cdot 1}}{2\cdot 1},
+  \frac{1-\sqrt{1^2+4\cdot 1\cdot 1}}{2\cdot 1}$,
+  or
+  \[ \tfrac{1+\sqrt{5}}{2},\tfrac{1-\sqrt{5}}{2}. \]
+  These look nice because $\tfrac{1+\sqrt{5}}{2}\approx 1.61803$.
+
+  \vspace{0.1in}
+  These solutions give us two candidates for $F_n$:
+  \[ g(n) = \left(\frac{1+\sqrt{5}}{2}\right)^n, \]
+  and
+  \[ h(n) = \left(\frac{1-\sqrt{5}}{2}\right)^n, \]
+  
+  \vspace{0.1in}
+  But we can see that while both $g(n)$ and $h(n)$ satisfy
+  $g(n+1)=g(n)+g(n-1)$ and $h(n+1)=h(n)+h(n-1)$, they are not the
+  correct function for $F_n$. (We can just plug in various values of
+  $n$ to check.)
+\end{frame}
+
+\begin{frame}\frametitle{Solutions (2)}
+  To get the actual function, we observe that if both $g(n)$ and
+  $h(n)$ are solutions to our recurrence, then for any $\alpha$ and
+  $\beta$,
+  \[\ell(n) = \alpha\cdot g(n) + \beta\cdot h(n) \]
+  is also a solution to the recurrence, because
+  \begin{eqnarray*}
+    \ell(n+1) &=& \alpha g(n+1) + \beta h(n+1) \\
+    &=& \alpha (g(n)+g(n-1)) + \beta (h(n)+h(n-1)) \\
+    &=& \alpha g(n) + \beta h(n) + \alpha g(n-1) + \beta h(n-1) \\
+    &=& \ell(n) + \ell(n-1).
+  \end{eqnarray*}
+
+  \vspace{0.1in} This opens another possibility for us, i.e., $g(n)$
+  and $h(n)$ may be useful, but we need to find $\alpha$ and $\beta$.
+  How?
+\end{frame}
+
+\begin{frame}\frametitle{The 2nd guess}
+  Let $\ell(n) = \alpha g(n) + \beta h(n)$.  We may use two initial
+  values for $F_n$ to set up the system of equations:
+  \[ 0 = \ell(0) = \alpha g(0) + \beta h(0), \]
+  and
+  \[ 1 = \ell(1) = \alpha g(1) + \beta h(1).\]
+  Plugging in $g(0),h(0),g(1)$, and $h(1)$, we get
+  \[ \alpha\left(\tfrac{1+\sqrt{5}}{2}\right)^0 +
+  \beta\left(\tfrac{1-\sqrt{5}}{2}\right)^0  = \alpha + \beta = 0, \]
+  and
+  \[ \alpha\left(\tfrac{1+\sqrt{5}}{2}\right)^1 +
+  \beta\left(\tfrac{1-\sqrt{5}}{2}\right)^1 =
+  \alpha\left(\tfrac{1+\sqrt{5}}{2}\right) +
+  \beta\left(\tfrac{1-\sqrt{5}}{2}\right)  = 1. \]
+
+  The first equation gives $\beta = -\alpha$.  Put that in the second
+  equation to get
+  \[
+  \alpha\left(\tfrac{1+\sqrt{5}}{2}\right)
+  -\alpha\left(\tfrac{1-\sqrt{5}}{2}\right)  =
+  \tfrac{2\alpha\sqrt{5}}{2} = \alpha\sqrt{5} = 1,
+  \]
+  implying that $\alpha=1/\sqrt{5}$ and $\beta=-1/\sqrt{5}$.
+\end{frame}
+
+\begin{frame}\frametitle{The final solution}
+  Using the obtained $\alpha$ and $\beta$, our solution to $F_n$
+  becomes
+  \[ \frac{1}{\sqrt{5}}\left(\frac{1+\sqrt{5}}{2}\right)^n
+  - \frac{1}{\sqrt{5}}\left(\frac{1-\sqrt{5}}{2}\right)^n. \]
+
+  Now, we can check that this is indeed the correct solution to $F_n$.
+
+  \vspace{0.2in} Note that $\tfrac{1+\sqrt{5}}{2}\approx 1.61803$ is
+  the golden ratio.  Also observe that $|\tfrac{1-\sqrt{5}}{2}|\approx
+  |-0.61803|<1$; therefore, the term
+  $\left(\tfrac{1-\sqrt{5}}{2}\right)^n$ goes to zero as $n$ goes to
+  infinity.  This explains why we only observe only the ratio
+  $\tfrac{1+\sqrt{5}}{2}$ in $F_n$ as $n$ gets large.
 \end{frame}
