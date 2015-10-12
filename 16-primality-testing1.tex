@@ -83,11 +83,39 @@
   time in the polynomial of $m$.
 \end{frame}
 
-\begin{frame}\frametitle{Running time: integer addition}
-  
-\end{frame}
+\begin{frame}\frametitle{Running time: integer operations}
+  When we have two $m$-bit integers $a$ and $b$ The running times for
+  \begin{itemize}
+  \item Addition and subtraction: $O(m)$, and
+  \item Multiplication and division: $O(m^2)$.
+  \end{itemize}
 
-\begin{frame}\frametitle{Running time: integer multiplication}
+  \vspace{0.2in}
+
+  {\bf Examples:}
+
+  \vspace{0.1in}
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+      1000 1110 1011 0110\\
+      +\\
+      0010 0111 0110 1111\\
+      ------ \\
+      1011 0110 0010 0111
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \textcolor{white}{0000 0000} 1000 1110\\
+      x\\
+      \textcolor{white}{0000 0000} 0010 0111\\
+      ------ \\
+      \textcolor{white}{0000 0000} 1000 1110\\
+      \textcolor{white}{0000 000}1 0001 110\\
+      \textcolor{white}{0000 00}10 0011 10\\
+      \textcolor{white}{000}1 0001 110\\
+      = \\
+      \textcolor{white}{000}1 0101 1010 0010
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
