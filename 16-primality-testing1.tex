@@ -175,11 +175,122 @@
   can factor it as a product of prime numbers.  For example, you can
   write
   \[ 140 = 2\times 2\times 5\times 7. \]
+
+  \vspace{0.1in} Not only you can do that, but the Greeks also know
+  that you can do that in only one way (except the permutation of the
+  prime factors).  Many proofs we shall introduce later on require
+  this fact, so we shall prove it next.
 \end{frame}
 
 \begin{frame}
   \textcolor{blue}{Theorem:} A prime factorization of a positive
   number larger than 1 is unique.
+
+  \begin{tcolorbox}[title=Proof]
+  We shall prove by contradiction.  We also
+  use an argument usually referred to as the ``minimal criminal''
+  argument, for which we use the fact that we can pick the minimal
+  element of a subset of positive integers.
+
+  \vspace{0.1in}
+  Assume that the statement is false, i.e., there exists a positive
+  integer with two prime factorizations.  Let $n$ be the smallest
+  integer with that property.  I.e., $n$ has at least two prime
+  factorizations:
+  \[ n = p_1 \cdot p_2 \cdots p_r, \]
+  and
+  \[ n = q_1 \cdot q_2 \cdots q_s.\]
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}
+  \begin{tcolorbox}[title=Proof (cont.)]
+  To simplify our proof, we shall make a few assumptions.  Note that
+  these assumptions do not change the actual assumption of the
+  theorem.  When we make these types of assumption, we usually say
+  that we make assumptions ``without loss of generality''.
+
+  \vspace{0.1in} {\em 1st assumption.} We assume that the two prime
+  factorizations do not share any primes, i.e., the sets
+  $\{p_1,p_2,\ldots,p_r\}$ and $\{q_1,q_2,\ldots,q_s\}$ are disjoint.
+  If this is not the case, we can divide $n$ by a common prime factor
+  $p_i$ to obtain a smaller integer $n'$ with two prime
+  factorizations.
+
+  \vspace{0.1in} {\em 2nd assumption.} We also assume that $p_1$ is
+  the smallest prime factor in both prime factorizations, i.e.,
+  $p_1\leq p_i$ for all $1\leq i\leq r$ and $p_1 < q_j$ for all $1\leq
+  j\leq s$.  Otherwise, we can switch the roles of prime
+  factorizations $p_1p_2\cdots p_r$ and $q_1q_2\cdots q_s$.
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}
+  \begin{tcolorbox}[title=Proof (cont.)]
+  We shall proceed to show that the assumption leads to a
+  contradiction by proving that there exists an integer $n'$ smaller
+  than $n$ with two prime factorizations.
+
+  Let's take $p_1$ and divide every prime $q_j$ with $p_1$.  Let $r_j$
+  be each remainder, i.e., for $1\leq j\leq s$, let
+  \[ r_j=q_j \Mod p_1.\]
+
+  Since $p_1$ does not appear in the second prime factorization, it
+  does not divide any $q_j$; thus, $r_j\neq 0$.
+  
+  Let
+  \[ n' = r_1\cdot r_2\cdots r_s.\]
+  From this definition, we can obtain one prime factorization of $n'$
+  by combining all prime factorizations of all $r_j$.
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}
+  \begin{tcolorbox}[title=Proof (cont.)]
+  It is left to show that $n'=r_1\cdot r_2\cdots r_s$ has another
+  prime factorization.  To do so, we shall prove that $p_1|n'$.
+
+  \vspace{0.1in}
+  Since $r_j=q_j\Mod p_1$, we can write
+  \[ q_j=k_j\cdot p_1 + r_j, \]
+  for some integer $k_j$.  Thus, we have that
+  \[ n = (k_1p_1+r_1)(k_2p_1+r_2)\cdots(k_sp_1+r_s), \]
+  which can be written as
+  \[ n = K\cdot p_1 + r_1\cdot r_2\cdots r_s, \]
+  for some integer $K$.  Since $p_1|n$, we have that $p_1|r_1\cdot
+  r_2\cdots r_s$ (or, $p_1|n'$).
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}
+  \begin{tcolorbox}[title=Proof (cont.)]
+  Since $p_1|n'$, there exists a prime factorization of $n'$ that has
+  $p_1$ as a factor.  To see that this is a different prime
+  factorization, recall that all $r_j < p_1$ (because they are
+  remainders of divisions by $p_1$).  This means that every prime in
+  the first prime factorization is less than $p_1$, but the second
+  prime factorization has $p_1$ as a factor.  Hence, they are
+  different.
+
+  \vspace{0.1in} This leads to the contradiction, because we now have
+  a smaller integer $n'$ with more than one prime
+  factorizations. $\blacksquare$
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Fermat's Little Theorem}
+  Fermat has another famous theorem which is very useful in number
+  theory.  It can be stated as follows.
+
+  \begin{tcolorbox}
+    \textcolor{blue}{Theorem:} If $p$ is a prime and $a$ is an integer
+    not divisible by $p$, we have that
+    \[ a^{p-1}\Mod p = 1. \]
+  \end{tcolorbox}
+
+  To prove this theorem, we shall use the unique prime factorization
+  theorem to prove a short lemma related to divisibility of binomial
+  coefficients first.
 \end{frame}
 
 \begin{frame}
@@ -188,11 +299,53 @@
   \[
   p\Big|\binom{p}{k}.
   \]
+
+  \textcolor{blue}{Proof:}  Note that
+  \[\binom{p}{k}=\frac{p(p-1)(p-2)\cdots(p-k+1)}{k!}\]
+
+  Since $p$ is in the product in the numerator,
+  \[
+  p|p(p-1)(p-2)\cdots(p-k+1).
+  \]
+  Now consider the denominator $k!$.
+  Since it is a product of numbers less than $p$, its unique prime
+  factorization does not contain $p$.  Hence, the fraction has $p$ as
+  a factor; thus, $p|\binom{p}{k}$ as required. $\blacksquare$
 \end{frame}
 
 \begin{frame}\frametitle{Fermat's Little Theorem}
+  We shall prove a different form of the theorem. (Its equivalence to
+  the standard form shall be proved in the next lecture.)
+
   \begin{tcolorbox}
     \textcolor{blue}{Theorem:} If $p$ is a prime and for any integer
     $a$, we have that $p|a^p-a$.
   \end{tcolorbox}
+  \begin{tcolorbox}[title=Proof]
+    We shall prove by induction on $a$.  Let $P(a)$ be the statement
+    that $p|a^p-a$.
+
+    {\bf Base case:} Since $p|0^p-0$, $P(0)$ is true.
+  \end{tcolorbox}
 \end{frame}
+
+\begin{frame}
+  \begin{tcolorbox}[title=Proof (cont.)]    
+    {\bf Inductive step:} Assume $P(k)$ is true, we shall prove that
+    $P(k+1)$ is true.  From the binomial theorem, we have
+    \[ (k+1)^p - (k+1) \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad \]
+    \begin{eqnarray*}
+      &=&
+      \left(k^p + \tbinom{p}{p-1}k^{p-1} + \tbinom{p}{p-2}k^{p-2}+\cdots + \tbinom{p}{1}k + 1\right)\\
+      && - (k+1)\\
+      &=&
+      \left(k^p - k\right) + \left(\tbinom{p}{p-1}k^{p-1} + \tbinom{p}{p-2}k^{p-2}+\cdots + \tbinom{p}{1}k\right).
+    \end{eqnarray*}
+
+    The first term is divisible by $p$ from the induction hypothesis.
+    The second term is a sum of terms divisible by $p$ from the
+    previous lemma.  Thus, $p|(k+1)^p-(k-1)$, implying $P(k+1)$ as
+    required. $\blacksquare$
+  \end{tcolorbox}
+\end{frame}
+
