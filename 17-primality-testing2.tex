@@ -3,13 +3,200 @@
 
 \begin{frame}\frametitle{Efficient algorithms}
   This lecture proves that the two forms of the Fermat's Little
-  Theorem are equivalent.  It also considers two efficient algorithms
-  for
+  Theorem are equivalent.  
+
+  We then outline a primality testing algorithm based on the Fermat's
+  Little Theorem.  This algorithm requires two subroutines for
   \begin{itemize}
   \item computing powers $a^n$,
   \item finding the greatest common divisors.
   \end{itemize}
-  These two algorithms will be useful for our primality testing
-  algorithm based on the Fermat's Little Theorem that we shall outline
-  at the end of this lecture.
+  We will present efficient algorithms for these two problems.
 \end{frame}
+
+\begin{frame}\frametitle{Fermat's Little Theorem}
+  The common form of the Fermat's Little Theorem is as follows.
+
+  \begin{tcolorbox}[title=First form]
+    \textcolor{blue}{Theorem:} If $p$ is a prime and $a$ is an integer not divisible by $p$, then $a^{p-1}\Mod p = 1$.
+  \end{tcolorbox}
+
+  However, we prove the following version in the previous lecture:
+
+  \begin{tcolorbox}[title=Second form]
+    \textcolor{blue}{Theorem:} If $p$ is a prime, then $p|a^{p}-a$, for any integer $a$.
+  \end{tcolorbox}
+
+  We shall prove that both forms are equivalent.
+\end{frame}
+
+\begin{frame}\frametitle{Basic claim}
+  We need the following claim to prove the equivalence.
+
+  \begin{tcolorbox}
+    {\bf Claim 1:} If $p$ is a prime and $p| ab$ but $p\not| a$, then
+    $p|b$.
+  \end{tcolorbox}
+  
+  {\bf Proof:} Factor $ab$ into a product of primes.  Since $p$
+  divides $ab$ then $p$ must be one of the factors in the prime
+  factorization of $ab$.  However, since $p\not|a$, $p$ does not
+  appear in $a$'s prime factorization.  This implies that $p$ must be
+  from $b$'s prime factorization.  Hence, $p|b$.  $\blacksquare$
+
+  \vspace{0.2in}
+
+  Note that the assumption that $p$ is a prime is crucial.  For
+  example, if we let $p=6$, $a=9$, and $b=2$, we can see that $6|18$,
+  but $6\not|9$ or $6\not|2$.
+\end{frame}
+
+\begin{frame}\frametitle{Another form for the Fermat's Little Theorem}
+  To show that both forms of the Fermat's Little Theorem are
+  equivalent, we need to prove the following two claims.  (You should
+  look at the claims and try to understand why proving both of them
+  implies that both forms of the Fermat's Little Theorem are
+  equivalent.)
+
+  \begin{tcolorbox}[title=Second form $\Rightarrow$ first form]
+    \textcolor{blue}{Claim 2:} If $p$ is a prime, $p$ does not divide an integer $a$, and $p|a^p-a$; then $a^{p-1}\Mod p = 1$.
+  \end{tcolorbox}
+
+  {\bf Proof:} Write $a^p-a = a(a^{p-1}-1)$.  Since $p|a(a^{p-1}-1)$
+  but $p\not|a$, from claim 1, we have that $p|a^{p-1}-1$.  Thus, 
+  \[ a^{p-1}\Mod p = 1, \]
+  as required. $\blacksquare$
+\end{frame}
+
+\begin{frame} 
+  \begin{tcolorbox}[title=First form $\Rightarrow$ second form]
+    \textcolor{blue}{Claim 3:} Lat $p$ be a prime.  If for any integer
+    $a$ not divisible by $p$, $a^{p-1}\Mod p = 1$, then for any
+    integer $b$, we have that $p|b^p-b$.
+  \end{tcolorbox}
+  
+  {\bf Proof:} There are two cases, when $p\not|b$ and $p|b$.  
+
+  In the first case where $p\not|b$, the assumption implies that
+  $p|b^{p-1}-1$; thus, $p|b(b^{p-1}-1)$, as required.
+
+  Now consider the case when $p|b$.  Since we can write
+  $b^p-b=b(b^{p-1}-1)$, we know that $p|b(b^{p-1}-1)$, because
+  $p|b$. $\blacksquare$
+\end{frame}
+
+\begin{frame}\frametitle{The test: idea}
+  If we want to check if $q$ is a prime, from the Fermat's Little
+  Theorem, we know that when $q$ is a prime, for any integer $a$ not
+  divisible by $q$, $a^{q-1}\Mod q=1$.  We can devise a test based on
+  this fact:
+
+  \begin{tcolorbox}
+    {\bf PROCEDURE} FermatTest0($q$,$a$)\\
+    1. Find $y = a^{q-1}\Mod q$\\
+    2. {\bf if} $y\neq 1$ {\bf then}\\
+    3. \ \ {\bf return} ``COMPOSITE''\\
+    4. {\bf else}\\
+    5. \ \ {\bf return} ``PRIME''\\
+    6. {\bf endif}
+  \end{tcolorbox}
+
+  To implement this test efficiently, we need a way to find
+  $a^{q-1}\Mod q$ quickly.  Recall that in our test, $q$ will be a
+  very large number and an $O(q)$-time algorithm or even
+  $O(\sqrt{q})$-time algorithm will not be fast enough.
+\end{frame}
+
+\begin{frame}\frametitle{Computing powers}
+  If we want to find $a^n\Mod q$, a straight-forward implementation is
+  to perform $n$ multiplications.  When $a$ and $q$ are $m$-bit
+  numbers, this takes $O(nm^2)$ time because multiplication and
+  division run in $O(m^2)$ time.
+
+  Can we compute the power faster?
+
+  Let's start with some example.
+  \begin{itemize}
+  \item How to compute $a^2$?  We can't do anything faster then just
+    computing directly $a^2$.
+  \item What can we compute if we know $a^2$?  Note that we can square
+    $a^2$ to get $a^2\times a^2=a^4$.
+  \item We can keep squaring to get $a^8=a^4\times a^4$,
+    $a^{16}=a^8\times a^8$, and so on.
+  \item Thus, we can compute $a^{2^k}$ with only $k$ multiplications.
+  \end{itemize}
+
+  We know how to compute the power $a^n$ when $n$ is a power of $2$.
+  We still need to handle the case when the exponent $n$ is not a
+  power of $2$.
+\end{frame}
+
+\begin{frame}
+  To deal with general case, we can either keep all computed powers
+  and multiply appropriate results to get the final answer.  For
+  example, to compute $a^{20}$, we note that $a^{20}=a^{16}\cdot a^4$,
+  so we first compute $a^2,a^4,a^8,a^{16}$ and multiply $a^{16}$ and
+  $a^4$.
+
+  \vspace{0.1in} A recursive algorithm below takes another approach.
+  It first finds $a^{\lfloor n/2\rfloor}$, where $\lfloor x\rfloor$ is
+  a floor function that returns the largest integer not greater than
+  $x$ (e.g., $\lfloor 1.2\rfloor=1$ and $\lfloor 2\rfloor=2$).  It
+  then squares the result and depending on the value of $n/2$,
+  multiplies the result with $a$.
+
+  \begin{tcolorbox}
+    {\bf PROCEDURE} Power($a$,$n$)\\
+    1. {\bf if} $n=1$ {\bf then} {\bf return} $a$ {\bf endif}\\
+    2. {\bf let} $b\leftarrow$ Power($a$,$\lfloor n/2\rfloor$)\\
+    3. {\bf if} $2|n$ {\bf then} \\
+    4. \ \ {\bf return} $b\times b$ \\
+    5. {\bf else}\\
+    6. \ \ {\bf return} $b\times b\times a$ \\
+    7. {\bf endif}
+  \end{tcolorbox}
+
+\end{frame}
+
+\begin{frame}\frametitle{The number of multiplications}
+  Let's analyze the number of multiplications required to compute
+  $a^n$.
+\end{frame}
+
+\begin{frame}\frametitle{The running time}
+\end{frame}
+
+\begin{frame}\frametitle{The greatest common divisors}
+\end{frame}
+
+\begin{frame}\frametitle{The test: idea + more condition}
+  If $q$ is a prime and $a$ is chosen so that $2\leq a\leq q-1$, we
+  know that $gcd(q,a)=1$.  We shall add this condition to the test as
+  well.  While this check might not be that helpful in itself when $q$
+  is composite, it is crucial to our proof that the algorithm works
+  (described in the next lecture).
+
+  \begin{tcolorbox}
+    {\bf PROCEDURE} FermatTest($q$,$a$)\\
+    1. {\bf if} $GCD(q,a)\neq 1$ {\bf then} {\bf return} ``COMPOSITE'' {\bf endif}\\
+    2. Find $y = a^{q-1}\Mod q$\\
+    3. {\bf if} $y\neq 1$ {\bf then}\\
+    4. \ \ {\bf return} ``COMPOSITE''\\
+    5. {\bf else}\\
+    6. \ \ {\bf return} ``PRIME''\\
+    7. {\bf endif}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Finding the greatest common divisors}
+\end{frame}
+
+\begin{frame}\frametitle{The Euclidean algorithm}
+\end{frame}
+
+\begin{frame}\frametitle{An example}
+\end{frame}
+
+\begin{frame}\frametitle{The running time}
+\end{frame}
+
