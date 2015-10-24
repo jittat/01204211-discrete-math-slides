@@ -160,13 +160,80 @@
 
 \begin{frame}\frametitle{The number of multiplications}
   Let's analyze the number of multiplications required to compute
-  $a^n$.
+  $a^n$.  We will not be very precise here, and you will learn more
+  about this techniques in later courses.
+
+  First, we can see that multiplications appear on line 4 and 6.
+  Excluding the multiplications excuted in the recursive calls, each
+  invocation of procedure Power requires at most 3 multiplications.
+  To analyze the number of multiplications, we only need to look at
+  the depth of the recursion.
+
+  Let's look at an example of Power(a,140):
+
+  \begin{tcolorbox} 
+    Power(a,135) $\rightharpoonup$ Power(a,67) $\rightharpoonup$
+    Power(a,33) $\rightharpoonup$ Power(a,16) $\rightharpoonup$
+    Power(a,8) $\rightharpoonup$ Power(a,4) $\rightharpoonup$
+    Power(a,2) $\rightharpoonup$ Power(a,1)
+  \end{tcolorbox}       
+  
+  One important observation is that each recursive call decreases $n$
+  by at least a factor of 2.
 \end{frame}
 
+\begin{frame}
+  Since for each level of recursion, $n$ decrease by at least a factor
+  of $2$.  Let $n_i$ be the value of variable $n$ after $i$ levels of
+  recursion.  Clearly, $n_0=n$.  We have that $n_1\leq n_0/2$,
+  $n_2\leq n_1/2$, and so on, or in general,
+  \[ n_{i+1}\leq n_i/2. \]
+  This implies that
+  \[ n_i \leq n_0/2^i = n/2^i. \]
+
+  Also, note that the algorithm stops when $n=1$.  Let $k$ be the
+  maximum level of recursion.  We then have this equation
+  \[ 1 = n_k \leq n/2^k, \]
+  or $2^k\leq n$. To solve for $k$, we can use logarithms.  Taking
+  logarithms on both side, we get that
+  \[ k \leq \log n, \]
+  where $\log(\cdot)$ is a logarithm based 2.  Thus, the number of
+  multiplications required is $O(\log n)$.
+\end{frame}
+ 
 \begin{frame}\frametitle{The running time}
+  We have shown that the number of multiplications is $O(\log n)$.
+  However, we treat all multiplications as a unit of computation.
+  While this is OK, when the numbers are small enough.  However, in
+  our case where we deal with large numbers (e.g., 1000-bit numbers),
+  we need to consider the size of the integers when multiplying
+  them.
+
+  \vspace{0.08in}
+  Let $a$ and $n$ be $m$-bit integers. The number of bits for $a^n$ is
+  $nm$, which is extremely large.  If we need the actual number, there
+  is no way to find it efficiently, as the number of bits in the
+  output is already exponential in $m$.  (Recall that $n$ can be as
+  large as $2^m$.)
+
+  \vspace{0.08in}
+  But in our case, we do not want the actual number $a^n$, but
+  $a^n\Mod q$, where $q$ is an $m$-bit number.  Therefore, we can keep
+  all numbers below $q$ by performing a modulo operation after every
+  multiplication.  This means that each multiplication runs in
+  $O(m^2)$ time.  Therefore, the algorithm runs in $O(m^2\log n)$.
+  Since $n$ is an $m$-bit integer, it is at most $2^m$, implying $\log
+  n\leq m$.  The running time for Power is $O(m^3)$.
 \end{frame}
 
 \begin{frame}\frametitle{The greatest common divisors}
+  Another important concept in number theory is the greatest common
+  divisor.
+
+  A {\bf common divisor} for integers $a$ and $b$ is an integer $c$
+  such that $c|a$ and $c|b$.  A common divisor $c$ is {\bf the
+    greatest common divisor} if, for every common divisor $c'$,
+  $c'\leq c$.
 \end{frame}
 
 \begin{frame}\frametitle{The test: idea + more condition}
