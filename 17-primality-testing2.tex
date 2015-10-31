@@ -233,10 +233,185 @@
   A {\bf common divisor} for integers $a$ and $b$ is an integer $c$
   such that $c|a$ and $c|b$.  A common divisor $c$ is {\bf the
     greatest common divisor} if, for every common divisor $c'$,
-  $c'\leq c$.
+  $c'\leq c$.  We denote the greatest common divisor of $a$ and $b$ as
+  $gcd(a,b)$.
+
+  \vspace{0.1in}
+  \begin{tcolorbox}[title=Examples]
+    \[ gcd(100,15) = 5. \] 
+    \[ gcd(7,15) = 1. \] 
+    \[ gcd(1000,120) = 40. \] 
+    \[ gcd(2558,2530) = 2. \] 
+  \end{tcolorbox}
 \end{frame}
 
-\begin{frame}\frametitle{The test: idea + more condition}
+\begin{frame}\frametitle{Finding the greatest common divisors}
+  \begin{itemize}
+  \item The most straight-forward algorithm for finding the gcd of two
+    integers $a$ and $b$ is to iteratively divide both numbers by
+    integers from $1$ to $\min\{a,b\}$.
+  \item However, this will not be a polynomial time algorithm.
+  \item We may want to use the trick from the prime testing algorithm
+    where we only divide the numbers up to their square roots, i.e.,
+    we test for numbers from $1$ to $\sqrt{\min\{a,b\}}$.
+  \item But this does not work. {\em Can you find an example where this
+    approach is broken?}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The Euclidean algorithm}
+  The following Euclidean algorithm finds the $gcd$ of $a$ and $b$ when
+  both integers are non-negative.
+
+  \vspace{0.1in}
+  \begin{tcolorbox}[title=The Euclidean algorithm]
+    {\bf PROCEDURE} GCD($a$,$b$)\\
+    1. {\bf if} $a\Mod b=0$ {\bf then} \\
+    2. \ \ {\bf return} $b$ \\
+    3. {\bf else} \\
+    4. \ \ {\bf return} GCD($b$, $a\Mod b$)\\
+    5. {\bf endif}
+  \end{tcolorbox}
+
+  \vspace{0.2in} Note that we use GCD($a$,$b$) to denote the output of
+  this algorithm but we use $gcd(a,b)$ (small caps/math fonts) to
+  denote the {\bf correct} greatest common divisor.
+\end{frame}
+
+\begin{frame}\frametitle{An example}
+  Suppose we want to find $gcd(12,81)$.  The execution of GCD(12,81)
+  works as follows:
+
+  \vspace{0.2in}
+  \begin{tabular}{l|c|c|c|c|c}
+    & $a$ & $b$ & $b|a$? & $a\Mod b$ & result \\
+    \hline
+    GCD(15,81) & 15 & 81 & no & 15 & - \\
+    GCD(81,15) & 81 & 15 & no & 6 & - \\
+    GCD(15,6) & 15, & 6 & no & 3 & - \\
+    GCD(6,3) & 6 & 3 & yes & - & 3 \\
+    \hline
+  \end{tabular}
+\end{frame}
+
+\begin{frame}\frametitle{Why does this work?}
+  First, let's try to understand why this algorithm works.
+
+  \begin{itemize}
+    \item The first case is clear: since the largest divisor for $b$
+      is $b$ itself, when $b|a$, $b$ must be the $gcd$.
+    \item Now, suppose that $b\not|a$.  Suppose that $c$ is a common
+      divisor.  Since $c$ divides $b$, it must divide any multiple of
+      $b$, i.e. $c|kb$ for any integer $k$. Note also that we can
+      write
+      \[ a\Mod b = a - kb, \]
+      for some integer $k$.  Therefore, if $c$ divides both $a$ and
+      $b$, it must also divide $a\Mod b$.
+    \item On the other hand, if an integer $c$ divides both $b$ and
+      $a\Mod b$. We can show that $c$ divides $a$, because we can
+      write
+      \[ a = kb + (a\Mod b), \]
+      for some integer $k$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+  \item
+    From the previous discussion, we know that the set of common
+    divisors of $a$ and $b$, and of $b$ and $a\Mod b$ are the same.
+  \item
+    Therefore, the maximum of these divisors must be the same, i.e.,
+    \[ gcd(a,b) = gcd(b,a\Mod b). \]
+  \item This explains why the``else'' part is correct.
+  \item To get a formal proof of the algorithm's correctness, we need
+    mathematical induction.  We leave this as an exercise.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The running time}
+  \begin{itemize}
+  \item To prove the running time, we must be able to argue about the
+    progress the algorithm makes.
+  \item Before we start, let's make an assumption that $a\geq b$.
+    \begin{itemize}
+    \item
+      Note that this is always true, except in the first step.  But
+      after the first step this is always true since $a\Mod b < b$.
+    \item
+      Therefore, if $a<b$, we spend one iteration of GCD and then our
+      assumption is always true.
+    \end{itemize}
+  \item This also ensure that the values of variable $b$ are
+    decreasing as $a\Mod b$ is always smaller than $b$.  This shows
+    that the algorithm terminates in at most $b$ steps ({\em why?}),
+    but it is not strong enough to give us a good bound on the running
+    time.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+
+  Let's try to look at how the values of parameters $a$ and $b$ chan
+  ges over time.  Let $a_i$ and $b_i$ be the values of variables $a$
+  and $b$ at the $i$-th iteration.  (Note that $a=a_1$ and $b=b_1$.)
+  The following table shows a few values of $a_i$'s and $b_i$'s. 
+  
+  \vspace{0.2in}
+  \begin{tabular}{c|c|c}
+    $i$ & $a_i$ & $b_i$\\ \hline
+    1 & $a$ & $b$ \\
+    2 & $b$ & $a\Mod b$ \\
+    3 & $a\Mod b$ & $b\Mod (a\Mod b)$ \\
+  \end{tabular}
+  \vspace{0.2in}
+  
+  Note that the values of variable $a$ change from $a$ to $b$ and to
+  $a\Mod b$.  If we want a polynomial running time (in the number of
+  bits), we want $a$ or $b$ to decrese very quickly.
+\end{frame}
+
+\begin{frame}
+  Let's try to focus on $a$.  Can we say that $a$ always decreases by
+  a factor of 2 in every iteration?
+    
+  \begin{itemize}
+  \item Probably not.  But we know that, if $b\leq a/2$, this is true,
+    i.e., $a_{i+1}=b_i\leq a_i/2$. 
+  \item How about the case when $b>a/2$ ? Can we say anything in this
+    case? \pause
+  \item Clearly, in iteration $i+1$, $a_{i+1}=b_i$, which can be
+    larger than $a_i$.  But let's look at the next iteration $i+2$.
+    Now $a_{i+2}=b_{i+1}=a_i\Mod b_i$.  Note that since $b_i>a_i/2$,
+    $a_i\Mod b_i = a_i - b_i < a_i/2$.  Thus, we can conclude that
+    $a_{i+2}\leq a_i/2$.
+  \end{itemize}
+
+  Therefore, in any case, we know that after at least two iterations,
+  $a$ decreases by at least a factor of 2.  Clearly the algorithm
+  stops when $a\leq 1$.  Therefore, the number of iterations is at
+  most the number of times we can divide $a$ by 2 until $a$ is no
+  larger than 1.  This is at most $\log a$.
+\end{frame}
+
+\begin{frame}
+  If we consider the case where $b>a$, we have to account for the fact
+  that we swap $a$ and $b$.  The number of iterations is $O(\max\{\log
+  a,\log b\})$, or equivalently $O(\log a + \log b)$.
+
+  If $a$ and $b$ are $m$-bit numbers, each iteration runs in time
+  $O(m^2)$ (the time for a modulo operation).  Thus the algorithm runs
+  in time
+  \[
+  O((\log a + \log b)m^2)=O(m^3),
+  \]
+  because $\log a \leq m$ and $\log b\leq m$.
+\end{frame}
+
+\begin{frame}\frametitle{The final Fermat test: idea + more condition}
+  We can incorporate the $gcd$ computation in our primality testing
+  algorithm.
+  
   If $q$ is a prime and $a$ is chosen so that $2\leq a\leq q-1$, we
   know that $gcd(q,a)=1$.  We shall add this condition to the test as
   well.  While this check might not be that helpful in itself when $q$
@@ -253,17 +428,5 @@
     6. \ \ {\bf return} ``PRIME''\\
     7. {\bf endif}
   \end{tcolorbox}
-\end{frame}
-
-\begin{frame}\frametitle{Finding the greatest common divisors}
-\end{frame}
-
-\begin{frame}\frametitle{The Euclidean algorithm}
-\end{frame}
-
-\begin{frame}\frametitle{An example}
-\end{frame}
-
-\begin{frame}\frametitle{The running time}
 \end{frame}
 
