@@ -1,0 +1,445 @@
+\include{commons}
+\lecturetitle{Lecture 1: Introduction}
+
+\begin{frame}\frametitle{What is this course about?}
+  This is a math class. \\
+  \pause
+  But, what is mathematics? \\
+  \pause
+  Ah... that's a philosopical question. \\
+  \pause
+  IMHO, mathematics is a mean to communicate {\em precise} ideas.
+\end{frame}
+
+\begin{frame}\frametitle{It's like learning a new language}
+  \begin{itemize}
+  \item Do you remember the time when you start learning English?
+    \pause
+  \item There are a few things you have to learn and get used to.
+    \pause
+  \item They might not make so much sense in the beginning, but over
+    time, you will get comfortable with how the language is used.
+    \pause
+  \item As your knowledge of the language gets better, everything
+    becomes more natural.  Learning a new language sometimes expands
+    your view of the world.
+    \pause
+  \item I hope it is also true with this course.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The goals of this course}
+  There are two goals:
+  \begin{itemize}
+  \item To learn how to make mathematical arguments.
+    \pause
+  \item To learn various fundamental mathematical concepts that are
+    very useful in computer science.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%% why
+
+\begin{frame}[fragile]\frametitle{Why should we learn how to prove? (1)}
+  \pause
+  Look at this program.
+
+  \begin{tcolorbox}
+\begin{verbatim}
+    if a > b:
+        return a
+    else:
+        return b
+\end{verbatim}
+  \end{tcolorbox}
+  
+  The author claims that this program takes two variables $a$ and $b$
+  and returns the larger one.
+  \pause
+  
+  {\em Do you believe the author of the code? \pause Why?}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Finding the maximum value. (1)}
+  Now look at this program.
+
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+    if a > b:
+        if a > c:
+            return a
+        else:
+            return c
+    else:
+        if c > b:
+            return c
+        else:
+            return b
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+  The author claims that this program takes three variables $a$, $b$
+  and $c$ and returns the largest one.  \pause
+  
+  {\em Do you believe the author of the code? \pause Why?}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Finding the maximum value. (2)}
+  Finally, look at this program.
+
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  // Input: array A with n elements: A[0],...,A[n-1]
+  m = 0
+  for i = 0, 1, ..., n-1:
+    if A[i] > m:
+      m = A[i]
+  return m  
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+  The author claims that this program takes an array $A$ with $n$
+  elements and returns the maximum element.  \pause
+  
+  {\em Do you believe the author of the code? \pause Why?}
+  \pause
+
+  {\bf Can we try to test the code with all possible inputs?}
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{Finding the maximum value. (3)}
+  Let's try again.
+
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  // Input: array A with n elements: A[0],...,A[n-1]
+  m = A[0]
+  for i = 1, 2, ..., n-1:
+    if A[i] > m:
+      m = A[i]
+  return m  
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+  {\em Do you believe the author of the code? \pause Why?}
+  \pause
+
+  {\bf Can we try to test the code with all possible inputs?}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Another example: testing primes (1)}
+  A {\em prime} is a natural number greater than 1 that has no
+  positive divisors other 1 and itself.  E.g., 2,3,5,7,11 are primes.
+  \pause
+
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm CheckPrime(n):     // Input: an integer n
+      if n <= 1:
+          return False
+      i = 2
+      while i <= n-1:
+          if n is divisible by i:
+              return False
+          i = i + 1
+      return True
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+  The code above checks if $n$ is a prime number.   How fast can it run?
+  \pause
+
+  Note that if $n$ is a prime number, the for-loop repeats for $n-2$
+  times.  Thus, the running time is approximately proportional to
+  $n$.
+  \pause
+
+  Can we do better?
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Another example: testing primes (2)}
+  Consider the following code.
+  
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm CheckPrime2(n):  // Input: an integer n
+      if n <= 1:
+          return False
+      let s = square root of n
+      i = 2
+      while i <= s:
+          if n is divisible by i:
+              return False
+          i = i + 1
+      return True
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+  How fast can it run? \pause Note that $s = \sqrt{n}$; therefore, it
+  takes time approximately proportional to $\sqrt{n}$ to run.
+  \pause
+
+  Ok, it should be faster.  {\bf But is it correct?}
+
+\end{frame}
+
+\begin{frame}\frametitle{Informal arguments (1)}
+  \begin{itemize}
+  \item Let's try to argue the Algorithm {\tt CheckPrime2} works
+    correctly.  \pause
+
+  \item
+    Note that if $n$ is a prime number, the algorithm answers
+    correctly. (Why?)  \pause
+
+  \item Therefore, let's consider the case when $n$ is not prime
+    (i.e., $n$ is a composite).  \pause
+
+  \item If that's the case, $n$ has some positive divisor which is not
+    $1$ or $n$.  Let's call this number $a$.  \pause
+
+  \item Now, if $2\leq a\leq\sqrt{n}$, at some point during the
+    execution of the algorithm, $i=a$ and $i$ should divides $n$; thus
+    the algorithm correctly returns {\tt False}.  \pause
+
+  \item
+    Are we done?
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}\frametitle{Informal arguments (2)}
+  \begin{itemize}
+  \item Recall that we are left with the case that (1) $n$ is not
+    prime and (2) its positive divisor $a$ is larger than
+    $\sqrt{n}$. \pause
+
+  \item
+    Let $b=n/a$.  Since $n$ and $a$ are positive integers and $a$
+    divides $n$, $b$ is also a positive integer.
+    \pause
+
+  \item
+    Note that if we can argue that $2\leq b\leq\sqrt{n}$, we are done.
+    (why?)
+    \pause
+
+  \item
+    How can we do that?
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}\frametitle{The goals}
+  \begin{itemize}
+  \item Let's take a break and look back at what we are trying to do.
+    \pause
+
+    \begin{tcolorbox}
+      {\bf Original goal:} To show that Algorithm {\tt CheckPrime2} is
+      correct.
+    \end{tcolorbox}
+    \pause
+    
+    \begin{tcolorbox}
+      {\bf Current (sub) goal:} Consider a positive composite $n$ and
+      its positive divisor $a$, where $a>\sqrt{n}$.  Let $b=n/a$.  We
+      want to show that $2\leq b\leq\sqrt{n}$.
+    \end{tcolorbox}
+    \pause
+
+  \item Before we continue, I'd like to add a bit of formalism to our
+    thinking process.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The main goal}
+  \begin{itemize}
+  \item {\bf Original goal:} To show that Algorithm {\tt CheckPrime2}
+    is correct.  \pause
+  \item Let's focus on the statement we want to argue for:
+    
+    \begin{tcolorbox}
+      {\bf ``Algorithm {\tt CheckPrime2} is correct.''}
+    \end{tcolorbox}
+
+    \pause
+  \item
+    Note that this statement can either be ``true'' or ``false.''  If
+    we can demonstrate, using logical/mathematical arguments that this
+    statement is true, we can say that we {\bf prove} the statement.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The (sub) goal}
+  \begin{itemize}
+  \item
+    {\bf Current (sub) goal:} Consider a positive composite $n$ and its
+    positive divisor $a$, where $a>\sqrt{n}$.  Let $b=n/a$.  We want
+    to show that $2\leq b\leq\sqrt{n}$.
+    \pause
+  \item Let's focus only on the statement we want to argue for:
+    \pause
+
+    \begin{tcolorbox}
+      \begin{center}
+        $2\leq b\leq\sqrt{n}$.
+      \end{center}
+    \end{tcolorbox}
+    
+    \pause
+  \item If we only look at this statement, it is unclear if the
+    statement is true or false because there are variables $b$ and $n$
+    in the statement.  It can be true in some case and it can be false
+    in some case depending on the values of $n$ and $b$.
+
+    \pause
+
+  \item Are we doom? \pause Not really.  The statement above is not
+    precisely the statement we want to prove.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The (sub) goal (second try)}
+  \begin{itemize}
+  \item
+    {\small {\bf Current (sub) goal:} Consider a positive composite $n$ and its
+    positive divisor $a$, where $a>\sqrt{n}$.  Let $b=n/a$.  We want
+    to show that $2\leq b\leq\sqrt{n}$.}
+
+  \item We can be more specific about what values of $n$ and $b$ that
+    we want to consider. \pause
+
+    \begin{tcolorbox}[title=Revised statement]
+      For all positive composite integer $n$, and for every divisor
+      $a$ of $n$ such that $\sqrt{n} < a < n$,
+      \[ 2\leq b\leq\sqrt{n},\]
+      where $b=n/a$.
+    \end{tcolorbox}
+
+  \item Note that this revised statement is now ``quantified,'' that
+    is, every variable in the statement has specific scope.  Now the
+    statement is either true or false.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Propositions\footnote{This section follows the expositions in Berkeley's CS70 lecture notes.}}
+  \begin{itemize}
+  \item A {\em proposition} is a statement which is either {\bf true}
+    or {\bf false}.
+    \pause
+  \item It is our basic unit of mathematical ``facts''.
+    
+  \item Examples:
+    \begin{itemize}
+    \item Algorithm {\tt CheckPrime2} is correct.
+    \item $10^2 = 90$.
+    \item $\sqrt{2}$ is irrational.
+    \end{itemize}
+
+    \pause
+  \item Examples of statements which are not propositions (why?):
+    \begin{itemize}
+    \item $x > 10$.
+    \item $1+2+\cdots+10$.
+    \item This algorithm is fast.
+    \item Run, run quickly.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Combining propositions}
+  \begin{itemize}
+  \item We usually use a variable to refer to a proposition.  For
+    example, we may use $P$ to stand for ``it rains'' or $Q$ to stand
+    for ``the road is wet.''
+    \pause
+  \item The truth value of a variable is the truth value of the
+    proposition it stands for.
+    \pause
+  \item Many propositions can be combined to get a complex statement
+    using logical operators.  \pause
+  \item For example, we can join $P$ and $Q$ with ``and'' (denoted by
+    ``$\wedge$'') and get
+    \[P\wedge Q,\]
+    which stands for ``it rains and the road is wet''.
+    \pause
+    
+  \item An expression $P\wedge Q$ is an example of {\em propositional
+    forms}.  The logical value of a propositional form ``usually''
+    depends on the truth value of its variables.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Connectives: ``and'', ``or'', ``not''}
+  Given propositions $P$ and $Q$, we can use connectives to form more
+  complex propositions:
+  \begin{itemize}
+  \item {\bf Conjunction:} $P\wedge Q$ (``$P$ and $Q$''), \\
+    (True when both $P$ and $Q$ are true)
+  \item {\bf Disjunction:} $P\vee Q$ (``$P$ or $Q$''), \\
+    (True when at least one of $P$ and $Q$ is true)
+  \item {\bf Negation:} $\neg P$ (``not $P$'') \\
+    (True only when $P$ is false)
+  \end{itemize}
+  \pause
+
+  If $P$ stands for ``today is Tuesday'' and $Q$ stands for
+  ``dogs are animals'', then
+  \begin{itemize}
+  \item $P\wedge Q$ stands for ``today is Tuesday and dogs are animals'',
+  \item $P\vee Q$ stands for ``today is Tuesday or dogs are animals'', and
+  \item $\neg P$ stands for ``today is not Tuesday''.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Truth tables}
+  To represents values of propositional forms, we usually use truth tables.
+  \begin{tcolorbox}[title=And/Or/Not]
+    \begin{tabular}{|c|c||c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\wedge Q$ & $P\vee Q$ & $\neg P$ \\
+      \hline
+      $T$ & $T$ & $T$ & $T$ & $F$ \\
+      $T$ & $F$ & $F$ & $T$ & \\
+      $F$ & $T$ & $F$ & $T$ & $T$ \\
+      $F$ & $F$ & $F$ & $F$ & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 1}
+  For each of these statements, define propositional variables
+  representing each proposition inside the statement and write the
+  proposition form of the statement.
+  \begin{itemize}
+  \item All prime numbers are larger than 0 and all natural numbers is
+    at least one.
+  \item You are smart or you won't be taking this class.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Next lecture...}
+  \begin{itemize}
+  \item
+    We will discuss other ways to join two propositions, i.e.,
+    implications ($\Rightarrow$) and equivalences ($\Leftrightarrow$).
+
+  \item
+    We will look at two forms of quantifiers: universal quantifiers
+    and existential quantifiers.
+  \end{itemize}
+\end{frame}
+
