@@ -1,0 +1,208 @@
+\include{commons}
+\lecturetitle{Lecture 10: Counting 2}
+
+\begin{frame}\frametitle{Listing all subsets\footnote{This section follows section 1.3 from [LPV].}}
+  \begin{itemize}
+  \item From the previous lecture, we know that a set with $n$
+    elements has $2^n$ subsets.
+  \item Let's try to enumerate them. \pause
+  \item As an example, consider set $\{a,b,c\}$ and its subsets.
+  \item There are many ways of listing all 8 subsets.
+    \pause
+    \begin{itemize}
+    \item $\emptyset$, $\{a\}$, $\{a,b\}$, $\{a,b,c\}$,
+      $\{a,c\}$, $\{b\}$, $\{b,c\}$, $\{c\}$
+      \pause
+
+      Note that we treat each subset as a word in a dictionary and use
+      the dictionary order.
+      \pause
+      
+    \item $\emptyset$, $\{a\}$, $\{b\}$, $\{c\}$,
+      $\{a,b\}$, $\{a,c\}$, $\{b,c\}$, $\{a,b,c\}$
+      \pause
+
+      In this case, we order by their cardinalities, then use
+      dictionary ordering for subsets with the same numbers of
+      elements.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{A different representation (1)}
+  \begin{itemize}
+  \item There is a different representation for subsets which is
+    particularly useful when listing subsets.
+  \item To represent a subset of $A=\{a,b,c\}$, we consider each
+    element of $A$ one-by-one in some fixed order.  If that element is
+    in the subset, we write down 1, if it is not we write down 0.
+  \item For examples:
+    \begin{itemize}
+    \item $\{a,c\}$ is represented as: \pause $101$
+    \item $\{a\}$ is represented as: \pause $100$
+    \item $\{b,c\}$ is represented as: \pause $011$
+    \item $\{\}$ is represented as: \pause $000$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{A different representation (2)}
+  \begin{itemize}
+  \item Note that we represent a subset as a string with 0's and 1's.
+    You may recall that these strings can be considered as binary
+    numbers.
+  \item Thus, we can associate the numerical values of the
+    representations with the subsets:
+    \pause
+    \begin{itemize}
+    \item $\{a,c\}$ is rep. as: $101_2$ \pause $= 5$, \ \ \ \pause
+      $\{a\}$ is rep. as: $100_2$ \pause $= 4$
+    \item $\{b,c\}$ is rep. as: $011_2$ \pause $= 3$, \ \ \ \pause
+      $\{\}$ is rep. as: $000_2$ \pause $= 0$
+    \end{itemize}
+    \pause
+  \item Also, this representation can be considered backwards, i.e.,
+    if we start with an integer $6$, we can write down its binary
+    representation: $110_2$ and turns it into a subset $\{a,b\}$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{A correspondence}
+  Let's see a full list of correspondence between $\{0,1,2,\ldots,7\}$
+  and subsets of $\{a,b,c\}$.
+  \begin{itemize}
+  \item $0 \leftrightarrow 000_2 \leftrightarrow \{\}$
+  \item $1 \leftrightarrow 001_2 \leftrightarrow \{c\}$
+  \item $2 \leftrightarrow 010_2 \leftrightarrow \{b\}$
+  \item $3 \leftrightarrow 011_2 \leftrightarrow \{c,b\}$
+  \item $4 \leftrightarrow 100_2 \leftrightarrow \{a\}$
+  \item $5 \leftrightarrow 101_2 \leftrightarrow \{a,c\}$
+  \item $6 \leftrightarrow 110_2 \leftrightarrow \{a,b\}$
+  \item $7 \leftrightarrow 111_2 \leftrightarrow \{a,b,c\}$
+  \end{itemize}
+  \pause
+
+  Do you notice anything interesting?
+\end{frame}
+
+\begin{frame}\frametitle{A general case}
+  Similarly, we can describe a representation for each subset of a set
+  $A$ with $n$ elements.  As we consider each element $a$ of $A$, we
+  put $1$ if $a\in A$ and put $0$ if $a\not\in A$.
+  \pause
+
+  Each subset is represented uniquely as a string of $0$ and $1$ of
+  length $n$.  Also, each string corresponds to only one subset.
+  Then, we can conclude that the number of subsets equal the number of
+  bit strings of length $n$.
+  \pause
+
+  How many bit strings of length $n$ are there?
+  \pause
+
+  \vspace{0.1in}
+
+  There are $2^n$ bit strings; hence, the number of subsets is also
+  $2^n$.
+  \pause
+  
+  This is another proof of the following theorem:
+  
+  \begin{tcolorbox}
+    {\bf \textcolor{blue}{Theorem:}} The number of subsets of a set with
+    $n$ elements is $2^n$.
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Two proofs}
+  Why do we need two proofs of the same statement?
+  \pause
+
+  Really, it does not make a statement stronger, truer, ``more''
+  correct.  But each proof usually reveals additional facts related to
+  the statement.
+
+  \begin{itemize}
+  \item The first proof considers a procedure for constructing subsets.
+  \item The second proof introduces a nice technique for counting.
+    I.e., instead of counting subsets directly, we show that we have a
+    ``special'' correspondence between subsets and binary numbers, and
+    then just count the numbers.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{A bijection}
+  What is so special about this correspondence?
+  \pause
+
+  \begin{itemize}
+  \item For each number, there is only {\bf one} subset that
+    corresponds to it.
+  \item For each subset, there is only {\bf one} number that it
+    corresponds to.
+  \end{itemize}
+
+  With these two properties, we can conclude that both sets have the
+  same cardinality.
+
+  \begin{tcolorbox}
+    This type of correspondence is called a {\bf
+      one-to-one correspondence} or {\bf bijection}.
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Sequences of choices}
+  Previously, when we want to count the number of bit strings of
+  length $n$, we use this argument:
+
+  \begin{tcolorbox}
+    Suppose that to select an object, you have to make $k$ decisions.
+    The first decision has $n_1$ choices, the second decision has
+    $n_2$ choices, and so on.  More precisely, for $1\leq i\leq k$,
+    the $i$-th decision has $n_i$ choices.  Then the number of ways
+    you can select an object is $n_1\cdot n_2\cdots n_{k-1}\cdot n_k$.
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Example 1}
+  \begin{tcolorbox}
+    A car license number consists of two English letters and one
+    number from 1 to 9999.  How many possible license numbers are
+    there?
+  \end{tcolorbox}
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}\frametitle{Example 2}
+  \begin{tcolorbox}
+    10 students stand in a line.  You want to give them ice cream.
+    There are 4 flavours, but you don't want to give the same flavour
+    to any consecutive students.  In how many ways can you give out
+    the ice cream to these students?
+  \end{tcolorbox}
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}\frametitle{Permutations}
+\end{frame}
+
+\begin{frame}\frametitle{Counting permutations: an example}
+  We want to count the number of permutations.  Let's try with a small
+  example: permutations of set $\{a,b,c\}$.
+
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}\frametitle{Counting permutations}
+\end{frame}
+
+\begin{frame}\frametitle{Number of permutations}
+  We have proved this theorem.
+  \begin{tcolorbox}
+    {\bf \textcolor{blue}{Theorem:}} The number of permutations of a
+    set with $n$ elements is $n!$.
+  \end{tcolorbox}
+\end{frame}
+
+
+
