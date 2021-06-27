@@ -1,0 +1,280 @@
+\include{commons}
+\lecturetitle{Lecture 13: The pigeonhole principle and the birthday problem}
+
+\begin{frame}\frametitle{The sock problem}
+  \begin{tcolorbox}
+    I have $n$ pairs of socks.  Each pair is different from the other
+    pair.  How many socks do I have to pick out to be sure that I have
+    at least one matching pair.
+  \end{tcolorbox}
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}\frametitle{The Pigeonhole Principle}
+  The answer of the previous question seems obvious.  But it appears
+  to be very useful in numerous cases.  It is called {\bf the
+    pigeonhole principle}.
+
+  \begin{tcolorbox}[title=The pigeonhole principle]
+    If we put $n+1$ objects into $n$ boxes, at least one box gets more
+    than one objects.
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Example}
+  \begin{tcolorbox}
+    Assume that nobody is taller than 250 cm.  In a group of 251
+    people, there are at least two people whose heights differ by at
+    most 1cm.
+  \end{tcolorbox}
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}\frametitle{Students with the same birthday\footnote{This section follows section 2.5 in [LPV].}}
+  \begin{itemize}
+  \item It is quite often that you find people with the same birthday.
+  \item Since there is at most 366 days in a year, the pigeonhole
+    principle states that if you have 367 people is a room, there is
+    at least one pair with the same birthday.
+    \pause
+  \item But that's the worst case scenario, as it is more common to
+    find people with the same birthday.  (In the next class, we will
+    try to see if there is a pair of students in the class with the
+    same birthday.)
+    \pause
+  \item So, let's think about the probability that there are two
+    students with the same birthday in a room with 40 students.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{A simple case}
+  \begin{itemize}
+  \item Let's start with $2$ people in the room.
+    \pause
+  \item {\small {\bf Notes:} While we have not defined properly what
+    probabilities mean, we can count the number of all possibilities
+    and the number of cases that we are interested in, and then
+    calculate probability as the ratio between the two.  \pause E.g.,
+    if there are $50$ possible outcomes and $30$ of them are the ones
+    we are interested in, the probability is $0.6$. \pause (Note that
+    we assume that every outcome is equally likely.)}  \pause
+  \item How many possible birthdays can two people have? \pause
+    \begin{itemize}
+    \item Since each person has $366$ choices, and the first person
+      and the second person can choose independently, the number is
+      $366\cdot 366$.
+    \end{itemize}
+    \pause
+  \item How many possible ways can they share the same birthday?
+    \pause
+    \begin{itemize}
+    \item Since the first person has $366$ choices, and the second
+      person has to choose the same day, there are only $366$ ways.
+    \end{itemize}
+    \pause
+  \item Thus, the probability is $\frac{366}{366^2} = 0.0027$, very
+    unlikely.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{3 people}
+  \begin{itemize}
+  \item Let's consider $3$ people.
+    \pause
+  \item How many possible birthdays can $3$ people have? \pause
+    \begin{itemize}
+    \item Since each person has $366$ choices, and each person can
+      choose independently, the number is $366\cdot 366\cdot 366=366^3$.
+    \end{itemize}
+    \pause
+  \item How many possible ways can at least two of them share the same
+    birthday?  \pause
+    \begin{itemize}
+    \item There are many cases. \pause
+    \item So let's think about the case when everyone do not share any
+      birthdays.
+    \item The first person has $366$ choices.  \pause The second one
+      has $366 - 1 = 365$ choices.  \pause The third one has $366 - 2
+      = 364$ choices. \pause Thus, the number of ways they do not
+      share any birthdays is $366\cdot 365\cdot 364$. \pause
+    \item Notice that this is the number of ordered subsets. \pause
+    \end{itemize}
+    \pause
+  \item Thus, the probability that they do not share birthdays is
+    $\frac{366\cdot 365\cdot 364}{366^3} = 0.9918$.  Thus the
+    probability that two of them share a birthday is $1-0.9918 =
+    0.0082$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{40 people}
+  \begin{itemize}
+  \item Let's extend our previous argument to the case with $40$ people.
+  \item How many possible birthdays can $40$ people have? \pause
+    \begin{itemize}
+    \item $366^{40}$.
+    \end{itemize}
+    \pause
+  \item How many possible ways that they do not sure any birthdays? \pause
+    \begin{itemize}
+    \item This is the number of ordered subsets with $40$ elements of
+      a $366$-set. \pause
+    \item Thus, there are $366\cdot 365\cdot 364\cdots 327$ ways.
+    \end{itemize}
+    \pause
+  \item Thus, the probability that they do not share birthdays is
+    \[\frac{366\cdot 365\cdot 364\cdots 327}{366^{40}}.\]
+  \item \pause Umm... how small is it? \pause
+  \item Again you can use a computer to compute the exact value of
+    this quantity.  For example, you may want to use Wolfram Alpha.
+    \pause
+
+  \item Anyway, we will try to estimate it using basic mathematical
+    tools.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{General case: $n$ days $k$ people}
+  \begin{itemize}
+  \item Let's continue on the general case.  When we have $k$ people
+    and a year contains $n$ days, the probability that no two people
+    share the same birthday is
+    \[\frac{n\cdot (n-1)\cdot (n-2)\cdots (n-k+1)}{n^k}.\]
+  \item \pause If this number is very close to 0, then it is very
+    unlikely that no two people share the same birthday, i.e., it is
+    very likely that there exists two people with the same birthday.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{A few tweaks}
+  \begin{itemize}
+  \item Dealing with small numbers is sometimes troublesome. (The
+    reason will be more apparent later when we start introducing the
+    tools.)  So let's consider the reciprocal instead:
+    \[\frac{n^k}{n\cdot (n-1)\cdot (n-2)\cdots (n-k+1)}.\]
+    \pause
+  \item The top term looks easy to deal with; the bottom one does not.
+    Let's break up the product:
+    \[\left(\frac{n}{n}\right)\cdot
+    \left(\frac{n}{n-1}\right)\cdot\left(\frac{n}{n-2}\right)
+    \cdots\left(\frac{n}{n-k+1}\right).\]
+    \pause
+  \item If you look closely at this product, you can see that each
+    term is at least one.  In the beginning, the terms are very close
+    to one and they get larger at the end.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The logarithms}
+  \begin{itemize}
+  \item There is a nice tool that you can turn multiplications to
+    additions: {\bf logarithms.}  So let's try to take the logarithms; \pause
+    we get
+    \[\ln\left(\left(\frac{n}{n}\right)\cdot
+    \left(\frac{n}{n-1}\right)\cdot\left(\frac{n}{n-2}\right)
+    \cdots\left(\frac{n}{n-k+1}\right)\right) \qquad \qquad \qquad \qquad \]
+    \[ = \ln\left(\frac{n}{n}\right)+
+    \ln\left(\frac{n}{n-1}\right)+\ln\left(\frac{n}{n-2}\right) +
+    \cdots+\ln\left(\frac{n}{n-k+1}\right).\]
+    \pause
+  \item The terms do not look that much better.  But there's a nice
+    fact about the natural logarithms.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{$\ln x$: the upper bound}
+  \begin{tcolorbox}
+    {\bf Fact:}
+    \[\ln x \leq x - 1\]
+  \end{tcolorbox}
+  This fact can be proved with elementary calculus.  But it is fairly clear if you plot the functions $\ln x$ and $x-1$. \pause
+
+  So let's do that at Wolfram Alpha.
+  \vspace{1.2in}
+\end{frame}
+
+\begin{frame}\frametitle{$\ln x$: the lower bound}
+  We know that
+  \[ \ln x \leq x - 1 \]
+  
+  If we use the fact that $\ln\frac{1}{x}=-\ln x$, we can obtain the
+  lower bound.
+  \[ \ln x = -\ln\frac{1}{x}\geq -\left(\frac{1}{x}-1\right)=\frac{x-1}{x}. \]
+
+  \pause
+  Let's conclude by stating the lemma:
+  \begin{tcolorbox}
+    \begin{lemma}
+      \[\frac{x-1}{x}\leq \ln x\leq x-1.\]
+    \end{lemma}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{The lower bound }
+  Let's look at each term in the sum: $\ln\left(\frac{n}{n-j}\right)$.
+  Using the lower bound in Lemma 1, we get that
+  \[
+  \ln\left(\frac{n}{n-j}\right)
+  \geq \frac{\frac{n}{n-j}-1}{\frac{n}{n-j}}
+  = \frac{\frac{n-n+j}{n-j}}{\frac{n}{n-j}}
+  = \frac{j}{n}.
+  \]
+  \pause
+  Thus,
+  \[
+  \ln\left(\left(\frac{n}{n}\right)\cdot
+  \left(\frac{n}{n-1}\right)\cdot\left(\frac{n}{n-2}\right)
+  \cdots\left(\frac{n}{n-k+1}\right)\right)
+  \qquad\qquad\qquad\qquad\qquad\qquad
+  \]
+  \begin{eqnarray*}
+  &=& \ln\left(\frac{n}{n}\right)+
+  \ln\left(\frac{n}{n-1}\right)+\ln\left(\frac{n}{n-2}\right) +
+  \cdots+\ln\left(\frac{n}{n-k+1}\right)\\
+  &\geq& \frac{0}{n}+\frac{1}{n}+\frac{2}{n}+\cdots+\frac{k-1}{n}\\
+  &=& \frac{1}{n}\left(1+2+\cdots+(k-1)\right) = \frac{k(k-1)}{2n}.
+  \end{eqnarray*}
+\end{frame}
+
+\begin{frame}\frametitle{The upper bound }
+  Again, let's look at each term in the sum:
+  $\ln\left(\frac{n}{n-j}\right)$.  Using the upper bound in Lemma 1,
+  we get that
+  \[
+  \ln\left(\frac{n}{n-j}\right)
+  \leq \frac{n}{n-j}-1=\frac{j}{n-j}.
+  \]
+  \pause
+  Thus,
+  \[
+  \ln\left(\left(\frac{n}{n}\right)\cdot
+  \left(\frac{n}{n-1}\right)\cdot\left(\frac{n}{n-2}\right)
+  \cdots\left(\frac{n}{n-k+1}\right)\right)
+  \qquad\qquad\qquad\qquad\qquad\qquad
+  \]
+  \begin{eqnarray*}
+  &\leq& \frac{0}{n-0}+\frac{1}{n-1}+\frac{2}{n-2}+\cdots+\frac{k-1}{n-k+1}\\
+  &\leq& \frac{0}{n-k+1}+\frac{1}{n-k+1}+\frac{2}{n-k+1}+\cdots+\frac{k-1}{n-k+1}\\
+  &=& \frac{1}{n-k+1}\left(1+2+\cdots+(k-1)\right) = \frac{k(k-1)}{2(n-k+1)}.
+  \end{eqnarray*}
+\end{frame}
+
+\begin{frame}\frametitle{Both}
+  Using the derived upper and lower bounds, we get
+  \[
+  e^{\frac{k(k-1)}{2n}}\leq
+  \frac{n^k}{n(n-1)(n-2)\cdots(n-k+1)}
+  \leq e^{\frac{k(k-1)}{2(n-k+1)}}
+  \]
+  \pause
+  Let's plug in $n=366$ and $k=40$:
+  \[
+  8.42\leq \frac{366^{40}}{366\cdot 365\cdots 327}\leq 10.86.
+  \]
+  \pause
+  So the probability that we get no two people with the same birthday
+  is between $1/8.42 \approx 0.118$ and $1/10.86 \approx 0.092$.  So
+  we have high chance of finding two students with the same
+  birthday. \pause This is pretty close as the actual value is
+  $0.1094$.
+\end{frame}

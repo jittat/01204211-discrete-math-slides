@@ -1,0 +1,115 @@
+\include{commons}
+\lecturetitle{Lecture 12: Counting 4}
+
+\begin{frame}\frametitle{Quick questions (1)}
+  \begin{tcolorbox}
+    There are 40 students in the classroom.  There are 35 students who
+    like Naruto, 10 students who like Bleach, and 7 students who like
+    both of them.  How many students in this classroom who do not like
+    either Bleach or Naruto?
+  \end{tcolorbox}
+
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}\frametitle{Quick questions (2)}
+  \begin{tcolorbox}
+    There are 35 students in the classroom.  There are 25 students who
+    like Naruto, 15 students who like Bleach, 12 students who like One
+    Piece.  There are 10 students who like both Naruto and Bleach, 7
+    students who like both Bleach and One Piece, and 9 students who
+    like both Naruto and One Piece.  There are 5 students who like all
+    of them.
+
+    How many students in this classroom who do not like any of Bleach,
+    Naruto, or One Piece?
+  \end{tcolorbox}
+
+  \vspace{1.2in}
+\end{frame}
+
+\begin{frame}\frametitle{Is this correct?}
+  The answer from the previous quick question is
+  \[ 35 - (25 + 15 + 12 - 10 - 7 - 9 + 5) = 4.\]
+
+  Is this correct?  Why?
+
+  \pause
+
+  \vspace{0.2in}
+
+  Let's try to argue that this answer is, in fact, correct and try to
+  find general answers to this kind of counting questions.
+\end{frame}
+
+\begin{frame}\frametitle{Let's look at an individual student (1)}
+  {\small
+  \begin{tabular}{c|c||c|c|c|c|c|c|c|c||c}
+    & &  & N & B & O & NB & BO & NO & NBO & \\
+    \hline
+    & & $35$ & $-25$ & $-15$ & $-12$ & $+10$ & $+7$ & $+9$ & $-5$ & $4$ \\
+    \hline
+    Alfred & N,O & \pause * & * & & * & & & * & & \\
+    Bobby & B & \pause * & & * & & & & & & \\
+    Cathy & B,O & \pause * & & * & * & & * & & & \\
+    Dave & N,B,O & \pause * & * & * & * & * & * & * & * & \\
+    Eddy & - & \pause * & &  & & & & & & \\
+    $\vdots$ & $\vdots$ & & & & & & & & & \\
+  \end{tabular}
+  }
+\end{frame}
+
+\begin{frame}\frametitle{Let's look at an individual student (2)}
+  {\small
+  \begin{tabular}{c|c||c|c|c|c|c|c|c|c||c}
+    & &  & N & B & O & NB & BO & NO & NBO & \\
+    \hline
+    & & $35$ & $-25$ & $-15$ & $-12$ & $+10$ & $+7$ & $+9$ & $-5$ & $4$ \\
+    \hline
+    Alfred & N,O & 1 & -1 & & -1 & & & +1 & & 0 \\
+    Bobby & B & 1 & & -1 & & & & & & 0 \\
+    Cathy & B,O & 1 & & -1 & -1 & & +1 & & & 0 \\
+    Dave & N,B,O & 1 & -1 & -1 & -1 & +1 & +1 & +1 & -1 & 0 \\
+    Eddy & - & 1 & &  & & & & & & 1 \\
+    $\vdots$ & $\vdots$ & & & & & & & & & \\
+  \end{tabular}
+  }
+\end{frame}
+
+\begin{frame}\frametitle{Let's see how each one is counted}
+  Alfred (N,O): \pause $$1 - {2\choose 1} + {2\choose 2} = \pause 1 - 2 + 1 = 0$$
+
+  Bobby (B): \pause $$1 - {1\choose 1} = \pause 1 - 1 = 0$$
+
+  Dave (N,B,O): \pause $$1 - {3\choose 1} + {3\choose 2} - {3\choose 3} = \pause 1 - 3 + 3 - 1 = 0$$
+
+  \pause
+
+  Do you see any patterns here?
+  \pause
+  How about $$1 - {5\choose 1} + {5\choose 2} - {5\choose 3} + {5\choose 4} - {5\choose 5}\ \ ?$$
+\end{frame}
+
+\begin{frame}\frametitle{Underlying structures}
+  Let's write $1$ as ${5\choose 0}$.  Also, let's separate plus terms
+  and minus terms:
+
+  $${5\choose 0} + {5\choose 2} + {5\choose 4}
+  \ \ \ \ \ \heartsuit \ \ \ \ \
+  {5\choose 1} + {5\choose 3} + {5\choose 5}$$
+
+  \pause
+  \vspace{0.1in}
+  Note that the left terms are the number of even subsets and the
+  right terms are the number of odd subsets.  Do you recall one of the
+  homework? \pause We have proved this:
+
+  \begin{tcolorbox}
+    {\bf Theorem:} The number of even subsets is equal to the number
+    of odd subsets.
+  \end{tcolorbox}
+
+  This theorem also shows that our calculation technique is correct.
+  This technique is usually called the {\bf Inclusion-Exclusion
+    principle}.
+\end{frame}

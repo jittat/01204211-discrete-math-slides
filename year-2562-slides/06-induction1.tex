@@ -1,0 +1,203 @@
+\include{commons}
+\lecturetitle{Lecture 6: Mathematical Induction 1}
+
+\begin{frame}\frametitle{Mathematical Induction}
+  \begin{itemize}
+  \item In this lecture, we will focus on how to prove properties on natural numbers. \pause
+  \item For example, we may want to prove that for any integer $n\geq 1$,
+    \[ \sum_{i=1}^n i = n(n+1)/2, \]
+    \pause
+    or for any integer $n\geq 1$,
+    \[ \sum_{i=1}^n i^2 = \frac{n}{6}(n+1)(2n+1),\]
+    \pause
+    or ``We can pay any integer amount $x\geq 4$ baht with 2-baht
+    coins and 5-baht coins.''
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{A review of the summation notation (by examples)}
+  \begin{itemize}
+  \item $\displaystyle\sum_{i=1}^{10} i =$ \pause $1+2+\cdots+10.$ \\ \pause (reads ``sum from
+    $i=1$ to $10$ of $i$'' or ``sum of $i$ from $i=1$ to $10$'') \pause
+  \item $\displaystyle\sum_{i=7}^{9} (i^2+i) =$ \pause $(7^2+7)+(8^2+8)+(9^2+9).$ \\ \pause (reads ``sum from $i=7$ to $9$ of $i^2 + i$'' or ``sum of $i^2+i$ from $i=7$ to $9$'') \pause
+  \item The range of the index may be sets.  For example, let
+    $A=\{1,2,4,15\}$, we have that $\displaystyle\sum_{i\in A} i^2 =$ \pause $1^2+2^2+4^2+15^2$.
+    \pause
+  \item What is $\sum_{i=5}^{2} i$? \pause Note that in this case, the
+    range is empty.  This sum is called an {\bf empty sum}.  By
+    convention, we define it to be zero.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Informal arguments (1)}
+  \begin{itemize}
+  \item Let's try to check that $\sum_{i=1}^n i = n(n+1)/2$, for any
+    integer $n\geq 1$, by experimentation.
+  \item Try $n=1$: \pause LHS\footnote{LHS = left hand side}: $1$, \pause RHS\footnote{RHS = right hand side}: $1(1+1)/2 = 1$, \pause OK
+  \item Try $n=2$: \pause LHS: $1+2=3$, \pause RHS: $2(2+1)/2 = 3$, \pause OK
+  \item Try $n=3$: \pause LHS: $1+2+3=6$, \pause RHS: $3(3+1)/2 = 6$, \pause OK
+  \item Try ... \pause
+  \item With this trying-all approach, we can't actually prove this statement.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Informal arguments (2)}
+  \begin{itemize}
+  \item Our goal is to show that $\sum_{i=1}^n i = n(n+1)/2$, for any
+    integer $n\geq 1$.
+  \item Try $n=2$: LHS: $1+2=3$, RHS: $2(2+1)/2 = 3$.
+  \item Try $n=3$: LHS: $1+2+3$, RHS: $3(3+1)/2$ \pause
+  \item If we compare these two lines, we can see that
+    \begin{eqnarray*}
+      1+2+3 &=& (1+2)+3 \\ \pause
+      &=& 2(2+1)/2 + 3 \mbox{\ \ \ \ \ \ \ \ \ (*)} \\ \pause
+      &=& 2(2+1)/2 + (2+1) \\ \pause
+      &=& 2(2+1)/2 + 2\cdot(2+1)/2 \\ \pause
+      &=& (2+2)(2+1)/2 = (3+1)(3)/2,
+    \end{eqnarray*}
+    which is equal to $3(3+1)/2$. \pause
+  \item Line (*) is important here.  That is because we use the fact
+    that the statement is true when $n=2$ there.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Informal arguments (3)}
+  \begin{itemize}
+  \item Goal: show that $\sum_{i=1}^n i = n(n+1)/2$, for any integer
+    $n\geq 1$.
+  \item \textcolor{blue}{What we have just done?} \pause We show that
+    the statement is true when $n=3$ if it is true when $n=2$. \pause
+  \item Let's try to make a more general argument. \pause
+  \item Assume that the statement is true for $n=k$.  I.e.,
+    \[ \sum_{i=1}^k i = k(k+1)/2. \] \pause
+  \item Can we show that, with this assumption, the statement is true
+    for $n=k+1$?  I.e., can we show that
+    \[ \sum_{i=1}^{k+1} i = (k+1)((k+1)+1)/2 ? \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Informal arguments (4)}
+  Let's try... \\
+  {\bf Assumption:} $\sum_{i=1}^k i = k(k+1)/2$. \\
+  {\bf Goal:} $\sum_{i=1}^{k+1} i = (k+1)((k+1)+1)/2$. \\ \pause
+
+  \begin{eqnarray*}
+    \sum_{i=1}^{k+1} i &=& \left(\sum_{i=1}^k i\right) + (k+1) \\ \pause
+    &=& k(k+1)/2 + (k+1) \\ \pause
+    &=& k(k+1)/2 + 2\cdot(k+1)/2 \\ \pause
+    &=& (k+2)(k+1)/2\\
+    &=& (k+1)((k+1)+1)/2,
+  \end{eqnarray*}
+  as required.
+
+\end{frame}
+
+\begin{frame}\frametitle{Informal arguments (5)}
+  We have all the ingredients required to prove this statement:
+  \begin{tcolorbox}
+    For integer $n\geq 1$, $\sum_{i=1}^n i = n\cdot(n+1)/2.$
+  \end{tcolorbox}
+  \pause
+
+  Let $P(n)\equiv$ ``$\sum_{i=1}^n i = n\cdot(n+1)/2$''. \pause
+
+  The statement we want to prove becomes:
+
+  \begin{tcolorbox}
+    For any natural number $n$, $P(n)$.
+  \end{tcolorbox}
+  \pause
+
+  We have shown:
+  \begin{enumerate}
+  \item $P(1)$ (by experimentation)
+  \item $P(k)\Rightarrow P(k+1)$ for any integer $k\geq 1$.
+  \end{enumerate}
+  \pause
+
+  What do these two statements imply?
+  
+\end{frame}
+
+\begin{frame}\frametitle{Informal arguments (6)}
+  We have:
+  \begin{enumerate}
+  \item $P(1)$ (by experimentation)
+  \item $P(k)\Rightarrow P(k+1)$ for any integer $k\geq 1$.
+  \end{enumerate}
+  What do these two statements imply?
+  \pause
+
+  \vspace{0.2in}
+  
+  $P(1)$ (1st statement itself) \\
+  \pause $\Rightarrow P(2)$ (from 2nd statement, let $k=1$) \\
+  \pause $\Rightarrow P(3)$ (from 2nd statement, let $k=2$) \\
+  \pause $\Rightarrow P(4)$ (from 2nd statement, let $k=3$) \\
+  \pause $\Rightarrow P(5)$
+  \pause $\Rightarrow P(6)$
+  \pause $\Rightarrow P(7)$
+  \pause $\ldots$
+  \pause
+
+  \vspace{0.2in}
+
+  Informally, these chain of reasoning will eventually reach any
+  natural number $n$.  Therefore, we can conclude that $P(n)$ for any
+  natural number $n$.
+
+  \pause
+
+  We have just shown the statement with mathematical induction.
+  
+\end{frame}
+
+\begin{frame}\frametitle{Mathematical Induction}
+  \begin{tcolorbox}
+    Suppose that you want to prove that property $P(n)$ is true for
+    every natural number $n$.\\
+    
+    Suppose that we can prove the following two facts:
+    
+    {\bf Base case:} $P(1)$ \\
+    {\bf Inductive step:} For any $k\geq 1$, $P(k)\Rightarrow P(k+1)$ \\
+    
+    The {\bf Principle of Mathematical Induction} states that $P(n)$
+    is true for every natural number $n$.
+  \end{tcolorbox}
+
+  The assumption $P(k)$ in the inductive step is usually referred to
+  as {\bf the Induction Hypothesis}.
+  
+\end{frame}
+
+\begin{frame}\frametitle{Let's re-write the proof again}
+  \begin{theorem}
+    For every natural number $n$, $\sum_{i=1}^n i = n(n+1)/2$
+  \end{theorem}
+  {\bf \textcolor{blue}{Proof:}}{\small
+    We prove by induction.  The property that we want to prove $P(n)$
+    is ``$\sum_{i=1}^n i = n(n+1)/2$.''
+
+    {\bf Base case:} We can plug in $n=1$ to check that $P(1)$ is
+    true: $1 = 1(1+1)/2$.
+
+    {\bf Inductive step:} We assume that $P(k)$ is true for $k\geq 1$
+    and show that $P(k+1)$ is true.
+
+    Let's state the Induction Hypothesis $P(k)$:
+    $ \sum_{i=1}^k i = k(k+1)/2.$
+
+    Let's show $P(k+1)$.  We write
+    $ \sum_{i=1}^{k+1} i = \left(\sum_{i=1}^k i\right) + (k+1) .$
+    Using the Induction Hypothesis, we know that this is equal to
+    \begin{eqnarray*}
+      k(k+1)/2 + (k+1) &=& k(k+1)/2 + 2\cdot(k+1)\\
+      &=& (k+2)(k+1)/2,
+    \end{eqnarray*}
+    which implies $P(k+1)$ as required.
+
+    From the Principle of Mathematical Induction, this implies that
+    $P(n)$ is true for every natural number $n$.
+  }
+\end{frame}
