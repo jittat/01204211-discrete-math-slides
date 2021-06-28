@@ -5,7 +5,7 @@ from buildutils import build
 
 def main():
     if len(sys.argv) < 2:
-        print "Usage: buildhandout.py [filename.tex]"
+        print("Usage: buildhandout.py [filename.tex]")
         quit()
 
     fname = sys.argv[1]

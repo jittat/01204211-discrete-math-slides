@@ -7,7 +7,7 @@ template = "slides.template"
 
 def main():
     if len(sys.argv) < 2:
-        print "Usage: buildslides.py [filename.tex]"
+        print("Usage: buildslides.py [filename.tex]")
         quit()
     fname = sys.argv[1]
     if fname.endswith('.'):
