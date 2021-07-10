@@ -152,11 +152,11 @@
       most significant digit and $a_k$ is the least significant one.
       Therefore, we can write
       \[ n = a_1\cdot 10^{k-1} + a_2\cdot 10^{k-2} + \cdots + a_{k-1}\cdot 10^1 + a_k\cdot 10^0.\]
-      Consider the $i$-th term: $a_i\cdot 10^{k-i-1}$.  From Lemma 5,
-      we know that $10^{k-i-1} - 1$ is divisible by 3.  Thus
-      $a_i\cdot(10^{k-i-1}-1)$ is also divisible by $3$.
+      Consider the $i$-th term: $a_i\cdot 10^{k-i}$.  From Lemma 5,
+      we know that $10^{k-i} - 1$ is divisible by 3.  Thus
+      $a_i\cdot(10^{k-i}-1)$ is also divisible by $3$.
 
-      Therefore, the remainder of $a_i\cdot 10^{k-i-1}$ divided by $3$
+      Therefore, the remainder of $a_i\cdot 10^{k-i}$ divided by $3$
       is equal to the remainder of $a_i$ divided by $3$.
 
       Summing all terms, the remainder of the division of $n$ by $3$
