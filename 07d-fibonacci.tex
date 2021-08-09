@@ -1,0 +1,208 @@
+\include{commons}
+\lecturetitle{Lecture 7d: Fibonacci sequence} 
+
+\begin{frame}\frametitle{The Fibonacci sequence\footnote{This lecture mostly follows Chapter 4 of [LPV].}}
+
+  \begin{columns}[c]
+    \column{.3\textwidth}
+    \includegraphics{images/fibonacci.jpg}
+
+    {\tiny Source: https://en.wikipedia.org/wiki/ File:Fibonacci.jpg}
+    
+    \column{.7\textwidth}
+    In 1202, Leonardo Bonacci (known as Fibonacci) asked the following
+    question.
+
+    \begin{tcolorbox}
+      {\footnotesize ``[A]ssuming that: a newly born pair of rabbits,
+        one male, one female, are put in a field; rabbits are able to
+        mate at the age of one month so that at the end of its second
+        month a female can produce another pair of rabbits; rabbits
+        never die and a mating pair always produces one new pair (one
+        male, one female) every month from the second month on.''
+
+        ``The puzzle that Fibonacci posed was: how many pairs will
+        there be in one year?''}
+    \end{tcolorbox}
+    
+    {\tiny From https://en.wikipedia.org/wiki/Fibonacci\_number}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  Let's try to solve Fibonacci's question. \pause
+
+  Let $\spadesuit$ denote a newly born rabit pair, and $\heartsuit$
+  denote a mature rabit pair.
+  
+  \begin{tabular}{c|l|r}
+    Month & Rabits & \\ \hline
+    1 & $\spadesuit$ & 1 \\ \pause
+    2 & $\heartsuit$ & 1\\ \pause
+    3 & $\heartsuit$ \pause $\spadesuit$ & 2 \\ \pause
+    4 & $\heartsuit$ $\heartsuit$ \pause $\spadesuit$ & 3 \\ \pause
+    5 & $\heartsuit$ $\heartsuit$ $\heartsuit$ \pause $\spadesuit$ $\spadesuit$ & 5 \\ \pause
+    6 & $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$ \pause $\spadesuit$ $\spadesuit$ $\spadesuit$ & 8 \\ \pause
+    7 & $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$ $\heartsuit$
+    \pause $\spadesuit$ $\spadesuit$ $\spadesuit$  $\spadesuit$ $\spadesuit$ & 13
+  \end{tabular}
+
+  \vspace{0.1in}
+  
+  \pause How many rabit pairs do we have at the beginning of the 8th
+  month? \pause
+
+  {\small
+    \begin{itemize}
+    \item
+      Surely all 13 rabit pairs we have in the 7th month remain there and
+      are all mature.  So, the question is how many newly born rabbit
+      pairs that we have. \pause
+    \item
+      The number of newly born rabbit pairs equals the number of mature
+      rabbit pairs we have.  \pause This is also equal to the number of
+      rabit pairs that we have in the 6th month: 8.
+    \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}
+  Thus, we will have 13+8 rabit pairs at the beginning of the 8th
+  month.
+  \pause
+  
+  If we write down the sequence, we get the Fibonacci sequence:
+  \[
+  1,1,2,3,5,8,13,21,\ldots
+  \]
+  \pause
+  Again, what's the next number in this sequence?  How can you compute it? \pause
+
+  21+13 = 34 is the answer. \pause You take the last two numbers and
+  add them up to get the next number.  Why? 
+\end{frame}
+
+\begin{frame}
+  To be precise, let $F_n$ be the $n$-th number in the Fibonacci
+  sequence. (That is, $F_1=1, F_2=1, F_3=2, F_4=3$ and so on.)  We can
+  define the $(n+1)$-th number as
+  \[
+  F_{n+1}=F_n+F_{n-1},
+  \]
+  for $n=2,3,\ldots$.
+  \pause
+  Is this enough to completely specify the sequence? \pause
+
+  No, because we do not know how to start.  To get the Fibonacci
+  sequence, we need to specify two starting values: $F_1=1$ and
+  $F_2=1$ as well.
+
+  Now, you can see that the equation and these special values uniquely
+  determine the sequence.  It is also convenient to define $F_0=0$ so
+  that the equation works for $n=1$.
+\end{frame}
+
+\begin{frame}\frametitle{A recurrence}
+  The equation
+  \[ F_{n+1}=F_n+F_{n-1} \]
+  and the initial values $F_0=0$ and $F_1=1$ specify all values of the
+  Fibonacci sequence.  With these two initial values, you can use the
+  equation to find the value of any number in the sequence.
+
+  This definition is called a {\bf recurrence}.  Instead of defining
+  the value of each number in the sequence explicitly, we do so by
+  using the values of other numbers in the sequence.
+\end{frame}
+
+\begin{frame}\frametitle{Tilings with 1x1 and 2x1 tiles}
+  You have a walk way of length $n$ units.  The width of the walk way
+  is 1 unit.  You have unlimited supplies of 1x1 tiles and 2x1 tiles.
+  Every tile of the same size is indistinguishable.  In how many ways
+  can you tile the walk way?
+
+  Let's consider small cases.
+  \begin{itemize}
+  \item When $n=1$, there are 1 way.
+  \item When $n=2$, there are 2 ways.
+  \item When $n=3$, there are 3 ways.
+  \item When $n=4$, there are 5 ways.
+  \end{itemize}
+
+  Let's define $J_n$ to be the number of ways you can tile a walk way
+  of length $n$.  From the example above, we know that $J_1=1$ and $J_2=2$.
+
+  Can you find a formula for general $J_n$?
+\end{frame}
+
+\begin{frame}\frametitle{Figuring out the recurrence for $J_n$}
+  To figure out the general formula for $J_n$, we can think about the
+  first choice we can make when tiling a walk way of length $n$.
+  There are two choices:
+  \begin{itemize}
+  \item (1) We can start placing a 1x1 tile at the beginning, or
+  \item (2) We can start placing a 2x1 tile at the beginning.
+  \end{itemize}
+
+  In each of the cases, let's think about how many ways we can tile
+  the rest of the walk way, provided that the first step is made.
+
+  \vspace{0.1in}
+  Note that if we start by placing a 1x1 tile, we are left with a walk
+  way of length $n-1$.  From the definition of $J_n$, we know that
+  there are $J_{n-1}$ ways to tile the rest of the walk way of length
+  $n-1$.  Using similar reasoning, we know that if we start with a 2x1
+  tile, there are $J_{n-2}$ ways to tile the rest of the walk way.
+\end{frame}
+
+\begin{frame}\frametitle{The recurrence for $J_n$}
+  \begin{tcolorbox}
+    From the discussion, we have that
+    \[ J_n = J_{n-1} + J_{n-2}, \]
+    where $J_1=1$ and $J_2=2$.
+  \end{tcolorbox}
+
+  Note that this is exactly the same recurrence as the Fibonacci
+  sequence, but with different initial values.  In fact, we have that
+  \[ J_n = F_{n+1}. \]
+\end{frame}
+
+\begin{frame}\frametitle{Identities on Fibonacci numbers}
+  There are a lot of identities related to Fibonacci numbers.  Let's
+  see the first few values in the sequence:
+  \[
+  0,1,1,2,3,5,8,13,21,34,55,89,\ldots
+  \]
+
+  Now, let's add the first few numbers:
+  \begin{eqnarray*}
+    0+1 &=& 1\\
+    0+1+1 &=& 2\\
+    0+1+1+2 &=& 4\\
+    0+1+1+2+3 &=& 7\\
+    0+1+1+2+3+5 &=& 12\\
+    0+1+1+2+3+5+8 &=& 20\\
+    0+1+1+2+3+5+8+13 &=& 33
+  \end{eqnarray*}
+  From this we can formulate the following conjecture:
+  \[ F_0+F_1+\cdots+F_n = F_{n+2} - 1.\]
+\end{frame}
+
+\begin{frame}
+  \textcolor{blue}{Theorem:} For $n\geq 0$, we have that \[ F_0+F_1+\cdots+F_n = F_{n+2}-1.\]
+
+  \textcolor{blue}{Proof:} We shall prove by induction on $n$.  The
+  base case has already been demonstrated when we consider small
+  values of $n$.
+  
+  \vspace{0.1in}
+  {\bf Inductive Step:} Let's assume that the statement is true for $n=k$, for $k\geq 0$, i.e., assume that
+  \[ F_0+F_1+\cdots+F_k = F_{k+2}-1.\]
+  We shall prove that the statement is true when $n=k+1$.  This is not
+  hard to show.  We write
+  \begin{eqnarray*}
+    (F_0+F_1+\cdots+F_k)+F_{k+1} &=& (F_{k+2}-1) + F_{k+1} \\
+    &=& F_{k+3} - 1,
+  \end{eqnarray*}
+  as required.  Note that the first step follows from the induction
+  hypothesis. $\blacksquare$
+\end{frame}
