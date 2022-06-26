@@ -1,0 +1,310 @@
+\include{commons}
+\lecturetitle{Lecture 2a: Quantifiers}
+
+\begin{frame}\frametitle{Review (1)}
+  \begin{itemize}
+  \item A {\em proposition} is a statement which is either {\bf true}
+    or {\bf false}.
+  \item We can use variables to stand for propositions, e.g., $P$ =
+    ``today is Tuesday''.
+  \item We can use connectives to combine variables to get
+    propositional forms.
+    \begin{itemize}
+    \item {\bf Conjunction:} $P\wedge Q$ (``$P$ and $Q$''), 
+    \item {\bf Disjunction:} $P\vee Q$ (``$P$ or $Q$''), and
+    \item {\bf Negation:} $\neg P$ (``not $P$'')
+    \item {\bf Implication:} $P\Rightarrow Q$ (``$P$ implies $Q$'', ``if $P$, then $Q$'', \\ ``$P$, only if $Q$'')
+    \item {\bf Equivalence:} $P\Leftrightarrow Q$ (``$P$ if and only if $Q$'')
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Review (2): Testing primes}
+  Consider the following code.
+  
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm CheckPrime2(n):  // Input: an integer n
+      if n <= 1:
+          return False
+      let s = square root of n
+      i = 2
+      while i <= s:
+          if n is divisible by i:
+              return False
+          i = i + 1
+      return True
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+  How fast can it run? Note that $s = \sqrt{n}$; therefore, it
+  takes time approximately proportional to $\sqrt{n}$ to run.
+
+  Ok, it should be faster.  {\bf But is it correct?}
+
+\end{frame}
+
+
+\begin{frame}\frametitle{The goals}
+  \begin{itemize}
+  \item Let's recall what we are trying to do.
+
+    \begin{tcolorbox}
+      {\bf Original goal:} To show that Algorithm {\tt CheckPrime2} is
+      correct.
+    \end{tcolorbox}
+    
+    \begin{tcolorbox}
+      {\bf Current (sub) goal:} Consider a positive composite $n$ and
+      its positive divisor $a$, where $a>\sqrt{n}$.  Let $b=n/a$.  We
+      want to show that $2\leq b\leq\sqrt{n}$.
+    \end{tcolorbox}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The (sub) goal}
+  \begin{itemize}
+  \item
+    {\small {\bf Current (sub) goal:} Consider a positive composite $n$ and its
+    positive divisor $a$, where $a>\sqrt{n}$.  Let $b=n/a$.  We want
+    to show that $2\leq b\leq\sqrt{n}$.}
+
+  \item We can be more specific about what values of $n$ and $b$ that
+    we want to consider. 
+
+    \begin{tcolorbox}[title=Revised statement]
+      For all positive composite integer $n$, and for every divisor
+      $a$ of $n$ such that $\sqrt{n} < a < n$,
+      \[ 2\leq b\leq\sqrt{n},\]
+      where $b=n/a$.
+    \end{tcolorbox}
+
+  \item Note that this revised statement is now ``quantified,'' that
+    is, every variable in the statement has specific scope.  Now the
+    statement is either true or false.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Predicates}
+  \begin{itemize}
+  \item
+    In many cases, the statement we are interested in contains variables.
+
+  \item
+    For example, ``$x$ is even,'' ``$p$ is prime,'' or ``$s$ is a student.''
+    \pause
+
+  \item
+    As we previously did with propositions, we can use variables to
+    represent these statements.  E.g.,
+    \begin{itemize}
+    \item let $E(x)\equiv$ ``$x$ is even'',
+    \item let $P(y)\equiv$ ``$y$ is prime, and
+    \item let $S(w)\equiv$ ``$w$ is a student.
+    \end{itemize}
+    We call $E(x)$, $P(y)$, and $S(w)$ {\em predicates}. (You can
+    think of predicates as statements that may be true of false
+    depending on the values of its variables.)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quantifiers (1)}
+  \begin{itemize}
+  \item As we note before, these predicates are not propositions.  But
+    if we know the values of their variables, then they becomes
+    propositions.  For example, if we let $x=5$, then $E(5)$ is a
+    proposition which is false.  Also, $P(7)$ is true.
+  \item Since the truth values of predicates depend on the assignments
+    of their variables, we can put {\em quantifiers} to specify the
+    scopes of these variables and how to interprete the truth values of
+    the predicates over these values.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quantifiers (2): universal quantifiers}
+  \begin{itemize}
+  \item Let $A=\{2,4,6,8\}$.
+  \item Note that $E(2), E(4), E(6),$ and $E(8)$ are true, i.e.,
+    $E(x)$ is true for every $x\in A$.  \pause
+    
+    In this case, we say that the following proposition is true:
+    \[(\forall x\in A) E(x). \]
+    \pause
+
+  \item The quantifier $\forall$ is called a universal quantifier.
+    (We usually pronounce ``for all $x$'', or ``for every $x$.'')
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quantifiers (3): existential quantifiers}
+  \begin{itemize}
+  \item Again, let $A=\{2,4,6,8\}$.
+  \item Note that $P(2)$ is true.  This means that $P(y)$ is true for
+    some $y\in A$.  \pause
+
+    In this case, we say that the following proposition is true:
+    \[(\exists y\in A) P(y). \]
+    \pause
+    
+  \item The quantifier $\exists$ is called an existential quantifier.
+    (We usually pronounce ``for some $x$'', or ``there exists $x$.'')
+    \pause
+
+    \begin{tcolorbox}
+      When the universe $A$ is clear, we can leave it out and just
+      write $\forall x E(x)$ or $\exists y P(y)$.
+    \end{tcolorbox}
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The main goal}
+  \begin{itemize}
+  \item
+    Let's try to be more specific about our main goal:
+    
+    \begin{tcolorbox}
+      Algorithm {\tt CheckPrime2} is correct.
+    \end{tcolorbox}
+
+  \item
+    Can we re-write this statement so that the input/output of the
+    algorithm are explicit?
+
+  \item
+    Note that the set of its input $n$ is an integer.  Thus, we are
+    interested in every $n\in\mathbb Z$, where $\mathbb Z$ denote the
+    set of all integers.
+
+  \item
+    Let's rewrite the goal as:
+
+    \begin{tcolorbox}
+      \begin{center}
+        $\forall n\in\mathbb Z$,
+        $C(n)\Leftrightarrow P(n)$,
+      \end{center}
+    \end{tcolorbox}
+
+    where $C(n)\equiv$ \pause ``{\tt CheckPrime2(n)} returns True'', and \\
+    $P(n)\equiv$ \pause ``$n$ is a prime.''
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quantified propositions with more than one variables}
+  Let our universe be integers ($\mathbb Z$).  Which of the following statements is true?
+
+  \begin{itemize}
+  \item $\forall x\forall y (x=y)$
+  \item $\forall x\exists y (x=y)$
+  \item $\exists x\forall y (x=y)$
+  \item $\exists x\exists y (x=y)$
+  \end{itemize}
+
+  \pause
+
+  When you have many quantifiers, we can interprete the statement by
+  nesting the quantifiers. E.g,
+  \[\exists x\forall y P(x,y)\equiv \exists x (\forall y (P(x,y))).\]
+  \[\forall y\exists x P(x,y)\equiv \forall y (\exists x (P(x,y))).\]
+  \pause
+
+  Also note that usually, $\exists x\forall y P(x,y)\not\equiv \forall
+  y\exists x P(x,y)$.
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 4}
+  We will consider the universe to be ``everything''.  Consider the
+  following statements.  Define appropriate predicates and rewrite
+  them using the defined predicates and quantifiers.  (Note: the
+  predicates may have more than one variables.)
+  \begin{itemize}
+  \item Every human must die.
+  \item Some animal eats other animals.
+  \item If a student works hard, that student will be successful.
+  \item Everyone has someone that care about him or her.
+  \end{itemize}                  
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 5}
+  \begin{itemize}
+  \item Let's consider the current subgoal.  (Note that in this
+    version, variable $b$ is replaced with $n/a$.)
+    
+    \begin{tcolorbox}[title=Another revised statement]
+      For all positive composite integer $n$, and for every divisor
+      $a$ of $n$ such that $\sqrt{n} < a < n$,
+      \[ 2\leq n/a \leq\sqrt{n}.\]
+    \end{tcolorbox}
+
+  \item Define all required predicates and describe a quantified
+    proposition equivalent to the revised statement above.
+
+    \vspace{1in}
+    
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Negations of quantified propositions (1)}
+  Let consider a set of positive integers $\mathbb Z^+$ as our
+  universe.  Let predicate $P(x)\equiv$ ``$x$ is a prime number.''
+
+  Consider this proposition
+
+  \[(\forall x\in {\mathbb Z^+}) P(x).\]
+
+  How can we show that this is false? \pause
+
+  When showing that a universally quantified proposition is false, we
+  need to show ``one'' counter example.  In this case, since $P(4)$ is
+  false, $\forall x P(x)$ is false.  \pause
+
+  This way of disproving a statement is equivalent to showing that
+
+  \[(\exists x)(\neg P(x)).\]
+\end{frame}
+
+\begin{frame}\frametitle{Negations of quantified propositions (2)}
+  Let consider a set of positive integers $\mathbb Z^+$ as our
+  universe.  Let predicate $Q(x)\equiv$ ``if $x > 2$, then  $x^2\leq 2x$.''
+
+  Consider this proposition
+
+  \[(\exists x\in {\mathbb Z^+}) Q(x).\]
+
+  How can we show that this is false? \pause
+
+  When showing that an existential quantified proposition is false, we
+  need to show that $Q(x)$ is false for every possible values of $x$.
+  In this case, since $x^2 = x\cdot x > 2\cdot x$ for every $x>2$, we
+  have that $(\exists x) Q(x)$ is false. \pause
+
+  This way of disproving a statement is equivalent to showing that
+
+  \[(\forall x)(\neg Q(x)).\]
+\end{frame}
+
+\begin{frame}\frametitle{Negations of quantified propositions (3)}
+  Thus, the following equivalences:
+
+  \begin{itemize}
+  \item $\neg(\forall x P(x)) \equiv \exists x (\neg P(x))$
+  \item $\neg(\exists x P(x)) \equiv \forall x (\neg P(x))$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 6}
+  Consider the following statements with the quantified propositions
+  that you have written previously.  Write down their negations in
+  quantified propositional forms, and then translate them back to
+  English sentences.
+  \begin{itemize}
+  \item Every human must die.
+  \item Some animal eats other animals.
+  \item If a student works hard, that student will be successful.
+  \item Everyone has someone that care about him or her.
+  \end{itemize}                  
+\end{frame}

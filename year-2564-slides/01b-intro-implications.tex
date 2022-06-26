@@ -1,0 +1,248 @@
+\include{commons}
+\lecturetitle{Lecture 1b: Implications and equivalences}
+
+\begin{frame}\frametitle{This lecture covers:}
+  \begin{itemize}
+  \item More connectives: implications and equivalences
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Review (1)}
+  \begin{itemize}
+  \item A {\em proposition} is a statement which is either {\bf true}
+    or {\bf false}.
+  \item We can use variables to stand for propositions, e.g., $P$ =
+    ``today is Tuesday''.
+  \item We can use connectives to combine variables to get
+    propositional forms.
+    \begin{itemize}
+    \item {\bf Conjunction:} $P\wedge Q$ (``$P$ and $Q$''), 
+    \item {\bf Disjunction:} $P\vee Q$ (``$P$ or $Q$''), and
+    \item {\bf Negation:} $\neg P$ (``not $P$'') 
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Review (2)}
+  To represents values of propositional forms, we usually use truth tables.
+  \begin{tcolorbox}[title=And/Or/Not]
+    \begin{tabular}{|c|c||c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\wedge Q$ & $P\vee Q$ & $\neg P$ \\
+      \hline
+      $T$ & $T$ & $T$ & $T$ & $F$ \\
+      $T$ & $F$ & $F$ & $T$ & \\
+      $F$ & $T$ & $F$ & $T$ & $T$ \\
+      $F$ & $F$ & $F$ & $F$ & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 1}
+  As we said before, the truth value of propositional forms may not
+  depend on the values of its variables.  As you can see in this
+  exercise.
+  
+  Use a truth table to find the values of (1) $P\wedge \neg P$ and (2)
+  $P\vee\neg P$.
+  \pause
+
+  \begin{tcolorbox}[title=And/Or/Not]
+    \begin{tabular}{|c|c||c|c|}
+      \hline
+      $P$ & $\neg P$ & $P\wedge\neg P$ & $P\vee\neg P$\\
+      \hline
+      $T$ & $F$ & $F$ & $T$ \\
+      $F$ & $T$ & $F$ & $T$ \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+  \pause
+
+  Note that $P\wedge\neg P$ is always false and $P\vee\neg P$ is always true.
+
+  A propositional form which is always true regardless of the truth
+  values of its variables is called a {\em tautology.}  On the other
+  hand, a propositional form which is always false regardless of the
+  truth values of its variables is called a {\em contradiction.}
+\end{frame}
+
+\begin{frame}\frametitle{Implications\footnote{Materials in this lecture are mostly from Berkeley CS70's lecture notes.}}
+  Given $P$ and $Q$, an implication
+  \[P\Rightarrow Q\]
+  stands for ``if $P$, then $Q$''.  This is a very important
+  propositional form.
+
+  It states that ``when $P$ is true, $Q$ must be true''.  Let's try to
+  fill in its truth table:
+
+  \begin{tcolorbox}[title=Implications]
+    \begin{tabular}{|c|c||c|}
+      \hline
+      $P$ & $Q$ & $P\Rightarrow Q$ \\
+      \hline
+      $T$ & $T$ & \pause $T$ \\
+      $T$ & $F$ & \pause $F$ \\
+      $F$ & $T$ & \pause $T$ \\
+      $F$ & $F$ & \pause $T$ \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{What?}
+  \begin{itemize}
+  \item
+    Yes, when $P$ is false, $P\Rightarrow Q$ is {\bf always true} no
+    matter what truth value of $Q$ is. 
+
+  \item We say that in this case, the statement $P\Rightarrow Q$ is
+    {\em vacuously true.}
+    \pause
+
+  \item
+    You might feel a bit uncomfortable about this, because in most
+    natural languages, when we say that if $P$, then $Q$ we sometimes
+    mean something more than that in the logical expression
+    ``$P\Rightarrow Q$.''
+  \end{itemize}
+\end{frame}
+
+  
+\begin{frame}\frametitle{One explanation}
+  \begin{itemize}
+  \item
+    But let's look closely at what it means when we say that:
+
+    \begin{tcolorbox}
+      if $P$ is true, $Q$ must be true.
+    \end{tcolorbox}
+
+  \item
+    Note that this statement does not say anything about the case when
+    $P$ is false, i.e., it only considers the case when $P$ is true.
+    \pause
+    
+  \item
+    Therefore, having that $P\Rightarrow Q$ is true is OK with the
+    case that (1) $Q$ is false when $P$ is false, and (2) $Q$ is true
+    when $P$ is false.
+    \pause
+    
+  \item
+    This is an example when mathematical language is ``stricter'' than
+    natural language.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Noticing if-then}
+  We can write ``if $P$, then $Q$'' for $P\Rightarrow Q$, but there
+  are other ways to say this. E.g., we can write (1) $Q$ if $P$, (2) $P$
+  only if $Q$, or (3) when $P$, then $Q$.
+
+  \pause
+
+  \begin{tcolorbox}[title=Quick check 2]
+    For each of these statements, define
+    propositional variables representing each proposition inside the
+    statement and write the proposition form of the statement.
+    \begin{itemize}
+    \item If you do not have enough sleep, you will feel dizzy during class.
+    \item If you eat a lot and you do not have enough exercise, you will
+      get fat.
+    \item You can get A from this course, only if you work fairly hard.
+    \end{itemize}
+  \end{tcolorbox}
+  
+\end{frame}
+
+\begin{frame}\frametitle{Only-if}
+  Let $P$ be ``you get A from this course.''
+
+  Let $Q$ be ``you work fairly hard.''
+  
+  Let $R$ be ``You can get A from this course, only if you work fairly hard.''
+
+  Let's think about the truth values of $R$.
+  
+  \begin{tcolorbox}[title=Only if you work fairly hard.]
+    \begin{tabular}{|c|c||c|}
+      \hline
+      $P$ & $Q$ & $R$ \\
+      \hline
+      $T$ & $T$ & \\
+      $T$ & $F$ & \\
+      $F$ & $T$ & \\
+      $F$ & $F$ & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+  \pause
+
+  Thus, $R$ should be logically equivalent to $P\Rightarrow Q$.  (We
+  write $R\equiv P\Rightarrow Q$ in this case.)
+\end{frame}
+
+\begin{frame}\frametitle{If and only if: ($\Leftrightarrow$)}
+  Given $P$ and $Q$, we denote by
+  \[ P\Leftrightarrow Q \]
+  the statement ``$P$ if and only if $Q$.''
+  \pause
+  It is logically equivalent to
+  \[ (P\Leftarrow Q)\wedge (P\Rightarrow Q), \]
+  i.e., $P\Leftrightarrow Q \equiv (P\Leftarrow Q)\wedge (P\Rightarrow Q)$.
+
+  Let's fill in its truth table.
+  \begin{tcolorbox}
+    \begin{tabular}{|c|c||c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\Rightarrow Q$ & $P\Leftarrow Q$ & $P\Leftrightarrow Q$ \\
+      \hline
+      $T$ & $T$ & & & \\
+      $T$ & $F$ & & & \\
+      $F$ & $T$ & & & \\
+      $F$ & $F$ & & & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{An implication and its friends}
+  When you have two propositions
+  \begin{itemize}
+  \item $P$ = ``I own a cell phone'', and
+  \item $Q$ = ``I bring a cell phone to class''.
+  \end{itemize}
+  We have
+  \begin{itemize}
+  \item an implication $P\Rightarrow Q$ $\equiv$ \\ ``If I own a cell phone,
+    I'll bring it to class'',
+  \item its {\bf converse} $Q\Rightarrow P$ $\equiv$ \\ ``If I bring a cell phone
+    to class, I own it'', and
+  \item its {\bf contrapositive} $\neg Q\Rightarrow\neg P$ $\equiv$ \\ ``If I do not
+    bring a cell phone to class, I do not own one''.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 3}
+  Let's consider the following truth table:
+  \begin{tcolorbox}
+    \begin{tabular}{|c|c||c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\Rightarrow Q$ & $Q\Rightarrow P$ & $\neg Q \Rightarrow \neg P$ \\
+      \hline
+      $T$ & $T$ & & & \\
+      $T$ & $F$ & & & \\
+      $F$ & $T$ & & & \\
+      $F$ & $F$ & & & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+  \pause
+  Do you notice any equivalence?
+  \pause
+
+  Right, $P\Rightarrow Q\equiv \neg Q\Rightarrow\neg P$.
+\end{frame}
+

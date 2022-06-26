@@ -1,0 +1,188 @@
+\include{commons}
+\lecturetitle{Lecture 4b: Mathematical Induction 2}
+
+\begin{frame}\frametitle{Review: Mathematical Induction}
+  \begin{tcolorbox}
+    Suppose that you want to prove that property $P(n)$ is true for
+    every natural number $n$.\\
+    
+    Suppose that we can prove the following two facts:
+    
+    {\bf Base case:} $P(1)$ \\
+    {\bf Inductive step:} For any $k\geq 1$, $P(k)\Rightarrow P(k+1)$ \\
+    
+    The {\bf Principle of Mathematical Induction} states that $P(n)$
+    is true for every natural number $n$.
+  \end{tcolorbox}
+
+  The assumption $P(k)$ in the inductive step is usually referred to
+  as {\bf the Induction Hypothesis}.
+\end{frame}
+
+\begin{frame}\frametitle{Example 1}
+  {\bf \textcolor{blue}{Theorem:}}
+  For every natural number $n$, $\sum_{i=1}^n i^2 = \frac{n}{6}(n+1)(2n+1)$
+  \vspace{0.15in}
+  
+  {\bf \textcolor{blue}{Proof:}}
+  We prove by induction.  The property that we want to prove $P(n)$
+  is ``$\sum_{i=1}^n i^2 = \frac{n}{6}(n+1)(2n+1)$.''
+  \vspace{0.15in}
+
+  \pause
+
+  {\bf Base case:} We can plug in $n=1$ to check that $P(1)$ is
+  true: $1^2 = \frac{1}{6}(1+1)(2\cdot 1+1)$.
+  \vspace{0.15in}
+
+  {\bf Inductive step:} We assume that $P(k)$ is true for $k\geq 1$
+  and show that $P(k+1)$ is true.
+  \vspace{0.15in}
+
+  We first assume the Induction Hypothesis $P(k)$: $ \sum_{i=1}^k
+  i^2 = \frac{k}{6}(k+1)(2k+1)$
+  \vspace{0.15in}
+
+  (continue on the next page)
+\end{frame}
+
+\begin{frame}\frametitle{Example 1 (cont.)}
+  Let's show $P(k+1)$.  We write
+  $ \sum_{i=1}^{k+1} i^2 = \left(\sum_{i=1}^k i^2\right) + (k+1)^2 .$
+  \vspace{0.15in}
+
+  Using the Induction Hypothesis, we know that this is equal to
+  {\small
+  \begin{eqnarray*}
+    (k/6)(k+1)(2k+1) + (k+1)^2 &=& \frac{(k+1)}{6}(k(2k+1)+6(k+1)) \\
+    && \mbox{\tiny \ \ \ \ \ \ \textcolor{blue}{(In this step, we factor out $(k+1)/6$)}} \\
+    &=& \frac{(k+1)}{6}(2k^2+7k+6) \\
+    &=& \frac{(k+1)}{6}((k+1)+1)(2(k+1)+1).
+  \end{eqnarray*}
+  }
+  
+  This implies $P(k+1)$ as required.
+  
+  From the Principle of Mathematical Induction, this implies that
+  $P(n)$ is true for every natural number $n$. $\blacksquare$
+\end{frame}
+
+\begin{frame}\frametitle{Not an example (1)}
+  \begin{theorem}
+    For any set of cows, all cows have the same color.
+  \end{theorem}
+  \textcolor{blue}{Proof.}
+
+  We prove by induction on the size $n$ of the set of cows.
+  \pause
+  
+  {\bf Base case:} For $n=1$, clearly for any set of a single cow,
+  every cow in the set has the same color.
+  \pause
+  
+  {\bf Inductive step:} Suppose that for every set of size $k$ of
+  cows, all cows in the set have the same color.
+  
+  We will show that every set of size $k+1$ of cows, all cows in
+  this set have the same color.
+\end{frame}
+
+\begin{frame}\frametitle{Not an example (2)}
+  {\bf Inductive step (cont.):} Consider set $A$ of $k+1$ cows.
+
+  \vspace{2.2in}
+  \pause
+
+  Because we have established that the base case and the inductive
+  step is true, we can conclude that for any set of cows, all cows
+  have the same color. $\blacksquare$
+  
+\end{frame}
+
+\begin{frame}\frametitle{Not an example (3)}
+  Clearly the following theorem cannot be true.
+
+  \begin{tcolorbox}
+    \begin{theorem}
+      For any set of cows, all cows have the same color.
+    \end{theorem}
+  \end{tcolorbox}
+
+  What is wrong with its proof based on mathematical induction?
+  
+\end{frame}
+
+\begin{frame}\frametitle{Unused facts}
+  \begin{itemize}
+  \item Let's informally think about how proving $P(1)$ and
+    $P(k)\Rightarrow P(k+1)$ for all $k\geq 1$ implies that $P(n)$ is
+    true for all natural number $n$.
+    \vspace{1.5in}
+    \pause
+  \item
+    One may notice that when we prove a statement $P(n)$ for all
+    natural number $n$ by induction, during the inductive step where
+    we want to show $P(k+1)$ from $P(k)$, we usually have that
+    $P(1),P(2),\ldots,P(k)$ is true at hands as well.
+    \pause
+  \item Then why don't we use them as well?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Strong Mathematical Induction}
+  \begin{tcolorbox}[title=Strong Induction]
+    Suppose that you want to prove that property $P(n)$ is true for
+    every natural number $n$.\\
+    
+    Suppose that we can prove the following two facts:
+    \pause
+    {\bf Base case:} $P(1)$ \\
+    \pause
+    {\bf Inductive step:} For any $k\geq 1$,
+    \[P(1)\wedge P(2)\wedge\cdots\wedge P(k)\Rightarrow P(k+1).\]
+    \pause
+    Then $P(n)$ is true for every natural number $n$.
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Example 2}
+  \textcolor{blue}{Theorem:} For any integer $n\geq 4$, one can use only
+  2-baht coins and 3-baht coins to obtain exactly $n$ baht.
+  \vspace{0.1in}
+
+  \textcolor{blue}{Proof:} We prove by strong induction on $n$.
+  \pause
+  
+  {\bf Base cases:} For $n=4$, we can use two 2-baht coins.  For
+  $n=5$, we can use one 2-baht coin and one 3-baht coin.
+  \pause
+  \vspace{0.125in}
+
+  {\bf Inductive step:} Assume that for $k\geq 5$, we can obtain
+  exactly $\ell$ baht, for $4\leq\ell\leq k$, using only 2-baht and
+  3-baht coins.  We will show how to obtain a set of $k+1$ baht.
+  \pause
+  
+  Since $k\geq 5$, we have that $k-1 \geq 4$.  Therefore from the
+  Induction Hypothesis, we can use only 2-baht coins and 3-baht coins
+  to form a set of coins of total value $k-1$ baht.  \pause With one
+  additional 2-baht coin, we can obtain a set of value $(k-1) + 2 =
+  k+1$ baht, as required.  \pause
+  \vspace{0.125in}
+
+  From the Principle of Strong Mathematical Induction, we conclude
+  that the theorem is true. $\blacksquare$
+\end{frame}
+
+\begin{frame}\frametitle{Is strong induction more powerful?}
+  \begin{itemize}
+  \item Can we prove the previous theorem without using the strong
+    induction?
+    \pause Yes, you can (homework). \pause
+  \item In fact, if you can prove that $P(n)$ is true for all natural
+    number $n$ with strong induction, you can always prove it with
+    mathematical induction.
+    \pause
+  \item Hint: Let $Q(n)=P(1)\wedge P(2)\wedge\cdots\wedge P(n)$.
+  \end{itemize}
+\end{frame}

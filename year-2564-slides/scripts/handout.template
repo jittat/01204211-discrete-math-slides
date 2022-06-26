@@ -1,0 +1,17 @@
+\documentclass[handout]{beamer}
+\usefonttheme[onlymath]{serif}
+\usepackage{fancybox}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{background canvas}{%
+\begin{tikzpicture}
+    \clip (0,0) rectangle (\paperwidth,\paperheight);
+    \fill[color=black] (0,\paperheight) rectangle (\paperwidth,\paperheight-0.5pt);
+    \fill[color=black] (0,0) rectangle (\paperwidth,0.5pt);
+    \fill[color=black] (0,0) rectangle (0.5pt,\paperheight);
+    \fill[color=black] (\paperwidth-0.5pt,0) rectangle (\paperwidth,\paperheight);
+\end{tikzpicture}}
+\begin{document}
+\input{##}
+\end{document}

@@ -1,0 +1,470 @@
+\include{commons}
+\lecturetitle{Lecture 2a: Quantifiers}
+
+\begin{frame}\frametitle{This lecture covers:}
+  \begin{itemize}
+  \item More connectives: implications and equivalences
+  \item Quantifiers
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Review (1)}
+  \begin{itemize}
+  \item A {\em proposition} is a statement which is either {\bf true}
+    or {\bf false}.
+  \item We can use variables to stand for propositions, e.g., $P$ =
+    ``today is Tuesday''.
+  \item We can use connectives to combine variables to get
+    propositional forms.
+    \begin{itemize}
+    \item {\bf Conjunction:} $P\wedge Q$ (``$P$ and $Q$''), 
+    \item {\bf Disjunction:} $P\vee Q$ (``$P$ or $Q$''), and
+    \item {\bf Negation:} $\neg P$ (``not $P$'') 
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Review (2)}
+  To represents values of propositional forms, we usually use truth tables.
+  \begin{tcolorbox}[title=And/Or/Not]
+    \begin{tabular}{|c|c||c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\wedge Q$ & $P\vee Q$ & $\neg P$ \\
+      \hline
+      $T$ & $T$ & $T$ & $T$ & $F$ \\
+      $T$ & $F$ & $F$ & $T$ & \\
+      $F$ & $T$ & $F$ & $T$ & $T$ \\
+      $F$ & $F$ & $F$ & $F$ & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 1}
+  As we said before, the truth value of propositional forms may not
+  depend on the values of its variables.  As you can see in this
+  exercise.
+  
+  Use a truth table to find the values of (1) $P\wedge \neg P$ and (2)
+  $P\vee\neg P$.
+  \pause
+
+  \begin{tcolorbox}[title=And/Or/Not]
+    \begin{tabular}{|c|c||c|c|}
+      \hline
+      $P$ & $\neg P$ & $P\wedge\neg P$ & $P\vee\neg P$\\
+      \hline
+      $T$ & $F$ & $F$ & $T$ \\
+      $F$ & $T$ & $F$ & $T$ \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+  \pause
+
+  Note that $P\wedge\neg P$ is always false and $P\vee\neg P$ is always true.
+
+  A propositional form which is always true regardless of the truth
+  values of its variables is called a {\em tautology.}  On the other
+  hand, a propositional form which is always false regardless of the
+  truth values of its variables is called a {\em contradiction.}
+\end{frame}
+
+\begin{frame}\frametitle{Implications\footnote{Materials in this lecture are mostly from Berkeley CS70's lecture notes.}}
+  Given $P$ and $Q$, an implication
+  \[P\Rightarrow Q\]
+  stands for ``if $P$, then $Q$''.  This is a very important
+  propositional form.
+
+  It states that ``when $P$ is true, $Q$ must be true''.  Let's try to
+  fill in its truth table:
+
+  \begin{tcolorbox}[title=Implications]
+    \begin{tabular}{|c|c||c|}
+      \hline
+      $P$ & $Q$ & $P\Rightarrow Q$ \\
+      \hline
+      $T$ & $T$ & \pause $T$ \\
+      $T$ & $F$ & \pause $F$ \\
+      $F$ & $T$ & \pause $T$ \\
+      $F$ & $F$ & \pause $T$ \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{What?}
+  \begin{itemize}
+  \item
+    Yes, when $P$ is false, $P\Rightarrow Q$ is {\bf always true} no
+    matter what truth value of $Q$ is. 
+
+  \item We say that in this case, the statement $P\Rightarrow Q$ is
+    {\em vacuously true.}
+    \pause
+
+  \item
+    You might feel a bit uncomfortable about this, because in most
+    natural languages, when we say that if $P$, then $Q$ we sometimes
+    mean something more than that in the logical expression
+    ``$P\Rightarrow Q$.''
+  \end{itemize}
+\end{frame}
+
+  
+\begin{frame}\frametitle{One explanation}
+  \begin{itemize}
+  \item
+    But let's look closely at what it means when we say that:
+
+    \begin{tcolorbox}
+      if $P$ is true, $Q$ must be true.
+    \end{tcolorbox}
+
+  \item
+    Note that this statement does not say anything about the case when
+    $P$ is false, i.e., it only considers the case when $P$ is true.
+    \pause
+    
+  \item
+    Therefore, having that $P\Rightarrow Q$ is true is OK with the
+    case that (1) $Q$ is false when $P$ is false, and (2) $Q$ is true
+    when $P$ is false.
+    \pause
+    
+  \item
+    This is an example when mathematical language is ``stricter'' than
+    natural language.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Noticing if-then}
+  We can write ``if $P$, then $Q$'' for $P\Rightarrow Q$, but there
+  are other ways to say this. E.g., we can write (1) $Q$ if $P$, (2) $P$
+  only if $Q$, or (3) when $P$, then $Q$.
+
+  \pause
+
+  \begin{tcolorbox}[title=Quick check 2]
+    For each of these statements, define
+    propositional variables representing each proposition inside the
+    statement and write the proposition form of the statement.
+    \begin{itemize}
+    \item If you do not have enough sleep, you will feel dizzy during class.
+    \item If you eat a lot and you do not have enough exercise, you will
+      get fat.
+    \item You can get A from this course, only if you work fairly hard.
+    \end{itemize}
+  \end{tcolorbox}
+  
+\end{frame}
+
+\begin{frame}\frametitle{Only-if}
+  Let $P$ be ``you get A from this course.''
+
+  Let $Q$ be ``you work fairly hard.''
+  
+  Let $R$ be ``You can get A from this course, only if you work fairly hard.''
+
+  Let's think about the truth values of $R$.
+  
+  \begin{tcolorbox}[title=Only if you work fairly hard.]
+    \begin{tabular}{|c|c||c|}
+      \hline
+      $P$ & $Q$ & $R$ \\
+      \hline
+      $T$ & $T$ & \\
+      $T$ & $F$ & \\
+      $F$ & $T$ & \\
+      $F$ & $F$ & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+  \pause
+
+  Thus, $R$ should be logically equivalent to $P\Rightarrow Q$.  (We
+  write $R\equiv P\Rightarrow Q$ in this case.)
+\end{frame}
+
+\begin{frame}\frametitle{If and only if: ($\Leftrightarrow$)}
+  Given $P$ and $Q$, we denote by
+  \[ P\Leftrightarrow Q \]
+  the statement ``$P$ if and only if $Q$.''
+  \pause
+  It is logically equivalent to
+  \[ (P\Leftarrow Q)\wedge (P\Rightarrow Q), \]
+  i.e., $P\Leftrightarrow Q \equiv (P\Leftarrow Q)\wedge (P\Rightarrow Q)$.
+
+  Let's fill in its truth table.
+  \begin{tcolorbox}
+    \begin{tabular}{|c|c||c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\Rightarrow Q$ & $P\Leftarrow Q$ & $P\Leftrightarrow Q$ \\
+      \hline
+      $T$ & $T$ & & & \\
+      $T$ & $F$ & & & \\
+      $F$ & $T$ & & & \\
+      $F$ & $F$ & & & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{An implication and its friends}
+  When you have two propositions
+  \begin{itemize}
+  \item $P$ = ``I own a cell phone'', and
+  \item $Q$ = ``I bring a cell phone to class''.
+  \end{itemize}
+  We have
+  \begin{itemize}
+  \item an implication $P\Rightarrow Q$ $\equiv$ \\ ``If I own a cell phone,
+    I'll bring it to class'',
+  \item its {\bf converse} $Q\Rightarrow P$ $\equiv$ \\ ``If I bring a cell phone
+    to class, I own it'', and
+  \item its {\bf contrapositive} $\neg Q\Rightarrow\neg P$ $\equiv$ \\ ``If I do not
+    bring a cell phone to class, I do not own one''.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 3}
+  Let's consider the following truth table:
+  \begin{tcolorbox}
+    \begin{tabular}{|c|c||c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\Rightarrow Q$ & $Q\Rightarrow P$ & $\neg Q \Rightarrow \neg P$ \\
+      \hline
+      $T$ & $T$ & & & \\
+      $T$ & $F$ & & & \\
+      $F$ & $T$ & & & \\
+      $F$ & $F$ & & & \\
+      \hline
+    \end{tabular}
+  \end{tcolorbox}
+  \pause
+  Do you notice any equivalence?
+  \pause
+
+  Right, $P\Rightarrow Q\equiv \neg Q\Rightarrow\neg P$.
+\end{frame}
+
+\begin{frame}\frametitle{How about our subgoal?}
+  \begin{itemize}
+  \item
+    In many cases, the statement we are interested in contains variables.
+
+  \item
+    For example, ``$x$ is even,'' ``$p$ is prime,'' or ``$s$ is a student.''
+    \pause
+
+  \item
+    As we previously did with propositions, we can use variables to
+    represent these statements.  E.g.,
+    \begin{itemize}
+    \item let $E(x)\equiv$ ``$x$ is even'',
+    \item let $P(y)\equiv$ ``$y$ is prime, and
+    \item let $S(w)\equiv$ ``$w$ is a student.
+    \end{itemize}
+    We call $E(x)$, $P(y)$, and $S(w)$ {\em predicates}. (You can
+    think of predicates as statements that may be true of false
+    depending on the values of its variables.)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quantifiers (1)}
+  \begin{itemize}
+  \item As we note before, these predicates are not propositions.  But
+    if we know the values of their variables, then they becomes
+    propositions.  For example, if we let $x=5$, then $E(5)$ is a
+    proposition which is false.  Also, $P(7)$ is true.
+  \item Since the truth values of predicates depend on the assignments
+    of their variables, we can put {\em quantifiers} to specify the
+    scopes of these variables and how to interprete the truth values of
+    the predicates over these values.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quantifiers (2): universal quantifiers}
+  \begin{itemize}
+  \item Let $A=\{2,4,6,8\}$.
+  \item Note that $E(2), E(4), E(6),$ and $E(8)$ are true, i.e.,
+    $E(x)$ is true for every $x\in A$.  \pause
+    
+    In this case, we say that the following proposition is true:
+    \[(\forall x\in A) E(x). \]
+    \pause
+
+  \item The quantifier $\forall$ is called a universal quantifier.
+    (We usually pronounce ``for all $x$'', or ``for every $x$.'')
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quantifiers (3): existential quantifiers}
+  \begin{itemize}
+  \item Again, let $A=\{2,4,6,8\}$.
+  \item Note that $P(2)$ is true.  This means that $P(y)$ is true for
+    some $y\in A$.  \pause
+
+    In this case, we say that the following proposition is true:
+    \[(\exists y\in A) P(y). \]
+    \pause
+    
+  \item The quantifier $\exists$ is called an existential quantifier.
+    (We usually pronounce ``for some $x$'', or ``there exists $x$.'')
+    \pause
+
+    \begin{tcolorbox}
+      When the universe $A$ is clear, we can leave it out and just
+      write $\forall x E(x)$ or $\exists y P(y)$.
+    \end{tcolorbox}
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The main goal}
+  \begin{itemize}
+  \item
+    Let's try to be more specific about our main goal:
+    
+    \begin{tcolorbox}
+      Algorithm {\tt CheckPrime2} is correct.
+    \end{tcolorbox}
+
+  \item
+    Can we re-write this statement so that the input/output of the
+    algorithm are explicit?
+
+  \item
+    Note that the set of its input $n$ is an integer.  Thus, we are
+    interested in every $n\in\mathbb Z$, where $\mathbb Z$ denote the
+    set of all integers.
+
+  \item
+    Let's rewrite the goal as:
+
+    \begin{tcolorbox}
+      \begin{center}
+        $\forall n\in\mathbb Z$,
+        $C(n)\Leftrightarrow P(n)$,
+      \end{center}
+    \end{tcolorbox}
+
+    where $C(n)\equiv$ \pause ``{\tt CheckPrime2(n)} returns True'', and \\
+    $P(n)\equiv$ \pause ``$n$ is a prime.''
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quantified propositions with more than one variables}
+  Let our universe be integers ($\mathbb Z$).  Which of the following statements is true?
+
+  \begin{itemize}
+  \item $\forall x\forall y (x=y)$
+  \item $\forall x\exists y (x=y)$
+  \item $\exists x\forall y (x=y)$
+  \item $\exists x\exists y (x=y)$
+  \end{itemize}
+
+  \pause
+
+  When you have many quantifiers, we can interprete the statement by
+  nesting the quantifiers. E.g,
+  \[\exists x\forall y P(x,y)\equiv \exists x (\forall y (P(x,y))).\]
+  \[\forall y\exists x P(x,y)\equiv \forall y (\exists x (P(x,y))).\]
+  \pause
+
+  Also note that usually, $\exists x\forall y P(x,y)\not\equiv \forall
+  y\exists x P(x,y)$.
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 4}
+  We will consider the universe to be ``everything''.  Consider the
+  following statements.  Define appropriate predicates and rewrite
+  them using the defined predicates and quantifiers.  (Note: the
+  predicates may have more than one variables.)
+  \begin{itemize}
+  \item Every human must die.
+  \item Some animal eats other animals.
+  \item If a student works hard, that student will be successful.
+  \item Everyone has someone that care about him or her.
+  \end{itemize}                  
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 5}
+  \begin{itemize}
+  \item Let's consider the current subgoal.  (Note that in this
+    version, variable $b$ is replaced with $n/a$.)
+    
+    \begin{tcolorbox}[title=Another revised statement]
+      For all positive composite integer $n$, and for every divisor
+      $a$ of $n$ such that $\sqrt{n} < a < n$,
+      \[ 2\leq n/a \leq\sqrt{n}.\]
+    \end{tcolorbox}
+
+  \item Define all required predicates and describe a quantified
+    proposition equivalent to the revised statement above.
+
+    \vspace{1in}
+    
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Negations of quantified propositions (1)}
+  Let consider a set of positive integers $\mathbb Z^+$ as our
+  universe.  Let predicate $P(x)\equiv$ ``$x$ is a prime number.''
+
+  Consider this proposition
+
+  \[(\forall x\in {\mathbb Z^+}) P(x).\]
+
+  How can we show that this is false? \pause
+
+  When showing that a universally quantified proposition is false, we
+  need to show ``one'' counter example.  In this case, since $P(4)$ is
+  false, $\forall x P(x)$ is false.  \pause
+
+  This way of disproving a statement is equivalent to showing that
+
+  \[(\exists x)(\neg P(x)).\]
+\end{frame}
+
+\begin{frame}\frametitle{Negations of quantified propositions (2)}
+  Let consider a set of positive integers $\mathbb Z^+$ as our
+  universe.  Let predicate $Q(x)\equiv$ ``if $x > 2$, then  $x^2\leq 2x$.''
+
+  Consider this proposition
+
+  \[(\exists x\in {\mathbb Z^+}) Q(x).\]
+
+  How can we show that this is false? \pause
+
+  When showing that an existential quantified proposition is false, we
+  need to show that $Q(x)$ is false for every possible values of $x$.
+  In this case, since $x^2 = x\cdot x > 2\cdot x$ for every $x>2$, we
+  have that $(\exists x) Q(x)$ is false. \pause
+
+  This way of disproving a statement is equivalent to showing that
+
+  \[(\forall x)(\neg Q(x)).\]
+\end{frame}
+
+\begin{frame}\frametitle{Negations of quantified propositions (3)}
+  Thus, the following equivalences:
+
+  \begin{itemize}
+  \item $\neg(\forall x P(x)) \equiv \exists x (\neg P(x))$
+  \item $\neg(\exists x P(x)) \equiv \forall x (\neg P(x))$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 6}
+  Consider the following statements with the quantified propositions
+  that you have written previously.  Write down their negations in
+  quantified propositional forms, and then translate them back to
+  English sentences.
+  \begin{itemize}
+  \item Every human must die.
+  \item Some animal eats other animals.
+  \item If a student works hard, that student will be successful.
+  \item Everyone has someone that care about him or her.
+  \end{itemize}                  
+\end{frame}

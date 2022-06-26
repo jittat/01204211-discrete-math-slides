@@ -1,0 +1,272 @@
+\include{commons}
+\lecturetitle{Lecture 3a: Proof techniques 1}
+
+\begin{frame}\frametitle{Proof techniques\footnote{This lecture mostly follows Berkeley CS70 lecture notes.}}
+  Using inference rules, we can prove facts in propositional logic.
+  However, in many cases, we want to prove wider range of mathematical
+  facts.  Inference rules play crucial parts in providing high-level
+  structures for our proofs. \pause
+
+  In this lecture, we will focus on two general proof techniques that
+  originate from two simple inference rules.
+  \begin{itemize}
+  \item Direct proofs
+  \item Proofs by contraposition
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Terminologies}
+  These are terminologies used when showing mathematical facts.
+  \begin{itemize}
+  \item A {\bf theorem} is a statement that can be argued to be true.
+  \item A {\bf proof} is the sequence of statements forming that
+    mathematical argument.
+  \item An {\bf axiom} is a statement that is assumed to be true.
+    (Note that we do not prove an axiom; therefore, the validity of a
+    theorem proved using an axiom relies of the validity of the
+    axiom.)
+  \item To prove a theorem, we may prove many simple lemmas to make
+    our argument.  A {\bf lemma}, in this sense, is a smaller theorem
+    (or a supportive one).
+  \item A {\bf corollary} is a theorem which is a ``fairly'' direct
+    result of other theorems.
+  \item A {\bf conjecture} is a statement which we do not know if it
+    is true or false.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Direct proofs}
+  When we want to prove a theorem of the form $P\Rightarrow Q$, we can
+  assume that $P$ is true, then use this to argue that $Q$ has to be
+  true as well.
+
+  \begin{tcolorbox}[title=Direct proofs]
+    {\bf Theorem:} \\
+      $P\Rightarrow Q$.
+    \begin{proof}
+      Assume $P$.
+      
+      ... (then show that $Q$ follows from $P$)
+    \end{proof}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Example 1}
+  \begin{theorem}
+    If $x$ is an even number, then $x^2$ is an even number.
+  \end{theorem} \pause
+  \begin{proof}
+    Assume that $x$ is an even number. \pause
+
+    By definition, there exists an integer $k$ such that
+    $x=2k$. \pause This implies that $x^2 = (2k)^2 = 4k^2$.  \pause
+    Since $k$ is an integer, $2k^2$ is also an integer.  Hence we can
+    write $x^2 = 2\cdot (2k^2)$ where $2k^2$ is an integer; this means
+    that $x^2$ is even.
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Example 1: disected}
+  \begin{theorem}
+    ($\forall x$) If $x$ is an even number, then $x^2$ is an even
+    number.
+  \end{theorem} \pause
+  \begin{proof}
+    {\small
+      \begin{itemize}
+      \item Assume $P(x)$ where $P(x)$ = ``$x$ is an even
+        number''. \pause
+      \item By definition, $P(x)\Rightarrow R(x)$ where $R(x)$ =``there
+        exists an integer $k$ such that $x=2k$.'' \pause
+      \item $R(x)\Rightarrow S(x)$, where $S(x)$ = ``there exists an
+        integer $k$ such that $x^2 = (2k)^2 = 4k^2$.''  \pause
+      \item By elementary algebra, we know that $U$ is true, where $U$ =
+        ``for all integer $k$, $2k^2$ is an integer.''  \pause
+      \item $S(x)\wedge U\Rightarrow V(x)$, where $V$ = ``there exists
+        an integer $k$ such that $x^2 = 2\cdot (2k^2)$ where $2k^2$ is
+        an integer.'' \pause
+      \item By definition, $V(x)\Rightarrow Q(x)$, where $Q(x)$ = ``$x^2$
+        is even''.
+      \end{itemize}
+    }
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Example 1: be careful}
+  When we prove a statement with universal quantifiers like:
+
+  \begin{tcolorbox}
+    ($\forall x$) If $x$ is an even number, then $x^2$ is an even
+    number
+  \end{tcolorbox}
+
+  we have to be {\em extremely} careful not to assume anything about
+  $x$ except those state explicitly in the assumption.
+\end{frame}
+
+\begin{frame}\frametitle{Practice: Back to our subgoal}
+  Can you use direct proofs to show the following theorem?
+
+  \begin{theorem}
+    For any positive number $n$ and $a$ such that $a > \sqrt{n}$, then
+    $n/a\leq\sqrt{n}$.
+  \end{theorem} \pause
+
+  \begin{proof}
+    Assume that $a > \sqrt{n}$. \pause
+    Since
+    \[ n = n, \]
+    by dividing the left side by $a$ and the right side by $\sqrt{n}$,
+    we get that
+    \[ \frac{n}{a} < \frac{n}{\sqrt{n}}, \]
+    because both $a$ and $\sqrt{n}$ are positive.  Hence, $n/a <
+    \sqrt{n}$ as required.
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Practice: Divisibility by 3 (1)}
+  Let's try to prove a well-known fact.
+
+  \begin{theorem}
+    An integer $n$ is divisible by $3$ if the sum of the digits of $n$
+    is divisible by $3$.
+  \end{theorem}
+  \pause
+
+  \vspace{0.2in}
+  Let's start by proving this lemma.
+
+  \begin{lemma}
+    For any integer $k\geq 0$, $10^k - 1$ is divisible by $3$.
+  \end{lemma}
+\end{frame}
+
+\begin{frame}\frametitle{Practice: Divisibility by 3 (2)}
+  {\small
+    \begin{proof}
+      Assume that the sum of the digits of $n$ is divisible by $3$.
+      We will show that $n$ is divisible by $3$.
+      
+      Let $k$ be the number of digits of $n$.  Let
+      $a_1,a_2,\ldots,a_k$ be the digits of $n$ where $a_1$ is the
+      most significant digit and $a_k$ is the least significant one.
+      Therefore, we can write
+      \[ n = a_1\cdot 10^{k-1} + a_2\cdot 10^{k-2} + \cdots + a_{k-1}\cdot 10^1 + a_k\cdot 10^0.\]
+      Consider the $i$-th term: $a_i\cdot 10^{k-i}$.  From Lemma 5,
+      we know that $10^{k-i} - 1$ is divisible by 3.  Thus
+      $a_i\cdot(10^{k-i}-1)$ is also divisible by $3$.
+
+      Therefore, the remainder of $a_i\cdot 10^{k-i}$ divided by $3$
+      is equal to the remainder of $a_i$ divided by $3$.
+
+      Summing all terms, the remainder of the division of $n$ by $3$
+      is $a_1+a_2+\cdots+ a_k$.  Since $3$ divides this number, the
+      remainder of $n/3$ is 0; thus, $3$ divides $n$.
+    \end{proof}
+  }
+\end{frame}
+
+\begin{frame}\frametitle{Proof by contraposition}
+  When we want to prove a theorem of the form $P\Rightarrow Q$, we can
+  assume that $Q$ is false, then use this to argue that $P$ has to be
+  false as well.
+
+  \begin{tcolorbox}[title=Proof by contraposition]
+    {\bf Theorem:} \\
+    $P\Rightarrow Q$.
+    \begin{proof}
+      Assume $\neg Q$.
+      
+      ... (then show that $\neg P$ follows from $\neg Q$)
+    \end{proof}
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}\frametitle{Practice}
+  \begin{theorem}
+    If $x^2$ is an even number, then $x$ is an even number, 
+  \end{theorem} \pause
+
+  Before we try to prove by contraposition, let's try to use direct
+  proof to show this theorem. \pause
+
+  \begin{proof}
+    Assume that $x^2$ is an even number...
+
+    \vspace{1.2in} \pause
+
+    ... doesn't seem to go very well.
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Practice}
+  \begin{theorem}
+    If $x^2$ is an even number, then $x$ is an even number, 
+  \end{theorem} \pause
+  \begin{proof}
+    We will prove by contraposition.  
+    Assume that $x$ is not an even number.
+
+    \vspace{1.5in}
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Proving iff statements}
+  How can we prove a statement of the form $P\Leftrightarrow Q$?  For example:
+  \begin{theorem}
+    $x$ is an even number iff $x^2$ is an even number.
+  \end{theorem} \pause
+  \begin{proof}
+    We will prove that the statement is true in both directions.
+    
+    ($\Rightarrow$) This direction is true from Theorem~1.
+
+    ($\Leftarrow$) This direction is true from Theorem~5.
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{An incorrect proof is not a proof}
+  \begin{theorem}
+    For any numbers $x$ and $y$, $x = y$.
+  \end{theorem}
+  \pause
+
+  \begin{proof}
+    Assume that
+    \[ x = y. \] \pause
+    Multiplying both terms by 0, we get that
+    \[ 0\cdot x = 0\cdot y, \] \pause
+    and this implies
+    \[ 0 = 0, \]
+    which is clearly true.
+  \end{proof}
+
+  \pause
+
+  What is wrong with this (non) proof?
+\end{frame}
+
+\begin{frame}\frametitle{How to be good at proving theorems?}
+  In a way, proving theorems is like solving puzzles.  There is no
+  general rules on how to prove theorems.
+
+  \pause
+  But you can get better by (1) trying to read and understand good
+  proofs and by (2) practicing.
+
+  \pause
+  \vspace{0.2in}
+  
+  There are many levels of understandings:
+  \pause
+  
+  \begin{itemize}
+  \item Understand each step of the proof and how each step follows
+    from previous ones
+    \pause
+  \item Understand why the proof needs each step
+    \pause
+  \item Can apply techniques or proof strategies learned from this
+    proof for proving other statements
+  \end{itemize}
+\end{frame}

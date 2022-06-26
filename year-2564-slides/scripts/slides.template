@@ -1,0 +1,9 @@
+\documentclass{beamer}
+\usefonttheme[onlymath]{serif}
+\usepackage{fancybox}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\setbeamertemplate{theorems}[numbered]
+\begin{document}
+\input{##}
+\end{document}

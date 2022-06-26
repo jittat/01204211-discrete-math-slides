@@ -1,0 +1,297 @@
+\include{commons}
+\lecturetitle{Lecture 6a: Counting 3}
+
+\begin{frame}\frametitle{Quick recap}
+  We have proved many useful facts.
+  \begin{itemize}
+  \item The number of subsets of a set with $n$ elements is
+    $2^n$. \pause In fact, we know 3 proofs of this fact:
+    \begin{itemize}
+    \item We count the number of ways one can choose a subset.
+    \item We provide a bijection between subsets and binary strings.
+    \item We prove the fact by induction.
+    \end{itemize}
+    \pause
+  \item For a set with $n$ elements, the number of its permutations is
+    $n!$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{This lecture's goals\footnote{This lecture mostly follows [LPV].}}
+  \begin{itemize}
+  \item Consider set $\{1,2,3,4,5\}$.  How many subsets with $3$
+    elements does this set have? \pause
+  \item There are $10$ subsets with $3$ elements: $\{1,2,3\}$,
+    $\{1,2,4\}$, $\{1,2,5\}$, $\{1,3,4\}$, $\{1,3,5\}$, $\{1,4,5\}$,
+    $\{2,3,4\}$, $\{2,4,5\}$, $\{2,4,5\}$, $\{3,4,5\}$.
+  \item In this lecture, we shall find out how to count these subsets. \pause
+  \end{itemize}
+
+  \begin{tcolorbox}
+    {\bf\textcolor{blue}{Abbreviations:}} We shall call a set with $n$ elements as an
+    {\bf $n$-set}.  We shall call a subset with $k$ elements as a {\bf
+      $k$-subset}.
+  \end{tcolorbox}
+
+  \pause
+
+  \begin{itemize}
+  \item We will also discuss the inclusion-exclusion priciples.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Ordered subsets}
+  In general, elements in a given set is unordered.  I.e., sets
+  $\{1,2,3\}$ and $\{3,1,2\}$ are the same set. \pause
+
+  However, sometimes, it is useful to treat sets as ordered. \pause
+
+  For example, for set $\{1,2,3\}$, there are $6$ ordered subsets with
+  $2$ elements: $\{1,2\}$, $\{1,3\}$, $\{2,1\}$, $\{2,3\}$, $\{3,1\}$,
+  $\{3,2\}$.
+\end{frame}
+
+\begin{frame}\frametitle{Example: runners}
+  \begin{tcolorbox}
+    {\bf Question:} There are 10 runners for a given competition.
+    There are 3 awards: 1st price, 2nd price and 3rd price.  In how
+    many possible ways these 3 awards can be given?  (No runner can
+    get more than one award.)
+  \end{tcolorbox}
+  \pause
+
+  We can use the argument we used to derive the number of permutations
+  here.  We consider the process for selecting the winners. \pause
+  
+  \begin{itemize}
+  \item First, we pick the 1st price winner: there are 10 choices. \pause
+  \item For any 1st price winner, there are 9 choices to choose the
+    2nd price winner. \pause
+  \item For any 1st and 2nd price winners, there are 8 choices for the
+    3rd winner. \pause
+  \item Therefore, we conclude that the number of ways is $10\cdot
+    9\cdot 8$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Example: runners (another look)}
+  We can arrive at the same answer by a different way of counting.
+  
+  \begin{itemize}
+  \item Let's count all possible running results: there are $10!$
+    results.  (I.e., each running result is a permutation.) \pause
+    \begin{itemize}
+    \item $10!$ is too many for our answer. Why? \pause
+    \end{itemize}
+  \item For a particular selection of 3 top winners, how many possible
+    running results have exactly these 3 top winners? \pause
+    \begin{itemize}
+    \item The number of running results is the number of permutation
+      of the other 7 non-winning runners; thus, there are $7!$ of
+      them.
+    \end{itemize}
+  \item We can think of a process of choosing a permutation as having
+    two big steps: (1) pick 3 top winners, then (2) pick the rest of
+    runners.  This provide a different way to count the number of
+    permutations.
+    \pause
+  \item Let $X$ be the set of ordered subsets with $3$ elements of an
+    $10$-set.  We then have $|X|\times 7! = 10!$, because they count
+    the same objects. \pause  Solving this yields
+    \[ |X| = \frac{10!}{7!} = 10\cdot 9\cdot 8.\]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{General answers: numbers of ordered subsets}
+  Using the same arguments (either one), we have this theorem.
+
+  \begin{theorem}
+    The number of ordered subsets with $k$ elements of an $n$-set is
+    \[
+    n\cdot(n-1)\cdots(n - k + 1) = \frac{n!}{(n-k)!}.
+    \]
+  \end{theorem}
+\end{frame}
+
+\begin{frame}\frametitle{How big is $100!$ \ ?}
+  \begin{itemize}
+  \item
+    With computers, we may be able to answer the exact long number.
+    But mathematicians usually enjoy a ``quick'' estimate just to have
+    a rough idea on how things are.\footnote{This section on estimation follows section 1.4 of [LPV].}
+
+  \item
+    How can we start? \pause When we want to get an estimate, we
+    usually start by finding an {\bf upper bound} and a {\bf lower
+      bound} for the quantity. \pause As the names suggest, the upper
+    bound for $x$ is a quantity that is not smaller than $x$, and the
+    lower bound for $x$ is a quantity that is not larger than $x$
+    (maybe under some condition). \pause
+
+  \item
+    Let's think about $n!$.  \pause
+    \begin{itemize}
+    \item The first lower bound that comes to mind for $n!$ is $1^n = 1$.
+      \pause
+    \item Can we get a better lower bound?  (Here, better lower bounds
+      should be closer to the actual value.) \pause How about $2^n$?
+      Is it a lower bound? \pause How about $3^n$ or $5^n$? Are they
+      lower bounds of $n!$?
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Bounds for $n!$}
+  Recall that $n!=1\cdot 2\cdot 3\cdots n$.  Since all its factor,
+  except the first one is at least 2, we have that
+  \[ 2^{n-1}\leq n!. \] \pause
+  Similarly, since all factors of $n!$ is at most $n$, we have that
+  \[ n! \leq n^n.\] \pause
+  A slightly better upper bound is $n^{n-1}$ because we can, again,
+  ignore $1$.
+  \pause
+
+  \vspace{0.1in}
+  Are they any good? \pause
+
+  {\small
+  \begin{tabular}{c|c|c|c}
+    $n$ & $2^{n-1}$ & $n!$ & $n^{n-1}$ \\ \hline
+    $1$ & $1$ & $1$ & $1$ \\
+    $2$ & $2$ & $2$ & $2$ \\
+    $3$ & $4$ & $6$ & $9$ \\
+    $4$ & $8$ & $24$ & $64$ \\
+    $10$ & $512$ & $3,628,800$ & $1,000,000,000$
+  \end{tabular}
+  }
+\end{frame}
+
+\begin{frame}\frametitle{A better bound?}
+  Let's consider $n!$ again, but for simplicity, let's consider only
+  the case when $n$ is an even number:
+  \[ 1\cdot 2\cdot 3\cdots (n/2-1)\cdot(n/2)\cdot (n/2+1)\cdots n \]
+  \pause
+
+  To get a better lower bound, we may move our cutting point from $2$
+  to, say, $n/2$.  Note that at least $n/2$ factors are at least
+  $n/2$.  Thus,
+  \begin{eqnarray*}
+    n! &=& 1\cdot 2\cdots n \\
+    &\geq& \underbrace{1\cdot 1\cdots 1}_{n/2}\times\underbrace{(n/2)\cdots(n/2)}_{n/2} \\
+    &=& (n/2)^{n/2} = \sqrt{(n/2)^n}.
+  \end{eqnarray*}
+\end{frame}
+
+\begin{frame}\frametitle{Better?}
+  \begin{tabular}{c|c|c|c|c}
+    $n$ & $2^{n-1}$ & $\sqrt{(n/2)^n}$ & $n!$ & $n^{n-1}$ \\ \hline
+    $1$ & $1$ & - & $1$ & $1$ \\
+    $2$ & $2$ & $1$ & $2$ & $2$ \\
+    $3$ & $4$ & - & $6$ & $9$ \\
+    $4$ & $8$ & $4$ & $24$ & $64$ \\
+    $6$ & $32$ & $27$ & $720$ & $7,776$ \\
+    $10$ & $512$ & $3,125$ & $3,628,800$ & $1,000,000,000$ \\
+    $12$ & $2,048$ & $46,656$ & $479,001,600$ & $743,008,370,688$
+  \end{tabular}
+
+  \vspace{0.2in}
+
+  OK. A bit better.
+\end{frame}
+
+\begin{frame}\frametitle{Stirling's formula}
+  An even better estimate for $n!$ exists.
+
+  \begin{theorem}[Stirling's formula]
+    $n!\sim \left(\frac{n}{e}\right)^n\sqrt{2\pi n}$.
+  \end{theorem}
+
+  \vspace{0.2in}
+  When we write $a(n)\sim b(n)$, we mean that
+  $\frac{a(n)}{b(n)}\rightarrow 1$ as $n\rightarrow\infty$.
+  \pause
+
+  With Stirling's formula, We can use a calculator to estimate the
+  number of digits for $100!$.  \pause The estimate for $100!$ is
+  \[ (100/e)^{100}\cdot\sqrt{200\pi}\]
+  Thus, the number of digits is its logarithm, in base 10, i.e.,
+  \[\log\left((100/e)^{100}\cdot\sqrt{200\pi}\right) = 100\log(100/e) + \log(200\pi) \approx 157.9696.\]
+  \pause
+  Note that the correct answer is 158 digits.
+\end{frame}
+
+\begin{frame}\frametitle{Another example}
+  \begin{itemize}
+  \item Consider the sum $1+2+\cdots+n$. \pause
+  \item While know that it is $n(n+1)/2$, we can get a very easy upper
+    bound by noting that each term in the sum is at most $n$; thus,
+    \[ 1+2+\cdot+n\leq \underbrace{n+n+\cdots+n}_{\mbox{$n$ terms}} = n\times n = n^2 \] \pause
+  \item This upper bound of $n^2$ is very good as the gaps between the
+    upper bounds and the actual values will not be larger than $2$, as
+    $\frac{n^2}{n(n+1)/2} < 2$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The number of subsets}
+  \begin{tcolorbox}
+    \textcolor{blue}{Theorem:}
+    The number of $k$-subsets of an $n$-set is
+    \[\frac{n\cdot(n-1)\cdot(n-2)\cdots(n-k+1)}{k!}=\frac{n!}{(n-k)!k!}.\]
+  \end{tcolorbox}
+  
+  \begin{proof} {\small
+    \pause Consider the following process for choosing an ordered
+    subsets with $k$ elements of an $n$-set.  \pause First, we choose
+    a $k$-subset, then we permute it.  Let $B$ be the number of
+    $k$-subsets.  For each subset that we choose in the first step,
+    the second step has $k!$ choices.  \pause Therefore, we can choose
+    an ordered subset in $B\cdot k!$ possible ways.  \pause From the
+    previous discussion, we know that
+    \[
+    B\cdot k! = n\cdot(n-1)\cdots(n-k+1).
+    \]
+    Therefore, the number of $k$-subsets is
+    \[\frac{n\cdot(n-1)\cdot(n-2)\cdots(n-k+1)}{k!}=\frac{n!}{(n-k)!k!},\]
+    as required.
+    }
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Binomial coefficients}
+  The number of $k$-subsets of an $n$-set is very useful.  Hence,
+  there is a notation for it, i.e.,
+  \[
+  {n\choose k} = \frac{n!}{(n-k)!k!},
+  \]
+  (which reads ``$n$ choose $k$'').  These numbers are called {\bf
+    binomial coefficients}. \pause
+
+  \vspace{0.1in}
+  
+  Note that
+  \begin{itemize}
+  \item ${n\choose n}=1$ (why?), \pause
+  \item ${n\choose 0}=1$ (why?), \pause and,
+  \item when $k>n$, ${n\choose k}=0$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Properties (1)}
+  \textcolor{blue}{Theorem:} $${n\choose k}={n\choose n-k}.$$
+
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}\frametitle{Properties (2)}
+  \textcolor{blue}{Theorem:} When $n,k>0$, then
+  $${n\choose k}={n-1\choose k-1} + {n-1\choose k}.$$
+
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}\frametitle{Properties (3)}
+  \textcolor{blue}{Theorem:} When $n,k>0$, then
+  $${n\choose 0}+{n\choose 1}+{n\choose 2}+\cdots+{n\choose n}=2^n.$$
+
+  \vspace{2.5in}
+\end{frame}

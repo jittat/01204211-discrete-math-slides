@@ -1,0 +1,4 @@
+#!/bin/bash
+./scripts/buildslides.py $1
+./scripts/buildhandout.py $1
+

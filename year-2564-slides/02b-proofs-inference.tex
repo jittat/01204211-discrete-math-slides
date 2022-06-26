@@ -1,0 +1,372 @@
+\include{commons}
+\lecturetitle{Lecture 2b: Inference rules}
+
+\begin{frame}\frametitle{How to prove a mathematical statement?}
+  This lecture covers two fundamental concepts in mathematical proofs:
+  \begin{itemize}
+  \item Proofs by exhaustion
+  \item Inference rules\footnote{The materials on inference rules are from [Rosen].}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{De Morgan's Laws}
+  Given propositions $P$ and $Q$, these are a very useful logical
+  equivalences (referred to as the De Morgan's Laws).
+
+  \begin{itemize}
+  \item $\neg (P\vee Q)\equiv \neg P \wedge \neg Q$
+  \item $\neg (P\wedge Q)\equiv \neg P \vee \neg Q$
+  \end{itemize}
+
+  (Note that $\neg$ takes precedence over $\vee$ or $\wedge$.)
+
+  \vspace{0.2in}
+  
+  How can we prove that the first statement is true?
+  \pause
+
+  In this case, since there are not too many cases to consider, we can
+  enumerate all the possibilities to show that the proposition is
+  true.
+\end{frame}
+
+\begin{frame}\frametitle{Proof by exhaustion}
+  \begin{tcolorbox}
+    For any proposition $P$ and $Q$, $\neg (P\vee Q)\equiv \neg P
+    \wedge \neg Q$.
+  \end{tcolorbox}
+  \begin{proof}
+    We will prove by exhaustion.  \pause There are 4 cases as in the truth
+    table below.
+
+    \vspace{0.1in}
+    
+    \begin{tabular}{|c|c||c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\vee Q$ & $\neg(P\vee Q)$ & $\neg Q \wedge \neg P$ \\
+      \hline
+      $T$ & $T$ & & & \\
+      $T$ & $F$ & & & \\
+      $F$ & $T$ & & & \\
+      $F$ & $F$ & & & \\
+      \hline
+    \end{tabular}
+
+    \vspace{0.1in}
+    \pause
+
+    Note that for all possible truth values of $P$ and $Q$, $\neg
+    (P\vee Q)$ equals $\neg P \wedge \neg Q$.  Thus, the statement is
+    true.
+  \end{proof}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 1}
+  Prove the following statement by exhaustion.
+  \begin{tcolorbox}
+    For any proposition $P$ and $Q$, $\neg (P\wedge Q)\equiv \neg P
+    \vee \neg Q$.
+  \end{tcolorbox}
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 2}
+  Prove the following statement by exhaustion.
+  \begin{tcolorbox}
+    I have 2 pairs of socks in 2 colors: black and white.  If I pick
+    any 3 socks, I will have at least a pair of socks of the same
+    color.
+  \end{tcolorbox}
+  \vspace{1.5in}
+  \pause
+
+  This is clearly a brute force method.  Sometimes, even in small
+  cases, proofs by exhaustion can be very tedious and error-prone.
+\end{frame}
+
+\begin{frame}\frametitle{Logical deduction (1)}
+  Consider the following statements:
+
+  \begin{itemize}
+  \item It rains.
+  \item If it rains, then the road will get wet.
+  \item If the road is wet, it will be dangerous to drive very fast.
+  \end{itemize}
+
+  \pause
+  If we believe in these statements (i.e., if we believe that they are
+  all true), is it OK to conclude that:
+
+  \begin{itemize}
+  \item It is dangerous to drive very fast.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}\frametitle{Quick check 3}
+  Define propositional variables representing each proposition inside
+  these statements and write proposition forms of them.
+
+  \begin{itemize}
+  \item It rains.
+  \item If it rains, then the road will get wet.
+  \item If the road is wet, it will be dangerous to drive very fast.
+  \item It is dangerous to drive very fast.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}\frametitle{Logical deduction (2)}
+  Using that proposition variables, our problem translate to the
+  following.
+
+  \vspace{2.5in}
+  
+\end{frame}
+
+\begin{frame}\frametitle{Let's try to prove by exhaustion}
+  \pause
+  There are 3 variables.  These are all possible cases.
+
+  \vspace{0.1in}
+
+  \begin{tabular}{|c|c|c|}
+    \hline
+    $R$ & $W$ & $D$ \\
+    \hline 
+    $T$ & $T$ & $T$ \\
+    $T$ & $T$ & $F$ \\
+    $T$ & $F$ & $T$ \\
+    $T$ & $F$ & $F$ \\
+    $F$ & $T$ & $T$ \\
+    $F$ & $T$ & $F$ \\
+    $F$ & $F$ & $T$ \\
+    $F$ & $F$ & $F$ \\
+    \hline
+  \end{tabular}
+
+  \vspace{0.1in}
+
+  We believe that $R$, $R\Rightarrow W$, and $W\Rightarrow D$ are
+  true, and we want to conclude that $D$ must be true.
+
+  \pause
+
+  Proofs by exhaustion can be exhausted... 
+\end{frame}
+
+\begin{frame}\frametitle{Valid arguments (1)}
+  Very often, the statement we want to prove is in the form:
+
+  \begin{tcolorbox}
+    Given:
+    \begin{itemize}
+    \item Hypothesis 1,
+    \item Hypothesis 2,
+    \item ...
+    \item Hypothesis $n$
+    \end{itemize}
+    Then:
+    \begin{itemize}
+    \item Conclusion
+    \end{itemize}
+  \end{tcolorbox}
+
+  \pause
+
+  We say that the statement is {\bf valid} if when all hypotheses are
+  true, the conclusion must be true as well.  In that case, we say
+  that the conclusion {\bf logically follows} from the hypotheses.
+\end{frame}
+
+\begin{frame}\frametitle{Valid arguments (2)}
+  More precisely, to show that conclusion $Q$ logically follows from
+  hypotheses $P_1,P_2,\ldots,P_n$, we need to show that
+
+  \[ (P_1\wedge P_2\wedge \cdots\wedge P_n)\Rightarrow Q, \]
+
+  is always true, i.e., is a tautology.
+\end{frame}
+
+\begin{frame}\frametitle{An example}
+  Consider the following argument:
+
+  \begin{itemize}
+  \item Hypotheses: $P$ and $P\Rightarrow Q$
+  \item Conclusion: $Q$
+  \end{itemize}
+
+  Is this a valid argument?
+  \pause
+
+  \vspace{0.2in}
+  
+  It is.  See the following truth table.
+  
+  \begin{tabular}{|c|c||c|c|}
+    \hline
+    $P$ & $Q$ & $P\Rightarrow Q$ \\
+    \hline 
+    $T$ & $T$ & $T$ \\
+    $T$ & $F$ & $F$ \\
+    $F$ & $T$ & $T$ \\
+    $F$ & $F$ & $T$ \\
+    \hline
+  \end{tabular}
+\end{frame}
+
+\begin{frame}\frametitle{$R/W/D$ again}
+  Since we know that the previous argument is valid, maybe we can use
+  that ``small'' step in our previous example.
+
+  Recall our hypotheses:
+  \begin{itemize}
+  \item $R$
+  \item $R\Rightarrow W$
+  \item $W\Rightarrow D$
+  \end{itemize}
+
+  \pause
+  
+  Using the same reasoning, we can say that from $R$ and $R\Rightarrow
+  W$, $W$ logically follows.
+  \pause
+  
+  Then, since we know that $W$ is now true, and $W\Rightarrow D$, we
+  can conclude that $D$ must follow.
+\end{frame}
+
+\begin{frame}\frametitle{A rule of inference}
+  The previous ``small'' valid step that we can use in our argument is
+  extremely useful when making arguments.  It is called {\em Modus
+    ponens}, and is one of many useful rules of inference.
+
+  \begin{tcolorbox}[title=Modus ponens]
+    \begin{tabular}{l}
+      $P$\\
+      $P\Rightarrow Q$\\
+      \hline
+      $Q$
+    \end{tabular}
+  \end{tcolorbox}
+  
+\end{frame}
+
+\begin{frame}\frametitle{Other rules of inference}
+  \begin{columns}
+    
+    \begin{column}{0.4\textwidth}
+
+      \begin{tcolorbox}[title=Addition]
+        \begin{tabular}{l}
+          $P$\\
+          \hline
+          $P\vee Q$
+        \end{tabular}
+      \end{tcolorbox}
+      
+      \begin{tcolorbox}[title=Modus tollens]
+        \begin{tabular}{l}
+          $\neg Q$\\
+          $P\Rightarrow Q$\\
+          \hline
+          $\neg P$
+        \end{tabular}
+      \end{tcolorbox}
+      
+      \begin{tcolorbox}[title=Conjuction]
+        \begin{tabular}{l}
+          $P$\\
+          $Q$\\
+          \hline
+          $P\wedge Q$
+        \end{tabular}
+      \end{tcolorbox}
+      
+    \end{column}
+    
+    \begin{column}{0.5\textwidth}
+
+      \begin{tcolorbox}[title=Simplification]
+        \begin{tabular}{l}
+          $P\wedge Q$\\
+          \hline
+          $P$
+        \end{tabular}
+      \end{tcolorbox}
+      
+      \begin{tcolorbox}[title=Hypothetical syllogism]
+        \begin{tabular}{l}
+          $P\Rightarrow Q$\\
+          $Q\Rightarrow R$\\
+          \hline
+          $P\Rightarrow R$
+        \end{tabular}
+      \end{tcolorbox}
+      
+      \begin{tcolorbox}[title=Disjunctive syllogism]
+        \begin{tabular}{l}
+          $P\vee Q$\\
+          $\neg P$\\
+          \hline
+          $Q$
+        \end{tabular}
+      \end{tcolorbox}
+      
+    \end{column}
+    
+  \end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Using inference rules}
+  \begin{tcolorbox}
+    Argue that $P\Rightarrow Q$, $(P\vee R)$, and $\neg R$ logically
+    leads to the conclusion $Q$.
+  \end{tcolorbox}
+  \pause
+  \begin{tabular}{ll}
+    {\bf Steps} & {\bf Reasons}\\
+    \hline\pause
+    1. $P\vee R$ & Hypothesis\pause \\
+    2. $\neg R$ & Hypothesis\pause \\
+    3. $P$ & Disjunctive syllogism using Step 1 and 2\pause \\
+    4. $P\Rightarrow Q$ & Hypothesis\pause \\
+    5. $Q$ & Modus ponens using Step 3 and 4.
+  \end{tabular}
+\end{frame}
+
+\begin{frame}\frametitle{Other useful logical equivalences}
+  We have discussed De Morgan's Laws, which are logical
+  equivalences. The following logical equivalences are also useful
+  when making valid arguments.  (Notes: do not get confused with
+  operator $\Leftrightarrow$ and notation $P\equiv Q$.)
+
+  \vspace{0.2in}
+  
+  \begin{tabular}{l|l}
+    Equivalences & Names \\
+    \hline
+    $\neg (\neg P)\equiv P$ & Double negation law \\
+    $(P\vee Q)\wedge R\equiv (P\wedge R)\vee(Q\wedge R)$ & Distributive law\\
+    $(P\wedge Q)\vee R\equiv (P\vee R)\wedge(Q\vee R)$ & Distributive law\\
+    $P\Rightarrow Q\equiv \neg P\vee Q$ & \\
+  \end{tabular}
+\end{frame}
+
+\begin{frame}\frametitle{Another example}
+  \begin{tcolorbox}
+    Argue that $P\Rightarrow R$ and $Q\Rightarrow R$ logically leads
+    to the conclusion $(P\vee Q)\Rightarrow R$.
+  \end{tcolorbox}
+  \pause
+  \begin{tabular}{ll}
+    {\bf Steps} & {\bf Reasons}\\
+    \hline\pause
+    1. $P\Rightarrow R$ & Hypothesis\pause \\
+    2. $\neg P\vee R$ & Equivalence of Step 1\pause \\
+    3. $Q\Rightarrow R$ & Hypothesis\pause \\
+    4. $\neg Q\vee R$ & Equivalence of Step 3\pause \\
+    5. $(\neg P\vee R)\wedge (\neg Q\vee R)$ & Conjuction of Steps 2 and 4.\pause \\
+    6. ... (left as homework)
+  \end{tabular}
+\end{frame}
