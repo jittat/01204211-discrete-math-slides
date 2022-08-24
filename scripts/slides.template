@@ -3,7 +3,23 @@
 \usepackage{fancybox}
 \usepackage{tcolorbox}
 \usepackage{tikz}
+\usepackage{bm}
+
+
 \setbeamertemplate{theorems}[numbered]
+
+\newcommand{\ff}{\mathbb F}
+\newcommand{\rf}{\mathbb R}
+\newcommand{\cf}{\mathbb C}
+
+\newcommand{\vv}{\bm v}
+\newcommand{\uv}{\bm u}
+\newcommand{\vect}[1]{\bm{#1}}
+
+\newcommand{\V}{\mathcal V}
+\newcommand{\W}{\mathcal W}
+
+
 \begin{document}
 \input{##}
 \end{document}

@@ -1,0 +1,285 @@
+\include{commons}
+\lecturetitle{Lecture 8b: Vectors} 
+
+\begin{frame}\frametitle{What is a vector?}
+  You can think of a {\bf vector} as an ``ordered'' list of elements (which are
+  typically numbers).  For example:
+  \begin{itemize}
+  \item $[1,2,5,20]$
+  \item $[0,0,1,1,0,0,0,1]$
+  \end{itemize}
+
+  \pause
+
+  You can also view a vector as a {\bf function}, e.g., you can view
+  $\uv = [1,2,5,20]$ as a function $\uv$ that maps
+  \[
+  0 \mapsto 1, \ \
+  1 \mapsto 2, \ \
+  2 \mapsto 5, \ \
+  3 \mapsto 20.
+  \]
+
+  \pause
+  
+  Each element in the vector is typically a real number ($\rf$), but
+  can be an element from other sets with appropriate property (more on
+  this later).
+
+  \pause
+
+  { \tiny {\bf Remark:} Mathematically, a vector is an element of a
+    vector space.  We will understand this more later.}
+\end{frame}
+
+\begin{frame}
+  \frametitle{What can be represented as a vector?}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Viewing vectors: vectors in $\rf^2$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Viewing vectors: vectors in $\rf^3$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{$n$-vectors over $\rf$}
+
+  \begin{itemize}
+  \item We mostly deal with vectors with finite number of elements.
+  \item This is a \textcolor{red}{\bf $4$-vector}: $[10,20,500,4]$.
+    \pause
+  \item We sometimes also write it as a column vector:
+    \[
+    \begin{bmatrix}
+      10 \\ 20 \\ 500 \\ 4
+    \end{bmatrix}
+    \]
+    \pause
+  \item When every element of a vector is from some set, we say that
+    it is a vector {\bf over} that set.  For example, $[10,20,500,4]$
+    is a $4$-vector over ${\mathbb R}$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vector operations}
+
+  \begin{itemize}
+  \item As discussed in the previous slides, when working with a
+    system of linear equations, we mostly deals with {\bf linear
+      combinations} of vectors.
+  \item We will look at the operations we do to vectors to obtain
+    their linear combinations.
+    \pause
+  \item The operations are:
+    \begin{itemize}
+    \item Vector additions
+    \item Scalar multiplications
+    \end{itemize}
+  \item These operations motivate the definition of vector spaces.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vector additions}
+
+  Given two $n$-vectors
+  \[
+  \uv = [u_1,u_2,\ldots,u_n]
+  \]
+  and
+  \[
+  \vv = [v_1,v_2,\ldots,v_n],
+  \]
+  we have that
+  \[
+  \uv+\vv = [u_1+v_1,u_2+v_2,\ldots,u_n+v_n].
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vector additions, in picture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Zero vectors}
+  A zero $n$-vector ${\bm 0}=[0,0,\ldots,0]$ is an additive identity, i.e.,
+  for any vector $\uv$,
+  \[
+  {\bm 0} + \uv = \uv + {\bm 0} = \uv. 
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Scalar multiplications}
+
+  For a vector over $\rf$, we refer to an element $\alpha$ in
+  $\rf$ as a scalar.  For an $n$-vector
+  \[
+  \uv = [u_1,u_2,\ldots,u_n],
+  \]
+  we have that
+  \[
+  \alpha\cdot\uv = [\alpha\cdot u_1, \alpha\cdot u_2,\ldots, \alpha\cdot u_n],
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Scalar multiplications, in pictures}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Linear combinations}
+  For any scalar \
+  \[
+  \alpha_1,\alpha_2,\ldots,\alpha_m
+  \]
+  and vectors
+  \[
+  \uv_1,\uv_2,\ldots,\uv_m,
+  \]
+  we say that
+  \[
+  \alpha_1\uv_1 + \alpha_2\uv_2 + \cdots + \alpha_m \uv_m
+  \]
+  is a \textcolor{red}{\bf linear combination} of $\uv_1,\ldots,\uv_m$.
+  \pause
+  \vspace{0.2in}
+
+  Examples:
+  \vspace{1in}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{A linear system with 3 variables}
+  Give the following linear system.
+
+  {\footnotesize
+  \[
+  \begin{array}{rcrcrcl}
+    2x_1 & + & 4x_2 & + & 3x_3 & = & 7 \\
+    x_1 & + &  &  & 5x_3 & = & 12 \\
+    4x_1 & + & 2x_2 & + & 3x_3 & = & 10
+  \end{array}
+  \]
+  }
+  \pause
+  If we rewrite the system as
+
+  {\footnotesize
+  \[
+  \begin{bmatrix}
+    2 \\ 1 \\ 4
+  \end{bmatrix}
+  \cdot x_1 +
+  \begin{bmatrix}
+    4 \\ 0 \\ 2
+  \end{bmatrix}
+  \cdot x_2 +
+  \begin{bmatrix}
+    3 \\ 5 \\ 3
+  \end{bmatrix}
+  \cdot x_3 +
+  =
+  \begin{bmatrix}
+    7 \\ 12 \\ 10
+  \end{bmatrix}.
+  \]
+  }
+
+  \pause
+  This becomes the problem of expressing a vector as linear
+  combination of other vectors.  I.e., given vectors
+  \[
+  \uv_1 = [2,1,4], \ \ \uv_2 = [4,0,2], \ \ \uv_3 = [3,5,3]
+  \]
+  we would like to find coefficients $x_1,x_2,x_3$ such that
+  \[
+  x_1\cdot \uv_1 + x_2\cdot \uv_2 + x_3\cdot \uv_3 = [7,12,10].
+  \]
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Span}
+
+  A set of all linear combination of vectors $\uv_1,\uv_2,\ldots,\uv_m$ is called the \textcolor{red}{\bf span} of that set of vectors.
+
+  It is denote by $\mathrm{Span} \{\uv_1,\uv_2,\ldots,\uv_m\}$.
+
+  \vspace{0.3in}
+
+  Examples:
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Convex combination}
+  For any scalar \
+  \[
+  \alpha_1,\alpha_2,\ldots,\alpha_m,
+  \]
+  such that $\alpha_1+\alpha_2+\ldots+\alpha_m=1$ and $\alpha_i\geq 0$ for all $i$,
+  and vectors
+  \[
+  \uv_1,\uv_2,\ldots,\uv_m,
+  \]
+  we say that
+  \[
+  \alpha_1\uv_1 + \alpha_2\uv_2 + \cdots + \alpha_m \uv_m
+  \]
+  is a \textcolor{red}{\bf convex combination} of $\uv_1,\ldots,\uv_m$.
+  \pause
+  \vspace{0.2in}
+
+  Examples:
+  \vspace{1in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Elements in a vector}
+  \begin{itemize}
+  \item We see examples of vectors over $\rf$.
+  \item However, elements in a vector can be from other sets with
+    appropriate property.  (I.e., they should behave a real numbers.)
+  \item What do we want from an element in a vector?
+    \pause
+    \begin{itemize}
+    \item We should be able to perform addition, subtraction, multiplication, and division.
+      \pause
+    \item Operations should be commutative and associative.
+    \item Additive and multiplicative identity should exist.
+    \item Addition and multiplication should have inverses.
+    \end{itemize}
+    \pause
+
+    \item We refer to a set with these properties as a {\bf field}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A field}
+
+  A set $\ff$ with two operations $+$ and $\times$ (or $\cdot$) is a
+  \textcolor{red}{\bf field} iff these operations satisfy the
+  following properties:
+  \begin{itemize}
+    \pause
+  \item (Associativity): $(a+b)+c = a+(b+c)$ and $(a\cdot b)\cdot c = a\cdot(b\cdot c)$
+    \pause
+  \item (Commutativity): $a+b=b+a$ and $a\cdot b=b\cdot a$
+    \pause
+  \item (Identities): There exist two elements $0\in\ff$ and $1\in\ff$ such that $a+0 = a$ and $a\cdot 1 = a$
+    \pause
+  \item (Additive inverse): For every element $a\in \ff$, there is an element $-a\in \ff$ such that $a+(-a) = 0$
+    \pause
+  \item (Multiplicative inverse): For every element $a\in \ff\setminus\{0\}$, there is an alement $a^{-1}$ such that $a\cdot a^{-1}=1$
+    \pause
+  \item (Distributive): $a\cdot(b+c)=a\cdot b + a\cdot c$
+  \end{itemize}
+\end{frame}
+

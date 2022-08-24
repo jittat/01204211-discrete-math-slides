@@ -3,6 +3,8 @@
 \usepackage{fancybox}
 \usepackage{tcolorbox}
 \usepackage{tikz}
+\usepackage{bm}
+
 \setbeamertemplate{theorems}[numbered]
 \setbeamertemplate{background canvas}{%
 \begin{tikzpicture}
@@ -12,6 +14,19 @@
     \fill[color=black] (0,0) rectangle (0.5pt,\paperheight);
     \fill[color=black] (\paperwidth-0.5pt,0) rectangle (\paperwidth,\paperheight);
 \end{tikzpicture}}
+
+\newcommand{\ff}{\mathbb F}
+\newcommand{\rf}{\mathbb R}
+\newcommand{\cf}{\mathbb C}
+
+\newcommand{\vv}{\bm v}
+\newcommand{\uv}{\bm u}
+\newcommand{\vect}[1]{\bm{#1}}
+
+\newcommand{\V}{\mathcal V}
+\newcommand{\W}{\mathcal W}
+
+
 \begin{document}
 \input{##}
 \end{document}
