@@ -1,0 +1,342 @@
+\include{commons}
+\lecturetitle{Lecture 9a: Spans and independence} 
+
+\begin{frame}
+  \frametitle{Review: Linear combinations}
+
+  \begin{block}{Definition}
+    For any scalar \
+    \[
+    \alpha_1,\alpha_2,\ldots,\alpha_m
+    \]
+    and vectors
+    \[
+    \uv_1,\uv_2,\ldots,\uv_m,
+    \]
+    we say that
+    \[
+    \alpha_1\uv_1 + \alpha_2\uv_2 + \cdots + \alpha_m \uv_m
+    \]
+    is a \textcolor{red}{\bf linear combination} of $\uv_1,\ldots,\uv_m$.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: Span}
+
+  \begin{block}{Definition}
+    A set of all linear combination of vectors $\uv_1,\uv_2,\ldots,\uv_m$ is called the \textcolor{red}{\bf span} of that set of vectors.
+
+    It is denoted by $\mathrm{Span} \{\uv_1,\uv_2,\ldots,\uv_m\}$.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example 1}
+  Is $\mathrm{Span}\ \{[1,2],[2,5]\} = \rf^2$?
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example 2}
+  Is $\mathrm{Span}\ \{[1,0,1],[1,1,0],[2,3,4]\} = \rf^3$?
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example 3}
+  Is $\mathrm{Span}\ \{[1,0,1],[1,1,0],[4,2,2]\} = \rf^3$?
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Elements in a vector}
+  \begin{itemize}
+  \item We see examples of vectors over $\rf$.
+  \item However, elements in a vector can be from other sets with
+    appropriate property.  (I.e., they should behave a real numbers.)
+  \item What do we want from an element in a vector?
+    \begin{itemize}
+    \item We should be able to perform addition, subtraction, multiplication, and division.
+    \item Operations should be commutative and associative.
+    \item Additive and multiplicative identity should exist.
+    \item Addition and multiplication should have inverses.
+    \end{itemize}
+
+    \item We refer to a set with these properties as a {\bf field}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A field}
+
+  \begin{block}{Definition}
+    A set $\ff$ with two operations $+$ and $\times$ (or $\cdot$) is a
+    \textcolor{red}{\bf field} iff these operations satisfy the
+    following properties:
+    \begin{itemize}
+    \item (Associativity): $(a+b)+c = a+(b+c)$ and $(a\cdot b)\cdot c = a\cdot(b\cdot c)$
+    \item (Commutativity): $a+b=b+a$ and $a\cdot b=b\cdot a$
+    \item (Identities): There exist two elements $0\in\ff$ and $1\in\ff$ such that $a+0 = a$ and $a\cdot 1 = a$
+    \item (Additive inverse): For every element $a\in \ff$, there is an element $-a\in \ff$ such that $a+(-a) = 0$
+    \item (Multiplicative inverse): For every element $a\in \ff\setminus\{0\}$, there is an alement $a^{-1}$ such that $a\cdot a^{-1}=1$
+    \item (Distributive): $a\cdot(b+c)=a\cdot b + a\cdot c$
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Another useful field: $GF(2)$}
+  $GF(2) = \{0,1\}$.  I.e., it is a ``bit'' field.
+
+  What are $+$ and $\cdot$ in $GF(2)$?
+
+  \pause
+
+  \begin{itemize}
+  \item We define $b_1+b_2$ to be XOR.
+    \[
+    \begin{array}{c}
+      0 + 0 = 0 \\ 
+      0 + 1 = 1 + 0 = 1 \\ 
+      1 + 1 = 0
+    \end{array}
+    \] \pause
+  \item We define $b_1\cdot b_2$ to be standard multiplication.
+    \[
+    \begin{array}{c}
+      0 \cdot 0 = 0\cdot 1 = 1\cdot 0 = 0 \\
+      1\cdot 1 = 1
+    \end{array}
+    \] 
+    
+  \end{itemize}
+
+  You can check that $GF(2)$ satisfies the axioms of fields.
+\end{frame}
+
+\begin{frame}
+  \frametitle{$2\times 2$ Lights out}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Can you solve $2\times 2$ Lights out?}
+
+  Let
+  $\uv_1=[1,1,1,0]$, 
+  $\uv_2=[1,1,0,1]$, 
+  $\uv_3=[1,0,1,1]$, and 
+  $\uv_4=[0,1,1,1]$.
+
+  \vspace{0.2in}
+  
+  Given $\vect{b}=[b_1,b_2,b_3,b_4]$, can you always find
+  $a_1,a_2,a_3,a_4\in GF(2)$ such that
+  \[
+  a_1\cdot \uv_1 + 
+  a_2\cdot \uv_2 + 
+  a_3\cdot \uv_3 + 
+  a_4\cdot \uv_4 = \vect{b} ?
+  \]
+
+  \pause
+
+  \vspace{0.2in}
+
+  {\bf Same question:} Is $\mathrm{Span}\;\{\uv_1,\uv_2,\uv_3,\uv_4\} = GF(2)^4$?
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Can you solve $2\times 2$ Lights out?}
+
+  Let's try with an example.  Let $\vect{b}=[1,0,0,0]$.  Can you find
+  $a_1,a_2,a_3,a_4\in GF(2)$ such that
+  \[
+  a_1\cdot \uv_1 + 
+  a_2\cdot \uv_2 + 
+  a_3\cdot \uv_3 + 
+  a_4\cdot \uv_4 = \vect{b} ?
+  \]
+
+  \vspace{2in}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Can you solve $2\times 2$ Lights out?}
+
+  Since
+  \[
+  [1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]\in {\mathrm{Span}}\ \{\uv_1,\uv_2,\uv_3,\uv_4\},
+  \]
+  and
+  \pause
+  \[
+  \mathrm{Span}\ \{[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]\} = GF(2)^4,
+  \]
+  \pause
+  what can we say about ${\mathrm{Span}}\ \{\uv_1,\uv_2,\uv_3,\uv_4\}$?
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Generators}
+
+  \begin{block}{Definition}
+    Let $\V$ be a set of vectors.  Consider vectors $\uv_1,\uv_2,\ldots,\uv_n$.
+
+    If $\mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\} = \V$, we say that
+    \begin{itemize}
+    \item $\{\uv_1,\uv_2,\ldots,\uv_n\}$ is a {\bf generating set} for $\V$
+    \item vectors $\uv_1,\uv_2\ldots,\uv_n$ are {\bf generators} for $\V$
+    \end{itemize}
+  \end{block}
+
+  \pause
+
+  {\bf Examples}
+  \vspace{1.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Standard generators}
+
+  Note that $\{[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]\}$ are
+  generators for $GF(2)^4$.  Why?
+
+  \vspace{0.5in}
+  \pause
+
+  They are called {\bf standard generators} for $GF(2)^4$, written as $\vect{e}_1,\vect{e}_2,\vect{e}_3,\vect{e}_4$.
+  \pause
+
+  \vspace{0.2in}
+
+  For $\rf^n$, we also have
+  $[1,0,0,\ldots,0],[0,1,0,\ldots,0],[0,0,1,\ldots,0],\ldots,[0,0,0,\ldots,1]$
+  as standard generators.
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Generators and spans}
+  \begin{theorem}
+    Consider vectors $\uv_1,\uv_2,\ldots,\uv_n$.
+    If $\vv_1,\vv_2,\ldots,\vv_k$ are generators for $\V$, and for each $i$,
+    \[
+    \vv_i\in \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\},
+    \]
+    we have that $\V \subseteq \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\}$.
+  \end{theorem}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Geometry of spans: in $\rf^2$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Geometry of spans: in $\rf^3$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Two representations}
+
+  There are two ways to represent a line, a plane, and a (hyper)plane,
+  passing through the origin:
+  \begin{itemize}
+  \item as a span of vectors
+  \item as solutions of a system of homogeneous linear equations.
+  \end{itemize}
+
+  \pause
+  \vspace{0.2in}
+
+  What are common properties of these geometric objects?
+  \pause
+  \begin{itemize}
+  \item they pass through the origin,
+  \item if vector $\uv$ is in the objects, $\alpha\uv$ for any scalar $\alpha$ is also in the objects, and
+  \item if $\uv$ and $\vv$ are in the objects, $\uv+\vv$ is also in
+    the objects.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vector spaces}
+  \begin{block}{Definition}
+    A set $\V$ of vectors over $\ff$ is a \textcolor{red}{\bf vector space} iff
+    \begin{itemize}
+    \item \textcolor{blue}{(V1)} $\vect{0}\in\V$,
+    \item \textcolor{blue}{(V2)} for any $\uv\in\V$,
+      \[
+      \alpha\cdot\uv\in\V
+      \]
+      for any
+      $\alpha\in\ff$, and
+    \item \textcolor{blue}{(V3)} for any $\uv,\vv\in\V$,
+      \[
+      \uv+\vv\in\V.
+      \]
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Span of vectors is a vector space}
+  Consider $n$-vectors $\uv_1,\uv_2,\ldots,\uv_m$,
+  \[
+  \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_m\}
+  \]
+  is a vector space.
+
+  \pause
+  \vspace{0.2in}
+  Let's check if properties V1, V2, and V3 are satisfied.
+  \vspace{1.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solutions to homogeneous linear equations is a vector space}
+  Consider a set ${\mathcal S}$ of all $n$-vectors in the form $[x_1,x_2,\ldots,x_n]$ where
+  \[
+  \begin{array}{rcl}
+    a_{11}\cdot x_1 + a_{12}\cdot x_2 + \cdots + a_{1n}\cdot x_n &=& 0 \\
+    a_{21}\cdot x_1 + a_{22}\cdot x_2 + \cdots + a_{2n}\cdot x_n &=& 0 \\
+    \vdots &=& \vdots \\
+    a_{m1}x\cdot _1 + a_{m2}\cdot x_2 + \cdots + a_{mn}\cdot x_n &=& 0
+  \end{array}
+  \]
+  \vspace{0.2in}
+  Let's check if properties V1, V2, and V3 are satisfied.
+  \vspace{1.5in}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Dot product}
+
+  \begin{block}{Definition}
+    For $n$-vectors $\uv=[u_1,u_2,\ldots,u_n]$ and $\vv=[v_1,v_2,\ldots,v_n]$, the {\bf dot product} of $\uv$ and $\vv$, denoted by $\uv\cdot\vv$, is
+    \[
+    u_1\cdot v_1 + 
+    u_2\cdot v_2 +
+    \cdots +
+    u_n\cdot v_n 
+    \]
+  \end{block}
+
+  \vspace{0.2in}
+  \pause
+  Using dot products, the previous set $\mathcal S$ can be written as
+  \[
+  \{ \vect{x}\in \rf^n :
+  \vect{a}_1\cdot \vect{x} = 0,
+  \vect{a}_2\cdot \vect{x} = 0,\ldots,
+  \vect{a}_m\cdot \vect{x} = 0
+  \}
+  \]
+  and we know that $\mathcal S$ is a vector space.
+\end{frame}
