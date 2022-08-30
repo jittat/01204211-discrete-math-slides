@@ -1,11 +1,11 @@
 \include{commons}
-\lecturetitle{Lecture 9a: Spans and independence} 
+\lecturetitle{Lecture 9a: Spans and Vector Spaces} 
 
 \begin{frame}
   \frametitle{Review: Linear combinations}
 
   \begin{block}{Definition}
-    For any scalar \
+    For any scalars
     \[
     \alpha_1,\alpha_2,\ldots,\alpha_m
     \]
@@ -223,14 +223,31 @@
 
 \begin{frame}
   \frametitle{Generators and spans}
-  \begin{theorem}
+  \begin{lemma}
     Consider vectors $\uv_1,\uv_2,\ldots,\uv_n$.
     If $\vv_1,\vv_2,\ldots,\vv_k$ are generators for $\V$, and for each $i$,
     \[
     \vv_i\in \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\},
     \]
     we have that $\V \subseteq \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\}$.
-  \end{theorem}
+  \end{lemma}
+
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Adding a vector into a span}
+  \begin{lemma}
+    Consider vectors $\uv_1,\uv_2,\ldots,\uv_n$.
+    If $\vv\in \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\}$, then
+    \[
+    \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n,\vv\}
+    =
+    \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\}
+    \]
+  \end{lemma}
+
+  \vspace{2in}
 \end{frame}
 
 \begin{frame}
@@ -339,4 +356,302 @@
   \}
   \]
   and we know that $\mathcal S$ is a vector space.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Parity-check code}
+
+  \pause
+
+  From message $\vect{a}=[a_1,a_2,a_3,a_4]$, we compute (in $GF(2)$)
+  the parity check bit
+  \[
+  b = a_1 + a_2 + a_3 + a_4.
+  \]
+  \pause
+  Now our encoded message becomes
+  \[
+  [a_1,a_2,a_3,a_4,a_5],
+  \]
+  where $a_5=b=a_1 + a_2 + a_3 + a_4$.  It can detects a single-bit
+  error.
+  \pause
+
+  \vspace{0.2in}
+
+  What can we say about the condition on $a_5$? \pause
+
+  It is in fact a homogeneous linear equation (in $GF(2)$):
+  \[
+  a_1 + a_2 + a_3 + a_4+a_5 = 0
+  \]
+  \pause
+  \vspace{0.1in}
+  Now, what is the set of all possible codewords?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hamming code}
+
+  You can detect and correct more errors with Hamming codes.  In this
+  version called a $[7,4]$ Hamming code, you encode $4$-bit data
+  $[a_1,a_2,a_3,a_4]$ into a $7$-bit codeword
+  $[a_1,a_2,a_3,a_4,a_5,a_6,a_7]$.  Using the formula:
+  \[
+  \begin{array}{rcl}
+    a_5 &=& a_1 + a_2 + a_4\\
+    a_6 &=& a_1 + a_3 + a_4\\
+    a_7 &=& a_2 + a_3 + a_4
+  \end{array}
+  \]
+  \pause
+
+  Let's see how this works.
+
+  \vspace{1.5in}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Parity check}
+  Let
+  \[
+  \begin{array}{rcl}
+    s_1 &=& a_1 + a_2 + a_4 + a_5\\
+    s_2 &=& a_1 + a_3 + a_4 + a_6\\
+    s_3 &=& a_2 + a_3 + a_4 + a_7
+  \end{array}
+  \]
+
+  Given a codewords $\vect{w}=[c_1,c_2,\ldots,c_7]$, if we compute
+  $s_1,s_2,s_3$, we would get all zero's.
+
+  \pause
+
+  What if there is an error?  Let's try.
+  \vspace{1.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Codewords from Hamming code}
+
+  Turning the formula for $a_5,a_6,a_7$ around, we have $3$
+  homogeneous linear equations:
+  \[
+  \begin{array}{rcl}
+    a_1 + a_2 + a_4 + a_5 &=& 0\\
+    a_1 + a_3 + a_4 + a_6 &=& 0\\
+    a_2 + a_3 + a_4 + a_7 &=& 0
+  \end{array}
+  \]
+  and again the set of all possible codewords $\W$ forms a vector
+  space over $GF(2)$.
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{An object not passing through the origin: 2 dimensions}
+\end{frame}
+
+\begin{frame}
+  \frametitle{An object not passing through the origin: 3 dimensions}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Translation}
+
+  If we have a line or a plane passing through a vector $\vect{a}$,
+  but not through the origin, how can we represent it?
+
+  \pause
+
+  \begin{itemize}
+  \item Translate the object so that it passes through the origin.
+    \pause
+  \item We obtain a vector space $\V$.
+    \pause
+  \item Then we translate it back so that it passes through $\vect{a}$.
+    \pause
+  \item We get the set
+    \[
+    {\mathcal A} = \{ \vect{a} + \vect{u} : \vect{u} \in \V \}
+    \]
+    \pause
+  \item {\em Question:} Is $\mathcal A$ a vector space?
+    \pause
+  \item We also write it as $\vect{a} + \V$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Affine spaces}
+
+  \begin{block}{Definition}
+    If $\vect{a}$ is a vector and $\V$ is a vector space, then
+    \[
+    \vect{a} + \V
+    \]
+    is an \textcolor{red}{\bf affine space}.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{An affine space and convex combination: 2 dimensions}
+\end{frame}
+
+\begin{frame}
+  \frametitle{An affine space and convex combination: 3 dimensions}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Affine combination}
+  
+  \begin{block}{Definition}
+    For any scalars $\alpha_1,\alpha_2,\ldots,\alpha_m$
+    such that 
+    \[
+    \alpha_1 + \alpha_2 + \ldots + \alpha_m = 1
+    \]
+    and vectors $\uv_1,\uv_2,\ldots,\uv_m$, we say that a linear combination
+    \[
+    \alpha_1\uv_1 + \alpha_2\uv_2 + \cdots + \alpha_m \uv_m
+    \]
+    is an \textcolor{red}{\bf affine combination} of $\uv_1,\ldots,\uv_m$.
+  \end{block}
+
+  \pause
+
+  \begin{block}{Definition}
+    The set of all affine combinations of 
+    vectors $\uv_1,\uv_2,\ldots,\uv_m$
+    is called the \textcolor{red}{\bf affine hull} of
+    $\uv_1,\uv_2,\ldots,\uv_m$.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Convex combination: review}
+  
+  \begin{block}{Definition}
+    For any scalars $\alpha_1,\alpha_2,\ldots,\alpha_m \geq 0$
+    such that 
+    \[
+    \alpha_1 + \alpha_2 + \ldots + \alpha_m = 1
+    \]
+    and vectors $\uv_1,\uv_2,\ldots,\uv_m$, we say that a linear combination
+    \[
+    \alpha_1\uv_1 + \alpha_2\uv_2 + \cdots + \alpha_m \uv_m
+    \]
+    is a \textcolor{red}{\bf convex combination} of $\uv_1,\ldots,\uv_m$.
+  \end{block}
+
+  \begin{block}{Definition}
+    The set of all convex combinations of 
+    vectors $\uv_1,\uv_2,\ldots,\uv_m$
+    is called the \textcolor{red}{\bf convex hull} of
+    $\uv_1,\uv_2,\ldots,\uv_m$.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Writing an affine space using a span}
+  \pause
+
+  \begin{block}{An affine space}
+    An affine space passing through $\uv_1,\uv_2,\ldots,\uv_n$ is
+    \[
+    \uv_1 + \mathrm{Span}\ \{\uv_2-\uv_1,\uv_3-\uv_1,\ldots,\uv_n-\uv_1\}.
+    \]
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Non-homogeneous linear system}
+  Two linear systems:
+  \[
+  \begin{array}{rcl}
+    \vect{a_1}\cdot\vect{x} &=& b_1 \\
+    \vect{a_2}\cdot\vect{x} &=& b_2 \\
+    &\vdots&\\
+    \vect{a_m}\cdot\vect{x} &=& b_m
+  \end{array}
+  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+  \begin{array}{rcl}
+    \vect{a_1}\cdot\vect{x} &=& 0 \\
+    \vect{a_2}\cdot\vect{x} &=& 0 \\
+    &\vdots&\\
+    \vect{a_m}\cdot\vect{x} &=& 0
+  \end{array}
+  \]
+
+  What can you say about the solution sets of these two related linear
+  systems?
+
+  \pause
+
+  $\vect{0}$ is always a solution to the linear system on the right.
+
+  
+  Note: A linear equation whose right-hand-side is zero is called a
+  {\bf homogeneous linear equation}.  A system of linear homogeneous
+  equations is called a {\bf homogeneous linear system}.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solutions of the two systems}
+
+  Recall that if $\uv_1$ and $\uv_2$ are both solutions to the
+  non-homogeneous linear system, we have that for any $i$
+  \[
+  \vect{a}_i \uv_1 - \vect{a}_i \uv_2
+  = b_i - b_i = 0 = \vect{a}_i (\uv_1 - \uv_2).
+  \]
+  \pause
+
+  This implies that $\uv_1-\uv_2$ is a solution to the homogeneous
+  linear system.
+\end{frame}
+
+\begin{frame}
+  Suppose that $\W$ is the set of all solution to the non-homogeneous
+  linear system, i.e.,
+  \[
+  \W = \{\vect{x} : \vect{a}_i\vect{x} = b_i, \ \mbox{for $1\leq i\leq m$}\},
+  \]
+  and let $\uv\in \W$ be one of the solutions, we have that
+  \[
+  \{\vv - \uv : \vv\in\W \} 
+  \]
+  \pause
+  is a vector space, because
+  \pause
+  \[
+  \{\vv - \uv : \vv\in\W \}
+  =
+  \{\vect{x} : \vect{a}_i\vect{x} = 0, \ \mbox{for $1\leq i\leq m$}\}
+  \]
+
+  \vspace{0.1in}
+  \pause
+
+  In other words,
+  \[
+  \begin{array}{rcl}
+    \W &=& \uv + \{\vv - \uv : \vv\in\W \}  \\
+    &=& \uv + \{\vect{x} : \vect{a}_i\vect{x} = 0, \ \mbox{for $1\leq i\leq m$}\},
+  \end{array}
+  \]
+  \pause
+  i.e., $\W$ is an affine space.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solutions to a non-homogeneous linear system}
+
+  \begin{lemma}
+    If the solution set of a linear system is not empty, it is an
+    affine space.
+  \end{lemma}
 \end{frame}
