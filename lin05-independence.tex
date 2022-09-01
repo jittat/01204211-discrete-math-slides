@@ -1,0 +1,226 @@
+\include{commons}
+\lecturetitle{Lecture 9c: Linear Independence and Bases} 
+
+\begin{frame}
+  \frametitle{Review: Linear combinations}
+
+  \begin{block}{Definition}
+    For any scalars
+    \[
+    \alpha_1,\alpha_2,\ldots,\alpha_m
+    \]
+    and vectors
+    \[
+    \uv_1,\uv_2,\ldots,\uv_m,
+    \]
+    we say that
+    \[
+    \alpha_1\uv_1 + \alpha_2\uv_2 + \cdots + \alpha_m \uv_m
+    \]
+    is a \textcolor{red}{\bf linear combination} of $\uv_1,\ldots,\uv_m$.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: Span}
+
+  \begin{block}{Definition}
+    A set of all linear combination of vectors $\uv_1,\uv_2,\ldots,\uv_m$ is called the \textcolor{red}{\bf span} of that set of vectors.
+
+    It is denoted by $\mathrm{Span} \{\uv_1,\uv_2,\ldots,\uv_m\}$.
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Previous Lemmas}
+  \begin{lemma}
+    Consider vectors $\uv_1,\uv_2,\ldots,\uv_n$.
+    If $\vv_1,\vv_2,\ldots,\vv_k$ are generators for $\V$, and for each $i$,
+    \[
+    \vv_i\in \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\},
+    \]
+    we have that $\V \subseteq \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\}$.
+  \end{lemma}
+\end{frame}
+
+\begin{frame}
+  \begin{lemma}
+    Consider vectors $\uv_1,\uv_2,\ldots,\uv_n$.
+    If $\vv\in \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\}$, then
+    \[
+    \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n,\vv\}
+    =
+    \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\}
+    \]
+    \label{lemma:sup-vect}
+  \end{lemma}
+  \pause
+  \begin{lemma}
+    Consider vectors $\uv_1,\uv_2,\ldots,\uv_n$.
+    If $\uv_n\in \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_{n-1}\}$, then
+    \[
+    \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_{n-1}\}
+    =
+    \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\}
+    \]
+  \end{lemma}
+\end{frame}
+
+\begin{frame}
+  \begin{proof}[Proof of Lemma~\ref{lemma:sup-vect}]
+
+    {\small
+      
+      Since $\vv$ can be written as a linear combination of other
+      vectors, there exist $\alpha_1,\alpha_2,\ldots,\alpha_n$ such
+      that
+      \[
+      \vv = \alpha_1\uv_1+\alpha_2\uv_2+\cdots+\alpha_n\uv_n.
+      \]
+      
+      Consider any vector $\vect{w}\in\mathrm{Span}~\{\uv_1,\uv_2,\ldots,\uv_n,\vv\}$; thus, we can write
+      \[
+      \vect{w} = \beta_0\vv + \beta_1\uv_1 + \beta_2\uv_2 +\cdots+\beta_n\uv_n.
+      \]
+      Plugging in $\vv$, we get that
+      \begin{align*}
+        \vect{w} & =  \beta_0\left(\alpha_1\uv_1+\cdots+\alpha_n\uv_n\right) + \beta_1\uv_1 + \beta_2\uv_2 +\cdots+\beta_k\uv_k \\
+        &= (\beta_0\alpha_1+\beta_1)\uv_1 +
+        (\beta_0\alpha_2+\beta_2)\uv_2 +
+        \cdots+(\beta_0\alpha_n+\beta_n)\uv_n,
+      \end{align*}
+      implying that $\vect{w}\in\mathrm{Span}~\{\uv_1,\uv_2,\ldots,\uv_n\}$.
+
+    }
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Linearly independence}
+
+  \begin{block}{Definition}
+    Vectors $\uv_1,\uv_2,\ldots,\uv_n$ are \textcolor{red}{\bf
+      linearly independent} if no vector $\uv_i$ can be written as a
+    linear combination of other vectors.
+  \end{block}
+
+  \pause
+
+  \begin{block}{(Another) Definition}
+    Vectors $\uv_1,\uv_2,\ldots,\uv_n$ are \textcolor{red}{\bf
+      linearly independent} if the only solution of equation
+    \[
+    \alpha_1\uv_1 + \alpha_2\uv_2 +\cdots+\alpha_n\uv_n = \vect{0}
+    \]
+    is
+    \[
+    \alpha_1=\alpha_2=\cdots=\alpha_n=0.
+    \]
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples in $\rf^2$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples in $\rf^3$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples in $GF(2)$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples in linear systems}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Subset of linearly independent vectors}
+  \begin{lemma}
+    If $A=\{\uv_1,\uv_2,\ldots,\uv_n\}$ be a set of linearly
+    independent vectors, then any $B\subseteq A$ is also a set of
+    linearly independent vectors.
+  \end{lemma}
+  \begin{proof}
+    {\small
+      We prove by contradiction.  Assume that $B$ is {\bf not}
+      linearly independent.  Without loss of generality, assume that
+      $B=\{\uv_1,\uv_2,\ldots,\uv_k\}$ where $k\leq n$.  \pause This
+      means that there exists $\alpha_1,\alpha_2,\ldots,\alpha_k$ such
+      that
+      \[
+      \alpha_1\uv_1+\alpha_2\uv_2+\cdots+\alpha_k\uv_k=\vect{0},
+      \]
+      and some $\alpha_i$'s is nonzero.  \pause If we let
+      $\alpha_{k+1}=\alpha_{k+2}=\cdots=\alpha_n=0$, we have that
+      \[
+      \alpha_1\uv_1+\alpha_2\uv_2+\cdots+\alpha_n\uv_n=\vect{0},
+      \]
+      with some $\alpha_i$'s being nonzero as well.  \pause This
+      implies that vectors in $A$ are not linearly indepedent; leading
+      to a contradiction.
+    }
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Bases}
+
+  \begin{block}{Definition}
+    A set of vectors $\{\uv_1,\uv_2,\ldots,\uv_k\}$ is a \textcolor{red}{\bf basis} for vector space $\V$ if
+    \begin{itemize}
+    \item $\mathrm{Span}~\{\uv_1,\uv_2,\ldots,\uv_k\} = \V$, and
+    \item $\uv_1,\uv_2,\ldots,\uv_k$ are linearly independent.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples 1: $\rf^2$ and $\rf^3$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples 2}
+\end{frame}
+
+\begin{frame}
+  \begin{lemma}[Unique representation]
+    Let $\uv_1,\uv_2,\ldots,\uv_k$ be a basis for vector space $\V$.
+    For any $\vv\in\V$, there is a unique way to write $\vv$ as a
+    linear combination of $\uv_1,\ldots,\uv_k$.
+  \end{lemma}
+\end{frame}
+
+\begin{frame}
+  \begin{proof}[Proof of unique representation lemma]
+    {\small
+  We prove by contradiction.  \pause Assume that there exists a vector
+  $\vv\in\V$ with more than one ways to be written as linear
+  combinations of the basis.  Thus, there exist
+  \[ \alpha_1,\alpha_2,\ldots,\alpha_k, \] and
+  \[ \beta_1,\beta_2,\ldots,\beta_k, \]
+  that are not equal (i.e., there exists $i$ where
+  $\alpha_i\neq\beta_i$)
+  such that
+  $\vv=\alpha_1\uv_1+\alpha_2\uv_2+\cdots+\alpha_k\uv_k$ and
+  $\vv=\beta_1\uv_1+\beta_2\uv_2+\cdots+\beta_k\uv_k$.  \pause
+  This implies that
+  \[
+  \alpha_1\uv_1+\alpha_2\uv_2+\cdots+\alpha_k\uv_k=\vv=\beta_1\uv_1+\beta\uv_2+\cdots+\beta_k\uv_k,
+  \]
+  and
+  \[
+  (\alpha_1-\beta_1)\uv_1 +
+  (\alpha_2-\beta_2)\uv_2 + \cdots + (\alpha_k-\beta_k)\uv_k=0.
+  \]
+  \pause
+  Since $\alpha_i\neq\beta_i$, we have that at least one of the
+  coefficients is non-zero, implying that $\uv_1,\ldots,\uv_k$ are not
+  linearly independent.  This contradicts the assumption that
+  $\uv_1,\ldots,\uv_k$ form a basis.
+  }
+  \end{proof}
+\end{frame}

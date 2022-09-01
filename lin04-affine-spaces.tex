@@ -1,0 +1,257 @@
+\include{commons}
+\lecturetitle{Lecture 9b: Affine Spaces} 
+
+\begin{frame}
+  \frametitle{Review: Linear combinations}
+
+  \begin{block}{Definition}
+    For any scalars
+    \[
+    \alpha_1,\alpha_2,\ldots,\alpha_m
+    \]
+    and vectors
+    \[
+    \uv_1,\uv_2,\ldots,\uv_m,
+    \]
+    we say that
+    \[
+    \alpha_1\uv_1 + \alpha_2\uv_2 + \cdots + \alpha_m \uv_m
+    \]
+    is a \textcolor{red}{\bf linear combination} of $\uv_1,\ldots,\uv_m$.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: Span}
+
+  \begin{block}{Definition}
+    A set of all linear combination of vectors $\uv_1,\uv_2,\ldots,\uv_m$ is called the \textcolor{red}{\bf span} of that set of vectors.
+
+    It is denoted by $\mathrm{Span} \{\uv_1,\uv_2,\ldots,\uv_m\}$.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: Vector spaces}
+  \begin{block}{Definition}
+    A set $\V$ of vectors over $\ff$ is a \textcolor{red}{\bf vector space} iff
+    \begin{itemize}
+    \item \textcolor{blue}{(V1)} $\vect{0}\in\V$,
+    \item \textcolor{blue}{(V2)} for any $\uv\in\V$,
+      \[
+      \alpha\cdot\uv\in\V
+      \]
+      for any
+      $\alpha\in\ff$, and
+    \item \textcolor{blue}{(V3)} for any $\uv,\vv\in\V$,
+      \[
+      \uv+\vv\in\V.
+      \]
+    \end{itemize}
+  \end{block}
+
+  Examples of vector spaces:
+  \begin{itemize}
+  \item A span of vectors is a vector space.
+  \item A solution set to homogeneous linear equations is a vector space.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Translation}
+
+  If we have a line or a plane passing through a vector $\vect{a}$,
+  but not through the origin, how can we represent it?
+
+  \pause
+
+  \begin{itemize}
+  \item Translate the object so that it passes through the origin.
+    \pause
+  \item We obtain a vector space $\V$.
+    \pause
+  \item Then we translate it back so that it passes through $\vect{a}$.
+    \pause
+  \item We get the set
+    \[
+    {\mathcal A} = \{ \vect{a} + \vect{u} : \vect{u} \in \V \}
+    \]
+    \pause
+  \item {\em Question:} Is $\mathcal A$ a vector space?
+    \pause
+  \item We also write it as $\vect{a} + \V$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Affine spaces}
+
+  \begin{block}{Definition}
+    If $\vect{a}$ is a vector and $\V$ is a vector space, then
+    \[
+    \vect{a} + \V
+    \]
+    is an \textcolor{red}{\bf affine space}.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{An affine space and convex combination: 2 dimensions}
+\end{frame}
+
+\begin{frame}
+  \frametitle{An affine space and convex combination: 3 dimensions}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Affine combination}
+  
+  \begin{block}{Definition}
+    For any scalars $\alpha_1,\alpha_2,\ldots,\alpha_m$
+    such that 
+    \[
+    \alpha_1 + \alpha_2 + \ldots + \alpha_m = 1
+    \]
+    and vectors $\uv_1,\uv_2,\ldots,\uv_m$, we say that a linear combination
+    \[
+    \alpha_1\uv_1 + \alpha_2\uv_2 + \cdots + \alpha_m \uv_m
+    \]
+    is an \textcolor{red}{\bf affine combination} of $\uv_1,\ldots,\uv_m$.
+  \end{block}
+
+  \pause
+
+  \begin{block}{Definition}
+    The set of all affine combinations of 
+    vectors $\uv_1,\uv_2,\ldots,\uv_m$
+    is called the \textcolor{red}{\bf affine hull} of
+    $\uv_1,\uv_2,\ldots,\uv_m$.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Convex combination: review}
+  
+  \begin{block}{Definition}
+    For any scalars $\alpha_1,\alpha_2,\ldots,\alpha_m \geq 0$
+    such that 
+    \[
+    \alpha_1 + \alpha_2 + \ldots + \alpha_m = 1
+    \]
+    and vectors $\uv_1,\uv_2,\ldots,\uv_m$, we say that a linear combination
+    \[
+    \alpha_1\uv_1 + \alpha_2\uv_2 + \cdots + \alpha_m \uv_m
+    \]
+    is a \textcolor{red}{\bf convex combination} of $\uv_1,\ldots,\uv_m$.
+  \end{block}
+
+  \begin{block}{Definition}
+    The set of all convex combinations of 
+    vectors $\uv_1,\uv_2,\ldots,\uv_m$
+    is called the \textcolor{red}{\bf convex hull} of
+    $\uv_1,\uv_2,\ldots,\uv_m$.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Writing an affine space using a span}
+  \pause
+
+  \begin{block}{An affine space}
+    An affine space passing through $\uv_1,\uv_2,\ldots,\uv_n$ is
+    \[
+    \uv_1 + \mathrm{Span}\ \{\uv_2-\uv_1,\uv_3-\uv_1,\ldots,\uv_n-\uv_1\}.
+    \]
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Non-homogeneous linear system}
+  Two linear systems:
+  \[
+  \begin{array}{rcl}
+    \vect{a_1}\cdot\vect{x} &=& b_1 \\
+    \vect{a_2}\cdot\vect{x} &=& b_2 \\
+    &\vdots&\\
+    \vect{a_m}\cdot\vect{x} &=& b_m
+  \end{array}
+  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+  \begin{array}{rcl}
+    \vect{a_1}\cdot\vect{x} &=& 0 \\
+    \vect{a_2}\cdot\vect{x} &=& 0 \\
+    &\vdots&\\
+    \vect{a_m}\cdot\vect{x} &=& 0
+  \end{array}
+  \]
+
+  What can you say about the solution sets of these two related linear
+  systems?
+
+  \pause
+
+  $\vect{0}$ is always a solution to the linear system on the right.
+
+  
+  Note: A linear equation whose right-hand-side is zero is called a
+  {\bf homogeneous linear equation}.  A system of linear homogeneous
+  equations is called a {\bf homogeneous linear system}.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solutions of the two systems}
+
+  Recall that if $\uv_1$ and $\uv_2$ are both solutions to the
+  non-homogeneous linear system, we have that for any $i$
+  \[
+  \vect{a}_i \uv_1 - \vect{a}_i \uv_2
+  = b_i - b_i = 0 = \vect{a}_i (\uv_1 - \uv_2).
+  \]
+  \pause
+
+  This implies that $\uv_1-\uv_2$ is a solution to the homogeneous
+  linear system.
+\end{frame}
+
+\begin{frame}
+  Suppose that $\W$ is the set of all solution to the non-homogeneous
+  linear system, i.e.,
+  \[
+  \W = \{\vect{x} : \vect{a}_i\vect{x} = b_i, \ \mbox{for $1\leq i\leq m$}\},
+  \]
+  and let $\uv\in \W$ be one of the solutions, we have that
+  \[
+  \{\vv - \uv : \vv\in\W \} 
+  \]
+  \pause
+  is a vector space, because
+  \pause
+  \[
+  \{\vv - \uv : \vv\in\W \}
+  =
+  \{\vect{x} : \vect{a}_i\vect{x} = 0, \ \mbox{for $1\leq i\leq m$}\}
+  \]
+
+  \vspace{0.1in}
+  \pause
+
+  In other words,
+  \[
+  \begin{array}{rcl}
+    \W &=& \uv + \{\vv - \uv : \vv\in\W \}  \\
+    &=& \uv + \{\vect{x} : \vect{a}_i\vect{x} = 0, \ \mbox{for $1\leq i\leq m$}\},
+  \end{array}
+  \]
+  \pause
+  i.e., $\W$ is an affine space.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solutions to a non-homogeneous linear system}
+
+  \begin{lemma}
+    If the solution set of a linear system is not empty, it is an
+    affine space.
+  \end{lemma}
+\end{frame}
