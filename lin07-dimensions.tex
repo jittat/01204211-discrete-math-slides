@@ -1,0 +1,294 @@
+\include{commons}
+\lecturetitle{Lecture 10b: Dimensions} 
+
+\begin{frame}
+  \frametitle{Review: Linear combinations}
+
+  \begin{block}{Definition}
+    For any scalars
+    \[
+    \alpha_1,\alpha_2,\ldots,\alpha_m
+    \]
+    and vectors
+    \[
+    \uv_1,\uv_2,\ldots,\uv_m,
+    \]
+    we say that
+    \[
+    \alpha_1\uv_1 + \alpha_2\uv_2 + \cdots + \alpha_m \uv_m
+    \]
+    is a \textcolor{red}{\bf linear combination} of $\uv_1,\ldots,\uv_m$.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: Span}
+
+  \begin{block}{Definition}
+    A set of all linear combination of vectors $\uv_1,\uv_2,\ldots,\uv_m$ is called the \textcolor{red}{\bf span} of that set of vectors.
+
+    It is denoted by $\mathrm{Span} \{\uv_1,\uv_2,\ldots,\uv_m\}$.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: Vector spaces}
+  \begin{block}{Definition}
+    A set $\V$ of vectors over $\ff$ is a \textcolor{red}{\bf vector space} iff
+    \begin{itemize}
+    \item \textcolor{blue}{(V1)} $\vect{0}\in\V$,
+    \item \textcolor{blue}{(V2)} for any $\uv\in\V$,
+      \[
+      \alpha\cdot\uv\in\V
+      \]
+      for any
+      $\alpha\in\ff$, and
+    \item \textcolor{blue}{(V3)} for any $\uv,\vv\in\V$,
+      \[
+      \uv+\vv\in\V.
+      \]
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: Linearly independence}
+
+  \begin{block}{Definition}
+    Vectors $\uv_1,\uv_2,\ldots,\uv_n$ are \textcolor{red}{\bf
+      linearly independent} if no vector $\uv_i$ can be written as a
+    linear combination of other vectors.
+  \end{block}
+
+  \begin{block}{(Another) Definition}
+    Vectors $\uv_1,\uv_2,\ldots,\uv_n$ are \textcolor{red}{\bf
+      linearly independent} if the only solution of equation
+    \[
+    \alpha_1\uv_1 + \alpha_2\uv_2 +\cdots+\alpha_n\uv_n = \vect{0}
+    \]
+    is
+    \[
+    \alpha_1=\alpha_2=\cdots=\alpha_n=0.
+    \]
+  \end{block}
+
+\end{frame}
+\begin{frame}
+  \frametitle{Review: Bases}
+
+  \begin{block}{Definition}
+    A set of vectors $\{\uv_1,\uv_2,\ldots,\uv_k\}$ is a \textcolor{red}{\bf basis} for vector space $\V$ if
+    \begin{itemize}
+    \item $\mathrm{Span}~\{\uv_1,\uv_2,\ldots,\uv_k\} = \V$, and
+    \item $\uv_1,\uv_2,\ldots,\uv_k$ are linearly independent.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \begin{lemma}[Superfluous Vector Lemma]
+    Consider vectors $\uv_1,\uv_2,\ldots,\uv_n$.
+    If $\vv\in \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\}$, then
+    \[
+    \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n,\vv\}
+    =
+    \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\}
+    \]
+    \label{lemma:sup-vect}
+  \end{lemma}
+  \pause
+  \begin{lemma}
+    Consider vectors $\uv_1,\uv_2,\ldots,\uv_n$.
+    If $\uv_n\in \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_{n-1}\}$, then
+    \[
+    \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_{n-1}\}
+    =
+    \mathrm{Span}\ \{\uv_1,\uv_2,\ldots,\uv_n\}
+    \]
+  \end{lemma}
+\end{frame}
+
+\begin{frame}
+  \begin{lemma}[Unique representation]
+    Let $\uv_1,\uv_2,\ldots,\uv_k$ be a basis for vector space $\V$.
+    For any $\vv\in\V$, there is a unique way to write $\vv$ as a
+    linear combination of $\uv_1,\ldots,\uv_k$.
+  \end{lemma}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples in $\rf^2$ and $\rf^3$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples in $GF(2)$ - Vector spaces from graphs}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples in $GF(2)$ - Cycles}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples in $GF(2)$ - Basis}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Number of vectors in bases}
+  \begin{itemize}
+  \item We have an observation that for a vector space $\V$, every basis has the same size.
+    \pause
+  \item This is not a coincident.
+  \item In this course, we will see two proofs.
+    \pause
+  \item Remark: there are vector spaces whose basis has infinite size,
+    but we are not dealing with those vector spaces in this course.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{theorem}[Main Theorem]
+    If $\uv_1,\uv_2,\ldots,\uv_n$ and $\vv_1,\vv_2,\ldots,\vv_m$ are bases for vector space $\W$, then $n=m$.
+  \end{theorem}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exchange Lemma}
+  We will prove the main theorem using the ``exchange'' lemma.
+
+  \pause
+
+  \begin{lemma}[Simplified Exchange Lemma]
+    Consider a set of vectors $S$ and let $\vect{z}$ be a non-zero
+    vector in $\mathrm{Span}~S$.  There is a vector $\vect{w}\in S$
+    such that
+    $\mathrm{Span}~(S\cup\{\vect{z}\}-\{\vect{w}\})=\mathrm{Span}~S$.
+  \end{lemma}
+
+  \pause
+  
+  \begin{lemma}[Exchange Lemma]
+    Consider a set of vectors $S$ and its subset $A$.  Let $\vect{z}$
+    be a non-zero vector in $\mathrm{Span}~S$ such that
+    $A\cup\{\vect{z}\}$ is linearly independent.  There is a vector
+    $\vect{w}\in S-A$ such that
+    $\mathrm{Span}~(S\cup\{\vect{z}\}-\{\vect{w}\})=\mathrm{Span}~S$.
+  \end{lemma}
+
+  \vspace{1in}
+\end{frame}
+
+\begin{frame}
+  \begin{lemma}[Morphing Lemma]
+    If a set of vectors $S$ spans a vector space $\W$ and $B$ is a
+    linearly independent set of vectors in $\W$, then $|B|\leq |S|$.
+  \end{lemma}
+  \pause
+  \begin{proof}
+    {\footnotesize Let $B=\{\uv_1,\uv_2,\ldots,\uv_n\}$.  We show how to
+      construct $S_1,\ldots,S_n$ such that for each $i$, $|S_i|=|S|$,
+      $\mathrm{Span}~S_i=\mathrm{Span}~S$, and
+      \[
+      \{\uv_1,\ldots,\uv_i\}\subseteq S_i.
+      \]
+      \pause
+      Let $S_0=S$.  We construct $S_i$ from $S_{i-1}$.  \pause Note
+      that since $B$ is linearly independent,
+      $\{\uv_1,\ldots,\uv_{i-1}\}\subseteq S_{i-1}$ is also linearly
+      independent. \pause  We can use the Exchange Lemma to state that there
+      exist $\vect{w}\in S_{i-1} - \{\uv_1,\ldots,\uv_{i-1}\}$ such
+      that
+      \[
+      \mathrm{Span}~(S_{i-1}\cup\{\vect{\uv_i}\}-\{\vect{w}\})=\mathrm{Span}~S_{i-1}.
+      \]
+      We then let $S_i=S_{i-1}\cup\{\vect{\uv_i}\}-\{\vect{w}\}$.
+      \textcolor{gray}{(You can check that $S_i$ has the properties
+        as claimed above.)}
+
+      \pause
+      Since $|S_n|=|S|$ and $B\subseteq S_n$, we have that $|B|\leq |S|$.
+    }
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Morphing Lemma $\Rightarrow$ Main Theorem}
+  \begin{theorem}[Main Theorem]
+    If $\uv_1,\uv_2,\ldots,\uv_n$ and $\vv_1,\vv_2,\ldots,\vv_m$ are bases for vector space $\W$, then $n=m$.
+  \end{theorem}
+
+  \pause
+  \begin{proof}
+    Since $\{\uv_1,\uv_2,\ldots,\uv_n\}$ is a basis, it spans $\W$.
+    Also, vectors $\vv_1,\vv_2,\ldots,\vv_m$ are linearly independent
+    because they also form a basis.  Thus, from the Morphing Lemma, $m\leq n$.
+
+    \pause
+    We can reverse the roles of $\uv_i$'s and $\vv_i$'s to obtain that $n\leq m$.
+
+    \pause
+    Therefore, $n=m$.
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \begin{proof}[Proof of the Simplified Exchange Lemma]
+    {\footnotesize
+      \pause
+      Let $S=\{\uv_1,\uv_2,\ldots,\uv_n\}$. 
+      Since $\vect{z}\in\mathrm{Span}~S$, \pause
+      we note that $\mathrm{Span}~S=\mathrm{Span}~(S\cup\{\vect{z}\})$.
+      \pause
+      We can also write
+      \[
+      \vect{z}=\alpha_1\uv_1+\alpha_2\uv_2+\ldots+\alpha_n\uv_n.
+      \]
+      \pause
+      Because $\vect{z}$ is non-zero, there exists some non-zero $\alpha_i$.
+      \pause
+      We can rewrite the above equation as
+      \[
+      \alpha_i\uv_i=\vect{z} -
+      \alpha_1\uv_1-\ldots
+      -\alpha_{i-1}\uv_{i-1}-\alpha_{i+1}\uv_{i+1}-\cdots
+      -\alpha_n\uv_n,
+      \]
+      \pause
+      or
+      \[
+      \uv_i = \left(
+      \frac{1}{\alpha_i}\vect{z} -
+      \frac{\alpha_1}{\alpha_i}\uv_1-\ldots
+      -\frac{\alpha_{i-1}}{\alpha_i}\uv_{i-1}
+      -\frac{\alpha_{i+1}}{\alpha_i}\uv_{i+1}-\cdots
+      -\frac{\alpha_n}{\alpha_i}\uv_n
+      \right),
+      \]
+      \pause
+      i.e., $\uv_i\in\mathrm{Span}~(S\cup\{\vect{z}\})$.  \pause In this
+      case, we can remove $\uv_i$, i.e.,
+      \[
+      \mathrm{Span}~(S\cup\{\vect{z}\}-\{\uv_i\})=
+      \mathrm{Span}~(S\cup\{\vect{z}\})=
+      \mathrm{Span}~S.
+      \]
+      \pause
+      Therefore we
+      can let $\vect{w}=\uv_i$ and the lemma follows.
+    }
+  \end{proof}
+  \pause
+
+  {\small
+    How can we prove the full lemma?
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Dimensions}
+
+  \begin{block}{Definition}
+    The \textcolor{red}{\bf dimension} of a vector space $\V$ is the size of its basis.
+    
+    The dimension of $\V$ is written as $\mathrm{dim}~\V$.
+  \end{block}
+\end{frame}
