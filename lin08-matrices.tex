@@ -1,0 +1,353 @@
+\include{commons}
+\lecturetitle{Lecture 10c: Matrices} 
+
+\begin{frame}
+  \frametitle{What is a matrix?}
+
+  Matrices arise in many places.  We will see that there are
+  essentially two ways to look at matrices.
+  
+  \[
+  \left[
+    \begin{array}{ccc}
+      1 & 2 & 3 \\
+      4 & 5 & 6 \\
+      7 & 8 & 9 \\
+      10 & 11 & 12 \\
+    \end{array}
+    \right]
+  \pause
+  =
+  \left[
+    \begin{array}{c|c|c}
+      1 & 2 & 3 \\
+      4 & 5 & 6 \\
+      7 & 8 & 9 \\
+      10 & 11 & 12 \\
+    \end{array}
+    \right]
+  \pause
+  =
+  \left[
+    \begin{array}{ccc}
+      1 & 2 & 3 \\
+      \hline
+      4 & 5 & 6 \\
+      \hline
+      7 & 8 & 9 \\
+      \hline
+      10 & 11 & 12 \\
+    \end{array}
+    \right]
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{A matrix from a system of linear equations}
+  Consider the following system of linear equations:
+
+  \[
+  \begin{array}{ccccccr}
+    x_1 &+& x_2 &+& x_3 &=& 5\\
+    2x_1 &+& x_2 &+& 2x_3 &=& 10\\
+    3x_1 &+& x_2 &+& 2x_3 &=& 4
+  \end{array}
+  \]
+  \pause
+
+  Again we can view it as a vector equation:
+  \[
+  \begin{bmatrix}
+    1\\
+    2\\
+    3
+  \end{bmatrix}
+  x_1 +
+  \begin{bmatrix}
+    1\\
+    1\\
+    1
+  \end{bmatrix}
+  x_2 +
+  \begin{bmatrix}
+    1\\
+    2\\
+    2
+  \end{bmatrix}
+  x_3
+  =
+  \begin{bmatrix}
+    5\\
+    10\\
+    4
+  \end{bmatrix}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{A matrix from a system of linear equations}
+  {\small
+  From the following system of linear equations
+  \[
+  \begin{array}{ccccccr}
+    x_1 &+& x_2 &+& x_3 &=& 5\\
+    2x_1 &+& x_2 &+& 2x_3 &=& 10\\
+    3x_1 &+& x_2 &+& 2x_3 &=& 4
+  \end{array}
+  \]
+  
+  We can also view variables $x_1,x_2,x_3$ as a vector, i.e., let
+  $  \vect{x} = 
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}. $
+  }
+  
+  \pause
+  The coefficients form a nice rectangular ``matrix'' $A$:
+  \[
+  A =
+  \begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 1 & 2 \\
+    3 & 1 & 2
+  \end{bmatrix},
+  \]
+  \pause
+  and rewrite the system as
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 1 & 2 \\
+    3 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    5\\
+    10\\
+    4
+  \end{bmatrix}
+  \]
+
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-Vector Multiplication}
+  How would we understand the multiplication
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 1 & 2 \\
+    3 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \]
+  \pause
+
+  {\bf By rows.}  Consider the first row of $A$:
+  \pause
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \pause
+  =1\cdot x_1 + 1\cdot x_2 + 1\cdot x_3.
+  \]
+
+  Let's look at another two rows:
+  {\footnotesize
+  \[
+  \begin{bmatrix}
+    2 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \pause
+  =2\cdot x_1 + 1\cdot x_2 + 2\cdot x_3,
+  \ \ \ \ \ \
+  \pause
+  \begin{bmatrix}
+    3 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \pause
+  =3\cdot x_1 + 1\cdot x_2 + 2\cdot x_3,
+  \]
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-Vector Multiplication {\bf by Rows}}
+  We look at matrix-vector multiplication with ``row perspective''.
+  This is a common way to view matrix-vector multiplication.
+  \[
+  \begin{bmatrix}
+    \onslide<2->{1 & 1 & 1} \\
+    \onslide<3->{2 & 1 & 2} \\
+    \onslide<4->{3 & 1 & 2}
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    \onslide<2->{1\cdot x_1 + 1\cdot x_2 + 1\cdot x_3} \\
+    \onslide<3->{2\cdot x_1 + 1\cdot x_2 + 2\cdot x_3} \\
+    \onslide<4->{3\cdot x_1 + 1\cdot x_2 + 2\cdot x_3}
+  \end{bmatrix}
+  \]
+
+  Recall:
+  \only<2>{
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \pause
+  =1\cdot x_1 + 1\cdot x_2 + 1\cdot x_3.
+  \]
+  }
+  \only<3>{
+  \[
+  \begin{bmatrix}
+    2 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \pause
+  =2\cdot x_1 + 1\cdot x_2 + 2\cdot x_3,
+  \]
+  }
+  \only<4>{
+  \[
+  \begin{bmatrix}
+    3 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \pause
+  =3\cdot x_1 + 1\cdot x_2 + 2\cdot x_3,
+  \]
+  }
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Review: Dot product}
+
+  \begin{block}{Definition}
+    For $n$-vectors $\uv=[u_1,u_2,\ldots,u_n]$ and $\vv=[v_1,v_2,\ldots,v_n]$, the {\bf dot product} of $\uv$ and $\vv$, denoted by $\uv\cdot\vv$, is
+    \[
+    u_1\cdot v_1 + 
+    u_2\cdot v_2 +
+    \cdots +
+    u_n\cdot v_n 
+    \]
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-Vector Multiplication {\bf by Rows}}
+
+  We look at matrix-vector multiplication with ``row perspective'',
+  which can be written nicely with dot product.
+
+  I.e., from:
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 1 & 2 \\
+    3 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    1\cdot x_1 + 1\cdot x_2 + 1\cdot x_3 \\
+    2\cdot x_1 + 1\cdot x_2 + 2\cdot x_3 \\
+    3\cdot x_1 + 1\cdot x_2 + 2\cdot x_3
+  \end{bmatrix}
+  \]
+
+  we have
+  \[
+  \left[
+    \begin{array}{c}
+      \vect{r}_1 \\
+      \hline
+      \vect{r}_2 \\
+      \hline
+      \vect{r}_3 
+    \end{array}
+    \right]
+  \vect{x}
+  =
+  \left[
+    \begin{array}{c}
+      \vect{r}_1\cdot\vect{x} \\
+      \hline
+      \vect{r}_2\cdot\vect{x} \\
+      \hline
+      \vect{r}_3\cdot\vect{x}
+    \end{array}
+    \right],
+  \]
+  where
+  \[
+  \vect{r}_1=
+  \begin{bmatrix}
+    1 & 1 & 1
+  \end{bmatrix},
+  \ \ \
+  \vect{r}_2=
+  \begin{bmatrix}
+    2 & 1 & 2
+  \end{bmatrix},
+  \ \ \
+  \vect{r_3}=
+  \begin{bmatrix}
+    3 & 1 & 2
+  \end{bmatrix}.
+  \]
+\end{frame}
+  
