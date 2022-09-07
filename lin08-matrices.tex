@@ -2,6 +2,10 @@
 \lecturetitle{Lecture 10c: Matrices} 
 
 \begin{frame}
+  \frametitle{What is linear algebra?}
+\end{frame}
+
+\begin{frame}
   \frametitle{What is a matrix?}
 
   Matrices arise in many places.  We will see that there are
@@ -135,8 +139,23 @@
     4
   \end{bmatrix}
   \]
+\end{frame}
 
-  
+\begin{frame}
+  \frametitle{Size}
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1 & 1\\
+    2 & 1 & 2 & 5\\
+    3 & 1 & 2 & 4
+  \end{bmatrix}
+  \]
+  \pause
+
+  The {\bf size} of a matrix is determined by the number of rows and
+  columns.  A matrix with $m$ rows and $n$ columns is referred to as
+  an $m$-by-$n$ matrix or an $m\times n$ matrix.  We refers to $m$ and
+  $n$ as its {\bf dimensions}.
 \end{frame}
 
 \begin{frame}
@@ -417,7 +436,9 @@
 \end{frame} 
 
 \begin{frame}
-  \frametitle{Example: Matrix-Vector multiplication}
+  \frametitle{Two perspectives: Matrix-Vector multiplication}
+
+  {\bf Dot products between rows and the vector}
   \[
   \begin{bmatrix}
     a_{11} & a_{12} & a_{13} \\
@@ -442,6 +463,8 @@
       \right]
   }
   \]
+
+  {\bf Linear combination of column vectors}
   \[
   \begin{bmatrix}
     a_{11} & a_{12} & a_{13} \\
@@ -485,5 +508,329 @@
   \cdot x_3
   }
   \]
+
+  \onslide<9->{
+    \begin{block}{Dimensions}
+      If the matrix has $n$ columns, the vector should be an
+      $n$-vector.
+    \end{block}
+  }
 \end{frame}
 
+\begin{frame}
+  \frametitle{Document search}
+  \begin{itemize}
+  \item You have 1,000,000 documents in a library.  Given another
+    document, you would like to find similar documents from the
+    library.  How can you do that?
+    \pause
+  \item You need some way to measure document {\bf similarity}.
+    \pause
+  \item Suppose that you nave $N$ documents in the library:
+    $d_1,d_2,\ldots, d_N$.  Given a query document $q$, you want to
+    find document $d_i$ that maximize
+    \[
+    sim(d_i,q),
+    \]
+    where $sim(d,d')$ is the similarity score between documents $d$
+    and $d'$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Document vector models}
+
+  What is a document? \pause It's just a list of words.  \pause If you
+  throw all the ordering away, a document is simply a set of words.
+
+  \pause Let's start with an example.  Suppose that we only care about
+  5 words: \textcolor{blue}{{\tt dog}, {\tt cat}, {\tt food}, {\tt
+      restaurant},} and \textcolor{blue}{\tt coffee}.
+
+  \pause Consider the following 4 (very short) documents:
+
+  \begin{itemize}
+  \item $d_1$: {\tiny People love pets.  Most famous pets are cats and
+    dogs.} \\
+    \onslide<6->{$d_1=\{\mbox{\tt dog}, \mbox{\tt cat}\}$}
+  \item $d_2$: {\tiny Bar Mai has many restaurants with cheap foods.} \\
+    \onslide<7->{$d_2=\{\mbox{\tt restaurant}, \mbox{\tt food}\}$}
+  \item $d_3$: {\tiny Cat cafe used to be popular in Thailand.  People
+    buy coffee and play with cats there.} \\
+    \onslide<8->{$d_3=\{\mbox{\tt coffee}, \mbox{\tt cat}\}$}
+  \item $d_4$: {\tiny Dogs are human's best friends.  They were around
+    in civilization for a long long time.} \\
+    \onslide<9->{$d_4=\{\mbox{\tt dog}\}$}
+  \end{itemize}
+
+  \onslide<10->{
+  How can we translate these sets into vectors?
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Document vector models}
+
+  We assign a fixed co-ordinate for each word, and if a set contain a particular word, we put $1$ in that co-ordinate.
+
+  \pause Here are our 5 words: \textcolor{blue}{{\tt dog}, {\tt cat},
+    {\tt food}, {\tt restaurant},} and \textcolor{blue}{\tt coffee}.
+
+  Each document becomes:
+
+  \begin{itemize}
+  \item $d_1$: {\tiny People love pets.  Most famous pets are cats and
+    dogs.} \\
+    $d_1=\{\mbox{\tt dog}, \mbox{\tt cat}\}$ \\
+    \pause $\vect{d}_1=[1,1,0,0,0]$
+    \pause
+  \item $d_2$: {\tiny Bar Mai has many restaurants with cheap foods.} \\
+    $d_2=\{\mbox{\tt restaurant}, \mbox{\tt food}\}$\\
+    \pause $\vect{d}_2=[0,0,1,1,0]$
+    \pause
+  \item $d_3$: {\tiny Cat cafe used to be popular in Thailand.  People
+    buy coffee and play with cats there.} \\
+    $d_3=\{\mbox{\tt coffee}, \mbox{\tt cat}\}$ \\
+    \pause $\vect{d}_3=[0,1,0,0,1]$
+    \pause
+  \item $d_4$: {\tiny Dogs are human's best friends.  They were around
+    in civilization for a long long time.} \\
+    $d_4=\{\mbox{\tt dog}\}$\\
+    \pause $\vect{d}_4=[1,0,0,0,0]$
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Document vector models}
+  
+  Words: \textcolor{blue}{{\tt dog}, {\tt cat}, {\tt food}, {\tt
+      restaurant},} and \textcolor{blue}{\tt coffee}.
+
+  Suppose that we have query document:
+
+  $q$: {\tiny I love cats and coffee.  What restaurant should I
+    visit?} \\
+  \pause as a set:
+  $q=\{\mbox{\tt cat}, \mbox{\tt coffee}, \mbox{\tt restaurant}\}$ \\
+  \pause as a vector:
+  $\vect{q}=[0,1,0,1,1]$
+
+  \pause
+  \vspace{0.2in}
+  {\small
+  Our documents are:
+  \begin{itemize}
+  \item $d_1$: {\tiny People love pets.  Most famous pets are cats and
+    dogs.} \\
+    $d_1=\{\mbox{\tt dog}, \mbox{\tt cat}\}$ \ \ \ \ $\vect{d}_1=[1,1,0,0,0]$
+  \item $d_2$: {\tiny Bar Mai has many restaurants with cheap foods.} \\
+    $d_2=\{\mbox{\tt restaurant}, \mbox{\tt food}\}$ \ \ \ \ $\vect{d}_2=[0,0,1,1,0]$
+  \item $d_3$: {\tiny Cat cafe used to be popular in Thailand.  People
+    buy coffee and play with cats there.} \\
+    $d_3=\{\mbox{\tt coffee}, \mbox{\tt cat}\}$ \ \ \ \ $\vect{d}_3=[0,1,0,0,1]$
+  \item $d_4$: {\tiny Dogs are human's best friends.  They were around
+    in civilization for a long long time.} \\
+    $d_4=\{\mbox{\tt dog}\}$ \ \ \ \ $\vect{d}_4=[1,0,0,0,0]$
+  \end{itemize}
+  }
+  
+  \pause
+  How can we define ``similarity'' measure?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Dot products as a similarity measure}
+
+  From the previous example, we see that the dot products between
+  $\vect{d}_i$'s and $\vect{q}$ count the number of common words.
+
+  \pause
+  \vspace{0.1in}
+  This simple idea can be extended in many ways.
+
+  \pause
+  \begin{itemize}
+  \item We can increase our ``dictionary'''s size to include more
+    words.
+    \pause
+  \item We can group similar words into the same ``co-ordinates''.
+    \pause
+  \item In fact, the dot product measures the ``angle'' between
+    vectors.  For vectors over $\rf$, we have that
+    \[
+    \uv\cdot\vv = |\uv||\vv|\cos\theta,
+    \]
+    where $\theta$ is the angle between vectors $\uv$ and $\vv$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Computing all similarity scores}
+
+  If we have documents $\vect{d}_1,\vect{d}_1,\ldots,\vect{d}_N$, as
+  vectors, and a query $\vect{q}$, how can we compute all similarity
+  scores?
+
+  \pause
+  By performing matrix-vector multiplication:
+  
+  \[
+  \left[
+    \begin{array}{c}
+      \ \ \ \ \ \vect{d}_1 \ \ \ \ \ \\
+      \hline
+      \vect{d}_2 \\
+      \hline
+      \vdots \\
+      \hline
+      \vect{d}_N
+    \end{array}
+    \right]
+  \begin{bmatrix}
+    \\
+    \vect{q}\\
+    \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    sim(\vect{d}_1,\vect{q}) \\
+    sim(\vect{d}_2,\vect{q}) \\
+    \vdots \\
+    sim(\vect{d}_N,\vect{q})
+  \end{bmatrix}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vector-matrix multiplication}
+
+  Let's consider another direction.
+  
+  What is
+  {\small
+  \[
+  \begin{bmatrix}
+    x_1 & x_2 & x_3
+  \end{bmatrix}
+  \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34}
+  \end{bmatrix}?
+  \]
+  }
+  \pause
+  As a linear combination 
+  \vspace{1in}
+
+  \pause
+  As dot products
+  \vspace{1in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-matrix multiplication}
+
+  Consider
+  \[
+  \begin{bmatrix}
+    x_{11} & x_{12} & x_{13} \\
+    x_{21} & x_{22} & x_{23}
+  \end{bmatrix}
+  \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34}
+  \end{bmatrix}.
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-matrix multiplication (based on matrix-vector
+    multiplication)}
+
+  \[
+  \begin{bmatrix}
+    x_{11} & x_{12} & x_{13} \\
+    x_{21} & x_{22} & x_{23}
+  \end{bmatrix}
+  \left[
+  \begin{array}{c|c|c|c}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34}
+  \end{array}
+  \right].
+  \]
+
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-matrix multiplication (based on vector-matrix
+    multiplication)}
+
+  \[
+  \left[
+  \begin{array}{ccc}
+    x_{11} & x_{12} & x_{13} \\
+    \hline
+    x_{21} & x_{22} & x_{23}
+  \end{array}
+  \right]
+  \left[
+  \begin{array}{cccc}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34}
+  \end{array}
+  \right].
+  \]
+
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix transpose}
+
+  If $A$ is an $m\times n$ matrix
+  {\footnotesize
+  \[
+  \left[
+  \begin{array}{ccccc}
+    a_{11} & a_{12} & a_{13} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & a_{23} & \cdots & a_{2n} \\
+    \vdots & \vdots & \vdots & & \vdots \\
+    a_{m1} & a_{m2} & a_{m3} & \cdots & a_{mn}
+  \end{array}
+  \right],
+  \]
+  }
+  the \textcolor{red}{\bf transpose} of $A$, denoted by $A^{T}$ is
+  an $n\times m$ matrix {\footnotesize
+  \[
+  \left[
+  \begin{array}{cccc}
+    a_{11} & a_{21} & \cdots & a_{m1} \\
+    a_{12} & a_{22} & \cdots & a_{m2} \\
+    a_{13} & a_{23} & \cdots & a_{m3} \\
+    \vdots & \vdots & & \vdots \\
+    a_{1n} & a_{m2} & \cdots & a_{mn}
+  \end{array}
+  \right].
+  \]
+  }
+  \vspace{0.1in}
+
+  \pause
+
+  {\small
+    Remark: We usually view a vector as a column vector.
+    Therefore, a dot product between $m$-vectors can be viewed also as
+    a matrix multiplication:
+  \[
+  \uv\cdot\vv = \uv^T\vv
+  \]
+  }
+\end{frame}
