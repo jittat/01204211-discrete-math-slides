@@ -287,7 +287,7 @@
   \frametitle{Matrix-Vector Multiplication {\bf by Rows}}
 
   We look at matrix-vector multiplication with ``row perspective'',
-  which can be written nicely with dot product.
+  which can be written nicely with \textcolor{blue}{\bf dot product}.
 
   I.e., from:
   \[
@@ -349,5 +349,141 @@
     3 & 1 & 2
   \end{bmatrix}.
   \]
+
+  \pause
+  \begin{block}{Dot-product perspective}
+    The matrix-vector product is a vector of {\bf dot products}
+    between each rows and the vector.
+  \end{block}
 \end{frame}
   
+\begin{frame}
+  \frametitle{Matrix-Vector Multiplication {\bf by Columns}}
+
+  However, another nice way to look at matrix-vector multiplication is
+  {\bf by columns}.  Notice that:
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 1 & 2 \\
+    3 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    1\cdot x_1 + 1\cdot x_2 + 1\cdot x_3 \\
+    2\cdot x_1 + 1\cdot x_2 + 2\cdot x_3 \\
+    3\cdot x_1 + 1\cdot x_2 + 2\cdot x_3
+  \end{bmatrix}
+  \]
+  \pause
+  can be written as
+  \[
+  \begin{bmatrix}
+    1\\
+    2\\
+    3
+  \end{bmatrix}
+  x_1 +
+  \begin{bmatrix}
+    1\\
+    1\\
+    1
+  \end{bmatrix}
+  x_2 +
+  \begin{bmatrix}
+    1\\
+    2\\
+    2
+  \end{bmatrix}
+  x_3
+  =
+  \begin{bmatrix}
+    5\\
+    10\\
+    4
+  \end{bmatrix}
+  \]
+
+  \pause
+  \begin{block}{Linear combination perspective}
+    The matrix-vector product is a {\bf linear combination} of column vectors.
+  \end{block}
+  
+\end{frame} 
+
+\begin{frame}
+  \frametitle{Example: Matrix-Vector multiplication}
+  \[
+  \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33} \\
+    a_{41} & a_{42} & a_{43}
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1 \\
+    x_2 \\
+    x_3 
+  \end{bmatrix}
+  =
+  \onslide<2->{
+    \left[
+      \begin{array}{c}
+        \onslide<2->{a_{11}\cdot x_1 + a_{12}\cdot x_2 + a_{13}\cdot x_3} \\
+        \onslide<3->{a_{21}\cdot x_1 + a_{22}\cdot x_2 + a_{23}\cdot x_3} \\
+        \onslide<4->{a_{31}\cdot x_1 + a_{32}\cdot x_2 + a_{33}\cdot x_3} \\
+        \onslide<5->{a_{41}\cdot x_1 + a_{42}\cdot x_2 + a_{43}\cdot x_3} 
+      \end{array}
+      \right]
+  }
+  \]
+  \[
+  \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33} \\
+    a_{41} & a_{42} & a_{43}
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1 \\
+    x_2 \\
+    x_3 
+  \end{bmatrix}
+  =
+  \onslide<6->{
+  \begin{bmatrix}
+    a_{11} \\
+    a_{21} \\
+    a_{31} \\
+    a_{41}
+  \end{bmatrix}
+  \cdot x_1
+  +
+  }
+  \onslide<7->{
+  \begin{bmatrix}
+    a_{12} \\
+    a_{22} \\
+    a_{32} \\
+    a_{42}
+  \end{bmatrix}
+  \cdot x_2
+  +
+  }
+  \onslide<8->{
+  \begin{bmatrix}
+    a_{13} \\
+    a_{23} \\
+    a_{33} \\
+    a_{43}
+  \end{bmatrix}
+  \cdot x_3
+  }
+  \]
+\end{frame}
+
