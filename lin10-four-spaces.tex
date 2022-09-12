@@ -1,0 +1,249 @@
+\include{commons}
+\lecturetitle{Lecture 11b: Four fundamental subspaces (I)}
+
+\begin{frame}
+  \frametitle{What is a matrix?}
+
+  Matrices arise in many places.  We will see that there are
+  essentially two ways to look at matrices.
+  
+  \[
+  \left[
+    \begin{array}{c|c|c}
+      1 & 2 & 3 \\
+      4 & 5 & 6 \\
+      7 & 8 & 9 \\
+      10 & 11 & 12 \\
+    \end{array}
+    \right]
+  =
+  \left[
+    \begin{array}{ccc}
+      1 & 2 & 3 \\
+      4 & 5 & 6 \\
+      7 & 8 & 9 \\
+      10 & 11 & 12 \\
+    \end{array}
+    \right]
+  =
+  \left[
+    \begin{array}{ccc}
+      1 & 2 & 3 \\
+      \hline
+      4 & 5 & 6 \\
+      \hline
+      7 & 8 & 9 \\
+      \hline
+      10 & 11 & 12 \\
+    \end{array}
+    \right]
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vector spaces related to a matrix}
+
+  Consider an $m$-by-$n$ matrix $A$ over $\rf$.
+
+  \pause
+  We can view $A$ as
+  \begin{itemize}
+  \item $n$ columns of $m$-vectors:
+  $\vect{c}_1,\vect{c}_2,\ldots,\vect{c}_n$     
+  \pause
+  \item $m$ rows of $n$-vectors:
+  $\vect{r}_1,\vect{r}_2,\ldots,\vect{r}_m$
+  \end{itemize}
+
+  \pause When we have a set of vectors, recall that its span forms a
+  vector space.
+
+  \vspace{0.2in}
+  
+  We have
+  \pause
+  \begin{itemize}
+  \item Column space: $\vspan~\{\vect{c}_1,\vect{c}_2,\ldots,\vect{c}_n\} \subseteq \rf^{m}$     
+    \pause
+  \item Row space: $\vspan~\{\vect{r}_1,\vect{r}_2,\ldots,\vect{r}_m\} \subseteq \rf^{n}$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Subspaces}
+
+  \begin{block}{Definition}
+    Let $\V$ and $\W$ be vector spaces such that $\V\subseteq\W$.  We
+    say that $\V$ is a \textcolor{red}{\bf subspace} of $\W$.
+  \end{block}
+
+  \pause
+
+  {\bf Examples:}
+  \begin{itemize}
+  \item $\vspan~\{[1,1]\}$ is a subspace of $\rf^2$.
+  \item $\vspan~\{[1,0,0],[0,1,1]\}$ is a subspace of $\rf^3$.
+  \item $\vspan~\{[1,0,0],[0,1,1],[1,1,2]\}$ is a subspace of $\rf^3$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example 1}
+
+  Let
+  \[
+  A =
+  \begin{bmatrix}
+    1 & 2 & 4 \\
+    0 & 1 & 3
+  \end{bmatrix}
+  \]
+
+  \vspace{0.2in}
+  
+  \pause
+  \begin{itemize}
+  \item Column space:
+    \[
+      {\mathcal R}(A) =
+      \{
+      \alpha_1[1,0] + \alpha_2[2,1] +\alpha_3[4,3] \;|\; \alpha_1,\alpha_2,\alpha_3\in\rf
+      \}
+      \pause
+      = \rf^2.
+      \]
+      Note that: $\dim {\mathcal R}(A) = \pause 2$ \pause
+    \item Row space:
+    \[
+      {\mathcal R}(A^T) =
+      \{
+      \alpha_1[1,2,4] + \alpha_2[0,1,3] \;|\; \alpha_1,\alpha_2\in\rf
+      \}
+      \pause
+      \subseteq \rf^3.
+      \]
+      Note that: $\dim {\mathcal R}(A^T) = \pause 2$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example 1 (cont.)}
+
+  Let
+  \[
+  A =
+  \begin{bmatrix}
+    1 & 2 & 4 \\
+    0 & 1 & 3
+  \end{bmatrix}
+  \]
+
+  Is there any other way to obtain vector spaces from $A$?  \pause
+
+  \vspace{0.2in}
+
+  We can think of $A$ as a coefficient matrix of a system of
+  homogenous linear equations:
+  \[
+  A\vect{x} = 0.
+  \]
+  In this case, we have
+  \[
+  \begin{bmatrix}
+    1 & 2 & 4 \\
+    0 & 1 & 3
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\ x_2
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    0\\ 0
+  \end{bmatrix}
+  \]
+  \pause
+  The set of solutions $\{\vect{x} \;|\; A\vect{x}=\vect{0} \}$ form a vector space.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example 1 (cont.)}
+
+  Given a matrix $A$, we can look at the matrix-vector product $A\vect{x}$.
+
+  Consider
+  \[
+  \begin{bmatrix}
+    1 & 2 & 4 \\
+    0 & 1 & 3
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\ x_2
+  \end{bmatrix}.
+  \]
+
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Four fundamental subspaces}
+
+  \begin{block}{Four fundamental subspaces}
+    Given an $m$-by-$n$ matrix $A$, we have the following subspaces
+    \begin{itemize}
+    \item The column space of $A$ (denoted by ${\mathcal R}(A)$
+      \onslide<2->{$\subseteq \rf^m$}
+      )
+    \item The row space of $A$ (denoted by ${\mathcal R}(A^T)$
+      \onslide<3->{$\subseteq \rf^n$}
+      )
+    \item The nullspace of $A$
+      \[
+        {\mathcal N}(A) = \{\vect{x} \;|\; A\vect{x}=\vect{0}\}
+        \onslide<4->{\subseteq \rf^n}
+      \]
+    \item The left nullspace of $A$
+      \[
+        {\mathcal N}(A^T) = \{\vect{y} \;|\; A^T\vect{y}=\vect{0}\}
+        \onslide<5->{\subseteq \rf^m}
+      \]
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Linearly independent rows}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ranks}
+
+  \begin{block}{Definition}
+    Consider an $m$-by-$n$ matrix $A$.
+    \begin{itemize}
+    \item The \textcolor{red}{\bf row rank} of $A$ is the maximum
+      number of linearly independent rows of $A$.
+    \item The \textcolor{red}{\bf column rank} of $A$ is the maximum
+      number of linearly independent columns of $A$.
+    \end{itemize}
+  \end{block}
+
+  \vspace{0.2in}
+
+  \pause
+
+  {\bf Remark:} The column rank of $A$ is $\dim {\mathcal R}(A)$.  The
+  row rank of $A$ is $\dim {\mathcal R}(A^T)$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Row rank = Column rank}
+
+  \begin{theorem}
+    For any matrix $A$, its row rank equals its column rank.
+  \end{theorem}
+
+  \vspace{0.2in}
+  {\small We will prove this theorem next time.}
+  
+\end{frame}

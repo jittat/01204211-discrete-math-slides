@@ -138,6 +138,18 @@ We also can, equivalently, write them in matrix form.
 \end{frame}
 
 \begin{frame}
+  \frametitle{Review: Properties of matrix multiplications}
+
+  Let $A,B,C$ be matrices.
+  
+  \begin{itemize}
+  \item (Associative)\ \ \ $(AB)C = A(BC)$
+  \item (Distributive)\ \ \ $A(B+C) = AB + AC$
+  \item In general not commutative:  Usually $AB \neq BA$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
   \frametitle{Identity Matrix}
 
   \begin{block}{Definition}
@@ -208,9 +220,52 @@ We also can, equivalently, write them in matrix form.
     }
   
     \onslide<5->{
-      {\bf Remark 3:} $A$ might not have an inverse.
+      {\bf Remark 3:} $A$ might not have an inverse.  If $A$ has an inverse, we say that $A$ is {\bf invertible.}
     }
   }
+\end{frame}
+
+\begin{frame}
+  \begin{lemma}
+    If $A$ and $B$ are invertible, we have that
+    \[
+    (AB)^{-1} = B^{-1}A^{-1}.
+    \]
+  \end{lemma}
+  
+  \begin{proof}
+    Note that
+    \[
+    AB \pause (B^{-1}A^{-1}) =
+    A(BB^{-1})A^{-1} =
+    \pause
+    AIA^{-1} = AA^{-1} =
+    \pause
+    I.
+    \]
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Transpose}
+  \begin{itemize}
+  \item $(AB)^T=B^TA^T$.
+  \item $(A^T)^{-1}=(A^{-1})^T$.
+    \pause
+
+    This is because
+    \[
+    A^T(A^{-1})^T=(A^{-1}A)^T=I^T=I.
+    \]
+  \end{itemize}
+
+  \pause
+  \begin{block}{Definition}
+    Matrix $A$ is \textcolor{red}{\bf symmetric} if
+    \[
+    A=A^T.
+    \]
+  \end{block}
 \end{frame}
 
 \begin{frame}
@@ -619,4 +674,8 @@ This is called an {\bf LU decomposition} of $A$.
 
 \begin{frame}
   \frametitle{Why is an LU decomposition useful? (2)}
+\end{frame}
+
+\begin{frame}
+  \frametitle{LU decomposition - pivots}
 \end{frame}
