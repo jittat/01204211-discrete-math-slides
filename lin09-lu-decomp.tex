@@ -1,0 +1,622 @@
+\include{commons}
+\lecturetitle{Lecture 11a: Guassian Elimination and LU Decomposition} 
+
+\begin{frame}
+  \frametitle{Review: A Linear System}
+
+  Consider the following system of linear equations:
+
+  \[
+  \begin{array}{ccccccr}
+    x_1 &+& x_2 &+& x_3 &=& 5\\
+    2x_1 &+& x_2 &+& 2x_3 &=& 10\\
+    3x_1 &+& x_2 &+& 2x_3 &=& 4
+  \end{array}
+  \]
+  \pause
+
+  Again we can view it as a vector equation:
+  \[
+  \begin{bmatrix}
+    1\\
+    2\\
+    3
+  \end{bmatrix}
+  x_1 +
+  \begin{bmatrix}
+    1\\
+    1\\
+    1
+  \end{bmatrix}
+  x_2 +
+  \begin{bmatrix}
+    1\\
+    2\\
+    2
+  \end{bmatrix}
+  x_3
+  =
+  \begin{bmatrix}
+    5\\
+    10\\
+    4
+  \end{bmatrix}
+  \]
+  \pause
+
+  Solving this system is equivalent to testing if
+  \[
+    [5,10,4]\in\mathrm{Span}~\{[1,2,3],[1,1,1],[1,2,2]\}.
+    \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: Testing spans}
+
+  \begin{block}{Problem}
+    Given a set of $n$-vectors $S=\{\uv_1,\uv_2,\ldots,\uv_k\}$ over
+    $\ff$ and an $n$-vector $\vv$, can we check if $\vv\in\vspan~S$?
+  \end{block}
+
+  {\small
+  {\bf Example:}
+  Consider $3$-vectors over $\rf$.  Let
+  \[
+  \uv_1=[1,2,3],
+  \uv_2=[1,1,1], \uv_3=[1,2,2].
+  \]
+  We would like to check if
+  \[
+  \vv=[10,13,29]\in\vspan~\{\uv_1,\uv_2,\uv_3\}.
+  \]
+
+  Let us define variables $\alpha_1,\alpha_2,\alpha_3$ such that
+  $\vv=\alpha_1\uv_1 + \alpha_2\uv_2 + \alpha_3\uv_3$; i.e., we want
+  $\alpha_1,\alpha_2,\alpha_3$ to be such that
+\[
+\alpha_1
+\begin{bmatrix}
+  1 \\
+  2 \\
+  3
+\end{bmatrix}
++
+\alpha_2
+\begin{bmatrix}
+  1 \\
+  1 \\
+  1
+\end{bmatrix}
++
+\alpha_3
+\begin{bmatrix}
+  1 \\
+  2 \\
+  2
+\end{bmatrix}
+=
+\begin{bmatrix}
+  10 \\
+  13 \\
+  29
+\end{bmatrix}
+\]
+}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix form}
+  
+We can write these constraints down as the following linear equations.
+\[
+\begin{array}{ccccccl}
+  1\alpha_1 &+& 1\alpha_2 &+& 1\alpha_3 &=& 10\\
+  2\alpha_1 &+& 1\alpha_2 &+& 2\alpha_3 &=& 13\\
+  3\alpha_1 &+& 1\alpha_2 &+& 2\alpha_3 &=& 29\\
+\end{array}
+\]
+
+We also can, equivalently, write them in matrix form.
+\[
+\begin{bmatrix}
+  1 & 1 & 1 \\
+  2 & 1 & 2 \\
+  3 & 1 & 2
+\end{bmatrix}
+\begin{bmatrix}
+  \alpha_1 \\
+  \alpha_2 \\
+  \alpha_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+  10 \\
+  13 \\
+  29
+\end{bmatrix}
+\]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Identity Matrix}
+
+  \begin{block}{Definition}
+    An $n$-by-$n$ matrix $I$ is an \textcolor{red}{\bf identity
+      matrix} if
+    \[
+    I=
+    \only<1>{
+    \begin{bmatrix}
+      1 & 0 & \cdots & 0 \\
+      0 & 1 & \cdots & 0 \\
+      \vdots & \vdots &  & \vdots \\
+      0 & 0 & \cdots & 1 \\
+    \end{bmatrix}
+    }
+    \onslide<2->{
+    \begin{bmatrix}
+      a_{11} & a_{12} & \cdots & a_{1n} \\
+      a_{21} & a_{22} & \cdots & a_{2n} \\
+      \vdots & \vdots &  & \vdots \\
+      a_{n1} & a_{n2} & \cdots & a_{nn} \\
+    \end{bmatrix},
+    }
+    \]
+    \onslide<2->{
+      such that $a_{ii}=1$ for $1\leq i\leq n$ and $a_{ij}=0$ for all $i\neq j$.
+    }
+  \end{block}
+  
+  \onslide<3->{
+    For any $n$-by-$m$ matrix $A$,
+    \[
+    IA = A,
+    \]
+    and for any $m$-by-$n$ matrix $B$,
+    \[
+    BI = B.
+    \]
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Inverses}
+
+  \begin{block}{Definition}
+    For an $n$-by-$n$ matrix $A$, the \textcolor{red}{\bf inverse of
+      $A$}, denoted by $A^{-1}$, is an $n$-by-$n$ matrix such that
+    \[
+    AA^{-1}=A^{-1}A=I.
+    \]
+  \end{block}
+
+  {\small
+
+    {\bf Remark 1:} You can think of an inverse as a matrix that let
+    you ``get back'' anything after multiplying with $A$, i.e.,
+    \[
+    A^{-1}AB = B.
+    \]
+    
+    \onslide<2->{
+      {\bf Remark 2:} $A^{-1}$ is {\em both} left and right inverses.  Note
+      that if $L$ is a left inverse and $R$ is a right inverse, they must
+      be the same, since
+      \[
+      \onslide<4->{R=IR=(LA)R=}LAR \onslide<3->{=L(AR)=LI=L}.
+      \]
+    }
+  
+    \onslide<5->{
+      {\bf Remark 3:} $A$ might not have an inverse.
+    }
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solving a system of linear equations}
+  For an $n\times n$ matrix $A$ and a system of linear equations
+  \[
+  A\vect{x} =\vect{b},
+  \]
+  with $n$ variables $\vect{x}=[x_1,x_2,\ldots,x_n]$,
+  if $A^{-1}$ is an inverse of $A$, we can use it to solve for
+  $\vect{x}$.
+
+  \pause Note that we can multiply on the left of both sides with
+  $A^{-1}$ to obtain
+  \[
+  \onslide<3->{\vect{x} =} A^{-1}A\vect{x} = A^{-1}\vect{b}.
+  \]
+
+  \pause
+  \pause
+  Thus
+  \[
+  \vect{x} = A^{-1}\vect{b},
+  \]
+  is the solution of the system.
+\end{frame}
+
+\begin{frame}
+    
+    \[
+    \begin{bmatrix}
+      1 & 1 & 1 \\
+      2 & 1 & 2 \\
+      3 & 1 & 2
+    \end{bmatrix}
+    \begin{bmatrix}
+      \alpha_1 \\
+      \alpha_2 \\
+      \alpha_3
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      10 \\
+      13 \\
+      29
+    \end{bmatrix}
+    \]
+
+    Let's perform Gaussian elimination.
+    
+    \pause
+
+    \[
+    \begin{bmatrix}
+      1 & 1 & 1 \\
+      0 & -1 & 0 \\
+      0 & -2 & -1
+    \end{bmatrix}
+    \begin{bmatrix}
+      \alpha_1 \\
+      \alpha_2 \\
+      \alpha_3
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      10 \\
+      -7 \\
+      -1
+    \end{bmatrix}
+    \]
+    
+    \pause
+
+    \[
+    \begin{bmatrix}
+      1 & 1 & 1 \\
+      0 & 1 & 0 \\
+      0 & 0 & -1
+    \end{bmatrix}
+    \begin{bmatrix}
+      \alpha_1 \\
+      \alpha_2 \\
+      \alpha_3
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      10 \\
+      7 \\
+      13
+    \end{bmatrix}
+    \]
+    
+    \pause
+
+    We can perform backward substitution to find that $\alpha_1=16,
+    \alpha_2=7,$ and $\alpha_3=-13$.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Gaussian elimination and matrix operations}
+
+We will look closer to see how we could ``describe'' the steps from
+Gaussian elimination using matrix multiplications.  This would be very
+useful later.
+We start with
+\[
+A =
+\begin{bmatrix}
+  1 & 1 & 1 \\
+  2 & 1 & 2 \\
+  3 & 1 & 2
+\end{bmatrix}.
+\]
+The first row operation we did is: $R_2\leftarrow R_2-2R_1$
+
+Can we explain this step with a matrix multiplication? \pause I.e., can we find $M$ such that
+\[
+MA = 
+\begin{bmatrix}
+  1 & 1 & 1 \\
+  0 & -1 & 0 \\
+  3 & 1 & 2
+\end{bmatrix}.
+\]
+
+\end{frame}
+
+\begin{frame}
+We currently have
+\[
+MA =
+\begin{bmatrix}
+  1 & 1 & 1 \\
+  0 & -1 & 0 \\
+  3 & 1 & 2
+\end{bmatrix}.
+\]
+The next row operation we did is: $R_3\leftarrow R_3-3R_1$
+
+Can we explain this step with a matrix multiplication? \pause I.e., can we find $M'$ such that
+\[
+M'MA = 
+\begin{bmatrix}
+  1 & 1 & 1 \\
+  0 & -1 & 0 \\
+  0 & -2 & -1
+\end{bmatrix}.
+\]
+\end{frame}
+
+\begin{frame}
+We currently have
+\[
+M'MA =
+\begin{bmatrix}
+  1 & 1 & 1 \\
+  0 & -1 & 0 \\
+  0 & -2 & -1
+\end{bmatrix}.
+\]
+The next row operation we did is: $R_3\leftarrow R_3-2R_2$
+
+Can we explain this step with a matrix multiplication? \pause I.e., can we find $M''$ such that
+\[
+M''M'MA = 
+\begin{bmatrix}
+  1 & 1 & 1 \\
+  0 & -1 & 0 \\
+  0 & 0 & -1
+\end{bmatrix}.
+\]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Elementary matrices}
+  
+  {\footnotesize
+               
+    \begin{tabular}{l|c|c|l}
+      Operations & Result & Elementary matrix & Remarks \\
+      \hline
+      & & & \\
+      $R_2\leftarrow R_2 - 2R_1$
+      &
+      $
+      \begin{bmatrix}
+        1 & 1 & 1 \\
+        0 & -1 & 0 \\
+        3 & 1 & 2
+      \end{bmatrix}
+      $
+      &
+      $
+      E_{12}=
+      \begin{bmatrix}
+        1 & 0 & 0 \\
+        -2 & 1 & 0 \\
+        0 & 0 & 1
+      \end{bmatrix}
+      $
+      &
+      \\
+      & & & \\
+      \hline
+      & & & \\
+      $R_3\leftarrow R_3-3R_1$
+      &
+      $
+      \begin{bmatrix}
+        1 & 1 & 1 \\
+        0 & -1 & 0 \\
+        0 & -2 & -1
+      \end{bmatrix}
+      $
+      &
+      $
+      E_{13}=
+      \begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        -3 & 0 & 1
+      \end{bmatrix}
+      $
+      &
+      \\
+      & & & \\
+      \hline
+      & & & \\
+      $R_3\leftarrow R_3 - 2R_2$
+      &
+      $
+      \begin{bmatrix}
+        1 & 1 & 1 \\
+        0 & -1 & 0 \\
+        0 & 0 & -1
+      \end{bmatrix}
+      $
+      &
+      $
+      E_{23}=
+      \begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & -2 & 1
+      \end{bmatrix}
+      $
+      &
+      \\
+      & & & \\
+    \end{tabular}
+  }
+  
+\end{frame}
+
+\begin{frame}
+Let's denote the final upper triangular matrix by $B$.  Therefore, we
+have
+\[
+E_{23}E_{13}E_{12}A = B,
+\]
+or equivalently,
+\[
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & -2 & 1
+\end{bmatrix}
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  -3 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  -2 & 1 & 0 \\
+  0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+  1 & 1 & 1 \\
+  2 & 1 & 2 \\
+  3 & 1 & 2
+\end{bmatrix}
+=
+\begin{bmatrix}
+  1 & 1 & 1 \\
+  0 & -1 & 0 \\
+  0 & 0 & -1
+\end{bmatrix}.
+\]
+
+\end{frame}
+\begin{frame}
+  Recall that we have
+  \[
+  E_{12}=
+  \begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & -2 & 1
+\end{bmatrix}, \ \ 
+E_{13}=
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  -3 & 0 & 1
+\end{bmatrix}, \ \
+E_{23}=
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  -2 & 1 & 0 \\
+  0 & 0 & 1
+\end{bmatrix}.
+  \]
+
+  Let $E_{12}^{-1}, E_{13}^{-1}, E_{23}^{-1}$ be inverses of $E_{12},
+  E_{13}, E_{23}$, respectively.
+
+It is not hard to see that
+\[
+E_{12}^{-1} = \pause
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  2 & 1 & 0 \\
+  0 & 0 & 1
+\end{bmatrix}, \ \ 
+E_{13}^{-1} = \pause
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  3 & 0 & 1
+\end{bmatrix}, \ \ 
+E_{23}^{-1} = \pause
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 2 & 1
+\end{bmatrix}.
+\]
+Therefore, we can write
+\[
+E_{12}^{-1}E_{13}^{-1}E_{23}^{-1}
+E_{23}E_{13}E_{12}A = A =
+E_{12}^{-1}E_{13}^{-1}E_{23}^{-1}
+B,
+\]
+
+\end{frame}
+\begin{frame}
+After working out the multiplication
+\[
+E_{12}^{-1}E_{13}^{-1}E_{23}^{-1} =
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  2 & 1 & 0 \\
+  0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  3 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 2 & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  2 & 1 & 0 \\
+  3 & 2 & 1
+\end{bmatrix}
+\]
+we see that
+\[
+\begin{bmatrix}
+  1 & 1 & 1 \\
+  2 & 1 & 2 \\
+  3 & 1 & 2
+\end{bmatrix}
+=
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  2 & 1 & 0 \\
+  3 & 2 & 1
+\end{bmatrix}
+\begin{bmatrix}
+  1 & 1 & 1 \\
+  0 & -1 & 0 \\
+  0 & 0 & -1
+\end{bmatrix}.
+\]
+
+The matrix $A$ is ``factored'' into two matrices.  We denote the first
+matrix $L$ (for lower triangular) and the second one $U$ (for upper
+triangular).
+
+This is called an {\bf LU decomposition} of $A$.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Why is an LU decomposition useful? (1)}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Why is an LU decomposition useful? (2)}
+\end{frame}
