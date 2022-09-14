@@ -1,0 +1,150 @@
+\include{commons}
+\lecturetitle{Lecture 11b: Four fundamental subspaces (II)}
+
+\begin{frame}
+  \frametitle{What is a matrix?}
+
+  Matrices arise in many places.  We will see that there are
+  essentially two ways to look at matrices.
+  
+  \[
+  \left[
+    \begin{array}{c|c|c}
+      1 & 2 & 3 \\
+      4 & 5 & 6 \\
+      7 & 8 & 9 \\
+      10 & 11 & 12 \\
+    \end{array}
+    \right]
+  =
+  \left[
+    \begin{array}{ccc}
+      1 & 2 & 3 \\
+      4 & 5 & 6 \\
+      7 & 8 & 9 \\
+      10 & 11 & 12 \\
+    \end{array}
+    \right]
+  =
+  \left[
+    \begin{array}{ccc}
+      1 & 2 & 3 \\
+      \hline
+      4 & 5 & 6 \\
+      \hline
+      7 & 8 & 9 \\
+      \hline
+      10 & 11 & 12 \\
+    \end{array}
+    \right]
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Four fundamental subspaces}
+
+  \begin{block}{Four fundamental subspaces}
+    Given an $m$-by-$n$ matrix $A$, we have the following subspaces
+    \begin{itemize}
+    \item The column space of $A$ (denoted by ${\mathcal R}(A)$
+      {$\subseteq \rf^m$}
+      )
+    \item The row space of $A$ (denoted by ${\mathcal R}(A^T)$
+      {$\subseteq \rf^n$}
+      )
+    \item The nullspace of $A$
+      \[
+        {\mathcal N}(A) = \{\vect{x} \;|\; A\vect{x}=\vect{0}\}
+        {\subseteq \rf^n}
+      \]
+    \item The left nullspace of $A$
+      \[
+        {\mathcal N}(A^T) = \{\vect{y} \;|\; A^T\vect{y}=\vect{0}\}
+        {\subseteq \rf^m}
+      \]
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Four fundamental subspaces}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ranks}
+
+  \begin{block}{Definition}
+    Consider an $m$-by-$n$ matrix $A$.
+    \begin{itemize}
+    \item The \textcolor{red}{\bf row rank} of $A$ is the maximum
+      number of linearly independent rows of $A$.
+    \item The \textcolor{red}{\bf column rank} of $A$ is the maximum
+      number of linearly independent columns of $A$.
+    \end{itemize}
+  \end{block}
+
+  \vspace{0.2in}
+
+  {\bf Remark:} The column rank of $A$ is $\dim {\mathcal R}(A)$.  The
+  row rank of $A$ is $\dim {\mathcal R}(A^T)$.
+\end{frame}
+
+\begin{frame}
+  \begin{theorem}
+    For any matrix $A$, its row rank equals its column rank.
+  \end{theorem}
+
+  \begin{proof}
+    Let $r$ be the column rank.  We will show that there are $r$
+    $n$-vectors that span its row space.  This implies that the row
+    rank is at most $r$.  We can use the same argument again on $A^T$
+    to obtain that the column rank is at most the row rank; thus, they
+    must be equal.
+
+    \vspace{1.5in}
+  \end{proof}
+  
+\end{frame}
+
+\begin{frame}
+  \begin{proof}[Proof (cont.)]
+    \vspace{3in}
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Rank and nullity}
+
+  Given an $m$-by-$n$ matrix $A$, the rank of $A$ is $\dim~{\mathcal
+    R}(A)$.  Let $r$ be the rank of $A$.
+
+  What is $\dim~{\mathcal N}(A)$?
+
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Dimensions}
+
+  \begin{block}{Four fundamental subspaces}
+    Given an $m$-by-$n$ matrix $A$ of rank $r$, we have the following
+    subspaces
+    \begin{itemize}
+    \item The column space of $A$ (denoted by ${\mathcal R}(A)$
+      {$\subseteq \rf^m$})
+
+      $\dim~{\mathcal R}(A) = r$.
+    \item The row space of $A$ (denoted by ${\mathcal R}(A^T)$
+      {$\subseteq \rf^n$})
+
+      $\dim~{\mathcal R}(A^T) = r$.
+    \item The nullspace of $A$ (denoted by ${\mathcal N}(A) \subseteq \rf^n$)
+
+      $\dim~{\mathcal N}(A) = n-r$.
+    \item The left nullspace of $A$ (denoted by ${\mathcal N}(A^T) \subseteq \rf^m$)
+
+      $\dim~{\mathcal N}(A) = m-r$.
+    \end{itemize}
+  \end{block}
+\end{frame}
+

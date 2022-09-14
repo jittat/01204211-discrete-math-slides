@@ -27,6 +27,8 @@
 \newcommand{\W}{\mathcal W}
 
 \newcommand{\vspan}{\mathrm{Span}}
+\renewcommand{\ker}{\mathsf{Ker\;}}
+\newcommand{\img}{\mathsf{Im\;}}
 
 \setbeamercolor{block title}{use=structure,fg=white,bg=structure.fg!75!black}
 \setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!10!bg}

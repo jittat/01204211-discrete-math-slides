@@ -1,0 +1,409 @@
+\include{commons}
+\lecturetitle{Lecture 12b: Linear functions}
+
+
+\begin{frame}
+  \frametitle{Linear functions}
+
+  \begin{block}{Linear functions}
+    Consider vector spaces $\V$ and $\W$ over $\rf$.  A function
+    $f:\V\rightarrow\W$ is \textcolor{red}{\bf linear} if
+    \begin{enumerate}
+    \item for all $\vect{x},\vect{y}\in\V$,
+      $f(\vect{x}+\vect{y})=f(\vect{x}) + f(\vect{y})$ and
+    \item for all $\alpha\in\rf$ and $\vect{x}\in\V$,
+      $f(\alpha\vect{x})=\alpha f(\vect{x})$.
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example 1 - MLP}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example 2 - Page rank (1)}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example 2 - Page rank (2)}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-vector multiplication}
+
+  Given an $m\times n$ matrix $M$ over $\rf$, consider a product
+  \[
+  M\vect{x}.
+  \]
+  Note that for the multiplication to work, $\vect{x}$ must be in
+  $\rf^n$ and the result vector is in $\rf^m$.  Therefore, we can define
+  a function $f: \rf^n \rightarrow \rf^m$ as
+  \[
+  f(\vect{x}) = M\vect{x}.
+  \]
+  Note that $f$ is linear because:
+  \[
+  f(\vect{x}+\vect{y})=M(\vect{x}+\vect{y})=M\vect{x} + M\vect{y}=
+  f(\vect{x})+f(\vect{y}),
+  \]
+  and
+  \[
+  f(\alpha\vect{x})=M(\alpha\vect{x})=\alpha M\vect{x} = \alpha f(\vect{x}).
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{The converse}
+  \begin{lemma}
+    For any linear function $f:\rf^n \rightarrow \rf^m$, there exists an
+    $m\times n$ matrix $M$ such that
+    \[
+    f(\vect{x}) = M\vect{x}.
+    \]
+  \end{lemma}
+\end{frame}
+
+\begin{frame}
+
+    \begin{proof}
+      Consider any $x\in\rf^n$.
+      Let $\vect{x}=[x_1,x_2,\ldots,x_n]$.  Note that
+      \[
+      \vect{x}=[x_1,0,\ldots,0] + [0,x_2,0,\ldots,0] + \cdots + [0,\ldots,0,x_n].
+      \]
+      Let $\vect{e}_1,\vect{e}_2,\ldots,\vect{e}_n\in\rf^n$ be standard
+      generators, i.e., $\vect{e}_i$ be a vector with 1 at the $i$-th row
+      and 0 at every other positions.  (For example
+      $\vect{e}_1=[1,0,\ldots,0]$ and $\vect{e}_3=[0,0,1,0,\ldots,0]$.)
+
+      We thus have
+      \[
+      \vect{x}=x_1\vect{e}_1 + x_2\vect{e}_2 + \cdots + x_n\vect{e}_n.
+      \]
+      Since $f$ is linear, this implies that
+      \[
+      f(\vect{x}) = x_1f(\vect{e}_1) + x_2f(\vect{e}_2) + \cdots + x_nf(\vect{e}_n).
+      \]
+    \end{proof}
+\end{frame}
+
+\begin{frame}
+  \begin{proof}[Proof (cont.)]
+    {\small
+      Define $M$ as follows
+      \[
+      M=\left[
+        \begin{array}{c|c|c|c}
+          & & &  \\
+          %& & &  \\
+          f(\vect{e}_1) &
+          f(\vect{e}_2) &
+          \cdots &
+          f(\vect{e}_n) \\
+          %& & &  \\
+          & & & 
+        \end{array}
+        \right].
+      \]
+      Hence,
+      \begin{eqnarray*}
+        M\vect{x} &=& \left[
+          \begin{array}{c|c|c|c}
+            & & &  \\
+            %& & &  \\
+            f(\vect{e}_1) &
+            f(\vect{e}_2) &
+            \cdots &
+            f(\vect{e}_n) \\
+            %& & &  \\
+            & & & 
+          \end{array}
+          \right]
+        \begin{bmatrix}
+          x_1 \\
+          x_2 \\
+          \vdots \\
+          x_n
+        \end{bmatrix} \\
+        &=&
+        x_1f(\vect{e}_1) + x_2f(\vect{e}_2) + \cdots + x_nf(\vect{e}_n)
+        = f(\vect{x}),
+      \end{eqnarray*}
+      as required.
+    }
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Structures of linear functions}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Zero}
+
+\begin{lemma}
+  Consider any linear function $f:\V\rightarrow\W$.  Let $0_\V$ denote
+  the zero vector in $\V$ and $0_\W$ denote the zero vector in $\W$.
+  We have that linear function $f$ always maps zero to zero, i.e.,
+  $f(0_\V)=0_\W$.
+\end{lemma}
+\begin{proof}
+  First note that $0_\V=0_\V+0_\V$.  Since $f$ is linear, we have that
+  \[
+  f(0_\V)=f(0_\V+0_\V)=f(0_\V)+f(0_\V).
+  \]
+  Subtracting $f(0_\V)$ from both sides, we conclude that
+  \[
+  0_\W=f(0_\V).
+  \]
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\frametitle{One-to-one linear functions and Onto linear functions}
+
+Consider a function $f:D\rightarrow R$ (i.e., the domain of $f$ is $D$
+and its range is $R$).
+
+\begin{itemize}
+\item
+  Function $f$ is \textcolor{red}{\bf one-to-one} (or {\bf injective}) if for all
+  $x,y\in D$, $f(x)=f(y)$ implies that $x=y$.
+\item
+  Function $f$ is \textcolor{red}{\bf onto} (or {\bf surjective}) if for all $x\in
+  R$, there exists $y\in D$ such that $f(y)=x$.
+\end{itemize}
+
+For this course, we consider only linear functions; therefore,
+consider $f:\V\rightarrow\W$.
+\end{frame}
+
+\begin{frame}
+\frametitle{One-to-one linear functions}
+
+Suppose that $f$ is not one-to-one, i.e., there exists a pair
+$x,y\in\V$ such that $x\neq y$ and $f(x)=f(y)$. Since $f$ is linear,
+we know that
+\[
+f(x-y)=f(x)-f(y)=0.
+\]
+Since $x\neq y$, $x-y\neq 0$ and we have that there exists a non-zero
+element $z=x-y$ that $f$ maps to $0$.  The contraposition of this fact
+is as follows.  If the only element in $\V$ that $f$ maps to $0_\W$ is
+$0_\V$, $f$ is one-to-one (or injective).
+
+Because the set of elements that $f$ maps to zero is very important,
+we have a name for it.  The kernel of $f$, denoted by $\ker f$, is the
+set of all elements that $f$ maps to zero, i.e.,
+\[
+\ker f = \{\vv\in\V : f(\vv) = 0_\V\}.
+\]
+We can now restate the condition for $f$ to be one-to-one using this
+concept.
+\end{frame}
+
+\begin{frame}
+\begin{lemma}
+  A linear function $f$ is one-to-one, if and only if $\ker f=\{0\}$.
+\end{lemma}
+
+The kernel is also a vector space.
+
+\begin{lemma}
+  $\ker f$ is a vector space.
+\end{lemma}
+\begin{proof}
+  First note that $f(0)=0$; thus $0\in\ker f$.
+
+  Suppose that $x\in\ker f$, i.e., $f(x)=0$.  Note that for any scalar
+  $\alpha$,
+  \[
+  f(\alpha x) = \alpha f(x) = \alpha 0 = 0.
+  \]
+  Also suppose $y\in\ker f$.  We have that
+  \[
+  f(x+y) = f(x) + f(y) = 0 + 0 = 0.
+  \]
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\frametitle{Onto linear functions}
+
+For any function $g$, its image, denoted by $\img g$, is the set of all
+elements that $g$ maps to, i.e.,
+\[
+\img g = \{y : \mbox{there exists $x$ such that $g(x)=y$}\}.
+\]
+
+The image is also a vector space.
+
+\begin{lemma}
+  The image of linear function $f$, $\img f$, is a vector space.
+\end{lemma}
+\begin{proof}
+  Since $f(0_\V)=0_\W$, $0_\W\in\img f$.
+
+  Consider $y\in\img f$. We have that there exists $x$ such that
+  $f(x)=y$.  Consider any scalar $\alpha$.  We know that $\alpha
+  y\in\img f$ because $f(\alpha x) = \alpha f(x) =\alpha y$.
+
+  Consider, also, $y'\in\img f$.  Let $x'$ be such that $f(x')=y'$.
+  Since $y'\in\img f$, we know that $x'$ exists.  We have that
+  \[
+  f(x+x')=f(x)+f(x')=y+y'.
+  \]
+  This implies that $y+y'\in\img f$.
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\frametitle{Kernels and images}
+
+\begin{theorem}[Kernel-Image Theorem]
+  Consider a linear function $f:\V\rightarrow\W$.  We have that
+  \[
+  \dim V = \dim\ker f + \dim\img f.
+  \]
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Completing the basis}
+  
+  \begin{lemma}
+    For a set of linearly independent vectors
+    \[
+    \uv_1,\uv_2,\ldots,\uv_k
+    \]
+    in $\V$ with basis $B=\{\vv_1,\vv_2,\ldots,\vv_n\}$
+    (where $k\leq n$), there exists a set of vectors
+    $\vect{w}_1,\vect{w}_2,\ldots,\vect{w}_{n-k}\in B$ such
+    that
+    \[
+    \{
+    \uv_1,\uv_2,\ldots,\uv_k,
+    \vect{w}_1,\vect{w}_2,\ldots,\vect{w}_{n-k}
+    \}
+    \]
+    is also a basis for $\V$.
+  \end{lemma}
+
+  \pause
+
+  \begin{proof}
+    Use the morphing lemma.
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[Proof of Kernel-Image Theorem (1)]
+  Let $n=\dim\V$ and $k=\dim\ker f$.  Our goal is to show that
+  $\dim\img f=n-k$.
+
+  Since $\ker f$ is a vector space, there is a basis
+  $B=\{\vv_1,\vv_2,\ldots,\vv_k\}$.  From the previous slide, we can
+  find other $n-k$ vectors
+  $\vect{w}_1,\vect{w}_2,\ldots,\vect{w}_{n-k}$ to extend $B$ to be a
+  basis $S$ for $\V$, i.e., we have that
+  \[
+  S =
+  \{\vv_1,\vv_2,\ldots,\vv_k,\vect{w}_1,\vect{w}_2,\ldots,\vect{w}_{n-k}\}
+  \]
+  is a basis for $\V$.
+\end{proof}
+\end{frame}
+
+\begin{frame}
+  \begin{proof}[Proof of Kernel-Image Theorem (2)]
+
+  Consider any $\uv\in\V$.  We can write $\uv$ as
+  \[
+  \alpha_1\vv_1 + \alpha_2\vv_2 + \cdots + \alpha_k\vv_k +
+  \beta_1\vect{w}_1 + \beta_2\vect{w}_2 + \cdots +
+  \beta_{n-k}\vect{w}_{n-k},
+  \]
+  because $S$ is a basis.  Consider $f(\uv)$.  We have that
+  \begin{eqnarray*}
+  f(\uv) & = & 
+  f(\alpha_1\vv_1 + \alpha_2\vv_2 + \cdots + \alpha_k\vv_k +
+  \beta_1\vect{w}_1 + \beta_2\vect{w}_2 + \cdots +
+  \beta_{n-k}\vect{w}_{n-k}) \\
+  & = & 
+  f(\alpha_1\vv_1) + f(\alpha_2\vv_2) + \cdots + f(\alpha_k\vv_k) +
+  f(\beta_1\vect{w}_1) + f(\beta_2\vect{w}_2) + \cdots +
+  f(\beta_{n-k}\vect{w}_{n-k}) \\
+  & = & 
+  f(\beta_1\vect{w}_1) + f(\beta_2\vect{w}_2) + \cdots +
+  f(\beta_{n-k}\vect{w}_{n-k}) \\
+  & = & 
+  \beta_1f(\vect{w}_1) + \beta_2f(\vect{w}_2) + \cdots +
+  \beta_{n-k}f(\vect{w}_{n-k})
+  \end{eqnarray*}
+  {\tiny (Note that the second step follows because $\vv_i\in\ker f$.  Other
+  steps use the fact that $f$ is linear.)}
+
+  This calculation shows that an image of $f$ can be written as a
+  linear combination of $f(\vect{w}_1),\ldots,f(\vect{w}_{n-k})$.
+  That is
+  \[
+  \img f = \vspan\; \{f(\vect{w}_1),\ldots,f(\vect{w}_{n-k})\}.
+  \]
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \begin{proof}[Proof of Kernel-Image Theorem (3)]
+    {\small
+      Let $S'=\{f(\vect{w}_1),\ldots,f(\vect{w}_{n-k})\}$.  If we can show
+      that $S'$ is a basis for $\img f$, we are done because that would
+      imply that $\dim\img f=n-k$ as required.
+
+      We already know that $S'$ spans $\img f$.  To show that $S'$ is a
+      basis we still need to show that $S'$ is linearly independent.
+      
+      Suppose that there exist $\beta_1,\ldots,\beta_{n-k}$ such that
+      \[
+      \beta_1f(\vect{w}_1) + \beta_2f(\vect{w}_2) + \cdots +
+      \beta_{n-k}f(\vect{w}_{n-k}) = 0_\W.
+      \]
+      Since $f$ is linear we know that
+      \begin{eqnarray*}
+        0_\W &=&
+        \beta_1f(\vect{w}_1) + \beta_2f(\vect{w}_2) + \cdots +
+        \beta_{n-k}f(\vect{w}_{n-k})\\
+        &=&
+        f(\beta_1\vect{w}_1) + f(\beta_2\vect{w}_2) + \cdots +
+        f(\beta_{n-k}\vect{w}_{n-k})\\
+        &=&
+        f(\beta_1\vect{w}_1 + \beta_2\vect{w}_2 + \cdots +
+        \beta_{n-k}\vect{w}_{n-k}),
+      \end{eqnarray*}
+      i.e., $\beta_1\vect{w}_1 + \beta_2\vect{w}_2 + \cdots +
+      \beta_{n-k}\vect{w}_{n-k}$ is in $\ker f$.  If some $\beta_i\neq 0$,
+      we reach a contradiction with the fact that every
+      $\vect{w}_i\not\in\vspan~B$.  Therefore, we conclude that all
+      $\beta_1,\ldots,\beta_{n-k}$ must be 0.  Hence,
+      $S'=\{f(\vect{w}_1),\ldots,f(\vect{w}_{n-k})\}$ is linearly
+      independent as needed.
+    }
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ranks and nullities}
+\end{frame}
+
+\begin{frame}
+\frametitle{Direct sum (optional)}
+
+Consider two subspaces $\V$ and $\W$ of a vector space ${\mathcal Z}$.
+If $\V\cap\W=\{0\}$, we can define their {\em direct sum} to be
+another vector space $\V\oplus\W$ as
+\[
+\V\oplus\W = \{\vv+\uv : \vv\in\V, \uv\in\W\}.
+\]
+Note, again, that $\V\oplus\W$ is defined only when $\V\cap\W=\{0\}$.
+\end{frame}
+
