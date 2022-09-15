@@ -148,3 +148,77 @@
   \end{block}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Application: Singular Value Decomposition (SVD)}
+
+  Any $n$-by-$d$ matrix $A$ can be factored into the form of $UDV^T$, i.e.,
+  \[
+  \begin{bmatrix}
+    & & \\
+    & A & \\
+    & &
+  \end{bmatrix} =
+  \begin{bmatrix}
+    & & \\
+    & U & \\
+    & &
+  \end{bmatrix} 
+  \begin{bmatrix}
+    & & \\
+    & D & \\
+    & &
+  \end{bmatrix} 
+  \begin{bmatrix}
+    & & \\
+    & V^T & \\
+    & &
+  \end{bmatrix} 
+  \]
+  where
+  \begin{itemize}
+  \item $U$ is an $n$-by-$r$ matrix,
+  \item $D$ is a diagonal $r$-by-$r$ matrix, and
+  \item $V$ is an $d$-by-$r$ matrix (i.e., $V^T$ is an $r$-by-$d$ matrix)
+  \item (Also, columns of $U$ and $D$ are ``orthonormal.'')
+  \end{itemize}
+
+  \vspace{0.5in}
+  See demo.
+\end{frame}
+
+\begin{frame}
+  \[
+  \begin{bmatrix}
+    & & \\
+    & A & \\
+    & &
+  \end{bmatrix} =
+  \begin{bmatrix}
+    & & & &\\
+    & \vect{u}_i & U & &\\
+    & & & &
+  \end{bmatrix} 
+  \begin{bmatrix}
+    & & & \\
+    & d_{ii} & & \\
+    & & D & \\
+    & & &
+  \end{bmatrix} 
+  \begin{bmatrix}
+    & & \\
+    & \vect{v}^T_i & \\
+    & V^T & \\
+    & &
+  \end{bmatrix} 
+  \]
+
+  \pause
+  \vspace{0.9in}
+  \[
+  A =
+  d_1\uv_1\vv^T_1 +
+  d_2\uv_2\vv^T_2 +\cdots+
+  d_r\uv_r\vv^T_r.
+  \]
+  \vspace{0.9in}
+\end{frame}
