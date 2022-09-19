@@ -9,3 +9,5 @@
 *.dvi
 *.pyc
 
+/*.xopp
+/*-notes-*
