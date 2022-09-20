@@ -1,0 +1,44 @@
+\include{commons}
+\lecturetitle{Lecture 13b: Eigenvalues and Eigenvectors}
+
+
+\begin{frame}
+  \frametitle{Examples: random walks}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples: differential equations (1)}
+  Let's start with a simple system with one variable.
+  \[
+  \frac{du}{dt} = au,
+  \]
+  with $u=u(0)$ when $t=0$.
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples: differential equations (2)}
+  Now consider a system with two variables $v$ and $w$:
+  \[
+  \begin{array}{lcr}
+    \frac{dv}{dt} &=& 4v - 5w \\
+    \frac{dw}{dt} &=& 2v - 3w
+  \end{array}
+  \]
+  with $v=5$ and $w=4$ when $t=0$, \pause or if we let
+  $u(t)=\begin{bmatrix}v(t)\\ w(t)\end{bmatrix}$ and
+  \[
+  A = \begin{bmatrix}
+    4 & -5\\
+    2 & -3
+  \end{bmatrix},
+  \]
+  we have \[
+  \frac{du}{dt} = Au,
+  \]
+  with $u(0) = \begin{bmatrix} 5 \\ 4 \end{bmatrix}$
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples: differential equations (3)}
+\end{frame}
