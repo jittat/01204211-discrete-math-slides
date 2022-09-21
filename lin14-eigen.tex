@@ -1,6 +1,60 @@
 \include{commons}
 \lecturetitle{Lecture 13b: Eigenvalues and Eigenvectors}
 
+\begin{frame}
+  \frametitle{Review: Hamming codes (1)}
+  \pause
+
+  The code is defined by the generator matrix
+  {\tiny
+    \[
+    G=
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1 \\
+      0 & 1 & 1 & 1 \\
+      1 & 0 & 1 & 1 \\
+      1 & 1 & 0 & 1
+    \end{bmatrix}
+    \]
+  }
+  
+  Consider the encoding function $e: GF(2)^4\rightarrow GF(2)^7$.  Let
+  $e(\vect{x})=G\vect{x}$.  What is $\ker e$?
+
+  \pause
+
+  What is $\dim \img e$?
+
+  \vspace{1.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: Hamming codes (2)}
+  \pause
+
+  The code is defined by the generator matrix
+  {\tiny
+    $
+    G=
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1 \\
+      0 & 1 & 1 & 1 \\
+      1 & 0 & 1 & 1 \\
+      1 & 1 & 0 & 1
+    \end{bmatrix}
+    $
+  }
+  
+  What can you say about the minimum ``distance''?
+
+  \vspace{2.5in}
+\end{frame}
 
 \begin{frame}
   \frametitle{Examples: random walks}
@@ -41,4 +95,280 @@
 
 \begin{frame}
   \frametitle{Examples: differential equations (3)}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Eigenvalues and eigenvectors}
+  
+  \begin{block}{Definition}
+    For an $n$-by-$n$ matrix $A$, a vector $\vv$ is an
+    \textcolor{red}{\bf eigenvector} of $A$ if
+    \[
+    A\vv = \lambda\vv,
+    \]
+    and $\vv\neq\vect{0}$.
+    The scalar $\lambda$ is called an \textcolor{red}{\bf eigenvalue}
+    associated with $\vv$.
+  \end{block}
+\end{frame}
+
+\begin{frame}\
+  \frametitle{Example}
+  Consider matrix $A=\begin{bmatrix}5 & 7 \\ 5 & 3\end{bmatrix}$.
+
+  If we let $\vv_1=\begin{bmatrix}-1 \\ 1\end{bmatrix}$, we have
+  \[
+  A\vv_1=
+  \begin{bmatrix}
+    5 & 7 \\ 5 & 3
+  \end{bmatrix}
+  \begin{bmatrix}
+    -1 \\ 1
+  \end{bmatrix}
+  = \pause
+  \begin{bmatrix}
+    -5+7 \\ -5 + 3
+  \end{bmatrix}
+  = \pause
+  \begin{bmatrix}
+    2 \\ -2
+  \end{bmatrix}
+  =
+  (-2)\cdot
+  \begin{bmatrix}
+    -1 \\ 1
+  \end{bmatrix}.
+  \]
+
+  If we let $\vv_2=\begin{bmatrix}7 \\ 5\end{bmatrix}$, we have
+  \[
+  A\vv_2=
+  \begin{bmatrix}
+    5 & 7 \\ 5 & 3
+  \end{bmatrix}
+  \begin{bmatrix}
+    7 \\ 5
+  \end{bmatrix}
+  = \pause
+  \begin{bmatrix}
+    35+35 \\ 35 + 15
+  \end{bmatrix}
+  = \pause
+  \begin{bmatrix}
+    70 \\ 50
+  \end{bmatrix}
+  =
+  10\cdot
+  \begin{bmatrix}
+    7 \\ 5
+  \end{bmatrix}.
+  \]
+
+  \pause
+  See demo in colab.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Invariant subspace}
+
+  \begin{block}{Definition (invariant subspace)}
+    For an $n$-by-$n$ matrix $A$, subspace $\V\subseteq \rf^n$ is
+    called an \textcolor{red}{\bf invariant subspace} under linear map
+    $f(\vect{x})=A\vect{x}$ if for all $\uv\in \V$, $f(\uv)=A\uv\in\V$.
+  \end{block}
+
+  \pause
+  \begin{block}{Eigenvector}
+    If $\vv$ is an eigenvector of matrix $A$, then
+    \[
+    \vspan~\{\vv\}
+    \]
+    is a 1-dimensional invariant subspace under linear map defined by
+    $A$.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Finding eigenvalues and eigenvectors}
+
+  Given $A$, we want to find an eigenvalue $\lambda$ and a vector
+  $\uv\neq\vect{0}$ such that
+  \[
+  A\uv = \lambda\uv.
+  \]
+  
+  \pause
+  After some writing, we want to solve this equation
+  \[
+  (A - \lambda I)\uv = 0,
+  \]
+  where $\uv\neq 0$.
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: ranks and invertible matrices}
+
+  Consider an $n$-by-$n$ matrix $A$ and the following linear system of
+  equations
+  \[
+  A\vect{x} = \vect{0}.
+  \]
+
+  \pause
+  Suppose that there exists $\vect{x}\neq\vect{0}$ that satisfies the
+  equation, what can you say about $A$?
+
+  \pause Clearly, $A$ cannot have an inverse because no matrix $B$ can
+  bring $\vect{x}$ back from $A\vect{x}=0$. \pause In this case, we
+  say that $A$ is \textcolor{red}{\bf singular}.
+
+  \pause
+  \pause Equavilent conditions:
+  \begin{itemize}
+  \item The rank of $A$ is less than $n$.
+  \item Rows of $A$ are not linearly independent.
+  \item The linear function $f(\vect{x})=A\vect{x}$ is not injective.
+  \item $\ker f\neq\{\vect{0}\}$.
+  \item $\dim \ker f\neq 0$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Finding $\lambda$}
+  From this equation
+  \[
+  (A-\lambda I)\vect{x} = \vect{0}.
+  \]
+  Since we want it to have nonzero solution $\vect{x}$. Our goal is to
+  find $\lambda$ so that $A-\lambda I$ becomes singular.
+
+  \pause Typically, the tool to use is the {\bf determinant}.
+  However, we do not cover this topic in this class.  We will look at
+  small examples and consider an iterative method instead.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: $2\times 2$ matrix}
+
+  Consider matrix $A=\begin{bmatrix}5 & 7 \\ 5 & 3\end{bmatrix}$.  We
+  want to find $\lambda$ such that
+  \[
+  \begin{bmatrix}
+    5-\lambda & 7 \\
+    5 & 3-\lambda
+  \end{bmatrix}
+  \]
+  is singular.  \pause This amounts to solving
+  \[
+  \frac{5-\lambda}{5} = \frac{7}{3-\lambda},
+  \]
+  \pause
+  i.e.,
+  \[
+  \lambda^2 - 8\lambda - 20 = 0.
+  \]
+  \pause
+  The equation can be re-written as $(\lambda-10)(\lambda+2)=0$; thus,
+  it has 2 roots: $10$ and $-2$.
+
+  \pause You can find associated eigenvectors by solving corresponding
+  $(A-\lambda I)\vect{x}=\vect{0}$ equations.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix multiplication (again)}
+
+  Consider matrix $A=\begin{bmatrix}5 & 7 \\ 5 & 3\end{bmatrix}$.
+  We know that $A$ has two eigenvectors
+  \[
+  \vv_1=\begin{bmatrix} 7 \\ 5 \end{bmatrix}, \ \ \ \ \ \
+  \vv_2=\begin{bmatrix} -1 \\ 1 \end{bmatrix}.
+  \]
+  with corresponding eigenvalues $\lambda_1=10$ and $\lambda_2=-2$.
+
+  \pause What can we say about
+  \[
+  \begin{bmatrix}
+    5 & 7 \\ 5 & 3
+  \end{bmatrix}
+  \begin{bmatrix}
+    5 \\ 7
+  \end{bmatrix}
+  \pause
+  =
+  \begin{bmatrix}
+    5 & 7 \\ 5 & 3
+  \end{bmatrix}
+  \begin{bmatrix}
+    7 - 2 \\ 5 + 2
+  \end{bmatrix}
+  =
+  \pause
+  \begin{bmatrix}
+    5 & 7 \\ 5 & 3
+  \end{bmatrix}
+  \left(
+  \begin{bmatrix}
+    7 \\ 5
+  \end{bmatrix}
+  +2\cdot
+  \begin{bmatrix}
+    -1 \\ 1
+  \end{bmatrix}
+  \right)
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix multiplication (again and again)}
+
+  {\bf Fact:} An $n$-by-$n$ matrix $A$ has $n$ linearly independent
+  eigenvectors $\vv_1,\ldots,\vv_n$ with corresponding eigenvalues
+  $\lambda_1,\ldots,\lambda_n$.  (They might not be real vectors.)
+
+  \pause Since $\vv_1,\ldots,\vv_n$ form a basis, for any vector
+  $\vect{x}$ there exist $\alpha_1,\alpha_2,\cdots,\alpha_n$ such that
+  \[
+  \vect{x} = \alpha_1\vv_1 + \alpha_2\vv_2 + \cdots + \alpha_n\vv_n.
+  \]
+
+  \pause
+  Let's multiply $\vect{x}$ with $A$:
+  \[
+  \begin{array}{rcl}
+    A\vect{x} &=& A(\alpha_1\vv_1 + \alpha_2\vv_2 + \cdots + \alpha_n\vv_n) \\
+    &=& A\alpha_1\vv_1 + A\alpha_2\vv_2 + \cdots + A\alpha_n\vv_n \\
+    &=& \pause
+    \lambda_1\alpha_1\vv_1 + \lambda_2\alpha_2\vv_2 + \cdots + \lambda_n\alpha_n\vv_n.
+  \end{array}
+  \]
+  \pause We can keep multiplying with $A$ many times:
+  \[
+  A^k\vect{x}=
+  \pause
+  \lambda_1^k\alpha_1\vv_1 + \lambda_2^k\alpha_2\vv_2 + \cdots + \lambda_n^k\alpha_n\vv_n.
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{The power method}
+  If $A$ has eigenvalues $\lambda_1,\lambda_2,\ldots,\lambda_n$ such that
+  \[
+  |\lambda_1| > |\lambda_i|,
+  \]
+  for $i\neq 1$.  We call $\lambda_1$ the {\bf dominant eigenvalue}.
+  We also call the eigenvectors corresponding to $\lambda_1$ {\bf
+    dominant eigenvectors}.
+
+  \vspace{0.2in}
+  \begin{block}{The power method (or power iteration)}
+    \begin{itemize}
+    \item Start with a random vector $\vect{x_0}$.
+    \item For $i=0,1,\ldots,k$, \\
+      \ \ \ \ Let $\vect{x}_{i+1}=A\vect{x}_i$, with
+      probably some scaling.
+    \end{itemize}
+  \end{block}
 \end{frame}
