@@ -1,0 +1,435 @@
+\include{commons}
+\lecturetitle{Lecture 8a: Integers and GCD} 
+
+\begin{frame}
+  \frametitle{Number theory: integers and divisibility}
+
+  In the third part of the course, we study number theory, a
+  once-thought-to-be ``useless'' branch of mathematics.
+
+  \vspace{0.2in}
+  \pause
+  {\bf Why?}
+  \pause
+  
+  \begin{itemize}
+  \item The topic itself is very very beautiful.
+  \item It has many applications in cryptography and error correcting codes.
+  \end{itemize}
+
+  \vspace{0.1in}
+  \pause
+  {\bf We will cover:}
+  \begin{itemize}
+  \item Basic concepts of divisibility, prime numbers, and congruence.
+  \item How to quickly check if a number is prime.
+  \item How to essentially perform ``division'' with integers,
+    allowing us to work with important and useful objects like
+    polynomials using only integers.  \pause
+  \item Applications like cryptography (RSA), secret sharing, erasure
+    codes and error correcting codes.
+  \end{itemize}
+    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Definitions}
+
+  \begin{block}{Definition (divisibility)}
+    We say that an integer $a$ \textcolor{red}{\bf divides} $b$ or $b$
+    \textcolor{red}{\bf is divisible by} $a$ if there exist an integer
+    $k$ such that
+    \[
+    b = ak.
+    \]
+    If it is the case, we also write $a|b$.  We also say that $a$ is a
+    {\bf divisor} (or a {\bf factor}) of $b$.
+
+    On the other hand if $a$ does not divide $b$, we write $a\not|b$.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples}
+
+  If $a|b$ and $a|c$, prove that $a|(b+c)$.
+  \vspace{1.5in}
+  \pause
+  
+  If $a|b$ and $b|c$, prove that $a|c$.
+  \vspace{1.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Remainder}
+
+  \begin{block}{Defintion (remainder)}
+    The \textcolor{red}{\bf remainder} of the division of $b$ with $a$
+    is an integer $r$ when there exists an integer $q$ such that
+    \[
+    b = qa + r,
+    \]
+    where $0\leq r < a$.
+
+    \pause We refer to $q$ as the \textcolor{red}{\bf quotient} of the
+      division.
+  \end{block}
+
+  \pause
+
+  {\bf Examples:}
+  \vspace{.5in}
+
+  \pause We use operator {\tt mod} to denote an operation for finding
+  the remainder of a division.  I.e., $a \bmod b$ is the remainder of
+  dividing $a$ with $b$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples}
+
+  Let $r$ be the remainder of the division of $b$ by $a$.  Assume that
+  $c|a$ and $c|b$.  Prove that $c|r$.
+
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{More examples}
+
+  For every integer $a$, $a-1 | a^2-1$.
+
+  \vspace{2.5in}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Primes}
+
+  \begin{block}{Definition (primes)}
+    \begin{itemize}
+    \item An integer $p>1$ is a \textcolor{red}{\bf prime} if its
+      divisors are only $p$, $-p$, $1$, and $-1$.
+    \item If an integer $n>1$ is not a prime, it is called a
+      \textcolor{red}{\bf composite}.
+    \item Note: $1$ is not a prime and also not a composite.
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Algorithm for testing primes}
+  Recall our {\tt CheckPrime2} algorithm
+  
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm CheckPrime2(n):  // Input: an integer n
+      if n <= 1:
+          return False
+      let s = square root of n
+      i = 2
+      while i <= s:
+          if n is divisible by i:
+              return False
+          i = i + 1
+      return True
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+  How fast can it run? \pause Note that $s = \sqrt{n}$; therefore, it
+  takes time $O(\sqrt{n})$ to run.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Efficient algorithms}
+
+  Is $O(\sqrt{n})$ for checking a prime number efficient?
+
+  \pause
+
+  What is the ``size'' of the input to the problem?  \pause The input
+  contains one integer $n$; is the size of the input just 1?
+
+  \pause When working with input consisting only a few numbers, we
+  typically use the number of bits.  For integer $n$, the number of
+  bits of $n$ is $\lceil \log_2 n\rceil$.
+
+  \pause
+  {\tiny
+  \begin{tabular}{r|r|r}
+    $n$ & number of bits of $n$ & $\sqrt{n}$ \\
+    \hline
+    2 & 1 & 1.414 \\
+    4 & 2 & 2 \\
+    16 & 4 & 4 \\
+    1,024 & 10 & 32 \\
+    1,048,576 & 20 & 1,024 \\
+    1,125,899,906,842,624 & 50 & 33,554,432 \\
+    1,267,650,600,228,229,401,496,703,205,376 & 100 & 1,125,899,906,842,624 \\
+  \end{tabular}
+  }
+
+  \vspace{0.2in} \pause {\small Side note: Recall that the first step
+    in RSA is to find a pair of large primes.  Typically we want them
+    to be of size in the {\em thousand} bits.}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Greatest Common Divisors (GCD)}
+
+  \begin{block}{Definition (GCD)}
+    For integers $x$ and $y$, the \textcolor{red}{\bf greatest common
+      divisor} (or GCD) of $x$ and $y$ is the largest integer $g$ such
+    that $g|x$ and $g|y$.  We refer to it as $gcd(x,y)$.
+  \end{block}
+
+  \vspace{0.1in}
+  \pause
+  A simple way to find $gcd(x,y)$:
+
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  g = min(x,y)
+  while (x mod g != 0) or (y mod g != 0):
+    g -= 1
+  return g
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+\pause What is the running time of this algorithm? \pause
+Does it run in polynomial time on the size of the input?
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Euclid's algorithm}
+  
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm Euclid(x,y):
+    if x mod y == 0:
+      return y
+    else:
+      return Euclid(y, x mod y)
+\end{verbatim}
+  }
+  \end{tcolorbox}
+
+  \pause
+  Let's see how it works with $Euclid(12311,24324)$:
+  
+  {\footnotesize
+    Euclid( 12311, 24324) \\
+    Euclid( 24324, 12311) \\
+    Euclid( 12311, 12013) \\
+    Euclid( 12013,   298) \\
+    Euclid(   298,    93) \\
+    Euclid(    93,    19) \\
+    Euclid(    19,    17) \\
+    Euclid(    17,     2) \\
+    Euclid(     2,     1) \\
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Proofs}
+
+  We have to prove two properties:
+  \begin{itemize}
+  \item For any integers $x$ and $y$, $\mathrm{Euclid}(x,y) = gcd(x,y)$.
+  \item The running time of $\mathrm{Euclid}$.
+  \end{itemize}
+
+  \vspace{0.2in}
+
+  \pause Note that when $x<y$, $\mathrm{Euclid}(x,y)$ just calls
+  itself with both arguments swapped, i.e., $\mathrm{Euclid}(y,x)$.
+  After that, in each call, $x$ is always larger than $y$.  For
+  simplicity of the analysis, we shall work only with the case that $x
+  > y$.
+\end{frame}
+
+\begin{frame}
+  \begin{theorem}
+    For any integers $x$ and $y$ such that $x>y$,
+    $\mathrm{Euclid}(x,y) = gcd(x,y)$.
+  \end{theorem}
+  \begin{proof}
+    {\small
+
+      We prove using strong induction.  For the base case, note that
+      when $y|x$, $gcd(x,y)=y$; therefore, the base case of the
+      algorithm is correct.
+
+      Our induction hypothesis is: for any $x'<x$ and $y'<y$,
+      $\mathrm{Euclid}(x',y')=gcd(x',y')$.
+    
+      Now assume that $y\not| x$.  The Euclid algorithm returns
+      $\mathrm{Euclid}(y, x\bmod y)$ as the gcd.  Note that $y < x$
+      and $x\bmod y < y$.  Therefore, we can use the I.H. to claim that
+      \[
+      \mathrm{Euclid}(y, x\bmod y) = gcd(y, x\bmod y).
+      \]
+
+      Thus, we are left to show that
+      \[
+      gcd(x,y) = gcd(y, x\bmod y).
+      \]
+    }
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{What is $x \bmod y$?}
+
+  \pause Let $\lfloor a \rfloor$ be the largest integer $a'$ such that
+  $a'\leq \lfloor a\rfloor$.
+  
+  \pause
+  \[
+  x\bmod y = x - \left\lfloor\frac{x}{y}\right\rfloor\cdot y
+  \]
+\end{frame}
+
+\begin{frame}
+  \begin{lemma}
+    If $a|x$ and $a|y$, then $a|x \bmod y$.
+  \end{lemma}
+  \vspace{0.2in}
+  \pause
+  \begin{lemma}
+    $gcd(x,y)=gcd(y, x\bmod y)$
+  \end{lemma}
+  \vspace{1.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{How many recursive calls does Euclid's algorithm makes?}
+  \pause
+
+  Consider Euclid$(x,y)$:
+  \begin{itemize}
+  \item If we start with $x<y$, the next calls will always have that
+    $x>y$; so we have at most one call with $x<y$.
+    \pause
+  \item When can we decrease the value of $x$ or $y$ in the calls?
+    \pause
+  \item When $y\leq x/2$, when Euclid$(x,y)$ calls Euclid$(y,x\bmod y)$ the
+    first argument decreases by half.
+    \pause
+  \item How about when $y> x/2$? \pause \\
+    {\small
+    Euclid$(x,y) \Rightarrow$ \pause
+    Euclid$(y, x\bmod y) \Rightarrow$ \pause
+    Euclid$(x\bmod y, y\bmod (x\bmod y))$} \pause
+    Note that in this case, $x\bmod y\leq y/2\leq x/2$. \pause
+    Thus, after two recursive calls, the first argument decreases by half.
+  \item How many times can that happen?
+  \item The first argument can decrease by a factor of two for at most
+    $\log x$ times.  Therefore, the Euclid algorithm runs in time
+    $O(\log\max\{x,y\})=O(\log x + \log y)$. 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Computing power}
+
+  How fast can we compute $x^y$?
+
+  \pause
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm power(x,y):
+    a = 1
+    for i = 1,2,...,y:
+      a *= x
+    return a
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+  \pause What is the running time? \pause Is it efficient?
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Repeated squaring}
+
+  If $y$ is a power of two, we can find $x^y$ using small number of
+  multiplications using repeated squaring.  E.g.,
+  \[
+  x^{16} = (x^8)^2 = ((x^4)^2)^2 = (((x^2)^2)^2)^2.
+  \]
+  \pause
+
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm power(x,y):  // for y=2^k
+    if y == 0:
+      return 1
+    else:
+      a = power(x, y / 2)
+      return a*a
+\end{verbatim}
+  }
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Repeated squaring (general $y$)}
+
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm power(x,y): 
+    if y == 0:
+      return 1
+    else:
+      a = power(x, floor(y / 2))
+      if y mod 2 == 0:
+        return a*a
+      else
+        return a*a*x
+\end{verbatim}
+  }
+  \end{tcolorbox}
+
+  \pause
+  What is the number of recursive calls?
+
+  \pause
+  What is the running time?
+
+  \pause While the number of multiplication is small, the numbers
+  involved is huge as $x^y$ has $y\log x$ bits.  Computing $x^y$
+  exactly definitely takes a long time.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Repeated squaring (general $y$, mod $n$)}
+
+  Computing $x^y \bmod n$:
+  
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm power(x,y,n): 
+    if y == 0:
+      return 1
+    else:
+      a = power(x, floor(y / 2)) mod n
+      if y mod 2 == 0:
+        return a*a mod n
+      else
+        return a*a*x mod n
+\end{verbatim}
+  }
+  \end{tcolorbox}
+
+\end{frame}
+
