@@ -1,0 +1,367 @@
+\include{commons}
+\lecturetitle{Lecture 8b: Modular arithmetic} 
+
+\begin{frame}
+  There are 3 clocks.  At this moment, all three clocks ring at the
+  same time.  The first clock rings every 3 hours, the second clock
+  rings every 4 hours, and the third clock rings every 10 hours.  How
+  long do you have to wait until you would hear all clocks ring a the
+  same time again?
+  
+\end{frame}
+
+\begin{frame}
+  You have a large water container and two smaller buckets. The first
+  bucket carries 3 litres of water and the second bucket carries 5
+  litres of water.
+
+  Can you put exactly 1 litre of water in the water container?
+\end{frame}
+
+\begin{frame}
+  You have a large water container and two smaller buckets. The first
+  bucket carries 6 litres of water and the second bucket carries 15
+  litres of water.
+
+  What is the minimum volume of water you can exactly put in the water
+  container?
+
+  \pause
+
+  \vspace{0.2in}
+  In general if you have two buckets of volumes $x$ and $y$, the amount
+  that you can exactly make must be in the form of
+  \[
+  ax + by,
+  \]
+  for some integers $x$ and $y$.  (Note that $x$ and $y$ may be
+  negative.)
+
+  \pause Do you see why the sum must be divisible by any common
+  divisor of $x$ and $y$?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Useful fact}
+
+  For any integer $x$ and $y$, consider the term
+  \[
+  a\cdot x + b\cdot y,
+  \]
+  for some integer $a$ and $b$.
+
+  \pause
+  When the term is non-zero, it must be divisible by $gcd(x,y)$, so it
+  has to be at least $gcd(x,y)$.
+
+  \vspace{0.2in}
+
+  It turns out that you can actually attain that value, i.e.,
+  there exist a pair of integer $a$ and
+  $b$ such that
+  \[
+  a\cdot x + b\cdot y = gcd(x,y).
+  \]
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Finding $a$ and $b$: Extended Euclid Algorithm}
+
+  We will modify the Euclid algorithm so that it also returns $a$ and
+  $b$ together with $gcd(x,y)$.
+  
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm Euclid(x,y):
+    if x mod y == 0:
+
+      return y,          ,
+    else:
+      g, a', b' = Euclid(y, x mod y)
+
+      a =
+
+      b =
+
+      return g, a, b
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Notes:}
+
+  We have $a'$ and $b'$ such that
+  \[
+  a'\cdot y + b'\cdot(x \bmod y) = g.
+  \]
+
+  \vspace{3in}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Days}
+
+  What day is it today? \pause Thursday.
+
+  \pause
+  What day is 3 days after today? \pause Sunday.
+  
+  \pause
+  What day is 20 days after today? \pause Wednesday.
+
+  \pause
+  What day is 10 days before today? \pause Monday.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Clocks}
+
+  Suppose that it is 1 o'clock.
+
+  \pause
+  What time is the next 5 hours?  \pause 6 o'clock.
+  
+  \pause
+  What time is the next 10 hours?  \pause 11 o'clock.
+  
+  \pause
+  What time is the next 20 hours?  \pause 9 o'clock.
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Modular arithmetic}
+
+  As in the days of weeks and clocks examples (and also as the modulo
+  in RSA algorithm in our experiment), when working under modular
+  arithmetic, we start with a \textcolor{red}{\bf modulus} $m$.
+
+  \vspace{0.1in}
+  \pause
+  We can then define all arithmetic operations {\bf modulo} $m$.
+
+  \vspace{0.1in}
+  \pause
+  Suppose that $m=7$.  We would like to say that
+  {\small
+  \[
+  4 + 5 = 9 \bmod m= 2.
+  \]
+  Or
+  \[
+  3\cdot 4 = \pause 12 \bmod m = \pause 5.
+  \]
+  Or
+  \[
+  2 - 6 = \pause -4 \bmod 7 = \pause 3 \bmod 7 = 3.
+  \]
+  }
+
+  \pause
+  Note that when you view integers under the lense of modulus $7$,
+  these numbers
+  \[
+  \ldots,-19,-12,-5,2,9,16,23,\ldots
+  \]
+  are essentially {\bf the same}.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Properties (1)}
+
+  $a \bmod m = b \bmod m$, if and only if $m|a - b$.
+
+  \pause
+
+  \begin{proof}
+    {\small
+      $(\Rightarrow)$
+      Let $r=a \bmod m$.  We can write
+      \[
+      a = qm + r,
+      \]
+      and
+      \[
+      b = pm + r,
+      \]
+      for some integers $q$ and $p$.  Thus, we have
+      \[
+      a - b = qm + r - pm - r = (q-p)m.
+      \]
+      Therefore $m|a-b$.
+
+      $(\Leftarrow)$ Exercise.
+    }
+  \end{proof}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Properties (2)}
+
+  \begin{itemize}
+  \item $(a + b) \bmod m = ((a \bmod m) + (b \bmod m)) \bmod m$
+  \item $(a - b) \bmod m = ((a \bmod m) - (b \bmod m)) \bmod m$
+  \item $(a \cdot b) \bmod m = ((a \bmod m) \cdot (b \bmod m)) \bmod m$
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Congruences}
+
+  \begin{block}{Definition (congruences)}
+    For an integer $m>0$,
+    if integers $a$ and $b$ are such that
+    \[
+    a \bmod m = b \bmod m,
+    \]
+    we write
+    \[
+    a \equiv b \pmod m.
+    \]
+  \end{block}
+
+  \pause
+
+  We also have that
+  \[
+  a \equiv b \pmod m \ \ \ \ \Leftrightarrow \ \ \ \
+  m|(a-b)
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Congruences: properties (1)}
+
+  \begin{itemize}
+  \item (reflexivity) \\
+    $a\equiv a \pmod m$.
+  \item (symmetry) \\
+    $a\equiv b \pmod m$ implies $b\equiv a \pmod m$.
+  \item (transitiviey) \\
+    $a\equiv b \pmod m$ and $b \equiv c \pmod m$ implies $a \equiv c\pmod m$.
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Congruences: properties (2) -- operations}
+
+  If we have that
+  \[
+  a \equiv b \pmod m,
+  \]
+  and
+  \[
+  c \equiv d \pmod m,
+  \]
+  then
+  
+  \begin{itemize}
+  \item $a+c \equiv b+d \pmod m$
+  \item $a-c \equiv b-d \pmod m$
+  \item $ac \equiv bd \pmod m$
+  \end{itemize}
+
+  \pause
+
+  {\em What is missing here?}
+  \pause
+
+  \textcolor{red}{Division!}
+
+\end{frame}
+
+\begin{frame}
+  Also, we wish we can do ``cancellation'', i.e., if
+  \[
+  xa \equiv xb \pmod m,
+  \]
+  then $a \equiv b \pmod m$.  {\bf BUT THIS IS NOT ALWAYS TRUE.}
+  
+  \pause
+
+  Let's see the following example:
+
+  \[
+  2\cdot 1 \equiv 2\cdot 3 \pmod 4,
+  \]
+  but
+  \[
+  1 \not\equiv 3\pmod 4.
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multiplications as functions}
+
+  Let's view multiplication by 2 as a function, i.e., let $f(x)=2\cdot
+  x\bmod 4$.
+
+  \vspace{1in}
+
+  \pause
+  Let's also see $g(x) = 3\cdot x \bmod 4$.
+
+  \vspace{1in}
+
+  \pause
+  Which functions have inverses?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multiplicative inverses}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multiplicative inverse modulo $m$}
+
+  \begin{block}{Definition}
+    The multiplicative inverse modulo $m$ of $a$, denoted by $a^{-1}$,
+    is an integer such that
+    \[
+    a\cdot a^{-1}\equiv 1 \pmod m.
+    \]
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \begin{theorem}
+    An integer $a$ has a multiplicative inverse modulo $m$ iff
+    $gcd(a,m) = 1$.
+  \end{theorem}
+  \begin{proof}
+    \pause
+    {\footnotesize
+    $(\Leftarrow)$ Recall that there exist integers $x$ and $y$ such
+    that
+    \[
+    x\cdot a + y\cdot m = gcd(a,m) = 1.
+    \]
+    Thus,
+    $(x\cdot a + y\cdot m)\bmod m = x\cdot a \bmod m = 1 \bmod m$,
+    i.e., $x\cdot a\equiv 1 \pmod m$.  Therefore $x$ is the inverse.
+
+    \pause
+    $(\Rightarrow)$ Let $r=gcd(a,m)$.
+    Suppose that $b$ is the multiplicative inverse of
+    $a$ modulo $m$, i.e., we have that
+    \[
+    b\cdot a \equiv 1 \pmod m,
+    \]
+    Thus, $ba \bmod m = 1 \bmod m = 1$, i.e., there exists an integer
+    $q$ such that
+    \[
+    ba = qm + 1,
+    \]
+    or $ba - qm = 1$.  However, $r$ since $r|a$ and $r|m$, $r$ also
+    divides $bd-qm$ and $1$.  But it $r\not|1$ because $r>1$ and we
+    have the contradiction.
+    }
+  \end{proof}
+\end{frame}
