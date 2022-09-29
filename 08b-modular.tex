@@ -2,6 +2,39 @@
 \lecturetitle{Lecture 8b: Modular arithmetic} 
 
 \begin{frame}
+  \frametitle{Quick check 1} 
+
+  If $a|m$ and $b|m$, can we say that $ab|m$?  Prove this fact or
+  provide a counter example.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quick check 2}
+
+  If $a|m$, $b|m$, and $a\neq b$ are both prime, can we say that
+  $ab|m$?  Prove this fact or provide a counter example.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Prime factorization}
+
+  One useful fact that we use over and over again is the following.
+
+  \begin{block}{Unique Factorization (or Fundamental Theorem of Arithmetic)}
+    Every integer greater than 1 can be written {\em uniquely} as a
+    product of prime numbers (up to the order of factors).
+  \end{block}
+
+  \vspace{0.2in}
+  Examples:
+  \begin{itemize}
+  \item $10 = 2\cdot 5$
+  \item $13 = 13$
+  \item $112 = 2\cdot 2\cdot 2\cdot 2\cdot 7=2^4\cdot 7$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
   There are 3 clocks.  At this moment, all three clocks ring at the
   same time.  The first clock rings every 3 hours, the second clock
   rings every 4 hours, and the third clock rings every 10 hours.  How
@@ -268,7 +301,13 @@
   \end{itemize}
 
   \pause
+  \vspace{0.2in}
 
+  We can pretty much think of this ``congruence'' as a normal
+  equation.
+
+  \vspace{0.1in}
+  \pause
   {\em What is missing here?}
   \pause
 
@@ -314,7 +353,55 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Multiplicative inverses}
+  \frametitle{Multiplicative inverses (standard arithmetic)}
+
+  In standard arithmetic, what is 2/5?
+
+  \pause
+
+  We are looking to a number $x$ such that $2 = 5x$.  How can we do that?
+
+  \pause
+
+  By dividing on both sides with $5$:
+  \[
+  2/5 = 5x/5 = x,
+  \]
+  \pause
+  or equivalently, by multiplying with $(1/5)=5^{-1}$:
+  \[
+  2\cdot 5^{-1} = 5x\cdot5^{-1} = x\cdot 5\cdot 5^{-1} = x\cdot 1 = x.
+  \]
+  Here $5^{-1}$ is a multiplicative inverse of $5$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multiplicative inverses (modular arithmetic)}
+  
+  You can do the same thing in modular arithmetic.  Let the
+  modulus be $m=7$.  Note that
+  \[
+  5\cdot 3 \equiv 15 \equiv 1 \pmod 7.
+  \]
+  Therefore, $5^{-1}\equiv 3 \pmod 7$.
+
+  \pause
+  \vspace{0.1in}
+  To find $2/5$, we can view our goal as to find the value of $x$ such that
+  \[
+  2 \equiv 5x \pmod 7.
+  \]
+  We can multiply both sides with $5^{-1}\equiv 3$ to get
+  \[
+  2\cdot 5^{-1} \equiv 2\cdot 3 \equiv 6 \equiv 5^{-1}\cdot 5x \equiv x \pmod 7.
+  \]
+  \pause
+
+  Let's check:
+  \[
+  5\cdot 6 \equiv 30 \equiv 2 \pmod 7,
+  \]
+  as requied.
   
 \end{frame}
 
@@ -364,4 +451,71 @@
     have the contradiction.
     }
   \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples: division in modular arithmetic}
+
+  Since the requirement for an existance of $a^{-1}$ modulo $m$ is
+  that $gcd(a,m)=1$, if we let $m$ be a prime number, every $a$ which
+  is not a multiple of $m$ has an inverse.
+
+  Can you solve this equation?
+  \[
+  4x + 9 \equiv 0 \pmod{11}.
+  \]
+
+  \pause
+
+  We can even perform gaussian elimination ({\em which is very useful
+    later}):
+  \[
+  \begin{array}{rcl}
+    2x + y & \equiv & 3 \pmod 7 \\
+    x + 3y & \equiv & 5 \pmod 7
+  \end{array}
+  \]
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quick recap: RSA}
+
+  {\small
+  \begin{itemize}
+  \item Private key: $(e,n)$, \ \ \  Public key: $(d,n)$
+  \item Encryption $E(m) = m^{e} \bmod n$,\ \ \  Decryption: $D(w) = w^{d} \bmod n$.
+  \item Goal: Select $e,d,n$ such that $D(E(m)) = m^{ed}\bmod n = m$.
+  \end{itemize}
+  }
+  
+  \vspace{0.1in}
+  \pause
+  {\footnotesize
+  \begin{itemize}
+  \item Pick two primes $p$ and $q$.  Let $n=pq$.
+  \item Pick $e$ (usually a small number)
+  \item Pick $d$ such that $d = e^{-1} \pmod{(p-1)(q-1)}$, i.e., $ed\equiv 1 \pmod{(p-1)(q-1)}$, or
+    \[
+    ed = k\cdot(p-1)(q-1) + 1, 
+    \]
+    for some integer $k$.
+  \item What is $m^{ed}\bmod n$?
+  \end{itemize}
+  }
+  \vspace{0.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{What's next?}
+
+  \begin{itemize}
+  \item We will prove Fermat's Little Theorem and show how to
+    efficiently test if a number is prime.
+  \item We will also use Fermat's Little Theorem to prove the
+    correctness of RSA.
+  \item Modular arithmetic is also key to our usage of polynomials to
+    perform secret sharing and error correcting codes, because now we
+    can do Gaussian elimination using only integers.
+  \end{itemize}
 \end{frame}

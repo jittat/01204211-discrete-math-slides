@@ -326,7 +326,7 @@ Does it run in polynomial time on the size of the input?
     Euclid$(x,y) \Rightarrow$ \pause
     Euclid$(y, x\bmod y) \Rightarrow$ \pause
     Euclid$(x\bmod y, y\bmod (x\bmod y))$} \pause
-    Note that in this case, $x\bmod y\leq y/2\leq x/2$. \pause
+    Note that in this case, $x\bmod y= x-y\leq x/2$. \pause
     Thus, after two recursive calls, the first argument decreases by half.
   \item How many times can that happen?
   \item The first argument can decrease by a factor of two for at most
