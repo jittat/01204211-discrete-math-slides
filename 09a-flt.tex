@@ -1,0 +1,411 @@
+\include{commons}
+\lecturetitle{Lecture 9a: Fermat's Little Theorem} 
+
+\begin{frame}
+  \frametitle{Quick recap} 
+
+  For any integer $x$ and $y$, there exist a pair of integers $a$ and
+  $b$ such that \[ a\cdot x + b\cdot y = gcd(x,y).  \]
+
+  \pause
+  How to find $a$ and $b$?  Use the extended GCD algorithm.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Finding $a$ and $b$: Extended Euclid Algorithm}
+
+  We will modify the Euclid algorithm so that it also returns $a$ and
+  $b$ together with $gcd(x,y)$.
+  
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm Euclid(x,y):
+    if x mod y == 0:
+
+      return y, 0, 1
+    else:
+      g, a', b' = Euclid(y, x mod y)
+
+      a = b'
+
+      b = a' - b'*floor(x / y)     
+
+      return g, a, b
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Recap: Congruences}
+
+  \begin{block}{Definition (congruences)}
+    For an integer $m>0$,
+    if integers $a$ and $b$ are such that
+    \[
+    a \bmod m = b \bmod m,
+    \]
+    we write
+    \[
+    a \equiv b \pmod m.
+    \]
+  \end{block}
+
+  We also have that
+  \[
+  a \equiv b \pmod m \ \ \ \ \Leftrightarrow \ \ \ \
+  m|(a-b)
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Recap: Multiplicative inverse modulo $m$}
+
+  \begin{block}{Definition}
+    The multiplicative inverse modulo $m$ of $a$, denoted by $a^{-1}$,
+    is an integer such that
+    \[
+    a\cdot a^{-1}\equiv 1 \pmod m.
+    \]
+  \end{block}
+  \vspace{0.2in}
+  \begin{theorem}
+    An integer $a$ has a multiplicative inverse modulo $m$ iff
+    $gcd(a,m) = 1$.
+  \end{theorem}
+\end{frame}
+
+\begin{frame}
+  \frametitle{How to test if an integer $n$ is prime}
+
+  \begin{itemize}
+  \item Try to find factors of $n$.  (Takes time $\sqrt{n}$)
+    \pause
+  \item If there is a property that holds \textcolor{red}{\bf iff} $n$
+    is prime, we can check that property.  If we can check that
+    quickly, we can test if $n$ is prime.
+    \pause
+  \item If there is a property that holds \textcolor{red}{\bf if} $n$
+    is prime, how can we make use of that property?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{theorem}[Fermat's Little Theorem]
+    If $p$ is prime and $a$ is an integer such that $gcd(a,p)=1$,
+    \[
+    a^{p-1}\equiv 1 \pmod p.
+    \]
+  \end{theorem}
+
+  \pause
+
+  \vspace{0.2in}
+
+  {\em How can we use Fermat's Little Theorem to check if integer $n$
+    is prime?}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Fermat test}
+
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm CheckPrime(n):
+      pick integer a from 2,...,n-1
+
+      if gcd(a,n) != 1:
+          return False
+
+      if power(a,n-1,n) != 1:
+          return False
+      else:
+          return True
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{How good is the Fermat test?}
+
+  When you call {\tt CheckPrime(n)}:
+
+  \begin{itemize}
+  \item If $n$ is prime, \pause {\tt CheckPrime} always return True.
+  \item If $n$ is composite, \pause you want {\tt CheckPrime} to
+    return False, but {\bf Fermat's Little Theorem does not guarantee that.}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Fermat test - when $n$ is composite}
+
+  \begin{tcolorbox}
+  {\tiny
+\begin{verbatim}
+  Algorithm CheckPrime(n):
+      pick integer a from 2,...,n-1
+
+      if gcd(a,n) != 1:
+          return False
+
+      if power(a,n-1,n) != 1:
+          return False
+      else:
+          return True
+\end{verbatim}
+  }
+  \end{tcolorbox}
+
+  If $n$ is composite, the algorithm returns False when
+  \pause
+  
+  \begin{itemize}
+  \item $gcd(a,n)\neq 1$, i.e., when you pick $a$ with common factor with $n$.
+    \pause
+  \item $a^{n-1}\bmod n\neq 1$, i.e., when you find $a$ that violates
+    the property.  We want to be in this case.  How likely?
+  \end{itemize}
+  
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Proof of Fermat's Little Thm: Idea}
+
+  {\footnotesize
+    Let $p=7$ and $a=5$. Consider set
+    \[
+    B = \{1,2,3,\ldots,p-1\}
+    = \{1,2,3,4,5,6\}
+    \]
+    
+    Also consider set
+    \[
+    C = \{
+    1\cdot 5\bmod 7,\
+    2\cdot 5\bmod 7,\
+    3\cdot 5\bmod 7,\ldots,
+    6\cdot 5\bmod 7
+    \},
+    \]
+    which is \pause
+    \[
+    C = \{
+    5, 3, 1, 6, 4, 2
+    \}
+    \pause = B.
+    \]
+
+    \pause Is this coincidental?  \pause No. (We will prove that. But
+    can you quickly tell why.)
+    
+    Since $B = C$, the following terms are equal:
+    \[
+    \left(\prod_{i\in B} i\right) \bmod 7 = 1\cdot 2\cdot 3\cdot 4\cdot 5\cdot 6 \bmod 7,
+    \]
+    and
+    \[
+    \begin{array}{rcl}
+      \left(\prod_{i\in C} i\right) \bmod 7 &=& 5\cdot 3\cdot 1\cdot 6\cdot 4\cdot 2 \bmod 7\\
+      &=& (1a)\cdot (2a)\cdot (3a)\cdot (4a)\cdot (5a)\cdot (6a) \bmod 7 \\
+      &=& (1\cdot 2\cdot 3\cdot 4\cdot 5\cdot 6)\cdot a^{6} \bmod 7.
+    \end{array}
+    \]
+  }
+  
+\end{frame}
+
+\begin{frame}
+  \begin{proof}[Proof of Fermat's Little Thm]
+    {\small
+    Recall that $gcd(a,p)=1$, i.e., there exists a multiplicative
+    inverse $a^{-1}$ of $a$ modulo $p$.  This implies that for
+    $i\not\equiv j \pmod p$, $ai\not\equiv aj \pmod p$.
+    Also note that $a\cdot 0\equiv 0\pmod p$.
+
+    \pause
+    Let $B=\{1,2,\ldots,p-1\}$.  Let
+    \[
+    C = \{a\cdot i \bmod p | i\in B\}.
+    \]
+    \pause
+    Since for different $i,j\in B$, we have different $ai\bmod p,
+    aj\bmod p$, we know that $|C|=p-1$.  Also, $C\subseteq B$ because
+    $0\leq ai\bmod p\leq p-1$ and $0\not\in C$.  Thus, we can conclude that $C=B$.
+
+    \pause
+    Since $B=C$, we have that $\prod_{i\in B}i\equiv \prod_{i\in C}i \pmod p$, i.e.
+    \[
+    \begin{array}{rcl}
+      1\cdot 2\cdots (p-1)
+      &\equiv& (a1)\cdot (a2)\cdot(a3)\cdots(a(p-1)) \pmod p\\
+      &\equiv& (1\cdot 2\cdots (p-1))\cdot a^{p-1} \pmod p.
+    \end{array}
+    \]
+
+    Since each of $1,2,\ldots,p-1$ has an inverse modulo $p$, we can
+    multiply both sides with $1^{-1}, 2^{-1},\ldots,(p-1)^{-1}$ to obtain
+    \[
+    1\equiv a^{p-1} \pmod p,
+    \]
+    as required.
+    
+    }
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{Exercise}
+    Prove that for any integer $a$ and prime $p$,
+    \[
+    a^{p}\equiv a \pmod p.
+    \]
+  \end{block}
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{How good is the Fermat test when $n$ is composite?}
+
+  To answer correctly, we want $a$ to be such that $gcd(a,n)\neq 1$ or
+  \[
+  a^{n-1}\not\equiv 1 \pmod n.
+  \]
+  \pause We only consider the case where $gcd(a,n)=1$ because when
+  $gcd(a,n)\neq 1$, the test works perfectly.
+
+  \vspace{0.2in} \pause
+
+  We refer to $a\in\{1,2\ldots, p-1\}$ such that $gcd(a,n)=1$ and
+  $a^{n-1}\not\equiv 1\pmod n$ as a \textcolor{red}{\bf witness}.  The
+  other element $b$ such that $b^{n-1}\equiv 1\pmod n$ is called a
+  {\bf non-witness}.
+
+  How likely that we randomly choose an element and get a
+  witness?
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Number of witnesses}
+
+  Suppose that there exists a witness $a$; we know that
+  $a^{n-1}\not\equiv 1 \pmod n$.  How can we find other witnesses?
+
+  \pause
+
+  Consider a non-witness $b$ such that $b^{n-1}\equiv 1\pmod n$.
+
+  \vspace{2in}
+
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Carmichael Number}
+  A {\bf Carmicheal number} is a composite number $n$ where
+  \[
+  b^{n-1}\equiv 1 \pmod n,
+  \]
+  for every $b$ which are relatively primve to $n$.
+
+  \vspace{0.2in}
+  {\small
+  Carmicheal numbers are rare.  The smallest is $561=3\cdot 11\cdot
+  17.$ The next ones are $1105, 1729,$ and $2465$.  There are
+  $20,138,200$ Carmicheal numbers between $1$ and $10^{21}$.
+
+  So, if we ignore Carmicheal numbers, the Fermat test is very good.
+  There are other probabilistic tests (e.g, Miller-Rabin test) that
+  uses other properties that works for all numbers and there are
+  deterministic algorithms for testing primes.
+  }
+  
+  \begin{lemma}
+    If $n$ is not a Carmicheal number, the Fermat test returns that
+    $n$ is a composite with probability at least $1/2$.
+  \end{lemma}
+
+  Note that if you repeat the test for $k$ times, the probability that
+  it gives the wrong answer is at most $1/2^k$.
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Running time}
+  \begin{tcolorbox}
+  {\tiny
+\begin{verbatim}
+  Algorithm CheckPrime(n):
+      pick integer a from 2,...,n-1
+
+      if gcd(a,n) != 1:
+          return False
+
+      if power(a,n-1,n) != 1:
+          return False
+      else:
+          return True
+\end{verbatim}
+  }
+  \end{tcolorbox}
+
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Special case of Euler's theorem}
+
+  \begin{theorem}[Euler's theorem]
+    If $p$ and $q$ are different primes, for $a$ such that $gcd(a,pq)=1$, we have
+    \[
+    a^{(p-1)(q-1)} \equiv 1 \pmod{pq}.
+    \]
+  \end{theorem}
+
+  \vspace{0.2in}
+  \pause {\em Is this useful?} \pause {Yes! In the RSA algorithm.}
+\end{frame}
+
+\begin{frame}
+  \frametitle{RSA}
+
+  \begin{tcolorbox}
+  {\footnotesize
+  \begin{itemize}
+  \item Private key: $(e,n)$, \ \ \  Public key: $(d,n)$
+  \item Encryption $E(m) = m^{e} \bmod n$,\ \ \  Decryption: $D(w) = w^{d} \bmod n$.
+  \item Goal: Select $e,d,n$ such that $D(E(m)) = m^{ed}\bmod n = m$.
+  \end{itemize}
+  }
+  \end{tcolorbox}
+  
+  \vspace{0.1in}
+  \pause
+  {\footnotesize
+  \begin{itemize}
+  \item Pick two primes $p$ and $q$.  Let $n=pq$.
+  \item Pick $e$ (usually a small number)
+  \item Pick $d$ such that $d = e^{-1} \pmod{(p-1)(q-1)}$, i.e., $ed\equiv 1 \pmod{(p-1)(q-1)}$, or $ed = k\cdot(p-1)(q-1) + 1$, for some integer $k$.
+  \item What is $m^{ed}\bmod n$? \pause
+    \begin{eqnarray*}
+      m^{ed} &\equiv& m^{k(p-1)(q-1)+1} \pmod n\\
+      &\equiv& (m^{(p-1)(q-1)})^k\cdot m \pmod n\\
+      &\equiv& 1^k\cdot m \pmod n\\
+      &\equiv& m \pmod n
+    \end{eqnarray*}
+    \pause
+
+    What is the requirement for $m$?  \pause $gcd(m,n)=1$, otherwise
+    you can use the message to factor $n$.
+  \end{itemize}
+  }
+  \vspace{0.5in}
+\end{frame}
