@@ -1,0 +1,106 @@
+\include{commons}
+\lecturetitle{Lecture 9b: Polynomials (1)\footnote{This section is from Berkeley CS70 lecture notes.}} 
+
+\begin{frame}
+  \frametitle{Quick exercise} 
+
+  For any integer $a$, $a-1|a^2-1$.
+
+  \pause
+
+  For any integer $a$ and $n\geq 1$, $a-1|a^n-1$.
+
+  \vspace{3in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Polynomials}
+
+  A \textcolor{red}{\bf single-variable polynomial} is a function
+  $p(x)$ of the form
+  \[
+  p(x) = a_dx^d+a_{d-1}x^{d-1}+\cdots+a_1x+a_0.
+  \]
+
+  We call $a_i$'s {\em coefficients}.  Usually, variable $x$ and
+  coefficients $a_i$'s are real numbers.  The \textcolor{red}{\bf
+    degree} of a polynomial is the largest exponent of the terms with
+  non-zero coefficients.
+  
+  \vspace{0.2in}
+
+  {\bf Examples}
+  \begin{itemize}
+  \item $x^3-3x+1$
+  \item $x+10$
+  \item $10$
+  \item $0$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Folklore}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Applications}
+  \begin{itemize}
+  \item Secret sharing
+    \pause
+  \item Error-correcting codes
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Basic facts}
+
+  \begin{block}{Definition}
+    $a$ is a \textcolor{red}{\bf root} of polynomial $f(x)$ if
+    $f(a)=0$.
+  \end{block}
+  
+  \begin{block}{Properties}
+    {\bf Property 1:} A non-zero polynomial of degree $d$ has at most
+    $d$ roots.
+
+    {\bf Property 2:} Given $d+1$ pairs
+    $(x_1,y_1),\ldots,(x_{d+1},y_{d+1})$ with distinct $x_i$'s, there
+    is a {\em unique} polynomial $p(x)$ of degree at most $d$ such
+    that $p(x_i)=y_i$ for $1\leq i\leq d+1$.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \begin{lemma}
+    If two polynomials $f(x)$ and $g(x)$ of degree at most $d$ that
+    share $d+1$ points $(x_1,y_1),\ldots,(x_{d+1},y_{d+1})$, where all
+    $x_i$'s are distinct, i.e., $f(x_i)=g(x_i)=y_i$, then $f(x)=g(x)$.
+  \end{lemma}
+  \begin{proof}
+    {\small
+
+      Suppose that $f(x)=a_dx^d+a_{d-1}x^{d-1}+\cdots+a_0$ and
+      $g(x)=b_dx^d+b_{d-1}x^{d-1}+\cdots+b_0$.
+      
+      Let $h(x)=f(x)-g(x)$, i.e., let
+      $h(x)=c_dx^d+c_{d-1}x^{d-1}+\cdots+c_0$, where $c_i=a_i-b_i$.
+      Note that $h(x)$ is also a polynomial of degree (at most) $d$.
+
+      We claim that $h(x)$ has $d+1$ roots.  Note that since
+      $f(x_i)=g(x_i)=y_i$, we have that
+      \[
+      h(x_i)=f(x_i)-g(x_i)=y_i-y_i=0,
+      \]
+      i.e., every $x_i$ is a root of $h(x)$.
+
+      From {\bf Property 1}, if $h(x)$ is non-zero it has at most $d$
+      roots; therefore, $h(x)$ must be zero, i.e., $f(x)-g(x)=0$ or
+      $f(x)=g(x)$ as required.
+    }
+  \end{proof}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Polynomial interpolation}
+\end{frame}
