@@ -4,11 +4,11 @@
 \begin{frame}
   \frametitle{Quick exercise} 
 
-  For any integer $a$, $a-1|a^2-1$.
+  For any integer $a\neq 1$, $a-1|a^2-1$.
 
   \pause
 
-  For any integer $a$ and $n\geq 1$, $a-1|a^n-1$.
+  For any integer $a\neq 1$ and $n\geq 1$, $a-1|a^n-1$.
 
   \vspace{3in}
 \end{frame}
@@ -75,6 +75,7 @@
     If two polynomials $f(x)$ and $g(x)$ of degree at most $d$ that
     share $d+1$ points $(x_1,y_1),\ldots,(x_{d+1},y_{d+1})$, where all
     $x_i$'s are distinct, i.e., $f(x_i)=g(x_i)=y_i$, then $f(x)=g(x)$.
+    \label{lem:agree}
   \end{lemma}
   \begin{proof}
     {\small
@@ -102,5 +103,58 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Polynomial interpolation}
+  \frametitle{Polynomial interpolation - ideas}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Lagrange polynomial}
+
+  \begin{tcolorbox}
+    For $d+1$ points $(x_1,y_1), (x_2,y_2),\ldots, (x_{d+1},y_{d+1})$
+    where all $x_i$'s are distinct, let
+    {\footnotesize
+    \[
+    \Delta_i(x) =
+    \frac{(x-x_1)(x-x_2)\cdots(x-x_{i-1})(x-x_{i+1})\cdots(x-x_{d+1})}
+         {(x_i-x_1)(x_i-x_2)\cdots(x_i-x_{i-1})(x_i-x_{i+1})\cdots(x_i-x_{d+1})}.
+         \]
+         }
+  \end{tcolorbox}
+
+  Note that $\Delta_i(x)$ is a polynomial of degree \pause $d$.
+  Also we have that
+  \begin{itemize}
+  \item For $j\neq i$, $\Delta_i(x_j) = \pause 0$, and
+  \item $\Delta_i(x_i) = \pause 1$.
+  \end{itemize}
+  \pause
+  \vspace{0.2in}
+  We can use $\Delta_i(x)$ to construct a degree-$d$ polynomial
+  \[
+  p(x) =
+  y_1\cdot\Delta_1(x) +
+  y_2\cdot\Delta_2(x) + \cdots
+  y_{d+1}\cdot\Delta_{d+1}(x).
+  \]
+  What can you say about $p(x_i)$? 
+\end{frame}
+
+\begin{frame}
+  \begin{block}{Property 2}
+    Given $d+1$ pairs
+    $(x_1,y_1),\ldots,(x_{d+1},y_{d+1})$ with distinct $x_i$'s, there
+    is a {\em unique} polynomial $p(x)$ of degree at most $d$ such
+    that $p(x_i)=y_i$ for $1\leq i\leq d+1$.
+  \end{block}
+
+  \begin{proof}[Proof of Property 2]
+    Using Lagrange interpolation, we know that there exists a
+    polynomial $p(x)$ of degree $d$ such that $p(x_i)=y_i$ for all
+    $1\leq i\leq d+1$.
+
+    For uniqueness, assume that there exists another polynomial $g(x)$
+    of degree $d$ also satifying the condition.  Since $p(x)$ and
+    $g(x)$ agrees on more than $d$ points, $p(x)$ and $g(x)$ must be
+    equal from Lemma~\ref{lem:agree}.
+  \end{proof}
 \end{frame}
