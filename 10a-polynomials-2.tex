@@ -1,0 +1,232 @@
+\include{commons}
+\lecturetitle{Lecture 10a: Polynomials (2)\footnote{This section is from Berkeley CS70 lecture notes.}} 
+
+\begin{frame}
+  \frametitle{Review: Polynomials}
+
+  A \textcolor{red}{\bf single-variable polynomial} is a function
+  $p(x)$ of the form
+  \[
+  p(x) = a_dx^d+a_{d-1}x^{d-1}+\cdots+a_1x+a_0.
+  \]
+
+  We call $a_i$'s {\em coefficients}.  Usually, variable $x$ and
+  coefficients $a_i$'s are real numbers.  The \textcolor{red}{\bf
+    degree} of a polynomial is the largest exponent of the terms with
+  non-zero coefficients.
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: Basic facts}
+
+  \begin{block}{Definition}
+    $a$ is a \textcolor{red}{\bf root} of polynomial $f(x)$ if
+    $f(a)=0$.
+  \end{block}
+  
+  \begin{block}{Properties}
+    {\bf Property 1:} A non-zero polynomial of degree $d$ has at most
+    $d$ roots.
+
+    {\bf Property 2:} Given $d+1$ pairs
+    $(x_1,y_1),\ldots,(x_{d+1},y_{d+1})$ with distinct $x_i$'s, there
+    is a {\em unique} polynomial $p(x)$ of degree at most $d$ such
+    that $p(x_i)=y_i$ for $1\leq i\leq d+1$.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Polynomial division}
+  \pause
+
+  \begin{tcolorbox}
+    If you have a polynomial $p(x)$ of degree $d$, you can divide it
+    with a polynomial $q(x)$ of degree $\leq d$.  You have that there
+    exists a pair of polynomial $q'(x)$ and $r(x)$ such that
+    \[
+    p(x) = q'(x)q(x) + r(x),
+    \]
+    and $r(x)$ is of degree {\bf less} than $q(x)$'s degree.
+  \end{tcolorbox}
+\end{frame}
+
+\begin{frame}
+  \begin{lemma}
+    If $a$ is a root of polynomial $p(x)$ with degree $d\geq 1$, then
+    $p(x)=(x-a)q(x)$ for some polynomial $q(x)$ with degree at most
+    $d-1$
+  \end{lemma}
+  \begin{proof}
+    \pause
+    Dividing $p(x)$ with $(x-a)$, we get that
+    \[
+    p(x) = q'(x)(x-a) + r(x),
+    \]
+    where $r(x)$ is of degree at most $1-1=0$, i.e., $r(x)$ must be a
+    constant; thus, we assume that $r(x)=c$.  Let's evaluate $p(a)$; note
+    that $p(a)=c$, since
+    \[
+    p(a) = q'(a)(a-a) + c = 0 + c = c.
+    \]
+    However we know that $a$ is a root of $p(x)$, i.e., $p(a)=0$.
+    Therefore $c=0$, or $r(x)=0$.  Thus, the lemma follows.
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \begin{lemma}
+    If $p(x)$ is a polynomial of degree $d$ with $d$ distinct roots
+    $a_1,a_2,\ldots,a_d$, $p(x)$ can be written as
+    $c(x-a_1)(x-a_2)\cdots(x-a_d)$.
+  \end{lemma}
+  \begin{proof}
+    {\small
+      \pause
+      We prove by induction on $d$. \pause
+      
+      {\bf Base case:}
+      \pause
+
+      {\bf Inductive step:} \pause Assume that $p(x)$ is a polynomial
+      of degree $d+1$ with distinct roots $a_1,\ldots,a_d,a_{d+1}$.
+      \pause Since $a_{d+1}$ is $p(x)$'s root, we can divide $p(x)$
+      with $(x-a_{d+1})$ and get that
+      \[
+      p(x) = (x-a_{d+1})q(x),
+      \]
+      where \pause $q(x)$ is a polynomial of degree $d$ with $d$
+      distinct roots $a_1,\ldots,a_d$. 
+      \vspace{0.5in}
+    }
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Property 1}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Polynomials over a finite field $GF(p)$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples - evaluation}
+
+  Suppose that we work over $GF(m)$ where $m=11$.  Let $p(x) = 4\cdot
+  x^2 + 5\cdot x + 3$.  We have
+
+  {\small
+  \begin{tabular}{c|c|c}
+    $x$ & $p(x)$ & $p(x)\bmod m$ \\
+    \hline
+    $0$ & $3$ & $3$ \\
+    $1$ & $12$ & $1$ \\
+    $2$ & $29$ & $7$ \\
+    $3$ & $54$ & $10$ \\
+    $4$ & $87$ & $10$ \\
+    $5$ & $128$ & $7$ \\
+    $6$ & $177$ & $1$ \\
+    $7$ & $234$ & $3$ \\
+    $8$ & $299$ & $2$ \\
+    $9$ & $372$ & $9$ \\
+    $10$ & $453$ & $2$ \\
+    $11$ & $542$ & $3$ \\
+  \end{tabular}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples - interpolation}
+
+  Let $m=11$. Suppose that $p(x)$ is a polynomial over $GF(m)$ of
+  degree $2$ passing through $(2,7),(4,10),$ and $(7,3)$.  Find $p(x)$.
+
+  \pause
+  Let
+  \begin{itemize}
+  \item \pause
+    $\Delta_1(x)=\frac{(x-4)(x-7)}{(2-4)(2-7)}
+    =\frac{x^2-11x+28}{(-2)\cdot(-5)}
+    =\frac{x^2+6}{10}
+    =10x^2+5$
+  \item \pause
+    $\Delta_2(x)=\frac{(x-2)(x-7)}{(4-2)(4-7)}
+    =\frac{x^2-9x+14}{2\cdot(-3)}
+    =\frac{x^2+2x+3}{5}
+    =9x^2+7x+5$
+  \item \pause
+    $\Delta_2(x)=\frac{(x-2)(x-4)}{(7-2)(7-4)}
+    =\frac{x^2-6x+8}{5\cdot 3}
+    =\frac{x^2+5x+8}{4}
+    =3x^2+4x+2$
+  \end{itemize}
+
+  Thus,
+  \begin{eqnarray*}
+    p(x) &=&  7\Delta_1(x) + 10\Delta_2(x) + 3\Delta_3(x) \\
+    &=& (70x^2 + 35) + (90x^2 + 70x+50) + (9x^2+12x+6) \\
+    &=& 4x^2+5x+3
+  \end{eqnarray*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{How many?}
+\end{frame}
+
+\begin{frame}
+  Two ways of specifying a polynomial $p(x)$ of degree $d$:
+  \begin{itemize}
+  \item Specify its coefficients $a_0,a_1,\ldots,a_d$, i.e., the
+    polynomial is
+    \[
+    p(x) = a_d x^d + \ldots a_1 x + a_0.
+    \]
+    \pause
+  \item Specify $d+1$ points, i.e.,
+    $(x_1,y_1),(x_2,y_2),\ldots,(x_{d+1},y_{d+1})$, where all $x_i$
+    are distinct.  There is a {\em unique} polynomial $p(x)$ of degree
+    at most $d$ that passes through these points (from Property 2).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  For polynomials of degree at most $d$ over $GF(m)$, if you specify
+  $q$ points, there are:
+  
+  \begin{tabular}{c|c}
+    $q$ & numbers of polynomials \\
+    \hline
+    $d+1$ & $1$ \\
+    $d$ & $m$ \\
+    $d-1$ & $m^2$ \\
+    $d-2$ & $m^3$ \\
+    $\vdots$ & $\vdots$ \\
+    $1$ & $m^d$ \\
+    $0$ & $m^{d+1}$
+  \end{tabular}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Secret sharing scheme}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A more complex secret sharing scheme}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sending a message}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Erasure codes}
+
+  Suppose that we want to send a message $m_1,m_2,\ldots,m_n$ where
+  $m_i\leq p-1$ for some prime $p$. 
+
+  However, we know that our communication channel is lossy, i.e., some
+  messages can be {\em dropped}.  How can we send this message?
+
+  \vspace{2.5in}
+\end{frame}
