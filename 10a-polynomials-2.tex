@@ -2,6 +2,10 @@
 \lecturetitle{Lecture 10a: Polynomials (2)\footnote{This section is from Berkeley CS70 lecture notes.}} 
 
 \begin{frame}
+  \frametitle{Fun fact: Check digit for Thai National ID}
+\end{frame}
+
+\begin{frame}
   \frametitle{Review: Polynomials}
 
   A \textcolor{red}{\bf single-variable polynomial} is a function
@@ -171,6 +175,19 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Practice}
+
+  Let's work modulo $11$.
+
+  Use the last 3 digits of your student ID.  Suppose that they are
+  $a_2,a_1,a_0$.  Find a polynomial $p(x)$ of degree $2$ such that
+  $p(i)=a_i$ for $i=0,1,2$.
+
+  \vspace{2.5in}
+  
+\end{frame}
+
+\begin{frame}
   \frametitle{How many?}
 \end{frame}
 
@@ -208,15 +225,60 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Secret sharing scheme - settings}
+  \pause
+  \begin{itemize}
+  \item There are $n$ people, a secret $s$, and an integer $k$.
+  \item We want to ``distribute'' the secret in such a way that any
+    set of $k-1$ people cannot know anything about $s$, but any set of
+    $k$ people can reconstruct $s$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
   \frametitle{Secret sharing scheme}
+  \pause
+  \begin{itemize}
+  \item Pick $m$ to be larger than $n$ and $s$. (Much larger than $s$,
+    i.e., $m >>> s$.)
+  \item Pick a random polynomial of degree $k-1$ such that $P(0)=s$.
+  \item Give $P(i)$ to person $i$, for $1\leq i\leq n$.
+  \item Correctness: for any set of $k$ people,
+    \pause
+
+  \item Correctness: for any set of $k-1$ people, how many possible
+    candidate secrets compatible with the information these people
+    have?
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{A more complex secret sharing scheme}
+
+  Suppose that a company has 3 VPs and 5 senior members.  You want to
+  distribute a secret such that (1) any 2 VPs can obtain the secret or
+  (2) a single VP with 3 senior members can also obtain the secret.
+  How can you do that?
+  
+  \vspace{2.5in}
 \end{frame}
 
 \begin{frame}
   \frametitle{Sending a message}
+
+  Suppose that you want to send a message {\tt 1,2,1,1,3,4,4,10} over
+  the internet.
+
+  \pause
+  
+  Since the internet does not maintain the ordering (if you send with
+  UDP), you have to maintain the ``ordering'' youself, e.g., you can
+  add the message indices, i.e.,
+  \pause
+
+  {\bf Lossy internet:}
+  
+  \vspace{1.5in}
 \end{frame}
 
 \begin{frame}
