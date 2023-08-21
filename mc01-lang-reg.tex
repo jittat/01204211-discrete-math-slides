@@ -1,0 +1,280 @@
+\include{commons}
+\lecturetitle{Lecture 7a: Languages and regular expressions} 
+\renewcommand{\epsilon}{\varepsilon}
+
+\begin{frame}
+  \frametitle{What is computation?}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Models of computations}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Languages = specifications}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Formal definition: strings}
+
+  Intuitively, a string is a {\em finite} sequence of symbols.
+  However, to be able to formally prove properties of strings we need
+  a precise definition.
+
+  \vspace{0.1in}
+  
+  Let a finite set $\Sigma$ be the {\color{red}\bf alphabet}. (E.g.,
+  for bit strings, $\Sigma=\{0,1\}$; for digits,
+  $\Sigma=\{0,1,\ldots,9\}$; for English string
+  $\Sigma=\{a,b,\ldots,z\}$.)
+  
+  The following is a recursive definition of strings.
+
+  \begin{block}{Recursive definition of strings}
+    A {\color{red} \bf string} $w$ over alphabet $\Sigma$ is either
+    \begin{itemize}
+    \item the empty string $\epsilon$, or
+    \item $a\cdot x$ where $a\in\Sigma$ and $x$ is a string.
+    \end{itemize}
+  \end{block}
+
+  \vspace{0.1in}
+
+  The set of all strings over alphabet $\Sigma$ is denoted by $\Sigma^*$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: more recursive definitions}
+
+  \begin{block}{Lengths}
+    For a string $w$, let $|w|$ be the length of $w$ defined as
+    \[
+    |w| = \left\{
+    \begin{array}{ll}
+      0 & \mbox{when $w=\epsilon$} \\
+      1 + |x| & \mbox{when $w=a\cdot x$}
+    \end{array}
+    \right.
+    \]
+  \end{block}
+
+  \begin{block}{Concatenation}
+    For strings $w$ and $z$, the concatenation $w\bullet z$ is defiend
+    recursively as
+    \[
+    w\bullet z = \left\{
+    \begin{array}{ll}
+      z                   & \mbox{when $w=\epsilon$} \\
+      a\cdot(x\bullet z)  & \mbox{when $w=a\cdot x$}
+    \end{array}
+    \right.
+    \]
+  \end{block} 
+\end{frame}
+
+\begin{frame}
+  \frametitle{Review: proving facts about strings}
+
+  \begin{lemma}
+    For strings $w$ and $z$, $|w\bullet x|=|w|+|x|$.
+  \end{lemma}
+
+  \begin{proof}
+    \vspace{2in}
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Formal languages}
+
+  A {\color{red}\bf formal language} is a set of strings over some
+  finite alphabet $\Sigma$.
+
+  Examples:
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Careful...}
+
+  These are different languages: $\emptyset,\{\epsilon\}$
+
+  And $\epsilon$ is not a language.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{How to describe languages?}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Composition}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Combining languages}
+
+  If $A$ and $B$ are languages over alphabet $\Sigma$.
+  
+  \begin{itemize}
+  \item Basic set operations: $A\cup B$, $A\cap B$, $\bar{A}=\Sigma^*\setminus A$.
+  \item Concatenation: $A\bullet B$.
+    \vspace{1in}
+  \item Kleene closure or Kleene star: $A^*$.
+
+    \vspace{1in}
+    
+    Also $A^+=A\bullet A^*$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Regular languages}
+  \begin{block}{Definition: regular languages}
+    A language $L$ is {\color{red}\bf regular} if and only if it
+    satisfies one of the following conditions:
+    \begin{itemize}
+    \item $L$ is empty;
+    \item $L$ contains one string (can be the empty string $\epsilon$);
+    \item $L$ is a union of two regular languages;
+    \item $L$ is the concatenation of two regular languages; or
+    \item $L$ is the Kleene closure of a regular language.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Regular expressions}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Regular expressions: examples}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Subexpressions}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Regex is everywhere}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Proofs about regular expressions - structural induction} 
+\end{frame}
+
+\begin{frame}
+  \begin{lemma}
+    Every regular expression that does not use the symbol $\emptyset$
+    represents a non-empty language.
+  \end{lemma}
+
+  {\bf Proof.}
+  
+  \pause
+
+  Let $R$ be a regular expression that does not use the symbol
+  $\emptyset$.  We prove by (structural) induction that $R$ represents
+  a non-empty language.
+
+  \pause
+
+  {\bf Induction hypothesis:} Every subexpression of $R$ that does not
+  use the symbol $\emptyset$ represents a non-empty language.
+  
+  \pause
+
+  {\em Case 1:} $R=\emptyset$.
+  \vspace{0.5in}
+
+  \pause
+
+  {\em Case 2:} $R$ is a single string.
+
+  \pause
+  \vspace{1.5in}
+  
+\end{frame}
+
+\begin{frame}{}
+  
+  {\bf Proof.} (cont.2/4)
+  
+  {\em Case 3:} $R=S+T$ for some regular expressions $S$ and $T$.
+
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}{}
+  
+  {\bf Proof.} (cont.3/4)
+
+  {\em Case 4:} $R=S\bullet T$ for some regular expressions $S$ and $T$.
+
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}{}
+  
+  {\bf Proof.} (cont.4/4)
+
+  {\em Case 5:} $R=S^*$ for some regular expression $S$.
+
+  \vspace{2.5in}
+  \pause
+
+  In every case, the language $L(R)$ is non-empty.
+\end{frame}
+
+
+\begin{frame}
+  \begin{lemma}
+    Every non-empty regular language is represented by a regular
+    expression that does not use the symbol $\emptyset$.
+  \end{lemma}
+
+  \pause
+
+  Let $R$ be a regular expression. \pause We prove that if
+  $L(R)\neq\emptyset$, then there exists a regular expression $R'$
+  such that $L(R)=L(R')$ and $R'$ does not contain $\emptyset$.
+
+  \pause We prove by induction.  What should the induction hypothesis
+  be?
+
+  \vspace{1.5in}
+\end{frame}
+
+\begin{frame}
+
+  {\bf I.H.:} For every subexpression $S$ of $R$, if $L(S)\neq
+  \emptyset$, there exists an $\emptyset$-free regular expression $S'$
+  such that $L(S)=L(S')$.
+
+  \vspace{0.1in}
+  
+  \pause
+
+  \begin{block}{What are the cases that we have to consider?}
+
+  \pause
+
+  \begin{itemize}
+  \item $R=\emptyset$
+  \item $R$ is a single string.
+  \item $R = S+T$ for some regular expressions $S$ and $T$.
+  \item $R = S\bullet T$ for some regular expressions $S$ and $T$.
+  \item $R = S^*$ for some regular expression $S$.
+  \end{itemize}
+  \end{block}
+  
+\end{frame}
+
