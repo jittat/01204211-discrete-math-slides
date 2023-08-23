@@ -1,6 +1,12 @@
 \include{commons}
-\lecturetitle{Lecture 7a: Languages and regular expressions} 
+
+\newcommand\sbullet[1][.5]{\mathbin{\vcenter{\hbox{\scalebox{#1}{$\bullet$}}}}}
+
+\lecturetitle{Lecture 7a: Languages and regular expressions\footnote{Based on lecture notes of {\em Models of Computation} course by Jeff Erikson.}} 
 \renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\czero}{{\mathtt 0}}
+\newcommand{\cone}{{\mathtt 1}}
 
 \begin{frame}
   \frametitle{What is computation?}
@@ -24,7 +30,7 @@
   \vspace{0.1in}
   
   Let a finite set $\Sigma$ be the {\color{red}\bf alphabet}. (E.g.,
-  for bit strings, $\Sigma=\{0,1\}$; for digits,
+  for bit strings, $\Sigma=\{\czero,\cone\}$; for digits,
   $\Sigma=\{0,1,\ldots,9\}$; for English string
   $\Sigma=\{a,b,\ldots,z\}$.)
   
@@ -59,13 +65,13 @@
   \end{block}
 
   \begin{block}{Concatenation}
-    For strings $w$ and $z$, the concatenation $w\bullet z$ is defiend
+    For strings $w$ and $z$, the concatenation $w\sbullet z$ is defiend
     recursively as
     \[
-    w\bullet z = \left\{
+    w\sbullet z = \left\{
     \begin{array}{ll}
       z                   & \mbox{when $w=\epsilon$} \\
-      a\cdot(x\bullet z)  & \mbox{when $w=a\cdot x$}
+      a\cdot(x\sbullet z)  & \mbox{when $w=a\cdot x$}
     \end{array}
     \right.
     \]
@@ -76,7 +82,7 @@
   \frametitle{Review: proving facts about strings}
 
   \begin{lemma}
-    For strings $w$ and $z$, $|w\bullet x|=|w|+|x|$.
+    For strings $w$ and $z$, $|w\sbullet x|=|w|+|x|$.
   \end{lemma}
 
   \begin{proof}
@@ -118,13 +124,13 @@
   
   \begin{itemize}
   \item Basic set operations: $A\cup B$, $A\cap B$, $\bar{A}=\Sigma^*\setminus A$.
-  \item Concatenation: $A\bullet B$.
+  \item Concatenation: $A\sbullet B$.
     \vspace{1in}
   \item Kleene closure or Kleene star: $A^*$.
 
     \vspace{1in}
     
-    Also $A^+=A\bullet A^*$
+    Also $A^+=A\sbullet A^*$
   \end{itemize}
 \end{frame}
 
@@ -153,10 +159,62 @@
 
 \begin{frame}
   \frametitle{Regular expressions}
+  Let $\Sigma=\{\czero,\cone\}$.  Consider
+  \[
+  (
+  (\{\czero\cone\}\cup
+  (\{\cone\}\sbullet(\{\czero\}\cup\{\cone\czero\})))
+  \cup
+  (\{\czero\czero\}\sbullet(\{\cone\})^*)
+  )
+  \sbullet((\{\czero\}\sbullet\{\czero\})\sbullet\{\cone\})
+  \]
+  \vspace{2in}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Regular expressions: examples}
+  \frametitle{Regular expressions}
+  Regular language
+  \[
+  (
+  (\{\czero\cone\}\cup
+  (\{\cone\}\sbullet(\{\czero\}\cup\{\cone\czero\})))
+  \cup
+  (\{\czero\czero\}\sbullet(\{\cone\})^*)
+  )
+  \sbullet((\{\czero\}\sbullet\{\czero\})\sbullet\{\cone\})
+  \]
+  is represented as
+  \[
+  (
+  \czero\cone+
+  \cone(\czero+\cone\czero)
+  +\czero\czero(\cone)^*
+  )
+  \czero\czero\cone
+  \]
+
+  Regular expressions
+  \begin{itemize}
+  \item omit braces around one-string sets
+  \item use $+$ instead of $\cup$
+  \item omit $\sbullet$
+  \item follow the precedence: Kleene star operator $*$, $\sbullet$ (implicitly), and $+$.
+  \end{itemize}
+
+  {\em
+    Remark: $+$ and $\sbullet$ are associative, i.e., $(A+B)+C=A+(B+C)$ and $(A\sbullet B)\sbullet C=A\sbullet(B\sbullet C)$.
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Regular expressions: examples 1}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Regular expressions: examples 2}
+  All strings over $\{\czero,\cone\}$ except $\czero\cone\czero$.
+  \vspace{3in}
 \end{frame}
 
 \begin{frame}
@@ -217,7 +275,7 @@
   
   {\bf Proof.} (cont.3/4)
 
-  {\em Case 4:} $R=S\bullet T$ for some regular expressions $S$ and $T$.
+  {\em Case 4:} $R=S\sbullet T$ for some regular expressions $S$ and $T$.
 
   \vspace{2.5in}
 \end{frame}
@@ -271,10 +329,41 @@
   \item $R=\emptyset$
   \item $R$ is a single string.
   \item $R = S+T$ for some regular expressions $S$ and $T$.
-  \item $R = S\bullet T$ for some regular expressions $S$ and $T$.
+  \item $R = S\sbullet T$ for some regular expressions $S$ and $T$.
   \item $R = S^*$ for some regular expression $S$.
   \end{itemize}
   \end{block}
   
 \end{frame}
 
+\begin{frame}
+
+(E-ex1-6) For string $w$, the reversal $w^R$ is defined recursively as follows:
+\[
+w^R=\left\{
+\begin{array}{ll}
+  \varepsilon & \mbox{if $w=\varepsilon$} \\
+  x^R\sbullet a & \mbox{if $w=ax$ for some symbol $a$ and some string $x$}
+\end{array}
+\right.
+\]
+For a language $L$, the reversal of $L$ is defined as
+\[
+L^R = \{ w^R \;|\; w\in L\}.
+\]
+
+You may assume the following facts.
+\begin{itemize}
+\item $L^*\sbullet L^*=L^*$ for every language $L$.
+\item $(w^R)^R=w$ for every string $w$.
+\item $(x\sbullet y)^R=y^R\sbullet x^R$ for all strings $x$ and $y$.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+
+Prove that $(L^R)^*\subseteq (L^*)^R$.
+
+\vspace{3in}
+\end{frame}
