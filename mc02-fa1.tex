@@ -102,6 +102,31 @@
   
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Multiple of 5}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \pause
+\begin{verbatim}
+def multiple_of_5(w):
+    r = 0
+    for i in w:
+        r = (2*r + w) % 5
+    return r == 0
+\end{verbatim}        
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \pause
+      \includegraphics[width=2.5in]{images/gv/mc02-fa-ex3.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \includegraphics[width=3in]{images/gv/mc02-fa-ex3.png}
+\end{frame}
+
 \begin{frame}
   \frametitle{Digital design: Implementation}
 
@@ -126,4 +151,21 @@
   \item Mealy machine: $G:Q\times \Sigma \longrightarrow [0,1]$
   \end{itemize}
   
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: even number of $\cone$'s}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: strings containing $\czero\czero$ as a substring}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Combining DFAs}
+
+  What if we want to build a DFA that accepts strings with an even
+  number of $\cone$'s and containing $\czero\czero$ as a substring?
+
+  \vspace{2in}
 \end{frame}
