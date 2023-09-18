@@ -1,0 +1,663 @@
+\include{commons}
+
+\newcommand\sbullet[1][.5]{\mathbin{\vcenter{\hbox{\scalebox{#1}{$\bullet$}}}}}
+
+\lecturetitle{Lecture 12a: Undecidability (1)\footnote{Based partly on lecture notes of {\em Models of Computation} course by Jeff Erickson.}} 
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\czero}{{\mathtt 0}}
+\newcommand{\cone}{{\mathtt 1}}
+\newcommand{\sigcupgam}{\Sigma\cup\Gamma}
+
+\frame{
+  \frametitle{Non-context-free languages}
+
+  While
+  \[
+  \{\czero^n\cone^n \;|\; n\geq 0\}
+  \]
+  is context free, the language
+  \[
+  \{\czero^n\cone^n\czero^n \;|\; n\geq 0\}
+  \]
+  is not.
+
+  \pause
+
+  Can we write a python program to check if a string $w$ belongs to
+  the language $\{\czero^n\cone^n\czero^n \;|\; n\geq 0\}$?
+
+}
+
+\frame{
+  \frametitle{Big question}
+
+  Is there a python program that ``solves'' any possible problem?
+
+  \pause
+
+  Can a computer solve any problem?
+
+  \pause
+  
+  Is there an algorithm that solves every problem?
+
+  \pause
+
+  What is the limit of computation?
+  
+}
+
+\frame{
+  \frametitle{Answer by a counting argument}
+
+  If there are ``more'' problems than any possible algorithms, then
+  there should be some problem that algorithms cannot solve.
+
+  (Think of an algorithm as ``a python program.)
+  
+  \pause
+
+  However, there are infinitely many python programs and there are
+  infinitely many problems.  It is not obvious how to much such an
+  argument formally.
+  
+}
+
+\frame{
+  \frametitle{Bijections}
+
+  \begin{block}{Definition}
+    \begin{itemize}
+    \item
+      A function $f:A\longrightarrow B$ from domain $A$ to range $B$
+      is {\color{red}\bf one-to-one} if for any $x\neq y\in A$,
+      $f(x)\neq f(y)$.
+    \item
+      A function $f:A\longrightarrow B$ from domain $A$ to range $B$
+      is {\color{red}\bf onto} if for any $x'\in B$, there exists
+      $x\in A$ such that $f(x)= x'$.
+    \item
+      A function $f:A\longrightarrow B$ is a {\color{red}\bf
+        bijection} (or bijective) if it is one-to-one and onto.
+    \end{itemize}
+  \end{block}
+
+}
+
+\frame{
+  \frametitle{Bijection: examples}
+}
+
+\frame{
+  \begin{lemma}
+    For any set $A$, there is no bijective function $f:A\longrightarrow 2^A$.
+  \end{lemma}
+  \begin{proof}
+    We prove by contradiction.  Assume that there exists a bijective
+    function $f$ from $A$ to $2^A$.  We construct a set $B\subseteq A$
+    such that there is no $x\in A$ such that $f(x)=B$. \pause
+
+    We define $B$ as follows.
+    \[
+    B = \{ x\in A \;|\; x\not\in f(x)\}.
+    \]
+
+    Now suppose that there exists $x\in A$ such that $f(x)=B$.  There
+    are two cases to consider:
+
+    {\bf Case 1:} $x\in B.$ \pause
+    
+    {\bf Case 2:} $x\not\in B.$ \pause
+
+    In both case, we have a contradiction; therefore, our assumption
+    is false.  Thus, there is no bijection between $A$ and $2^A$.
+  \end{proof}
+}
+
+\frame{
+  \frametitle{Example: finite set}
+
+  Let $A={1,2,3,4,5,6,7}$.  Consider function $f:A\longrightarrow 2^A$ defined as
+
+  \vspace{0.1in}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      {\small
+        \begin{eqnarray*}
+          f(1) &=& \{\} \\ 
+          f(2) &=& \{1,2,3\} \\ 
+          f(3) &=& \{1,2,3,4,5,6,7\} \\ 
+          f(4) &=& \{1,3,5,7\} \\ 
+          f(5) &=& \{2,4,6\} \\ 
+          f(6) &=& \{7\} \\ 
+          f(7) &=& \{1,2,3\}
+        \end{eqnarray*}
+      }
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \only<2>{
+      \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+        \hline
+        1 & &&&&&& \\
+        \hline
+        2 & &&&&&& \\
+        \hline
+        3 & &&&&&& \\
+        \hline
+        4 & &&&&&& \\
+        \hline
+        5 & &&&&&& \\
+        \hline
+        6 & &&&&&& \\
+        \hline
+        7 & &&&&&& \\
+        \hline
+      \end{tabular}
+      }
+    \end{column}
+  \end{columns}
+
+  \vspace{0.1in}
+  
+  $B=$
+}
+
+\frame{
+  \frametitle{Example: infinite set}
+
+  Let $A={\mathbb N}=\{1,2,3,4,\ldots\}$.  Consider function
+  $f:A\longrightarrow 2^A$ defined as
+
+  \vspace{0.1in}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      {\small
+        \begin{eqnarray*}
+          f(1) &=& \{\} \\ 
+          f(2) &=& \{1,2,3\} \\ 
+          f(3) &=& \{1,2,3,4,5,6,7,\ldots\} \\ 
+          f(4) &=& \{1,3,5,7,\ldots\} \\ 
+          f(5) &=& \{2,4,6,\ldots\} \\ 
+          f(6) &=& \{7\} \\ 
+          f(7) &=& \{1,2,3,11,12,13,21,22,23,\ldots\}\\
+          \vdots && \vdots
+        \end{eqnarray*}
+      }
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{tabular}{|c|c|c|c|c|c|c|c|c}
+        \hline
+        & 1 & 2 & 3 & 4 & 5 & 6 & 7 & $\cdots$ \\
+        \hline
+        1 & &&&&&&& \\
+        \hline
+        2 & &&&&&&& \\
+        \hline
+        3 & &&&&&&& \\
+        \hline
+        4 & &&&&&&& \\
+        \hline
+        5 & &&&&&&& \\
+        \hline
+        6 & &&&&&&& \\
+        \hline
+        7 & &&&&&&& \\
+        \hline 
+        $\vdots$ & &&&&&&& \\ 
+      \end{tabular}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.1in}
+  
+  $B=$
+}
+
+\frame{
+
+  The previous lemma informally states that there are ``more'' subsets
+  than the number of elements in the set.
+
+  Let's think about:
+  \begin{itemize}
+  \item A set of all python programs, and
+  \item A set of all languages.
+  \end{itemize}
+
+  \pause
+
+  Since each python program ``solves'' at most one language, there are
+  not ``enough'' python programs to solve all possible language.
+
+  \pause
+
+  But what exactly is a problem that cannot be ``solved''?
+}
+
+\frame{
+  \frametitle{Decision problems}
+
+  \begin{itemize}
+  \item Given an integer $x$, is $x$ odd?
+  \item Given a string $w$, is $w$ palindrome?
+  \item Given a string $w$, is $w\in\{\czero^n\cone^n\;|\;n\geq 0\}$?
+  \item Given a map, a starting position $s$, a destination $t$, and
+    an integer $k$, does there exist a path from $s$ to $t$ with
+    distance at most $k$?
+  \item Given a program $P$ and input string $w$, when running $P$
+    with $w$ as an input, does $P$ terminate?
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Decision problems and languages}
+
+  For this problem:
+  
+  \begin{block}{}
+    Given an integer $x$, is $x$ odd?
+  \end{block}
+
+  we can define a corresponding language
+  \[
+  L_E=\{,\ldots,-6,-4,-2,0,2,4,6,\ldots\}.
+  \]
+
+  To solve this problem, given $x$, we can ask if $x\in L_E$.
+  
+}
+
+\begin{frame}[fragile=true]
+  \frametitle{Programs and inputs}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+\begin{verbatim}
+x = int(input())
+if x % 2 == 0:
+    print('yes')
+else:
+    print('no')
+\end{verbatim}
+    \end{column}
+    \pause
+    \begin{column}{0.5\textwidth}
+      {\small
+\begin{verbatim}
+$ python le.py 
+10
+yes
+$ python le.py 
+7
+no
+\end{verbatim}
+\pause
+\begin{verbatim}
+$ python le.py 
+fjdsklfjsdf
+Traceback (most recent call last):
+  File "le.py", line 1, in <module>
+    x = int(input())
+ValueError: invalid literal for int()
+with base 10: 'fjdsklfjsdf'
+\end{verbatim}
+\pause
+\begin{verbatim}
+$ python le.py < le.py
+\end{verbatim}
+\pause
+\begin{verbatim}
+Traceback (most recent call last):
+  File "le.py", line 1, in <module>
+    x = int(input())
+ValueError: invalid literal for int()
+with base 10: 'x = int(input())'
+\end{verbatim}
+      }
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile=true]
+  \frametitle{Nice programs}
+
+  {\small
+    We can systematically modify any python program $P$ so that
+  \begin{itemize}
+  \item $P$ contains a main function that works with the input as a string.
+  \item $P$ never crashes.  (If the original $P$ crashes, the modified
+    $P$ outputs {\tt no}.)
+  \end{itemize}
+  }
+  
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+\begin{verbatim}
+x = int(input())
+if x % 2 == 0:
+    print('yes')
+else:
+    print('no')
+\end{verbatim}
+    \end{column}
+    \pause
+    \begin{column}{0.5\textwidth}
+      {\small
+\begin{verbatim}
+import sys
+def main(w):
+    try:
+        x = int(w)
+        if x % 2 == 0:
+            print('yes')
+        else:
+            print('no')
+    except:
+        print('no')
+
+if __name__ == '__main__':
+    w = sys.stdin.read()
+    main(w)
+\end{verbatim}
+}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\frame{
+  \frametitle{When running a program}
+
+  When you run a program $P$ with input $x$, there are three possible
+  outcomes:
+
+  \begin{itemize}
+  \item $P$ terminates and outputs {\tt\bf yes},
+  \item $P$ terminates and outputs {\tt\bf no}, and
+  \item $P$ does not terminate. (It runs forever.)
+  \end{itemize}
+
+  \pause
+
+  \vspace{0.5in}
+  
+  {\bf Remarks:} if $P$ crashes (even after modification), we treat it
+  as if it terminates and outputs {\tt\bf no}.
+
+}
+
+\frame{
+  \frametitle{Deciders}
+
+  We say that a python program $P$ {\color{red}\bf decides} the
+  language $L$ if for any input string $x$, $P$ when running with $x$
+  as an input,
+  \begin{itemize}
+  \item $P$ always terminates, 
+  \item $P$ outputs {\tt\bf yes}, if $x\in L$, and
+  \item $P$ outputs {\tt\bf no}, if $x\not\in L$.
+  \end{itemize}
+
+}
+
+\frame{
+  \frametitle{Deciders: more examples}
+}
+
+\frame{
+  \frametitle{Language $A$}
+
+  Let ${\mathbb P}$ be the set of all python programs.  Let the
+  language $A$ be
+  \[
+  \{ P\in {\mathbb P} \;|\; \mbox{when running $P$ with $P$ as an
+    input, $P$ terminates} \}
+  \]
+  
+  \pause
+  
+  We use a function call notation $P(x)$ when refering to the
+  execution of program $P$ with input $x$.
+  
+  \pause
+  
+  We restate the definition of $A$ as 
+  \[
+  \{ P\in {\mathbb P} \;|\; \mbox{$P(P)$ terminates} \}.
+  \]
+}
+
+\begin{frame}[fragile=true]
+  \frametitle{Not a decider for $A$}
+  
+\begin{verbatim}
+Input: python program P (as a string)
+
+1. Load module P as Pmod
+2. Call Pmod.main(P)
+3. print('yes')               # we reach this line,
+                              #  only if M.main(P) terminates
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile=true]
+
+  \begin{lemma}
+    There is no python program that decides $A$.
+  \end{lemma}
+  \begin{proof}
+    We prove by contradiction. Assume that there is a python program
+    $P$ that decides $A$.  \pause
+
+    We describe a python program $B$ that reads a string $Q$ as an
+    input as follows:
+
+    {\small
+\begin{verbatim}
+Program B
+Input Q
+1.    Load P as module Pmod
+2.    if Pmod.main(Q) == 'yes':    # when Pmod outputs yes
+3.       while True: pass          #   loop forever 
+4.    else:                        # when Pmod outputs no
+5.       quit()                    #   halt
+\end{verbatim}
+    }
+
+    Given program $Q$ as an input, $B$ loops forever when \pause
+
+    It terminates when
+  \end{proof}
+\end{frame}
+
+\frame{
+  \begin{proof}
+    We know that
+    \begin{itemize}
+    \item $B(Q)$ loops when $Q(Q)$ terminates, and
+    \item $B(Q)$ terminates when $Q(Q)$ loops.
+    \end{itemize}
+
+    Does running $B$ using $B$ as an input terminate?
+
+    \pause
+
+    Let's try to plug in $Q=B$.  We have
+    \begin{itemize}
+    \item $B(B)$ loops when \pause $B(B)$ terminates, \pause and
+    \item $B(B)$ terminates when \pause $B(B)$ loops. \pause
+    \end{itemize}
+
+    Since either $B(B)$ loops or terminates, and we cannot be in any
+    of the cases, we obtain a contradiction.
+
+    Therefore, we conclude that program $P$ does not exist.
+  \end{proof}
+}
+
+\frame{
+  \frametitle{Undecidability}
+
+  If we believe that anything that a computer can do can be written as
+  a python program, \pause and there is no python program that decides
+  $A$, when we say that
+
+  \begin{block}{}
+    $A$ is undecidable.
+  \end{block}
+
+  Language $A$ will be very important later on, we give it a proper
+  name as $\textsc{Accept}$.
+
+}
+
+\frame{
+  \frametitle{The proof as a table}
+  List all python programs in ${\mathbb P}$ as $P_1,P_2,P_3,\ldots$.
+
+  \vspace{0.2in}
+  
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c}
+    \hline
+    & $P_1$ & $P_2$ & $P_3$ & $P_4$ & $P_5$ & $P_6$ & $P_7$ & \ldots \\
+    \hline
+    $P_1$ &&&&&&& \\
+    \hline
+    $P_2$ &&&&&&& \\
+    \hline
+    $P_3$ &&&&&&& \\
+    \hline
+    $P_4$ &&&&&&& \\
+    \hline
+    $P_5$ &&&&&&& \\
+    \hline
+    $P_6$ &&&&&&& \\
+    \hline
+    $\vdots$ &&&&&&& \\
+    \hline
+    $(B)$ &&&&&&& \\
+    \hline
+  \end{tabular}
+
+  \vspace{0.2in}
+
+  What does $B$ do on each input program $P_i$?
+}
+
+\frame{
+  \frametitle{Another language $\textsc{Halt}$}
+
+  Let
+  \[
+  \textsc{Halt} = \{ (P,w) \;|\;
+  \mbox{$P$ is a python program such that $P(w)$ terminates}
+  \}
+  \]
+
+  We shall prove that $\textsc{Halt}$ is also undecidable (if we
+  believe that python programs represent all possible computation).
+
+}
+
+\begin{frame}[fragile=true]
+  \begin{lemma}
+    {\sc Halt} is undecidable.
+  \end{lemma}
+  \begin{proof}
+    We prove the lemma by contradiction.  Assume that there is a
+    python program $P$ that decides {\sc Halt}. \pause
+
+    We construct a program $C$ as follows
+    {\small
+\begin{verbatim}
+Program C
+Input Q
+1.   Load P as module Pmod
+2.   if Pmod.main(Q,Q) == 'yes':
+3.      Load Q as module Qmod
+4.      if Qmod.main(Q) == 'yes':
+5.          print('yes')
+6.      else
+7.          print('no')
+8.   else
+9.      print('no')
+\end{verbatim}
+}
+  \end{proof}
+\end{frame}
+
+\begin{frame}[fragile=true]
+  \begin{proof}
+    We prove the lemma by contradiction.  Assume that there is a
+    python program $P$ that decides {\sc Halt}.
+
+    We construct a program $C$ as follows
+    {\small
+\begin{verbatim}
+Program C
+Input Q
+1.   if P(Q,Q) == 'yes':
+2.      if Q(Q) == 'yes':
+3.          print('yes')
+4.      else
+5.          print('no')
+6.   else
+7.      print('no')
+\end{verbatim}
+    }
+
+    \pause
+
+    Given program $P$, we can construct a program $C$ that decides
+    {\sc Accept}.  \pause However, we know that {\sc Accept} is
+    undecidable; thus, we reach a contradiction.
+
+    We conclude that there does not exist a python program $P$ that
+    decides {\sc Halt}.
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reduction}
+  \pause
+
+  \begin{itemize}
+  \item We show that if {\sc Halt} is decidable, then {\sc Accept} is
+    also decidable.
+    \pause
+  \item However, {\sc Accept is undecidable}.
+    \pause
+  \item We conclude that {\sc Halt} is also undecidable.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reduction in picture}
+\end{frame}
+
+\frame{
+  \frametitle{Python as computation}
+
+  Do you believe in this assumption:
+
+  {\bf Anything that a computer can do can be written as a python
+    program. }
+
+}
+
+\frame{
+  \frametitle{Turing machines}
+
+  {\bf Anything that a computer can do can be carried out using Turing
+    machines. }
+
+  \vspace{0.3in}
+  \pause
+  
+  {\bf Any possible computation can be performed by Turing machines. }
+
+}
