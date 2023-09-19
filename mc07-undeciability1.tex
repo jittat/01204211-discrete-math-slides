@@ -2,7 +2,7 @@
 
 \newcommand\sbullet[1][.5]{\mathbin{\vcenter{\hbox{\scalebox{#1}{$\bullet$}}}}}
 
-\lecturetitle{Lecture 12a: Undecidability (1)\footnote{Based partly on lecture notes of {\em Models of Computation} course by Jeff Erickson.}} 
+\lecturetitle{Lecture 12a: Undecidability (1)} 
 \renewcommand{\epsilon}{\varepsilon}
 
 \newcommand{\czero}{{\mathtt 0}}
@@ -511,7 +511,7 @@ Input Q
   \end{block}
 
   Language $A$ will be very important later on, we give it a proper
-  name as $\textsc{Accept}$.
+  name as $\textsc{HaltA}$.
 
 }
 
@@ -578,13 +578,9 @@ Program C
 Input Q
 1.   Load P as module Pmod
 2.   if Pmod.main(Q,Q) == 'yes':
-3.      Load Q as module Qmod
-4.      if Qmod.main(Q) == 'yes':
-5.          print('yes')
-6.      else
-7.          print('no')
-8.   else
-9.      print('no')
+3.      print('yes')
+4.   else
+5.      print('no')
 \end{verbatim}
 }
   \end{proof}
@@ -601,19 +597,16 @@ Input Q
 Program C
 Input Q
 1.   if P(Q,Q) == 'yes':
-2.      if Q(Q) == 'yes':
-3.          print('yes')
-4.      else
-5.          print('no')
-6.   else
-7.      print('no')
+2.      print('yes')
+3.   else
+4.      print('no')
 \end{verbatim}
     }
 
     \pause
 
     Given program $P$, we can construct a program $C$ that decides
-    {\sc Accept}.  \pause However, we know that {\sc Accept} is
+    {\sc HaltA}.  \pause However, we know that {\sc HaltA} is
     undecidable; thus, we reach a contradiction.
 
     We conclude that there does not exist a python program $P$ that
@@ -626,10 +619,10 @@ Input Q
   \pause
 
   \begin{itemize}
-  \item We show that if {\sc Halt} is decidable, then {\sc Accept} is
+  \item We show that if {\sc Halt} is decidable, then {\sc HaltA} is
     also decidable.
     \pause
-  \item However, {\sc Accept is undecidable}.
+  \item However, {\sc HaltA is undecidable}.
     \pause
   \item We conclude that {\sc Halt} is also undecidable.
   \end{itemize}
