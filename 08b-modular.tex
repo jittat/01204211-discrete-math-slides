@@ -135,6 +135,13 @@
   \vspace{3in}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Secret sharing}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Secret sharing scheme based on straight lines}
+\end{frame}
 
 \begin{frame}
   \frametitle{Days}
@@ -418,6 +425,53 @@
 \end{frame}
 
 \begin{frame}
+
+  \frametitle{Multiplicative inverse modulo $11$}
+
+  Let's try to figure out multiplicative inverse of every integer
+  modulo $11$.
+
+  \begin{tabular}{|c|c|}
+    \hline
+    $a$ & $a^{-1} \pmod{11}$ \\
+    \hline
+    $1$ & \\
+    $2$ & \\
+    $3$ & \\
+    $4$ & \\
+    $5$ & \\
+    $6$ & \\
+    $7$ & \\
+    $8$ & \\
+    $9$ & \\
+    $10$ & \\
+    \hline
+  \end{tabular}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: secret sharing}
+
+  \begin{itemize}
+  \item Think of a secret number $m\in\{0,1,\ldots,10\}$.
+  \item Pick a random number $a\in\{1,2,\ldots,10\}$.
+  \item Your straight line function $f(x)=(ax+m)\bmod 11$.
+  \item We will generate 3 points from $f$ and give them to 3 of your
+    friends, each with only 1 point.  Pick 3 numbers $x_1,x_2,x_3$
+    from $\{1,2,\ldots,10\}$.
+  \item Let's compute
+    \[
+    (x_1,f(x_1)), \ \ 
+    (x_2,f(x_2)), \ \ 
+    (x_3,f(x_3)).
+    \]
+  \item Give them to 3 of your friends and challenge them to form a
+    group of 2 people and figure out your number $m$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
   \begin{theorem}
     An integer $a$ has a multiplicative inverse modulo $m$ iff
     $gcd(a,m) = 1$.
@@ -476,6 +530,14 @@
   \end{array}
   \]
   
+\end{frame}
+
+\begin{frame}
+  \frametitle{Public-key cryptography}
+\end{frame}
+
+\begin{frame}
+  \frametitle{RSA}
 \end{frame}
 
 \begin{frame}
