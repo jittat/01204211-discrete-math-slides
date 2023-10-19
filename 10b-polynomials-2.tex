@@ -1,5 +1,5 @@
 \include{commons}
-\lecturetitle{Lecture 10a: Polynomials (2)\footnote{This section is from Berkeley CS70 lecture notes.}} 
+\lecturetitle{Lecture 10b: Polynomials (2)\footnote{This section is from Berkeley CS70 lecture notes.}} 
 
 \begin{frame}
   \frametitle{Fun fact: Check digit for Thai National ID}
@@ -146,20 +146,19 @@
   Let $m=11$. Suppose that $p(x)$ is a polynomial over $GF(m)$ of
   degree $2$ passing through $(2,7),(4,10),$ and $(7,3)$.  Find $p(x)$.
 
-  \pause
   Let
   \begin{itemize}
-  \item \pause
+  \item
     $\Delta_1(x)=\frac{(x-4)(x-7)}{(2-4)(2-7)}
     =\frac{x^2-11x+28}{(-2)\cdot(-5)}
     =\frac{x^2+6}{10}
     =10x^2+5$
-  \item \pause
+  \item
     $\Delta_2(x)=\frac{(x-2)(x-7)}{(4-2)(4-7)}
     =\frac{x^2-9x+14}{2\cdot(-3)}
     =\frac{x^2+2x+3}{5}
     =9x^2+7x+5$
-  \item \pause
+  \item
     $\Delta_2(x)=\frac{(x-2)(x-4)}{(7-2)(7-4)}
     =\frac{x^2-6x+8}{5\cdot 3}
     =\frac{x^2+5x+8}{4}
@@ -172,19 +171,6 @@
     &=& (70x^2 + 35) + (90x^2 + 70x+50) + (9x^2+12x+6) \\
     &=& 4x^2+5x+3
   \end{eqnarray*}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Practice}
-
-  Let's work modulo $11$.
-
-  Use the last 3 digits of your student ID.  Suppose that they are
-  $a_2,a_1,a_0$.  Find a polynomial $p(x)$ of degree $2$ such that
-  $p(i)=a_i$ for $i=0,1,2$.
-
-  \vspace{2.5in}
-  
 \end{frame}
 
 \begin{frame}
@@ -291,4 +277,31 @@
   messages can be {\em dropped}.  How can we send this message?
 
   \vspace{2.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Two ways of encoding}
+
+  Suppose that we want to send a message $m_1,m_2,\ldots,m_n$ where
+  $m_i\leq p-1$ for some prime $p$.  We want to tolerate up to $k$
+  missing messages.
+
+  We use a polynomial of degree \pause $n-1$ and generate $n+k$ points.
+
+  How can we obtain the polynomial $P(x)$?
+
+  \begin{itemize}
+  \item We can let the message be the coefficients, i.e., let
+    \[
+    P(x) = m_n\cdot x^{n-1} + m_{n-1}\cdot x^{n-2} + \cdots + m_2\cdot x + m_1.
+    \]
+    \pause
+  \item We can try to obtain a degree-$(n-1)$ polynomial $P(x)$ such that
+    \[
+    P(0)=m_1, \
+    P(1)=m_2, \ \ldots 
+    P(n-2)=m_{n-1}, \ 
+    P(n-1)=m_{n}.
+    \]
+  \end{itemize}
 \end{frame}
