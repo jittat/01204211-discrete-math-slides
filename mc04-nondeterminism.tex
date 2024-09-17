@@ -258,7 +258,7 @@
 
   We define $\delta^*:Q\times\Sigma^*\longrightarrow 2^Q$ as follows:
   \[
-  \delta^*(q,w) =
+  \delta^*(p,w) =
   \left\{
   \begin{array}{ll}
     \mbox{$\epsilon$-reach$(p)$} & \mbox{if $w=\epsilon$} \\
@@ -266,7 +266,7 @@
     {
       \displaystyle
       \bigcup_{r\in\mbox{{\scriptsize $\epsilon$-reach$(p)$}}} \;
-      \bigcup_{q\in\delta(r,q)}
+      \bigcup_{q\in\delta(r,a)}
       \delta^*(q,x)
     }
     & \mbox{if $w=ax$}.
@@ -299,7 +299,7 @@
 
   We define $\delta^*:Q\times\Sigma^*\longrightarrow 2^Q$ as follows:
   \[
-  \delta^*(q,w) =
+  \delta^*(p,w) =
   \left\{
   \begin{array}{ll}
     \mbox{$\epsilon$-reach$(p)$} & \mbox{if $w=\epsilon$} \\
