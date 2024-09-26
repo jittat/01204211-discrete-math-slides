@@ -272,6 +272,38 @@
   
 }
 
+\frame{
+  \frametitle{Languages and programs}
+
+  We will talk about languages of particular programs.  For example,
+  let ${\mathbb P}$ be the set of all python programs.  In this case,
+  ${\mathbb P}$ is a language.
+
+  \pause
+
+  \[
+  \{ P \in {\mathbb P} \;|\; \mbox{$P$ always terminates}\}
+  \]
+  \pause
+  \[
+  \{ P \in {\mathbb P} \;|\; \mbox{$P$ always loops}\}
+  \]
+  \pause
+  \[
+  \{ (P,x) \;|\; P\in{\mathbb P}, \mbox{when running $P$ with $x$ as
+    an input, $P$ terminates}\}
+  \]
+  \pause
+  \[
+  \{ (P,x) \;|\; P\in{\mathbb P}, \mbox{$P(x)$ terminates}\}
+  \]
+  \pause
+  \[
+  \{ (P,Q,x) \;|\; P,Q\in{\mathbb P}, \mbox{$P(x)$ and $Q(x)$ terminate with the same output.}\}
+  \]
+  
+}
+
 \begin{frame}[fragile=true]
   \frametitle{Programs and inputs}
   \begin{columns}
@@ -391,6 +423,39 @@ if __name__ == '__main__':
 }
 
 \frame{
+  \frametitle{Proving impossibility}
+}
+
+\frame{
+  \frametitle{Reduction: rough idea}
+}
+
+\frame{
+  \frametitle{Language $A$}
+
+  Let ${\mathbb P}$ be the set of all python programs.  Let the
+  language $A$ be
+  \[
+  \{ P\in {\mathbb P} \;|\; \mbox{when running $P$ with $P$ as an
+    input, $P$ terminates} \}
+  \]
+  
+  \pause
+  
+  We use a function call notation $P(x)$ when refering to the
+  execution of program $P$ with input $x$.
+  
+  \pause
+  
+  We restate the definition of $A$ as 
+  \[
+  \{ P\in {\mathbb P} \;|\; \mbox{$P(P)$ terminates} \}.
+  \]
+}
+
+
+
+\frame{
   \frametitle{Deciders}
 
   We say that a python program $P$ {\color{red}\bf decides} the
@@ -449,55 +514,10 @@ Input: python program P (as a string)
   \begin{lemma}
     There is no python program that decides $A$.
   \end{lemma}
-  \begin{proof}
-    We prove by contradiction. Assume that there is a python program
-    $P$ that decides $A$.  \pause
+  \pause
 
-    We describe a python program $B$ that reads a string $Q$ as an
-    input as follows:
-
-    {\small
-\begin{verbatim}
-Program B
-Input Q
-1.    Load P as module Pmod
-2.    if Pmod.main(Q) == 'yes':    # when Pmod outputs yes
-3.       while True: pass          #   loop forever 
-4.    else:                        # when Pmod outputs no
-5.       quit()                    #   halt
-\end{verbatim}
-    }
-
-    Given program $Q$ as an input, $B$ loops forever when \pause
-
-    It terminates when
-  \end{proof}
+  We will see the proof at the end of class.
 \end{frame}
-
-\frame{
-  \begin{proof}
-    We know that
-    \begin{itemize}
-    \item $B(Q)$ loops when $Q(Q)$ terminates, and
-    \item $B(Q)$ terminates when $Q(Q)$ loops.
-    \end{itemize}
-
-    Does running $B$ using $B$ as an input terminate?
-
-    \pause
-
-    Let's try to plug in $Q=B$.  We have
-    \begin{itemize}
-    \item $B(B)$ loops when \pause $B(B)$ terminates, \pause and
-    \item $B(B)$ terminates when \pause $B(B)$ loops. \pause
-    \end{itemize}
-
-    Since either $B(B)$ loops or terminates, and we cannot be in any
-    of the cases, we obtain a contradiction.
-
-    Therefore, we conclude that program $P$ does not exist.
-  \end{proof}
-}
 
 \frame{
   \frametitle{Undecidability}
@@ -632,6 +652,139 @@ Input Q
   \frametitle{Reduction in picture}
 \end{frame}
 
+\begin{frame}[fragile=true]
+  
+  {\small
+    Let $\textsc{Accept} = \{(P,w) \;|\;
+    \mbox{$P\in{\mathbb P}$ and $P(w)$ terminates with acceptance}\}.$
+  }
+  
+  \begin{lemma}
+    {\sc Accept} is undecidable.
+  \end{lemma}
+  \begin{block}{Proof.}
+
+      We prove the lemma by contradiction.  Assume that there is a
+      python program $Q$ that decides {\sc Accept}. \pause We
+      construct a program $C$ that decides {\sc Halt} as follows \pause
+      
+      {\footnotesize
+\begin{verbatim}
+Program C       
+Input P,w       
+1.   Replace every "print('no')" statement in P with "print('yes')"
+1.   if Q(P,w) == 'yes':
+2.      print('yes')
+3.   else
+4.      print('no')
+\end{verbatim}
+      }
+
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile=true]
+  \begin{proof}[Proof (cont.)]
+    {\footnotesize
+\begin{verbatim}
+Program C       
+Input P,w       
+1.   Replace every "print('no')" statement in P with "print('yes')"
+1.   if Q(P,w) == 'yes':
+2.      print('yes')
+3.   else
+4.      print('no')
+\end{verbatim}
+    }   
+    {\small
+      We have to make sure that our reduction is correct by considering
+      two cases.
+      
+      Case 1: when $P(w)$ halts. \pause
+
+      Case 2: when $P(w)$ does not halt. \pause
+
+      Since in both cases, $C$ answers correctly, we know that given
+      program $Q$ deciding {\sc Accept}, we can construct a program
+      $C$ that decides {\sc Halt}.  However, we know that {\sc Halt}
+      is undecidable; thus, we reach a contradiction.  We conclude
+      that {\sc Accept} is also undecidable.  }
+  \end{proof}
+\end{frame}
+
+\frame{
+  \frametitle{Reduction from {\sc Halt} to {\sc Accept} in picture}
+  
+}
+
+\frame{
+  \frametitle{How about {\sc Reject}?}
+
+  Let
+  \[
+  \textsc{Reject} = \{(P,w) \;|\;
+  \mbox{$P\in{\mathbb P}$ and $P$ rejects $w$}\}.
+  \]
+
+  
+}
+
+\begin{frame}[fragile=true]
+
+  \begin{lemma}
+    There is no python program that decides $A$.
+  \end{lemma}
+  \begin{proof}
+    We prove by contradiction. Assume that there is a python program
+    $P$ that decides $A$.  \pause
+
+    We describe a python program $B$ that reads a string $Q$ as an
+    input as follows:
+
+    {\small
+\begin{verbatim}
+Program B
+Input Q
+1.    Load P as module Pmod
+2.    if Pmod.main(Q) == 'yes':    # when Pmod outputs yes
+3.       while True: pass          #   loop forever 
+4.    else:                        # when Pmod outputs no
+5.       quit()                    #   halt
+\end{verbatim}
+    }
+
+    Given program $Q$ as an input, $B$ loops forever when \pause
+
+    It terminates when
+  \end{proof}
+\end{frame}
+
+\frame{
+  \begin{proof}
+    We know that
+    \begin{itemize}
+    \item $B(Q)$ loops when $Q(Q)$ terminates, and
+    \item $B(Q)$ terminates when $Q(Q)$ loops.
+    \end{itemize}
+
+    Does running $B$ using $B$ as an input terminate?
+
+    \pause
+
+    Let's try to plug in $Q=B$.  We have
+    \begin{itemize}
+    \item $B(B)$ loops when \pause $B(B)$ terminates, \pause and
+    \item $B(B)$ terminates when \pause $B(B)$ loops. \pause
+    \end{itemize}
+
+    Since either $B(B)$ loops or terminates, and we cannot be in any
+    of the cases, we obtain a contradiction.
+
+    Therefore, we conclude that program $P$ does not exist.
+  \end{proof}
+}
+
+
 \frame{
   \frametitle{Python as computation}
 
@@ -654,3 +807,5 @@ Input Q
   {\bf Any possible computation can be performed by Turing machines. }
 
 }
+
+
