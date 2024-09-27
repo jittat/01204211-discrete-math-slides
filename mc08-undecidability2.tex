@@ -96,6 +96,61 @@
   \end{lemma}
 \end{frame}
 
+\begin{frame}[fragile=true]
+
+  \begin{lemma}
+    There is no python program that decides $A$.
+  \end{lemma}
+  \begin{proof}
+    We prove by contradiction. Assume that there is a python program
+    $P$ that decides $A$.  \pause
+
+    We describe a python program $B$ that reads a string $Q$ as an
+    input as follows:
+
+    {\small
+\begin{verbatim}
+Program B
+Input Q
+1.    Load P as module Pmod
+2.    if Pmod.main(Q) == 'yes':    # when Pmod outputs yes
+3.       while True: pass          #   loop forever 
+4.    else:                        # when Pmod outputs no
+5.       quit()                    #   halt
+\end{verbatim}
+    }
+
+    Given program $Q$ as an input, $B$ loops forever when \pause
+
+    It terminates when
+  \end{proof}
+\end{frame}
+
+\frame{
+  \begin{proof}
+    We know that
+    \begin{itemize}
+    \item $B(Q)$ loops when $Q(Q)$ terminates, and
+    \item $B(Q)$ terminates when $Q(Q)$ loops.
+    \end{itemize}
+
+    Does running $B$ using $B$ as an input terminate?
+
+    \pause
+
+    Let's try to plug in $Q=B$.  We have
+    \begin{itemize}
+    \item $B(B)$ loops when \pause $B(B)$ terminates, \pause and
+    \item $B(B)$ terminates when \pause $B(B)$ loops. \pause
+    \end{itemize}
+
+    Since either $B(B)$ loops or terminates, and we cannot be in any
+    of the cases, we obtain a contradiction.
+
+    Therefore, we conclude that program $P$ does not exist.
+  \end{proof}
+}
+
 \begin{frame}
   \frametitle{Reduction: proving undecidability of {\sc Halt}}
 
@@ -124,8 +179,8 @@
   \begin{block}{Proof.}
 
       We prove the lemma by contradiction.  Assume that there is a
-      python program $Q$ that decides {\sc Accept}. \pause We
-      construct a program $C$ that decides {\sc Halt} as follows \pause
+      python program $Q$ that decides {\sc Accept}.  We
+      construct a program $C$ that decides {\sc Halt} as follows 
       
       {\footnotesize
 \begin{verbatim}
