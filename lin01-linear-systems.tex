@@ -1,6 +1,27 @@
 \include{commons}
 \lecturetitle{Lecture 8a: Linear systems of equations} 
 
+\begin{frame}
+  \frametitle{Linear algebra}
+
+  Linear algebra studies 
+  \begin{itemize}
+  \item matrices and operations with matrices
+  \item systems of linear equations
+  \item linear transformations
+  \item linear spaces (and their structures)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Why?}
+
+  \begin{itemize}
+  \item Lots of applications.
+  \item Interesting perspectives.
+  \end{itemize}
+\end{frame}
+
 \begin{frame}\frametitle{A linear system of equations}
   Let's start with a simple example with 2 variables:
 
@@ -33,7 +54,47 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Gaussian elimination (1)}
+  Let's consider a system with 3 variables:
+
+  \[
+  \begin{array}{rcrcrcl}
+    2x_1 & + & 4x_2 & + & 3x_3 & = & 7 \\
+    x_1 & + &  &  & 5x_3 & = & 12 \\
+    4x_1 & + & 2x_2 & + & 3x_3 & = & 10
+  \end{array}
+  \]
+
+  \vspace{2in}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Gaussian elimination (2)}
+  Let's consider another system with 3 variables:
+
+  \[
+  \begin{array}{rcrcrcl}
+    2x_1 & + & 4x_2 & + & 3x_3 & = & 7 \\
+    x_1 & + &  &  & 5x_3 & = & 12 \\
+    3x_1 & + & 8x_2 & + & x_3 & = & 10
+  \end{array}
+  \]
+
+  \vspace{2in}
+
+\end{frame}
+
+\begin{frame}
   \frametitle{A closer look: 1st perspective}
+
+  Consider
+  \[
+  \begin{array}{rcl}
+  5x + 10y &=& 5 \\
+  x - 3y &=& 11
+  \end{array}
+  \]
   Each equation (row) constraints certain values of $x$ and $y$.
   \vspace{2.5in}
 \end{frame}
@@ -63,6 +124,22 @@
   \]
   
   It turns out that you can obtain any $(a,b)$ from $\uv_1$ and $\uv_2$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{A closer look: 1st perspective (more example)}
+
+  Consider
+  \[
+  \begin{array}{rcrcrcl}
+    2x_1 & + & 4x_2 & + & 3x_3 & = & 7 \\
+    x_1 & + &  &  & 5x_3 & = & 12 \\
+    4x_1 & + & 2x_2 & + & 3x_3 & = & 10
+  \end{array}
+  \]
+  What are the row vectors?
+
+  \vspace{2in}
 \end{frame}
 
 \begin{frame}
@@ -114,6 +191,71 @@
   and with $x$ and $y$, we now see that ${\bm b}$ is a \textcolor{red}{\bf linear combination} of $\vv_1$ and $\vv_2$.
   
   Finding $x$ and $y$ is essentially checking if ${\bm b}$ is a linear combination of $\vv_1$ and $\vv_2$.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Example 2: a linear system with 2 variables}
+  {\small
+  \[
+  \begin{array}{rcrcrcl}
+    x & + & y & = & 7 \\
+    x & - & 2y & = & 13 \\
+  \end{array}
+  \]
+  }
+
+  \begin{tikzpicture}[scale=0.3]
+    \draw[help lines, color=gray!30, dashed] (-10.9,-10.9) grid (10.9,10.9);
+    \draw[->,thick] (-11,0)--(10,0) node[right]{$x$};
+    \draw[->,thick] (-6,-10)--(-6,10) node[above]{$y$};
+
+    \draw[help lines, color=gray!30, dashed] (14.1,-10.9) grid (34.9,10.9);
+  \end{tikzpicture}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Example 3: a linear system with 2 variables}
+  {\small
+  \[
+  \begin{array}{rcrcrcl}
+    2x & + & y & = & 5 \\
+    4x & + & 2y & = & 10 \\
+  \end{array}
+  \]
+  }
+
+  \begin{tikzpicture}[scale=0.3]
+    \draw[help lines, color=gray!30, dashed] (-10.9,-10.9) grid (10.9,10.9);
+    \draw[->,thick] (-11,0)--(10,0) node[right]{$x$};
+    \draw[->,thick] (-6,-10)--(-6,10) node[above]{$y$};
+
+    \draw[help lines, color=gray!30, dashed] (14.1,-10.9) grid (34.9,10.9);
+  \end{tikzpicture}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 4: a linear system with 2 variables}
+  {\small
+  \[
+  \begin{array}{rcrcrcl}
+    x & + & 3y & = & 6 \\
+    0.5\cdot x & + & 1.5\cdot y & = & 9 \\
+  \end{array}
+  \]
+  }
+
+  \begin{tikzpicture}[scale=0.3]
+    \draw[help lines, color=gray!30, dashed] (-10.9,-10.9) grid (10.9,10.9);
+    \draw[->,thick] (-11,0)--(10,0) node[right]{$x$};
+    \draw[->,thick] (-6,-10)--(-6,10) node[above]{$y$};
+
+    \draw[help lines, color=gray!30, dashed] (14.1,-10.9) grid (34.9,10.9);
+  \end{tikzpicture}
+
 \end{frame}
 
 \begin{frame}

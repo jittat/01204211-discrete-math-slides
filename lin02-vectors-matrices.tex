@@ -1,0 +1,1294 @@
+\include{commons}
+\lecturetitle{Lecture 8b: Vectors and Matrices} 
+
+\begin{frame}\frametitle{What is a vector?}
+  You can think of a {\bf vector} as an ``ordered'' list of elements (which are
+  typically numbers).  For example:
+  \begin{itemize}
+  \item $[1,2,5,20]$
+  \item $[0,0,1,1,0,0,0,1]$
+  \end{itemize}
+
+  \pause
+
+  You can also view a vector as a {\bf function}, e.g., you can view
+  $\uv = [1,2,5,20]$ as a function $\uv$ that maps
+  \[
+  0 \mapsto 1, \ \
+  1 \mapsto 2, \ \
+  2 \mapsto 5, \ \
+  3 \mapsto 20.
+  \]
+
+  \pause
+  
+  Each element in the vector is typically a real number ($\rf$), but
+  can be an element from other sets with appropriate property (more on
+  this later).
+
+  \pause
+
+  { \tiny {\bf Remark:} Mathematically, a vector is an element of a
+    vector space.  We will understand this more later.}
+\end{frame}
+
+\begin{frame}
+  \frametitle{What can be represented as a vector?}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Applications in machine learning}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Viewing vectors: vectors in $\rf^2$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Viewing vectors: vectors in $\rf^3$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{$n$-vectors over $\rf$}
+
+  \begin{itemize}
+  \item We mostly deal with vectors with finite number of elements.
+  \item This is a \textcolor{red}{\bf $4$-vector}: $[10,20,500,4]$.
+    \pause
+  \item We sometimes also write it as a column vector:
+    \[
+    \begin{bmatrix}
+      10 \\ 20 \\ 500 \\ 4
+    \end{bmatrix}
+    \]
+    \pause
+  \item When every element of a vector is from some set, we say that
+    it is a vector {\bf over} that set.  For example, $[10,20,500,4]$
+    is a $4$-vector over ${\mathbb R}$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vector operations}
+
+  \begin{itemize}
+  \item As discussed in the previous slides, when working with a
+    system of linear equations, we mostly deals with {\bf linear
+      combinations} of vectors.
+  \item We will look at the operations we do to vectors to obtain
+    their linear combinations.
+    \pause
+  \item The operations are:
+    \begin{itemize}
+    \item Vector additions
+    \item Scalar multiplications
+    \end{itemize}
+  \item These operations motivate the definition of vector spaces.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vector additions}
+
+  Given two $n$-vectors
+  \[
+  \uv = [u_1,u_2,\ldots,u_n]
+  \]
+  and
+  \[
+  \vv = [v_1,v_2,\ldots,v_n],
+  \]
+  we have that
+  \[
+  \uv+\vv = [u_1+v_1,u_2+v_2,\ldots,u_n+v_n].
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vector additions, in picture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Zero vectors}
+  A zero $n$-vector ${\bm 0}=[0,0,\ldots,0]$ is an additive identity, i.e.,
+  for any vector $\uv$,
+  \[
+  {\bm 0} + \uv = \uv + {\bm 0} = \uv. 
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Scalar multiplications}
+
+  For a vector over $\rf$, we refer to an element $\alpha$ in
+  $\rf$ as a scalar.  For an $n$-vector
+  \[
+  \uv = [u_1,u_2,\ldots,u_n],
+  \]
+  we have that
+  \[
+  \alpha\cdot\uv = [\alpha\cdot u_1, \alpha\cdot u_2,\ldots, \alpha\cdot u_n],
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Scalar multiplications, in pictures}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Linear combinations}
+  For any scalar \
+  \[
+  \alpha_1,\alpha_2,\ldots,\alpha_m
+  \]
+  and vectors
+  \[
+  \uv_1,\uv_2,\ldots,\uv_m,
+  \]
+  we say that
+  \[
+  \alpha_1\uv_1 + \alpha_2\uv_2 + \cdots + \alpha_m \uv_m
+  \]
+  is a \textcolor{red}{\bf linear combination} of $\uv_1,\ldots,\uv_m$.
+  \pause
+  \vspace{0.2in}
+
+  Examples:
+  \vspace{1in}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{A linear system with 3 variables}
+  Give the following linear system.
+
+  {\footnotesize
+  \[
+  \begin{array}{rcrcrcl}
+    2x_1 & + & 4x_2 & + & 3x_3 & = & 7 \\
+    x_1 & + &  &  & 5x_3 & = & 12 \\
+    4x_1 & + & 2x_2 & + & 3x_3 & = & 10
+  \end{array}
+  \]
+  }
+  \pause
+  If we rewrite the system as
+
+  {\footnotesize
+  \[
+  \begin{bmatrix}
+    2 \\ 1 \\ 4
+  \end{bmatrix}
+  \cdot x_1 +
+  \begin{bmatrix}
+    4 \\ 0 \\ 2
+  \end{bmatrix}
+  \cdot x_2 +
+  \begin{bmatrix}
+    3 \\ 5 \\ 3
+  \end{bmatrix}
+  \cdot x_3 +
+  =
+  \begin{bmatrix}
+    7 \\ 12 \\ 10
+  \end{bmatrix}.
+  \]
+  }
+
+  \pause
+  This becomes the problem of expressing a vector as linear
+  combination of other vectors.  I.e., given vectors
+  \[
+  \uv_1 = [2,1,4], \ \ \uv_2 = [4,0,2], \ \ \uv_3 = [3,5,3]
+  \]
+  we would like to find coefficients $x_1,x_2,x_3$ such that
+  \[
+  x_1\cdot \uv_1 + x_2\cdot \uv_2 + x_3\cdot \uv_3 = [7,12,10].
+  \]
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Span}
+
+  A set of all linear combination of vectors $\uv_1,\uv_2,\ldots,\uv_m$ is called the \textcolor{red}{\bf span} of that set of vectors.
+
+  It is denote by $\mathrm{Span} \{\uv_1,\uv_2,\ldots,\uv_m\}$.
+
+  \vspace{0.3in}
+
+  Examples:
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Convex combination}
+  For any scalar \
+  \[
+  \alpha_1,\alpha_2,\ldots,\alpha_m,
+  \]
+  such that $\alpha_1+\alpha_2+\ldots+\alpha_m=1$ and $\alpha_i\geq 0$ for all $i$,
+  and vectors
+  \[
+  \uv_1,\uv_2,\ldots,\uv_m,
+  \]
+  we say that
+  \[
+  \alpha_1\uv_1 + \alpha_2\uv_2 + \cdots + \alpha_m \uv_m
+  \]
+  is a \textcolor{red}{\bf convex combination} of $\uv_1,\ldots,\uv_m$.
+  \pause
+  \vspace{0.2in}
+
+  Examples:
+  \vspace{1in}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{What is a matrix?}
+
+  Matrices arise in many places.  We will see that there are
+  essentially two ways to look at matrices.
+  
+  \[
+  \left[
+    \begin{array}{ccc}
+      1 & 2 & 3 \\
+      4 & 5 & 6 \\
+      7 & 8 & 9 \\
+      10 & 11 & 12 \\
+    \end{array}
+    \right]
+  \pause
+  =
+  \left[
+    \begin{array}{c|c|c}
+      1 & 2 & 3 \\
+      4 & 5 & 6 \\
+      7 & 8 & 9 \\
+      10 & 11 & 12 \\
+    \end{array}
+    \right]
+  \pause
+  =
+  \left[
+    \begin{array}{ccc}
+      1 & 2 & 3 \\
+      \hline
+      4 & 5 & 6 \\
+      \hline
+      7 & 8 & 9 \\
+      \hline
+      10 & 11 & 12 \\
+    \end{array}
+    \right]
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{A matrix from a system of linear equations}
+  Consider the following system of linear equations:
+
+  \[
+  \begin{array}{ccccccr}
+    x_1 &+& x_2 &+& x_3 &=& 5\\
+    2x_1 &+& x_2 &+& 2x_3 &=& 10\\
+    3x_1 &+& x_2 &+& 2x_3 &=& 4
+  \end{array}
+  \]
+  \pause
+
+  Again we can view it as a vector equation:
+  \[
+  \begin{bmatrix}
+    1\\
+    2\\
+    3
+  \end{bmatrix}
+  x_1 +
+  \begin{bmatrix}
+    1\\
+    1\\
+    1
+  \end{bmatrix}
+  x_2 +
+  \begin{bmatrix}
+    1\\
+    2\\
+    2
+  \end{bmatrix}
+  x_3
+  =
+  \begin{bmatrix}
+    5\\
+    10\\
+    4
+  \end{bmatrix}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{A matrix from a system of linear equations}
+  {\small
+  From the following system of linear equations
+  \[
+  \begin{array}{ccccccr}
+    x_1 &+& x_2 &+& x_3 &=& 5\\
+    2x_1 &+& x_2 &+& 2x_3 &=& 10\\
+    3x_1 &+& x_2 &+& 2x_3 &=& 4
+  \end{array}
+  \]
+  
+  We can also view variables $x_1,x_2,x_3$ as a vector, i.e., let
+  $  \vect{x} = 
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}. $
+  }
+  
+  \pause
+  The coefficients form a nice rectangular ``matrix'' $A$:
+  \[
+  A =
+  \begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 1 & 2 \\
+    3 & 1 & 2
+  \end{bmatrix},
+  \]
+  \pause
+  and rewrite the system as
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 1 & 2 \\
+    3 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    5\\
+    10\\
+    4
+  \end{bmatrix}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Size}
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1 & 1\\
+    2 & 1 & 2 & 5\\
+    3 & 1 & 2 & 4
+  \end{bmatrix}
+  \]
+  \pause
+
+  The {\bf size} of a matrix is determined by the number of rows and
+  columns.  A matrix with $m$ rows and $n$ columns is referred to as
+  an $m$-by-$n$ matrix or an $m\times n$ matrix.  We refers to $m$ and
+  $n$ as its {\bf dimensions}.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-Vector Multiplication}
+  How would we understand the multiplication
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 1 & 2 \\
+    3 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \]
+  \pause
+
+  {\bf By rows.}  Consider the first row of $A$:
+  \pause
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \pause
+  =1\cdot x_1 + 1\cdot x_2 + 1\cdot x_3.
+  \]
+
+  Let's look at another two rows:
+  {\footnotesize
+  \[
+  \begin{bmatrix}
+    2 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \pause
+  =2\cdot x_1 + 1\cdot x_2 + 2\cdot x_3,
+  \ \ \ \ \ \
+  \pause
+  \begin{bmatrix}
+    3 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \pause
+  =3\cdot x_1 + 1\cdot x_2 + 2\cdot x_3,
+  \]
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-Vector Multiplication {\bf by Rows}}
+  We look at matrix-vector multiplication with ``row perspective''.
+  This is a common way to view matrix-vector multiplication.
+  \[
+  \begin{bmatrix}
+    \onslide<2->{1 & 1 & 1} \\
+    \onslide<3->{2 & 1 & 2} \\
+    \onslide<4->{3 & 1 & 2}
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    \onslide<2->{1\cdot x_1 + 1\cdot x_2 + 1\cdot x_3} \\
+    \onslide<3->{2\cdot x_1 + 1\cdot x_2 + 2\cdot x_3} \\
+    \onslide<4->{3\cdot x_1 + 1\cdot x_2 + 2\cdot x_3}
+  \end{bmatrix}
+  \]
+
+  Recall:
+  {\small
+  \only<2>{
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \pause
+  =1\cdot x_1 + 1\cdot x_2 + 1\cdot x_3.
+  \]
+  }
+  \only<3>{
+  \[
+  \begin{bmatrix}
+    2 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \pause
+  =2\cdot x_1 + 1\cdot x_2 + 2\cdot x_3,
+  \]
+  }
+  \only<4>{
+  \[
+  \begin{bmatrix}
+    3 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  \pause
+  =3\cdot x_1 + 1\cdot x_2 + 2\cdot x_3,
+  \]
+  }
+  }
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Review: Dot product}
+
+  \begin{block}{Definition}
+    For $n$-vectors $\uv=[u_1,u_2,\ldots,u_n]$ and $\vv=[v_1,v_2,\ldots,v_n]$, the {\bf dot product} of $\uv$ and $\vv$, denoted by $\uv\cdot\vv$, is
+    \[
+    u_1\cdot v_1 + 
+    u_2\cdot v_2 +
+    \cdots +
+    u_n\cdot v_n 
+    \]
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-Vector Multiplication {\bf by Rows}}
+
+  We look at matrix-vector multiplication with ``row perspective'',
+  which can be written nicely with \textcolor{blue}{\bf dot product}.
+
+  {\small
+  I.e., from:
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 1 & 2 \\
+    3 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    1\cdot x_1 + 1\cdot x_2 + 1\cdot x_3 \\
+    2\cdot x_1 + 1\cdot x_2 + 2\cdot x_3 \\
+    3\cdot x_1 + 1\cdot x_2 + 2\cdot x_3
+  \end{bmatrix}
+  \]
+
+  we have
+  \[
+  \left[
+    \begin{array}{c}
+      \vect{r}_1 \\
+      \hline
+      \vect{r}_2 \\
+      \hline
+      \vect{r}_3 
+    \end{array}
+    \right]
+  \vect{x}
+  =
+  \left[
+    \begin{array}{c}
+      \vect{r}_1\cdot\vect{x} \\
+      \hline
+      \vect{r}_2\cdot\vect{x} \\
+      \hline
+      \vect{r}_3\cdot\vect{x}
+    \end{array}
+    \right],
+  \]
+  where
+  \[
+  \vect{r}_1=
+  \begin{bmatrix}
+    1 & 1 & 1
+  \end{bmatrix},
+  \ \ \
+  \vect{r}_2=
+  \begin{bmatrix}
+    2 & 1 & 2
+  \end{bmatrix},
+  \ \ \
+  \vect{r_3}=
+  \begin{bmatrix}
+    3 & 1 & 2
+  \end{bmatrix}.
+  \]
+  }
+  \pause
+  \begin{block}{Dot-product perspective}
+    {\small
+    The matrix-vector product is a vector of {\bf dot products}
+    between each rows and the vector.}
+  \end{block}
+\end{frame}
+  
+\begin{frame}
+  \frametitle{Matrix-Vector Multiplication {\bf by Columns}}
+
+  However, another nice way to look at matrix-vector multiplication is
+  {\bf by columns}.  Notice that:
+  \[
+  \begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 1 & 2 \\
+    3 & 1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    1\cdot x_1 + 1\cdot x_2 + 1\cdot x_3 \\
+    2\cdot x_1 + 1\cdot x_2 + 2\cdot x_3 \\
+    3\cdot x_1 + 1\cdot x_2 + 2\cdot x_3
+  \end{bmatrix}
+  \]
+  \pause
+  can be written as
+  \[
+  \begin{bmatrix}
+    1\\
+    2\\
+    3
+  \end{bmatrix}
+  x_1 +
+  \begin{bmatrix}
+    1\\
+    1\\
+    1
+  \end{bmatrix}
+  x_2 +
+  \begin{bmatrix}
+    1\\
+    2\\
+    2
+  \end{bmatrix}
+  x_3
+  =
+  \begin{bmatrix}
+    5\\
+    10\\
+    4
+  \end{bmatrix}
+  \]
+
+  \pause
+  \begin{block}{Linear combination perspective}
+    The matrix-vector product is a {\bf linear combination} of column vectors.
+  \end{block}
+  
+\end{frame} 
+
+\begin{frame}
+  \frametitle{Two perspectives: Matrix-Vector multiplication}
+
+  {\bf Dot products between rows and the vector}
+  \[
+  \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33} \\
+    a_{41} & a_{42} & a_{43}
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1 \\
+    x_2 \\
+    x_3 
+  \end{bmatrix}
+  =
+  \onslide<2->{
+    \left[
+      \begin{array}{c}
+        \onslide<2->{a_{11}\cdot x_1 + a_{12}\cdot x_2 + a_{13}\cdot x_3} \\
+        \onslide<3->{a_{21}\cdot x_1 + a_{22}\cdot x_2 + a_{23}\cdot x_3} \\
+        \onslide<4->{a_{31}\cdot x_1 + a_{32}\cdot x_2 + a_{33}\cdot x_3} \\
+        \onslide<5->{a_{41}\cdot x_1 + a_{42}\cdot x_2 + a_{43}\cdot x_3} 
+      \end{array}
+      \right]
+  }
+  \]
+
+  {\bf Linear combination of column vectors}
+  \[
+  \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33} \\
+    a_{41} & a_{42} & a_{43}
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1 \\
+    x_2 \\
+    x_3 
+  \end{bmatrix}
+  =
+  \onslide<6->{
+  \begin{bmatrix}
+    a_{11} \\
+    a_{21} \\
+    a_{31} \\
+    a_{41}
+  \end{bmatrix}
+  \cdot x_1
+  +
+  }
+  \onslide<7->{
+  \begin{bmatrix}
+    a_{12} \\
+    a_{22} \\
+    a_{32} \\
+    a_{42}
+  \end{bmatrix}
+  \cdot x_2
+  +
+  }
+  \onslide<8->{
+  \begin{bmatrix}
+    a_{13} \\
+    a_{23} \\
+    a_{33} \\
+    a_{43}
+  \end{bmatrix}
+  \cdot x_3
+  }
+  \]
+
+  \onslide<9->{
+    \begin{block}{Dimensions}
+      If the matrix has $n$ columns, the vector should be an
+      $n$-vector.
+    \end{block}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Document search}
+  \begin{itemize}
+  \item You have 1,000,000 documents in a library.  Given another
+    document, you would like to find similar documents from the
+    library.  How can you do that?
+    \pause
+  \item You need some way to measure document {\bf similarity}.
+    \pause
+  \item Suppose that you nave $N$ documents in the library:
+    $d_1,d_2,\ldots, d_N$.  Given a query document $q$, you want to
+    find document $d_i$ that maximize
+    \[
+    sim(d_i,q),
+    \]
+    where $sim(d,d')$ is the similarity score between documents $d$
+    and $d'$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Document vector models}
+
+  What is a document? \pause It's just a list of words.  \pause If you
+  throw all the ordering away, a document is simply a set of words.
+
+  \pause Let's start with an example.  Suppose that we only care about
+  5 words: \textcolor{blue}{{\tt dog}, {\tt cat}, {\tt food}, {\tt
+      restaurant},} and \textcolor{blue}{\tt coffee}.
+
+  \pause Consider the following 4 (very short) documents:
+
+  \begin{itemize}
+  \item $d_1$: {\tiny People love pets.  Most famous pets are cats and
+    dogs.} \\
+    \onslide<6->{$d_1=\{\mbox{\tt dog}, \mbox{\tt cat}\}$}
+  \item $d_2$: {\tiny Bar Mai has many restaurants with cheap foods.} \\
+    \onslide<7->{$d_2=\{\mbox{\tt restaurant}, \mbox{\tt food}\}$}
+  \item $d_3$: {\tiny Cat cafe used to be popular in Thailand.  People
+    buy coffee and play with cats there.} \\
+    \onslide<8->{$d_3=\{\mbox{\tt coffee}, \mbox{\tt cat}\}$}
+  \item $d_4$: {\tiny Dogs are human's best friends.  They were around
+    in civilization for a long long time.} \\
+    \onslide<9->{$d_4=\{\mbox{\tt dog}\}$}
+  \end{itemize}
+
+  \onslide<10->{
+  How can we translate these sets into vectors?
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Document vector models}
+
+  We assign a fixed co-ordinate for each word, and if a set contain a particular word, we put $1$ in that co-ordinate.
+
+  \pause Here are our 5 words: \textcolor{blue}{{\tt dog}, {\tt cat},
+    {\tt food}, {\tt restaurant},} and \textcolor{blue}{\tt coffee}.
+
+  Each document becomes:
+
+  \begin{itemize}
+  \item $d_1$: {\tiny People love pets.  Most famous pets are cats and
+    dogs.} \\
+    $d_1=\{\mbox{\tt dog}, \mbox{\tt cat}\}$,
+    \pause $\vect{d}_1=[1,1,0,0,0]$
+    \pause
+  \item $d_2$: {\tiny Bar Mai has many restaurants with cheap foods.} \\
+    $d_2=\{\mbox{\tt restaurant}, \mbox{\tt food}\}$,
+    \pause $\vect{d}_2=[0,0,1,1,0]$
+    \pause
+  \item $d_3$: {\tiny Cat cafe used to be popular in Thailand.  People
+    buy coffee and play with cats there.} \\
+    $d_3=\{\mbox{\tt coffee}, \mbox{\tt cat}\}$,
+    \pause $\vect{d}_3=[0,1,0,0,1]$
+    \pause
+  \item $d_4$: {\tiny Dogs are human's best friends.  They were around
+    in civilization for a long long time.} \\
+    $d_4=\{\mbox{\tt dog}\}$,
+    \pause $\vect{d}_4=[1,0,0,0,0]$
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Document vector models}
+  
+  Words: \textcolor{blue}{{\tt dog}, {\tt cat}, {\tt food}, {\tt
+      restaurant},} and \textcolor{blue}{\tt coffee}.
+
+  Suppose that we have query document:
+
+  $q$: {\tiny I love cats and coffee.  What restaurant should I
+    visit?} \\
+  \pause as a set:
+  $q=\{\mbox{\tt cat}, \mbox{\tt coffee}, \mbox{\tt restaurant}\}$ \\
+  \pause as a vector:
+  $\vect{q}=[0,1,0,1,1]$
+
+  \pause
+  \vspace{0.2in}
+  {\small
+  Our documents are:
+  \begin{itemize}
+  \item $d_1$: {\tiny People love pets.  Most famous pets are cats and
+    dogs.} \\
+    $d_1=\{\mbox{\tt dog}, \mbox{\tt cat}\}$ \ \ \ \ $\vect{d}_1=[1,1,0,0,0]$
+  \item $d_2$: {\tiny Bar Mai has many restaurants with cheap foods.} \\
+    $d_2=\{\mbox{\tt restaurant}, \mbox{\tt food}\}$ \ \ \ \ $\vect{d}_2=[0,0,1,1,0]$
+  \item $d_3$: {\tiny Cat cafe used to be popular in Thailand.  People
+    buy coffee and play with cats there.} \\
+    $d_3=\{\mbox{\tt coffee}, \mbox{\tt cat}\}$ \ \ \ \ $\vect{d}_3=[0,1,0,0,1]$
+  \item $d_4$: {\tiny Dogs are human's best friends.  They were around
+    in civilization for a long long time.} \\
+    $d_4=\{\mbox{\tt dog}\}$ \ \ \ \ $\vect{d}_4=[1,0,0,0,0]$
+  \end{itemize}
+  }
+  
+  \pause
+  How can we define ``similarity'' measure?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Dot products as a similarity measure}
+
+  From the previous example, we see that the dot products between
+  $\vect{d}_i$'s and $\vect{q}$ count the number of common words.
+
+  \pause
+  \vspace{0.1in}
+  This simple idea can be extended in many ways.
+
+  \pause
+  \begin{itemize}
+  \item We can increase our ``dictionary'''s size to include more
+    words.
+    \pause
+  \item We can group similar words into the same ``co-ordinates''.
+    \pause
+  \item In fact, the dot product measures the ``angle'' between
+    vectors.  For vectors over $\rf$, we have that
+    \[
+    \uv\cdot\vv = |\uv||\vv|\cos\theta,
+    \]
+    where $\theta$ is the angle between vectors $\uv$ and $\vv$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Computing all similarity scores}
+
+  If we have documents $\vect{d}_1,\vect{d}_1,\ldots,\vect{d}_N$, as
+  vectors, and a query $\vect{q}$, how can we compute all similarity
+  scores?
+
+  \pause
+  By performing matrix-vector multiplication:
+  
+  \[
+  \left[
+    \begin{array}{c}
+      \ \ \ \ \ \vect{d}_1 \ \ \ \ \ \\
+      \hline
+      \vect{d}_2 \\
+      \hline
+      \vdots \\
+      \hline
+      \vect{d}_N
+    \end{array}
+    \right]
+  \begin{bmatrix}
+    \\
+    \vect{q}\\
+    \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    sim(\vect{d}_1,\vect{q}) \\
+    sim(\vect{d}_2,\vect{q}) \\
+    \vdots \\
+    sim(\vect{d}_N,\vect{q})
+  \end{bmatrix}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vector-matrix multiplication}
+
+  Let's consider another direction.
+  
+  What is
+  {\small
+  \[
+  \begin{bmatrix}
+    x_1 & x_2 & x_3
+  \end{bmatrix}
+  \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34}
+  \end{bmatrix}?
+  \]
+  }
+  \pause
+  As a linear combination 
+  \vspace{1in}
+
+  \pause
+  As dot products
+  \vspace{1in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-matrix multiplication}
+
+  Consider
+  \[
+  \begin{bmatrix}
+    x_{11} & x_{12} & x_{13} \\
+    x_{21} & x_{22} & x_{23}
+  \end{bmatrix}
+  \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34}
+  \end{bmatrix}.
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-matrix multiplication (based on matrix-vector
+    multiplication)}
+
+  \[
+  \begin{bmatrix}
+    x_{11} & x_{12} & x_{13} \\
+    x_{21} & x_{22} & x_{23}
+  \end{bmatrix}
+  \left[
+  \begin{array}{c|c|c|c}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34}
+  \end{array}
+  \right].
+  \]
+
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix-matrix multiplication (based on vector-matrix
+    multiplication)}
+
+  \[
+  \left[
+  \begin{array}{ccc}
+    x_{11} & x_{12} & x_{13} \\
+    \hline
+    x_{21} & x_{22} & x_{23}
+  \end{array}
+  \right]
+  \left[
+  \begin{array}{cccc}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34}
+  \end{array}
+  \right].
+  \]
+
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix transpose}
+
+  If $A$ is an $m\times n$ matrix
+  {\footnotesize
+  \[
+  \left[
+  \begin{array}{ccccc}
+    a_{11} & a_{12} & a_{13} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & a_{23} & \cdots & a_{2n} \\
+    \vdots & \vdots & \vdots & & \vdots \\
+    a_{m1} & a_{m2} & a_{m3} & \cdots & a_{mn}
+  \end{array}
+  \right],
+  \]
+  }
+  the \textcolor{red}{\bf transpose} of $A$, denoted by $A^{T}$ is
+  an $n\times m$ matrix {\footnotesize
+  \[
+  \left[
+  \begin{array}{cccc}
+    a_{11} & a_{21} & \cdots & a_{m1} \\
+    a_{12} & a_{22} & \cdots & a_{m2} \\
+    a_{13} & a_{23} & \cdots & a_{m3} \\
+    \vdots & \vdots & & \vdots \\
+    a_{1n} & a_{m2} & \cdots & a_{mn}
+  \end{array}
+  \right].
+  \]
+  }
+  \vspace{0.1in}
+
+  \pause
+
+  {\small
+    Remark: We usually view a vector as a column vector.
+    Therefore, a dot product between $m$-vectors can be viewed also as
+    a matrix multiplication:
+  \[
+  \uv\cdot\vv = \uv^T\vv
+  \]
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix multiplication and transpose}
+  What is $(AB)^T$?
+  \vspace{2.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Key-Value database}
+
+  Suppose you have a database of key-value pairs:
+  \[
+  \{(somchai,10), (somying,14), (somnuk,23), (somjai,50), (somsom,-40)\}
+  \]
+  
+  Given a query $q$, you want to find a value $v$ such that $(q,v)$ is
+  in the database.  E.g., \pause
+
+  Let's see how we could do that (very {\bf inefficiently}) with
+  matrix multiplication.
+
+  \vspace{2in}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vector encodings of keys and queries}
+
+  \begin{itemize}
+  \item You want to have {\bf distinct} keys: $\vect{k}_1,\vect{k}_2,\ldots,\vect{k}_n$
+    \vspace{1in}
+  \item You want a query $\vect{q}$ to {\bf match} with an appropriate key.
+    (Maybe the key which is exactly the same.)
+    \vspace{1in}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example}
+  \begin{itemize}
+  \item Key encoding:
+    \[
+    somchai = [0,1,0,0,0,0], \ \
+    somying = [0,0,0,0,1,0], \ \
+    somnuk = [1,0,0,0,0,0],
+    \]
+    \[
+    somjai = [0,0,1,0,0,0], \ \ \ \ \
+    somsom = [0,0,0,0,0,1]
+    \]
+  \item A value table (or vector):
+    {\small
+    $\vv = 
+    \begin{bmatrix}
+      10 \\ 14 \\ 23 \\ 50 \\ -40
+    \end{bmatrix}
+    $
+    }
+  \item A query $\vect{q}$ is a $5$-vector.  A query matches key
+    $\vect{k}_i$ if
+    \[
+    \vect{k}_i^T\vect{q} = 1
+    \]
+    
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example (cont)}
+  \begin{itemize}
+  \item Key matrix
+    {\small
+      $
+      K=\begin{bmatrix}
+      0 & 1 & 0 & 0 & 0 & 0\\
+      0 & 0 & 0 & 0 & 1 & 0\\
+      1 & 0 & 0 & 0 & 0 & 0\\
+      0 & 0 & 1 & 0 & 0 & 0\\
+      0 & 0 & 0 & 0 & 0 & 1
+      \end{bmatrix}
+      $
+    }
+  \item A value table (or vector):
+    {\small
+      $\vv = 
+      \begin{bmatrix}
+        10 \\ 14 \\ 23 \\ 50 \\ -40
+      \end{bmatrix}
+      $
+    }
+  \item Let's try querying with various $\vect{q}$
+    \pause
+    \pause
+  \item The final formula is
+    \[
+    (K\vect{q})^T\vv \pause
+    = (\vect{q}^T K^T)\vv
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Key-Value database (with vector values)}
+
+  Suppose you have a database of key-value pairs, where a value is a $2$-vector:
+  \[
+  \{(somchai,[10,20]), (somying,[14,-2]), (somnuk,[23,3]), (somjai,[50,-10])\}
+  \]
+  
+  Given a query $q$, can you find a $2$-vector $\vv$ such that $(q,\vv)$ is in the database?
+
+  \vspace{2in}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Understanding self-attention formula}
+
+  Self-attention mechanisms are key steps in transformers, work horses
+  for all chatbots you have been using recently.  The formula looks
+  like (from wikipedia)
+  \[
+  Attention(Q,K,V) = softmax\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+  \]
+  \vspace{1.5in}
+  
+\end{frame}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Elements in a vector}
+  \begin{itemize}
+  \item We see examples of vectors over $\rf$.
+  \item However, elements in a vector can be from other sets with
+    appropriate property.  (I.e., they should behave a real numbers.)
+  \item What do we want from an element in a vector?
+    \pause
+    \begin{itemize}
+    \item We should be able to perform addition, subtraction, multiplication, and division.
+      \pause
+    \item Operations should be commutative and associative.
+    \item Additive and multiplicative identity should exist.
+    \item Addition and multiplication should have inverses.
+    \end{itemize}
+    \pause
+
+    \item We refer to a set with these properties as a {\bf field}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A field}
+
+  A set $\ff$ with two operations $+$ and $\times$ (or $\cdot$) is a
+  \textcolor{red}{\bf field} iff these operations satisfy the
+  following properties:
+  \begin{itemize}
+    \pause
+  \item (Associativity): $(a+b)+c = a+(b+c)$ and $(a\cdot b)\cdot c = a\cdot(b\cdot c)$
+    \pause
+  \item (Commutativity): $a+b=b+a$ and $a\cdot b=b\cdot a$
+    \pause
+  \item (Identities): There exist two elements $0\in\ff$ and $1\in\ff$ such that $a+0 = a$ and $a\cdot 1 = a$
+    \pause
+  \item (Additive inverse): For every element $a\in \ff$, there is an element $-a\in \ff$ such that $a+(-a) = 0$
+    \pause
+  \item (Multiplicative inverse): For every element $a\in \ff\setminus\{0\}$, there is an alement $a^{-1}$ such that $a\cdot a^{-1}=1$
+    \pause
+  \item (Distributive): $a\cdot(b+c)=a\cdot b + a\cdot c$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Another useful field: $GF(2)$}
+  $GF(2) = \{0,1\}$.  I.e., it is a ``bit'' field.
+
+  What are $+$ and $\cdot$ in $GF(2)$?
+
+  \pause
+
+  \begin{itemize}
+  \item We define $b_1+b_2$ to be XOR.
+    \pause
+
+    \[
+    \begin{array}{c}
+      0 + 0 = 0 \\ \pause
+      0 + 1 = 1 + 0 = 1 \\ \pause
+      1 + 1 = 0
+    \end{array}
+    \] \pause
+  \item We define $b_1\cdot b_2$ to be standard multiplication.
+    \pause
+    \[
+    \begin{array}{c}
+      0 \cdot 0 = 0\cdot 1 = 1\cdot 0 = 0 \\ \pause
+      1\cdot 1 = 1
+    \end{array}
+    \] 
+    
+  \end{itemize}
+
+  \pause
+
+  You can check that $GF(2)$ satisfies the axioms of fields.
+\end{frame}
+
