@@ -32,6 +32,32 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Exercise}
+
+  The following vectors represent the amount of nutritions for 100ml
+  of the healthy drink ingredients
+  \[
+  \vect{v}=\begin{bmatrix}
+  100 \\ 50 \\ 0 \\ 0
+  \end{bmatrix} \ \ 
+  \vect{c}=\begin{bmatrix}
+  0 \\ 0 \\ 300 \\ 0
+  \end{bmatrix} \ \
+  \vect{w}=\begin{bmatrix}
+  50 \\ 0 \\ 50 \\ 10
+  \end{bmatrix} 
+  \]
+
+  \pause Write down the nutritions for a mixed drink that consists of
+  50ml of $\vect{v}$, 200ml of $\vect{c}$ and 10ml of $\vect{w}$.
+
+  \pause
+
+  Write that result as a matrix-vector product.  (The matrix should be
+  a $4\times 3$ matrix.)
+\end{frame}
+
+\begin{frame}
   \frametitle{Example 1}
   Is $\mathrm{Span}\ \{[1,2],[2,5]\} = \rf^2$?
   \vspace{2.5in}
@@ -118,6 +144,113 @@
 \begin{frame}
   \frametitle{$2\times 2$ Lights out}
 \end{frame}
+
+
+\begin{frame}
+  \frametitle{Parity-check code}
+
+  \pause
+
+  From message $\vect{a}=[a_1,a_2,a_3,a_4]$, we compute (in $GF(2)$)
+  the parity check bit
+  \[
+  b = a_1 + a_2 + a_3 + a_4.
+  \]
+  \pause
+  Now our encoded message becomes
+  \[
+  [a_1,a_2,a_3,a_4,a_5],
+  \]
+  where $a_5=b=a_1 + a_2 + a_3 + a_4$.  It can detects a single-bit
+  error.
+  \pause
+
+  \vspace{0.2in}
+
+  What can we say about the condition on $a_5$? \pause
+
+  It is in fact a homogeneous linear equation (in $GF(2)$):
+  \[
+  a_1 + a_2 + a_3 + a_4+a_5 = 0
+  \]
+  \pause
+  \vspace{0.1in}
+  Now, what is the set of all possible codewords?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hamming code}
+
+  You can detect and correct more errors with Hamming codes.  In this
+  version called a $[7,4]$ Hamming code, you encode $4$-bit data
+  $[a_1,a_2,a_3,a_4]$ into a $7$-bit codeword
+  $[p_1,p_2,a_1,p_3,a_2,a_3,a_4]$.  Using the formula:
+  \[
+  \begin{array}{rcl}
+    p_1 &=& a_1 + a_2 + a_4\\
+    p_2 &=& a_1 + a_3 + a_4\\
+    p_3 &=& a_2 + a_3 + a_4
+  \end{array}
+  \]
+  \pause
+
+  Let's see how this works.
+
+  \vspace{1.5in}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hamming code (encoding as matrix multiplication)}
+  
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Parity check}
+  Suppose that we are given $[d_1,d_2,d_3,d_4,d_5,d_6,d_7]$
+  Let
+  \[
+  \begin{array}{rcl}
+    s_1 &=& d_1 + d_3 + d_5 + d_7\\
+    s_2 &=& d_2 + d_3 + d_6 + d_7\\
+    s_3 &=& d_4 + d_5 + d_6 + d_7
+  \end{array}
+  \]
+
+  Given a codewords $\vect{w}=[c_1,c_2,\ldots,c_7]$, if we compute
+  $s_1,s_2,s_3$, we would get all zero's.
+
+  \pause
+
+  What if there is an error?  Let's try.
+  \vspace{1.5in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hamming code (parity check as matrix multiplication)}
+  
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Codewords from Hamming code}
+
+  Turning the formula for $p_1,p_2,p_3$ around, we have $3$
+  homogeneous linear equations:
+  \[
+  \begin{array}{rcl}
+    d_1 + d_3 + d_5 + d_7 &=& 0\\
+    d_2 + d_3 + d_6 + d_7 &=& 0\\
+    d_4 + d_5 + d_6 + d_7 &=& 0
+  \end{array}
+  \]
+  and again the set of all possible codewords $\W$ forms a vector
+  space over $GF(2)$.
+  
+\end{frame}
+
+
 
 \begin{frame}
   \frametitle{Can you solve $2\times 2$ Lights out?}
@@ -356,97 +489,6 @@
   \}
   \]
   and we know that $\mathcal S$ is a vector space.
-\end{frame}
-
-\begin{frame}
-  \frametitle{Parity-check code}
-
-  \pause
-
-  From message $\vect{a}=[a_1,a_2,a_3,a_4]$, we compute (in $GF(2)$)
-  the parity check bit
-  \[
-  b = a_1 + a_2 + a_3 + a_4.
-  \]
-  \pause
-  Now our encoded message becomes
-  \[
-  [a_1,a_2,a_3,a_4,a_5],
-  \]
-  where $a_5=b=a_1 + a_2 + a_3 + a_4$.  It can detects a single-bit
-  error.
-  \pause
-
-  \vspace{0.2in}
-
-  What can we say about the condition on $a_5$? \pause
-
-  It is in fact a homogeneous linear equation (in $GF(2)$):
-  \[
-  a_1 + a_2 + a_3 + a_4+a_5 = 0
-  \]
-  \pause
-  \vspace{0.1in}
-  Now, what is the set of all possible codewords?
-\end{frame}
-
-\begin{frame}
-  \frametitle{Hamming code}
-
-  You can detect and correct more errors with Hamming codes.  In this
-  version called a $[7,4]$ Hamming code, you encode $4$-bit data
-  $[a_1,a_2,a_3,a_4]$ into a $7$-bit codeword
-  $[a_1,a_2,a_3,a_4,a_5,a_6,a_7]$.  Using the formula:
-  \[
-  \begin{array}{rcl}
-    a_5 &=& a_1 + a_2 + a_4\\
-    a_6 &=& a_1 + a_3 + a_4\\
-    a_7 &=& a_2 + a_3 + a_4
-  \end{array}
-  \]
-  \pause
-
-  Let's see how this works.
-
-  \vspace{1.5in}
-  
-\end{frame}
-
-\begin{frame}
-  \frametitle{Parity check}
-  Let
-  \[
-  \begin{array}{rcl}
-    s_1 &=& a_1 + a_2 + a_4 + a_5\\
-    s_2 &=& a_1 + a_3 + a_4 + a_6\\
-    s_3 &=& a_2 + a_3 + a_4 + a_7
-  \end{array}
-  \]
-
-  Given a codewords $\vect{w}=[c_1,c_2,\ldots,c_7]$, if we compute
-  $s_1,s_2,s_3$, we would get all zero's.
-
-  \pause
-
-  What if there is an error?  Let's try.
-  \vspace{1.5in}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Codewords from Hamming code}
-
-  Turning the formula for $a_5,a_6,a_7$ around, we have $3$
-  homogeneous linear equations:
-  \[
-  \begin{array}{rcl}
-    a_1 + a_2 + a_4 + a_5 &=& 0\\
-    a_1 + a_3 + a_4 + a_6 &=& 0\\
-    a_2 + a_3 + a_4 + a_7 &=& 0
-  \end{array}
-  \]
-  and again the set of all possible codewords $\W$ forms a vector
-  space over $GF(2)$.
-  
 \end{frame}
 
 \begin{frame}
