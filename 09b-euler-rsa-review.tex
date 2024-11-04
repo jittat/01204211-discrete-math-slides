@@ -1,0 +1,130 @@
+\include{commons}
+\lecturetitle{Lecture 9b: RSA Review and Euler's Theorem} 
+
+\begin{frame}
+  \frametitle{RSA}
+
+  \begin{tcolorbox}
+  {\footnotesize
+  \begin{itemize}
+  \item Private key: $(d,n)$, \ \ \  Public key: $(e,n)$
+  \item Encryption $E(m) = m^{e} \bmod n$,\ \ \  Decryption: $D(w) = w^{d} \bmod n$.
+  \item Goal: Select $e,d,n$ such that $D(E(m)) = m^{ed}\bmod n = m$.
+  \end{itemize}
+  }
+  \end{tcolorbox}
+  \vspace{2in}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Recap: Congruences}
+
+  \begin{block}{Definition (congruences)}
+    For an integer $m>0$,
+    if integers $a$ and $b$ are such that
+    \[
+    a \bmod m = b \bmod m,
+    \]
+    we write
+    \[
+    a \equiv b \pmod m.
+    \]
+  \end{block}
+
+  We also have that
+  \[
+  a \equiv b \pmod m \ \ \ \ \Leftrightarrow \ \ \ \
+  m|(a-b)
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Recap: Multiplicative inverse modulo $m$}
+
+  \begin{block}{Definition}
+    The multiplicative inverse modulo $m$ of $a$, denoted by $a^{-1}$,
+    is an integer such that
+    \[
+    a\cdot a^{-1}\equiv 1 \pmod m.
+    \]
+  \end{block}
+  \vspace{0.2in}
+  \begin{theorem}
+    An integer $a$ has a multiplicative inverse modulo $m$ iff
+    $gcd(a,m) = 1$.
+  \end{theorem}
+\end{frame}
+
+\begin{frame}
+  \begin{theorem}[Fermat's Little Theorem]
+    If $p$ is prime and $a$ is an integer such that $gcd(a,p)=1$,
+    \[
+    a^{p-1}\equiv 1 \pmod p.
+    \]
+  \end{theorem}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Special case of Euler's theorem}
+
+  \begin{theorem}[Euler's theorem]
+    If $p$ and $q$ are different primes, for $a$ such that $gcd(a,pq)=1$, we have
+    \[
+    a^{(p-1)(q-1)} \equiv 1 \pmod{pq}.
+    \]
+  \end{theorem}
+
+  \vspace{3in}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Special case of Euler's theorem}
+
+  \begin{theorem}[Euler's theorem]
+    If $p$ and $q$ are different primes, for $a$ such that $gcd(a,pq)=1$, we have
+    \[
+    a^{(p-1)(q-1)} \equiv 1 \pmod{pq}.
+    \]
+  \end{theorem}
+
+  \vspace{0.2in}
+  {\em Is this useful?} \pause {Yes! In the RSA algorithm.}
+\end{frame}
+
+\begin{frame}
+  \frametitle{RSA}
+
+  \begin{tcolorbox}
+  {\footnotesize
+  \begin{itemize}
+  \item Private key: $(d,n)$, \ \ \  Public key: $(e,n)$
+  \item Encryption $E(m) = m^{e} \bmod n$,\ \ \  Decryption: $D(w) = w^{d} \bmod n$.
+  \item Goal: Select $e,d,n$ such that $D(E(m)) = m^{ed}\bmod n = m$.
+  \end{itemize}
+  }
+  \end{tcolorbox}
+  
+  \vspace{0.1in}
+  \pause
+  {\footnotesize
+  \begin{itemize}
+  \item Pick two primes $p$ and $q$.  Let $n=pq$.
+  \item Pick $e$ (usually a small number)
+  \item Pick $d$ such that $d = e^{-1} \pmod{(p-1)(q-1)}$, i.e., $ed\equiv 1 \pmod{(p-1)(q-1)}$, or $ed = k\cdot(p-1)(q-1) + 1$, for some integer $k$.
+  \item What is $m^{ed}\bmod n$? \pause
+    \begin{eqnarray*}
+      m^{ed} &\equiv& m^{k(p-1)(q-1)+1} \pmod n\\
+      &\equiv& (m^{(p-1)(q-1)})^k\cdot m \pmod n\\
+      &\equiv& 1^k\cdot m \pmod n\\
+      &\equiv& m \pmod n
+    \end{eqnarray*}
+    \pause
+
+    What is the requirement for $m$?  \pause $gcd(m,n)=1$, otherwise
+    you can use the message to factor $n$.
+  \end{itemize}
+  }
+  \vspace{0.5in}
+\end{frame}
