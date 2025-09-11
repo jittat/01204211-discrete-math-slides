@@ -206,10 +206,10 @@
   \begin{proof}
     {\small
 
-      \pause Consider any string $w\in L(C)$.  We show that
+      \pause Consider any string $w\in L(S)$.  We show that
       $w=\czero^n\cone^n$ for some non-negative integer $n$.
       
-      \pause {\bf I.H.:} Assume that for any string $x\in L(C)$ such
+      \pause {\bf I.H.:} Assume that for any string $x\in L(S)$ such
       that $|x|<|w|$, $x=\czero^k\cone^k$ for some non-negative
       integer $k$.
 
@@ -217,7 +217,7 @@
 
       {\bf Case 1:} $w=\epsilon$. \pause
 
-      {\bf Case 2:} $w=\czero x \cone$ for some $x\in L(C)$. \pause
+      {\bf Case 2:} $w=\czero x \cone$ for some $x\in L(S)$. \pause
       Since $|x|=|w|-2<|w|$, we can apply I.H., and get that
       $x=\czero^k \cone^k$;thus $w=\czero\czero^k\cone^k\cone$, i.e.,
       $w=\czero^n\cone^n$ where $n=k+1$, as required.
