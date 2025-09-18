@@ -531,7 +531,7 @@ Input: python program P (as a string)
   \end{block}
 
   Language $A$ will be very important later on, we give it a proper
-  name as $\textsc{HaltA}$.
+  name as $\textsc{SelfHalt}$.
 
 }
 
@@ -626,7 +626,7 @@ Input Q
     \pause
 
     Given program $P$, we can construct a program $C$ that decides
-    {\sc HaltA}.  \pause However, we know that {\sc HaltA} is
+    {\sc SelfHalt}.  \pause However, we know that {\sc SelfHalt} is
     undecidable; thus, we reach a contradiction.
 
     We conclude that there does not exist a python program $P$ that
@@ -639,10 +639,10 @@ Input Q
   \pause
 
   \begin{itemize}
-  \item We show that if {\sc Halt} is decidable, then {\sc HaltA} is
+  \item We show that if {\sc Halt} is decidable, then {\sc SelfHalt} is
     also decidable.
     \pause
-  \item However, {\sc HaltA is undecidable}.
+  \item However, {\sc SelfHalt is undecidable}.
     \pause
   \item We conclude that {\sc Halt} is also undecidable.
   \end{itemize}
@@ -732,11 +732,11 @@ Input P,w
 \begin{frame}[fragile=true]
 
   \begin{lemma}
-    There is no python program that decides $A$.
+    There is no python program that decides $\textsc{SelfHalt}$.
   \end{lemma}
   \begin{proof}
     We prove by contradiction. Assume that there is a python program
-    $P$ that decides $A$.  \pause
+    $P$ that decides $\textsc{SelfHalt}$.  \pause
 
     We describe a python program $B$ that reads a string $Q$ as an
     input as follows:

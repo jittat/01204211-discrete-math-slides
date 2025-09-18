@@ -67,10 +67,10 @@
 }
 
 \frame{
-  \frametitle{Language {\sc HaltA} and {\sc Halt}}
+  \frametitle{Language {\sc SelfHalt} and {\sc Halt}}
 
   Let ${\mathbb P}$ be the set of all python programs.  Let the
-  language {\sc HaltA} be
+  language {\sc SelfHalt} be
   \[
   \{ P\in {\mathbb P} \;|\; \mbox{when running $P$ with $P$ as an
     input, $P$ terminates} \}
@@ -78,7 +78,7 @@
   
   Or with a more concise notation:
   \[
-  \textsc{HaltA} = \{ P\in {\mathbb P} \;|\; \mbox{$P(P)$ terminates} \}.
+  \textsc{SelfHalt} = \{ P\in {\mathbb P} \;|\; \mbox{$P(P)$ terminates} \}.
   \]
 
   We also have another related language
@@ -92,18 +92,18 @@
 
 \begin{frame}
   \begin{lemma}
-    {\sc HaltA} and {\sc Halt} are undecidable.
+    {\sc SelfHalt} and {\sc Halt} are undecidable.
   \end{lemma}
 \end{frame}
 
 \begin{frame}[fragile=true]
 
   \begin{lemma}
-    There is no python program that decides $A$.
+    There is no python program that decides {\sc SelfHalt}.
   \end{lemma}
   \begin{proof}
     We prove by contradiction. Assume that there is a python program
-    $P$ that decides $A$.  \pause
+    $P$ that decides $\textsc{SelfHalt}$.  \pause
 
     We describe a python program $B$ that reads a string $Q$ as an
     input as follows:
@@ -155,9 +155,9 @@ Input Q
   \frametitle{Reduction: proving undecidability of {\sc Halt}}
 
   \begin{itemize}
-  \item We show that if {\sc Halt} is decidable, then {\sc HaltA} is
+  \item We show that if {\sc Halt} is decidable, then {\sc SelfHalt} is
     also decidable.
-  \item However, {\sc HaltA is undecidable}.
+  \item However, {\sc SelfHalt is undecidable}.
   \item We conclude that {\sc Halt} is also undecidable.
   \end{itemize}
 \end{frame}
