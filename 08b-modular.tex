@@ -1,6 +1,8 @@
 \include{commons}
 \lecturetitle{Lecture 8b: Modular arithmetic} 
 
+\section{Review}
+
 \begin{frame}
   \frametitle{Quick check 1} 
 
@@ -35,113 +37,44 @@
 \end{frame}
 
 \begin{frame}
-  There are 3 clocks.  At this moment, all three clocks ring at the
-  same time.  The first clock rings every 3 hours, the second clock
-  rings every 4 hours, and the third clock rings every 10 hours.  How
-  long do you have to wait until you would hear all clocks ring a the
-  same time again?
-  
+  \frametitle{Problem size}
+  \begin{itemize}
+    \item Sort $n$ numbers
+    \pause
+    \item Check if vertex $u$ is reachable from vertex $v$ in a graph with $n$ vertices and $m$ edges
+    \pause
+    \item Multiply two $n\times n$ matrices
+    \pause
+    \item Add two integers
+    \pause
+    \item Check if an integer $n$ is prime
+    \pause
+    \item Find $gcd(a,b)$ for inputs $a$ and $b$
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
-  You have a large water container and two smaller buckets. The first
-  bucket carries 3 litres of water and the second bucket carries 5
-  litres of water.
-
-  Can you put exactly 1 litre of water in the water container?
+  \frametitle{Polynomial times}
+  \begin{itemize}
+    \item Sort $n$ numbers
+    \item Check if vertex $u$ is reachable from vertex $v$ in a graph with $n$ vertices and $m$ edges
+    \item Multiply two $n\times n$ matrices
+    \pause
+    \item Add two integers
+    \item Check if an integer $n$ is prime
+    \item Find $gcd(a,b)$ for inputs $a$ and $b$
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
-  You have a large water container and two smaller buckets. The first
-  bucket carries 6 litres of water and the second bucket carries 15
-  litres of water.
-
-  What is the minimum volume of water you can exactly put in the water
-  container?
-
-  \pause
-
-  \vspace{0.2in}
-  In general if you have two buckets of volumes $x$ and $y$, the amount
-  that you can exactly make must be in the form of
-  \[
-  ax + by,
-  \]
-  for some integers $x$ and $y$.  (Note that $x$ and $y$ may be
-  negative.)
-
-  \pause Do you see why the sum must be divisible by any common
-  divisor of $x$ and $y$?
+  \frametitle{When inputs contain a few numbers}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Useful fact}
-
-  For any integer $x$ and $y$, consider the term
-  \[
-  a\cdot x + b\cdot y,
-  \]
-  for some integer $a$ and $b$.
-
-  \pause
-  When the term is non-zero, it must be divisible by $gcd(x,y)$, so it
-  has to be at least $gcd(x,y)$.
-
-  \vspace{0.2in}
-
-  It turns out that you can actually attain that value, i.e.,
-  there exist a pair of integer $a$ and
-  $b$ such that
-  \[
-  a\cdot x + b\cdot y = gcd(x,y).
-  \]
+  \frametitle{GCD and Power}
 \end{frame}
 
-\begin{frame}[fragile]
-  \frametitle{Finding $a$ and $b$: Extended Euclid Algorithm}
-
-  We will modify the Euclid algorithm so that it also returns $a$ and
-  $b$ together with $gcd(x,y)$.
-  
-  \begin{tcolorbox}
-  {\small
-\begin{verbatim}
-  Algorithm Euclid(x,y):
-    if x mod y == 0:
-
-      return y,          ,
-    else:
-      g, a', b' = Euclid(y, x mod y)
-
-      a =
-
-      b =
-
-      return g, a, b
-\end{verbatim}
-  }
-  \end{tcolorbox}
-  
-\end{frame}
-
-\begin{frame}
-  \frametitle{Notes:}
-
-  We have $a'$ and $b'$ such that
-  \[
-  a'\cdot y + b'\cdot(x \bmod y) = g.
-  \]
-
-  \vspace{3in}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Secret sharing}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Secret sharing scheme based on straight lines}
-\end{frame}
+\section{Modular arithmetic}
 
 \begin{frame}
   \frametitle{Days}
@@ -451,24 +384,129 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Example: secret sharing}
+  \frametitle{Examples: division in modular arithmetic}
 
-  \begin{itemize}
-  \item Think of a secret number $m\in\{0,1,\ldots,10\}$.
-  \item Pick a random number $a\in\{1,2,\ldots,10\}$.
-  \item Your straight line function $f(x)=(ax+m)\bmod 11$.
-  \item We will generate 3 points from $f$ and give them to 3 of your
-    friends, each with only 1 point.  Pick 3 numbers $x_1,x_2,x_3$
-    from $\{1,2,\ldots,10\}$.
-  \item Let's compute
-    \[
-    (x_1,f(x_1)), \ \ 
-    (x_2,f(x_2)), \ \ 
-    (x_3,f(x_3)).
-    \]
-  \item Give them to 3 of your friends and challenge them to form a
-    group of 2 people and figure out your number $m$.
-  \end{itemize}
+  Suppose that we know that every non-zero integer $a$ has an inverse modulo $m$.
+
+  Can you solve this equation?
+  \[
+  4x + 9 \equiv 0 \pmod{11}.
+  \]
+
+  \pause
+
+  We can even perform gaussian elimination ({\em which is very useful
+    later}):
+  \[
+  \begin{array}{rcl}
+    2x + y & \equiv & 3 \pmod 7 \\
+    x + 3y & \equiv & 5 \pmod 7
+  \end{array}
+  \]
+  
+\end{frame}
+
+\section{Finding inverses}
+
+\begin{frame}
+  There are 3 clocks.  At this moment, all three clocks ring at the
+  same time.  The first clock rings every 3 hours, the second clock
+  rings every 4 hours, and the third clock rings every 10 hours.  How
+  long do you have to wait until you would hear all clocks ring a the
+  same time again?
+  
+\end{frame}
+
+\begin{frame}
+  You have a large water container and two smaller buckets. The first
+  bucket carries 3 litres of water and the second bucket carries 5
+  litres of water.
+
+  Can you put exactly 1 litre of water in the water container?
+\end{frame}
+
+\begin{frame}
+  You have a large water container and two smaller buckets. The first
+  bucket carries 6 litres of water and the second bucket carries 15
+  litres of water.
+
+  What is the minimum volume of water you can exactly put in the water
+  container?
+
+  \pause
+
+  \vspace{0.2in}
+  In general if you have two buckets of volumes $x$ and $y$, the amount
+  that you can exactly make must be in the form of
+  \[
+  ax + by,
+  \]
+  for some integers $x$ and $y$.  (Note that $x$ and $y$ may be
+  negative.)
+
+  \pause Do you see why the sum must be divisible by any common
+  divisor of $x$ and $y$?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Useful fact}
+
+  For any integer $x$ and $y$, consider the term
+  \[
+  a\cdot x + b\cdot y,
+  \]
+  for some integer $a$ and $b$.
+
+  \pause
+  When the term is non-zero, it must be divisible by $gcd(x,y)$, so it
+  has to be at least $gcd(x,y)$.
+
+  \vspace{0.2in}
+
+  It turns out that you can actually attain that value, i.e.,
+  there exist a pair of integer $a$ and
+  $b$ such that
+  \[
+  a\cdot x + b\cdot y = gcd(x,y).
+  \]
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Finding $a$ and $b$: Extended Euclid Algorithm}
+
+  We will modify the Euclid algorithm so that it also returns $a$ and
+  $b$ together with $gcd(x,y)$.
+  
+  \begin{tcolorbox}
+  {\small
+\begin{verbatim}
+  Algorithm Euclid(x,y):
+    if x mod y == 0:
+
+      return y,          ,
+    else:
+      g, a', b' = Euclid(y, x mod y)
+
+      a =
+
+      b =
+
+      return g, a, b
+\end{verbatim}
+  }
+  \end{tcolorbox}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Notes:}
+
+  We have $a'$ and $b'$ such that
+  \[
+  a'\cdot y + b'\cdot(x \bmod y) = g.
+  \]
+
+  \vspace{3in}
 \end{frame}
 
 \begin{frame}
@@ -541,7 +579,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Quick recap: RSA}
+  \frametitle{RSA: steps}
 
   {\small
   \begin{itemize}
@@ -567,6 +605,36 @@
   }
   \vspace{0.5in}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Secret sharing}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Secret sharing scheme based on straight lines}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: secret sharing}
+
+  \begin{itemize}
+  \item Think of a secret number $m\in\{0,1,\ldots,10\}$.
+  \item Pick a random number $a\in\{1,2,\ldots,10\}$.
+  \item Your straight line function $f(x)=(ax+m)\bmod 11$.
+  \item We will generate 3 points from $f$ and give them to 3 of your
+    friends, each with only 1 point.  Pick 3 numbers $x_1,x_2,x_3$
+    from $\{1,2,\ldots,10\}$.
+  \item Let's compute
+    \[
+    (x_1,f(x_1)), \ \ 
+    (x_2,f(x_2)), \ \ 
+    (x_3,f(x_3)).
+    \]
+  \item Give them to 3 of your friends and challenge them to form a
+    group of 2 people and figure out your number $m$.
+  \end{itemize}
+\end{frame}
+
 
 \begin{frame}
   \frametitle{What's next?}
